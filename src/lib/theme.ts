@@ -261,7 +261,7 @@ export const alternatingBlocks: FeatureCard[] = [
     title: 'In-built Lower Third Builder',
     description:
       'Create broadcast-quality name and title graphics directly inside Q-worship. Display speaker names, sermon titles, and announcements on your live stream — no extra software needed.',
-    image: '/Photos/Inbuild.png',
+    image: '/Photos/third-builder.png',
     linkText: 'Learn more',
     imageFirst: false,
   },
@@ -269,7 +269,7 @@ export const alternatingBlocks: FeatureCard[] = [
     title: 'NDI Support',
     description:
       "Send Qworship's output over your network as an NDI source. Route Bible verses, lyrics, and media directly into your video switcher or streaming rig — no capture cards, no extra cables.",
-    image: '/Photos/NDI.png',
+    image: '/Photos/NDL.png',
     linkText: 'Learn more',
     imageFirst: true,
   },

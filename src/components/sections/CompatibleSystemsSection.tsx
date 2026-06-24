@@ -14,7 +14,7 @@ export function CompatibleSystemsSection() {
           <span className="relative inline-block">
             all
             <span
-              className="absolute -bottom-1 left-1/2 h-px w-10 -translate-x-1/2 bg-[#6B6B6B]"
+              className="absolute -bottom-1 left-1/2 h-px w-20 -translate-x-1/2 bg-[#6B6B6B]"
               aria-hidden="true"
             />
           </span>{' '}
@@ -22,7 +22,7 @@ export function CompatibleSystemsSection() {
         </h2>
       </SiteContainer>
 
-      <div className="compatible-systems-marquee mt-20 overflow-hidden">
+      <div className="compatible-systems-marquee mt-28 overflow-hidden">
         <div className="compatible-systems-track">
           {marqueeSystems.map((system, index) => (
             <div
