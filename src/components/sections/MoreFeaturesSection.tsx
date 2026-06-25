@@ -2,7 +2,11 @@ import { moreFeatures } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 
-export function MoreFeaturesSection() {
+interface MoreFeaturesSectionProps {
+  showViewAllLink?: boolean
+}
+
+export function MoreFeaturesSection({ showViewAllLink = true }: MoreFeaturesSectionProps) {
   return (
     <section className="section-gap reveal bg-[#09090B]">
       <SiteContainer>
@@ -13,16 +17,18 @@ export function MoreFeaturesSection() {
               There&apos;s so much more — see for yourself.
             </p>
           </div>
-          <a
-            href="#"
-            className="flex items-center gap-2 text-white font-bold shrink-0 group hover:opacity-90 transition-opacity"
-          >
-            See all Q-worship features
-            <MaterialIcon
-              name="arrow_forward"
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </a>
+          {showViewAllLink && (
+            <a
+              href="/features"
+              className="flex items-center gap-2 text-white font-bold shrink-0 group hover:opacity-90 transition-opacity"
+            >
+              See all Q-worship features
+              <MaterialIcon
+                name="arrow_forward"
+                className="group-hover:translate-x-1 transition-transform"
+              />
+            </a>
+          )}
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">

@@ -68,3 +68,40 @@ export interface HandsFreeFeature {
 }
 
 export type BillingPeriod = 'monthly' | 'yearly'
+
+export interface FeaturesSubNavItem {
+  id: string
+  label: string
+  href: string
+}
+
+export interface FeatureSpotlightCard {
+  title: string
+  description: string
+}
+
+export interface ChecklistSpotlightContent {
+  id: string
+  title: { before: string; accent: string; after?: string }
+  body: string
+  checklist: string[]
+  cards: FeatureSpotlightCard[]
+  image: string
+  imageAlt: string
+  showListeningOverlay?: boolean
+}
+
+export interface AccordionSpotlightItem {
+  id: string
+  title: string
+  description: string
+}
+
+export interface AccordionSpotlightContent {
+  id: string
+  header: { line1: string; line2Before: string; accent: string }
+  subtitle: string
+  items: AccordionSpotlightItem[]
+  image: string
+  imageAlt: string
+}

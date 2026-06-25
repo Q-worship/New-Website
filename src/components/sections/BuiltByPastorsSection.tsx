@@ -7,11 +7,8 @@ import { MaterialIcon } from '@/components/ui/MaterialIcon'
 
 
 const checklistItems = [
-
-  'Auto-tagging based on mood and color',
-
+  'Every feature solves a real Sunday-morning problem',
   'Direct integration with Unsplash & Pexels',
-
 ]
 
 
@@ -29,21 +26,17 @@ export function BuiltByPastorsSection() {
           <div className="space-y-6 lg:space-y-8">
 
             <h2 className="font-headline text-4xl md:text-5xl font-bold leading-tight whitespace-nowrap">
-              Built By <span className="text-primary">Pastors</span> for <span className="text-primary">Pastors</span>
+              Built By <span className="text-primary">Pastors for Pastors</span>
             </h2>
 
             <p className="text-on-surface-variant text-lg">
-
-              Every feature is tuned for technical precision and cinematic flair.
-
+              Q-worship wasn't built in a lab, it was built in a church
             </p>
 
             <p className="text-on-surface-variant text-lg leading-relaxed">
-
-              Intelligent categorization and global search for your entire media library. Find the
-
-              perfect background in seconds, not minutes.
-
+              Q-worship was born in a real church, by pastors who got tired of fumbling through apps
+              mid-sermon while 300 people waited. Every one of its features exists because a pastor,
+              worship leader, or tech volunteer asked for it.
             </p>
 
             <div className="space-y-4 pt-2">
@@ -63,9 +56,7 @@ export function BuiltByPastorsSection() {
             </div>
 
             <button type="button" className="built-by-pastors-btn mt-4">
-
-              Join our mailing list
-
+              Learn more
             </button>
 
           </div>

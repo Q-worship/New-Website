@@ -1,4 +1,4 @@
-import { assetLibraryImages } from '@/lib/theme'
+import { assetLibraryVideos } from '@/lib/theme'
 
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { GlassButton } from '@/components/ui/GlassButton'
@@ -27,14 +27,15 @@ export function AssetLibrarySection() {
         </div>
       </SiteContainer>
       <div className="asset-library-lower-cards">
-        {assetLibraryImages.map((src) => (
+        {assetLibraryVideos.map((src) => (
           <div className="asset-library-lower-card" key={src}>
-            <img
+            <video
               src={src}
-              alt=""
               className="asset-library-lower-card-img"
-              loading="lazy"
-              decoding="async"
+              autoPlay
+              muted
+              loop
+              playsInline
             />
           </div>
         ))}

@@ -1,7 +1,10 @@
 import type {
+  AccordionSpotlightContent,
   BuildTabItem,
+  ChecklistSpotlightContent,
   CompatibleSystem,
   FeatureCard,
+  FeaturesSubNavItem,
   HandsFreeFeature,
   MoreFeature,
   NavDropdownItem,
@@ -356,11 +359,11 @@ export const compatibleSystems: CompatibleSystem[] = [
   { name: 'OpenLP', icon: 'openlp' },
 ]
 
-export const assetLibraryImages = [
-  '/Photos/rectangles/Rectangle%2037.png',
-  '/Photos/rectangles/Rectangle%2038.png',
-  '/Photos/rectangles/Rectangle%2042.png',
-  '/Photos/rectangles/Rectangle%2044.png',
+export const assetLibraryVideos = [
+  '/Photos/Copy%20of%20intence3.mp4',
+  '/Photos/Copy%20of%20Jordan3.mp4',
+  '/Photos/Copy%20of%20jordan4.mp4',
+  '/Photos/Copy%20of%20liquid%20_1.mp4',
 ] as const
 
 export const pricingPlans: PricingPlan[] = [
@@ -409,6 +412,182 @@ export const heroCopy = {
   body: "Meet Q-worship, The world's most powerful and complete church presentation platform, built by pastors for churches of all sizes .",
 }
 
+export const featuresHeroCopy = {
+  badge: 'QWORSHIP FEATURES',
+  heading: {
+    accent: 'Everything',
+    rest: 'your church needs',
+  },
+  body: "Q-worship brings together voice-powered Bible search, live projection, song management, multi integrations, and rich features — all built by pastors who've stood where you stand.",
+  primaryCta: 'Download',
+  secondaryCta: 'Get Started',
+  image: '/Photos/Rectangle%209.png',
+}
+
+export const featuresSubNavItems: FeaturesSubNavItem[] = [
+  { id: 'overview', label: 'Overview', href: '#overview' },
+  { id: 'hands-free-bible', label: 'Hands-Free Bible', href: '#hands-free-bible' },
+  { id: 'on-screen-bible', label: 'On-screen Bible', href: '#on-screen-bible' },
+  { id: 'songbook', label: 'Songbook', href: '#songbook' },
+  { id: 'service-slides', label: 'Service Slides', href: '#service-slides' },
+  { id: 'media', label: 'Media', href: '#media' },
+]
+
+export const handsFreeFeatureSpotlight: ChecklistSpotlightContent = {
+  id: 'hands-free-bible',
+  title: {
+    before: 'Your Bible. Voice-first. Always ready,',
+    accent: 'Online and Offline',
+  },
+  body: 'Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
+  checklist: [
+    'Natural language processing for spoken references',
+    "Session context retention — 'next verse', 'change to NIV' understood in context",
+    'Full offline support — 31,406 verses cached locally across several Bible translations',
+    "Sleep/wake commands ('thank you', 'amen' to dismiss)",
+  ],
+  cards: [
+    {
+      title: 'Voice Command Navigation',
+      description:
+        "Say a reference like 'John 3:16' or 'Psalm 23' and Q-worship finds it instantly. No typing, no clicking - just speak and the verse appears on screen.",
+    },
+    {
+      title: 'Works Online and Offline',
+      description:
+        'No Wi Fi? No Problem. Q-worship is available in 2 usage modes - Online and Offline. Our voice Bible search works just as fast without internet as it does with internet.',
+    },
+    {
+      title: 'Multiple Bible Versions',
+      description:
+        'Switch between all the major Bible translations- KJV, NKJV, MSG, AMP, GN, and NIV with a single voice command mid service. Your congregation hears the version that speaks to them',
+    },
+  ],
+  image: '/Photos/hands-free-stage.png',
+  imageAlt: 'Church auditorium with Bible verse on screen',
+  showListeningOverlay: true,
+}
+
+export const onScreenBibleSpotlight: AccordionSpotlightContent = {
+  id: 'on-screen-bible',
+  header: {
+    line1: 'Effortless Manual Search',
+    line2Before: 'Q-worship · ',
+    accent: 'On-screen Bible',
+  },
+  subtitle:
+    'A powerful visual editor for searching, selecting, and projecting Bible content. Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  items: [
+    {
+      id: 'search',
+      title: 'Search Across All 66 Books',
+      description:
+        'Type any reference or keyword in our on-screen Bible editor and Q-worship searches all 31,406 verses across all 66 Books in seconds. Enjoy flexible search, find the right verse before the congregation notices.',
+    },
+    {
+      id: 'range',
+      title: 'Surrounding Verse Range',
+      description:
+        'Select a single verse or expand to surrounding context with one click. Preview the full passage range before projecting so your congregation always sees the right amount of scripture.',
+    },
+    {
+      id: 'versions',
+      title: 'Version Navigation',
+      description:
+        'Switch between KJV, NKJV, NIV, MSG, ESV, NASB, NLT and more without leaving the editor. Your selected passage updates instantly across every translation you need.',
+    },
+  ],
+  image: '/Photos/On-screen%20bible.png',
+  imageAlt: 'On-screen Bible editor interface',
+}
+
+export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
+  id: 'songbook',
+  title: {
+    before: 'Every Lyric.',
+    accent: 'Right on Time.',
+  },
+  body: 'Lead worship with complete confidence. Move through each section of your songs — Verse, Chorus, Bridge and beyond. Let your congregation see every word, perfectly in sync, exactly when you need it.',
+  checklist: buildTabItems.find((tab) => tab.id === 'songs')!.features.slice(0, 4),
+  cards: [
+    {
+      title: 'Verse & Chorus Navigation',
+      description:
+        'Navigate Verse, Chorus, Bridge, Tag and more with one click. What you see is what your congregation sees — always.',
+    },
+    {
+      title: 'Import From Anywhere',
+      description:
+        'Bring in songs from Word documents, PDFs or text files. Edit songs directly inside Q-worship, no extra tools needed.',
+    },
+    {
+      title: 'Complete Song Metadata',
+      description:
+        'Keep your CCLI number, song key and tempo all in one place. Organise your entire church songbook by author, topic, or tag.',
+    },
+  ],
+  image: '/Photos/Songs.png',
+  imageAlt: 'Songbook lyrics projection interface',
+}
+
+export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
+  id: 'service-slides',
+  title: {
+    before: 'Your Service.',
+    accent: 'Fully in Your Hands.',
+  },
+  body: buildTabItems.find((tab) => tab.id === 'service')!.description,
+  checklist: buildTabItems.find((tab) => tab.id === 'service')!.features.slice(0, 4),
+  cards: [
+    {
+      title: 'Unified Service Order',
+      description:
+        'Your songs, scriptures, announcements and media — all in one place, all in the right order, all ready to go live the moment you need them.',
+    },
+    {
+      title: 'Reorder On the Fly',
+      description:
+        'Reorder items on the fly without losing your work. Navigate your whole service with simple keyboard shortcuts.',
+    },
+    {
+      title: 'Auto-Save & Resume',
+      description:
+        'Your service saves automatically, every step of the way. Pick up exactly where you left off, every time.',
+    },
+  ],
+  image: '/Photos/Service%20order.png',
+  imageAlt: 'Service order management interface',
+}
+
+export const mediaFeatureSpotlight: ChecklistSpotlightContent = {
+  id: 'media',
+  title: {
+    before: 'Keep Your Church',
+    accent: 'In the Loop',
+  },
+  body: buildTabItems.find((tab) => tab.id === 'announcements')!.description,
+  checklist: buildTabItems.find((tab) => tab.id === 'announcements')!.features.slice(0, 4),
+  cards: [
+    {
+      title: 'In-Service Announcements',
+      description:
+        'Slide your announcements, countdowns and notices straight into your service — no switching apps, no second screen, no interruptions.',
+    },
+    {
+      title: 'Countdown Timers',
+      description:
+        'Add a countdown so your congregation knows when things start. Customise the look to match your church\'s style.',
+    },
+    {
+      title: 'Seamless Transitions',
+      description:
+        'Move seamlessly from announcements into worship. Everything on one screen, always under your control.',
+    },
+  ],
+  image: '/Photos/Announcements.png',
+  imageAlt: 'Announcements and media projection interface',
+}
+
 export const images = {
   logo: '/Photos/logo.png',
   heroFrame: '/Photos/Frame%201171275872.png',
@@ -423,4 +602,5 @@ export const images = {
   partners:
     'https://lh3.googleusercontent.com/aida-public/AB6AXuBEulfurEaig4HkDRWZHLhOHiW3eycUCF3M42BaGblBzntXMdMFWZZIEXqVqqIrey50IkNrT0h-EaWS_3gaQzosqVdYnyOarGCsB7yy0KKmOcudI0Kj8dCTT7h-XvilnTmE5j9bCMvtyVYEjnWfmuQf-NpRiS0qhXtF47hym7Y1fABSA9dqj8325BsvAKmjJjIIl-gdUhFGcZC0PJe2wpQXOAzHlxqFa1EvYrrNpg4dQK1slcfLmSBup_agmDtTv-4LD8SiCbEld0TO',
   cta: '/Photos/lastlast.png',
+  featuresHero: '/Photos/Rectangle%209.png',
 }
