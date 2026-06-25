@@ -5,6 +5,11 @@ import type {
   CompatibleSystem,
   FeatureCard,
   FeaturesSubNavItem,
+  GuideCard,
+  GuideCategoryItem,
+  FaqCategoryItem,
+  FaqItem,
+  DownloadsPageCopy,
   HandsFreeFeature,
   MoreFeature,
   NavDropdownItem,
@@ -22,9 +27,9 @@ export const navLinks: NavLink[] = [
 ]
 
 export const resourceDropdownItems: NavDropdownItem[] = [
-  { label: 'Downloads', href: '/resources' },
-  { label: 'Guides', href: '/resources' },
-  { label: 'FAQs', href: '/resources' },
+  { label: 'Downloads', href: '/downloads' },
+  { label: 'Guides', href: '/guides' },
+  { label: 'FAQs', href: '/faqs' },
 ]
 
 export const tabItems: TabItem[] = [
@@ -421,20 +426,18 @@ export const featuresHeroCopy = {
   body: "Q-worship brings together voice-powered Bible search, live projection, song management, multi integrations, and rich features — all built by pastors who've stood where you stand.",
   primaryCta: 'Download',
   secondaryCta: 'Get Started',
-  image: '/Photos/Rectangle%209.png',
+  image: '/Photos/features/Rectangle%2042300.png',
 }
 
 export const featuresSubNavItems: FeaturesSubNavItem[] = [
   { id: 'overview', label: 'Overview', href: '#overview' },
-  { id: 'hands-free-bible', label: 'Hands-Free Bible', href: '#hands-free-bible' },
   { id: 'on-screen-bible', label: 'On-screen Bible', href: '#on-screen-bible' },
-  { id: 'songbook', label: 'Songbook', href: '#songbook' },
-  { id: 'service-slides', label: 'Service Slides', href: '#service-slides' },
-  { id: 'media', label: 'Media', href: '#media' },
+  { id: 'hands-free-bible', label: 'Hands-Free Bible', href: '#hands-free-bible' },
+  { id: 'pricing', label: 'Pricing', href: '#pricing' },
 ]
 
 export const handsFreeFeatureSpotlight: ChecklistSpotlightContent = {
-  id: 'hands-free-bible',
+  id: 'overview',
   title: {
     before: 'Your Bible. Voice-first. Always ready,',
     accent: 'Online and Offline',
@@ -463,7 +466,7 @@ export const handsFreeFeatureSpotlight: ChecklistSpotlightContent = {
         'Switch between all the major Bible translations- KJV, NKJV, MSG, AMP, GN, and NIV with a single voice command mid service. Your congregation hears the version that speaks to them',
     },
   ],
-  image: '/Photos/hands-free-stage.png',
+  image: '/Photos/features/Group%202085663381.png',
   imageAlt: 'Church auditorium with Bible verse on screen',
   showListeningOverlay: true,
 }
@@ -472,7 +475,7 @@ export const onScreenBibleSpotlight: AccordionSpotlightContent = {
   id: 'on-screen-bible',
   header: {
     line1: 'Effortless Manual Search',
-    line2Before: 'Q-worship · ',
+    line2Before: 'Q-worship , ',
     accent: 'On-screen Bible',
   },
   subtitle:
@@ -497,37 +500,108 @@ export const onScreenBibleSpotlight: AccordionSpotlightContent = {
         'Switch between KJV, NKJV, NIV, MSG, ESV, NASB, NLT and more without leaving the editor. Your selected passage updates instantly across every translation you need.',
     },
   ],
-  image: '/Photos/On-screen%20bible.png',
+  image: '/Photos/features/3.png',
   imageAlt: 'On-screen Bible editor interface',
 }
 
-export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
-  id: 'songbook',
-  title: {
-    before: 'Every Lyric.',
-    accent: 'Right on Time.',
+export const postPastorsAccordionSpotlight: AccordionSpotlightContent = {
+  id: 'hands-free-accordion',
+  header: {
+    line1: 'Effortless Manual Search',
+    line2Before: 'Q-worship , ',
+    accent: 'On-screen Bible',
   },
-  body: 'Lead worship with complete confidence. Move through each section of your songs — Verse, Chorus, Bridge and beyond. Let your congregation see every word, perfectly in sync, exactly when you need it.',
-  checklist: buildTabItems.find((tab) => tab.id === 'songs')!.features.slice(0, 4),
-  cards: [
+  subtitle:
+    'A powerful visual editor for searching, selecting, and projecting Bible content. Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  items: [
     {
-      title: 'Verse & Chorus Navigation',
+      id: 'search',
+      title: 'Search Across All 66 Books',
       description:
-        'Navigate Verse, Chorus, Bridge, Tag and more with one click. What you see is what your congregation sees — always.',
+        'Type any reference or keyword in our on-screen Bible editor and Q-worship searches all 31,102 verses across all 66 Books in seconds. Enjoy flexible search, find the right verse before the congregation notices.',
     },
     {
-      title: 'Import From Anywhere',
+      id: 'range',
+      title: 'Surrounding Verse Range',
       description:
-        'Bring in songs from Word documents, PDFs or text files. Edit songs directly inside Q-worship, no extra tools needed.',
+        'Select a single verse or expand to surrounding context with one click. Preview the full passage range before projecting so your congregation always sees the right amount of scripture.',
     },
     {
-      title: 'Complete Song Metadata',
+      id: 'versions',
+      title: 'Version Navigation',
       description:
-        'Keep your CCLI number, song key and tempo all in one place. Organise your entire church songbook by author, topic, or tag.',
+        'Switch between KJV, NKJV, NIV, MSG, ESV, NASB, NLT and more without leaving the editor. Your selected passage updates instantly across every translation you need.',
     },
   ],
-  image: '/Photos/Songs.png',
-  imageAlt: 'Songbook lyrics projection interface',
+  image: '/Photos/features/ghgh.png',
+  imageAlt: 'Church auditorium with Philippians 4:13 on screen',
+}
+
+export const moreFeaturesAccordionSpotlight: AccordionSpotlightContent = {
+  id: 'on-screen-bible-showcase',
+  header: {
+    line1: 'Effortless Manual Search',
+    line2Before: 'Q-worship , ',
+    accent: 'On-screen Bible',
+  },
+  subtitle:
+    'A powerful visual editor for searching, selecting, and projecting Bible content. Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  items: [
+    {
+      id: 'search',
+      title: 'Search Across All 66 Books',
+      description:
+        'Type any reference or keyword in our on-screen Bible editor and Q-worship searches all 31,406 verses across all 66 Books in seconds. Enjoy flexible search, find the right verse before the congregation notices.',
+    },
+    {
+      id: 'range',
+      title: 'Surrounding Verse Range',
+      description:
+        'Select a single verse or expand to surrounding context with one click. Preview the full passage range before projecting so your congregation always sees the right amount of scripture.',
+    },
+    {
+      id: 'versions',
+      title: 'Version Navigation',
+      description:
+        'Switch between KJV, NKJV, NIV, MSG, ESV, NASB, NLT and more without leaving the editor. Your selected passage updates instantly across every translation you need.',
+    },
+  ],
+  image: '/Photos/features/ghgh.png',
+  imageAlt: 'Church auditorium with Philippians 4:13 on screen',
+}
+
+export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
+  id: 'hands-free-bible',
+  title: {
+    before: 'Your Bible. Hands-free. Always ready,',
+    accent: 'Online and Offline',
+  },
+  body: 'For ages, pastors have paused mid-sermon to wait for a verse. Q-worship ends that. Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
+  checklist: [
+    'Natural language processing for spoken references',
+    "Session context retention — 'next verse', 'change to NIV' understood in context",
+    'Full offline support — 31,102 verses cached locally across several Bible translations',
+    "Sleep/wake commands ('thank you', 'amen' to dismiss)",
+  ],
+  cards: [
+    {
+      title: 'Voice Command Navigation',
+      description:
+        "Say a reference like 'John 3:16' or 'Psalm 23' and Q-worship finds it instantly. No typing, no clicking - just speak and the verse appears on screen.",
+    },
+    {
+      title: 'Works Online and Offline',
+      description:
+        'No Wi Fi? No Problem. Q-worship is available in 2 usage modes - Online and Offline. Our voice Bible search works just as fast without internet as it does with internet.',
+    },
+    {
+      title: 'Multiple Bible Versions',
+      description:
+        'Switch between all the major Bible translations- KJV, NKJV, MSG, AMP, GNT, and NIV with a single voice command mid service. Your congregation hears the version that speaks to them',
+    },
+  ],
+  image: '/Photos/features/song.png',
+  imageAlt: 'Amazing Grace lyrics projected over a mountain landscape',
 }
 
 export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
@@ -588,6 +662,478 @@ export const mediaFeatureSpotlight: ChecklistSpotlightContent = {
   imageAlt: 'Announcements and media projection interface',
 }
 
+export const lowerThirdBuilderSpotlight: ChecklistSpotlightContent = {
+  id: 'lower-third-builder',
+  title: {
+    before: 'In-built',
+    accent: 'Lower Third Builder',
+  },
+  body: 'Create broadcast-quality name and title graphics directly inside Q-worship. Display speaker names, sermon titles, and announcements on your live stream — no extra software needed.',
+  checklist: [
+    'Broadcast-quality lower thirds built right into Q-worship',
+    'Display speaker names and sermon titles on your live stream',
+    'Customise fonts, colours, and positioning to match your brand',
+    'No extra graphics software required — design and go live in one app',
+  ],
+  cards: [
+    {
+      title: 'Broadcast-Quality Graphics',
+      description:
+        'Create professional name and title overlays that look great on any stream or projector output.',
+    },
+    {
+      title: 'Live Stream Ready',
+      description:
+        'Display speaker names, sermon titles, and announcements on your live stream without switching applications.',
+    },
+    {
+      title: 'All In One Place',
+      description:
+        'Design, preview, and project lower thirds from the same interface you use for lyrics, Bible verses, and media.',
+    },
+  ],
+  image: '/Photos/third-builder.png',
+  imageAlt: 'Lower third builder interface',
+}
+
+const guideCardDescription =
+  'Stay in the moment. Just say the reference out loud — Qworship hears you, finds the verse, and puts it on screen. No pausing, no searching, no breaking your stride at the pulpit.'
+
+export const guidesHeroCopy = {
+  badge: 'ARTICLES & GUIDES',
+  heading: {
+    accent: 'Everything',
+    rest: 'your church needs',
+  },
+  body: featuresHeroCopy.body,
+  primaryCta: 'Download',
+  secondaryCta: 'Get Started online',
+  image: featuresHeroCopy.image,
+}
+
+export const guidesCategoryItems: GuideCategoryItem[] = [
+  { id: 'general', label: 'General' },
+  { id: 'my-first-sunday', label: 'My first Sunday' },
+  { id: 'hands-free-bible', label: 'Hands-Free Bible' },
+  { id: 'my-songbook', label: 'My Songbook' },
+  { id: 'service-slides', label: 'Service Slides' },
+  { id: 'media', label: 'Media' },
+  { id: 'lower-third', label: 'Lower third' },
+]
+
+export const guideCards: GuideCard[] = [
+  {
+    id: 'live-console-first-sunday',
+    categoryId: 'general',
+    title: 'Setting up Q-worship Live Console for your first Sunday',
+    description: guideCardDescription,
+    image: '/Photos/On-screen%20bible.png',
+    imageAlt: 'Q-worship Live Console Bible interface',
+  },
+  {
+    id: 'no-need-to-type-general-1',
+    categoryId: 'general',
+    title: 'No need to Type. Just Speak',
+    description: guideCardDescription,
+    image: '/Photos/Announcements.png',
+    imageAlt: 'Sunday announcements slide preview',
+  },
+  {
+    id: 'no-need-to-type-general-2',
+    categoryId: 'general',
+    title: 'No need to Type. Just Speak',
+    description: guideCardDescription,
+    image: '/Photos/hands-free-stage.png',
+    imageAlt: 'Pastor using hands-free Bible search on stage',
+  },
+  {
+    id: 'live-console-first-sunday-2',
+    categoryId: 'general',
+    title: 'Setting up Q-worship Live Console for your first Sunday',
+    description: guideCardDescription,
+    image: '/Photos/On-screen%20bible.png',
+    imageAlt: 'Q-worship Live Console Bible interface',
+  },
+  {
+    id: 'no-need-to-type-general-1-2',
+    categoryId: 'general',
+    title: 'No need to Type. Just Speak',
+    description: guideCardDescription,
+    image: '/Photos/Announcements.png',
+    imageAlt: 'Sunday announcements slide preview',
+  },
+  {
+    id: 'no-need-to-type-general-2-2',
+    categoryId: 'general',
+    title: 'No need to Type. Just Speak',
+    description: guideCardDescription,
+    image: '/Photos/hands-free-stage.png',
+    imageAlt: 'Pastor using hands-free Bible search on stage',
+  },
+  {
+    id: 'first-sunday-checklist',
+    categoryId: 'my-first-sunday',
+    title: 'Your first Sunday checklist',
+    description:
+      'Walk through service order setup, display outputs, and a quick rehearsal so your team is confident before doors open.',
+    image: '/Photos/Service%20order.png',
+    imageAlt: 'Service order planning interface',
+  },
+  {
+    id: 'first-sunday-rehearsal',
+    categoryId: 'my-first-sunday',
+    title: 'Rehearse like it is Sunday',
+    description:
+      'Run through lyrics, announcements, and scripture in presentation mode so transitions feel natural when the congregation arrives.',
+    image: '/Photos/eas%20to%20use.png',
+    imageAlt: 'Team rehearsing with Q-worship',
+  },
+  {
+    id: 'hands-free-getting-started',
+    categoryId: 'hands-free-bible',
+    title: 'Getting started with Hands-Free Bible',
+    description: guideCardDescription,
+    image: '/Photos/Hands%20free%20Bible.png',
+    imageAlt: 'Hands-free Bible voice search',
+  },
+  {
+    id: 'hands-free-offline',
+    categoryId: 'hands-free-bible',
+    title: 'Using voice Bible search offline',
+    description:
+      'Cache translations locally and keep preaching without Wi-Fi — voice commands work the same online or off.',
+    image: '/Photos/hands-free-stage.png',
+    imageAlt: 'Hands-free Bible on stage',
+  },
+  {
+    id: 'songbook-import',
+    categoryId: 'my-songbook',
+    title: 'Build your church songbook',
+    description:
+      'Import songs, organize sets, and project lyrics with the fonts and layouts your worship team prefers.',
+    image: '/Photos/Songs.png',
+    imageAlt: 'Songbook management interface',
+  },
+  {
+    id: 'songbook-live',
+    categoryId: 'my-songbook',
+    title: 'Project lyrics during live worship',
+    description:
+      'Switch songs quickly, follow song sections, and keep the band and congregation in sync from the Live Console.',
+    image: '/Photos/Praise%20and%20Worship.png',
+    imageAlt: 'Worship lyrics on screen',
+  },
+  {
+    id: 'service-slides-announcements',
+    categoryId: 'service-slides',
+    title: 'Design Sunday announcement slides',
+    description:
+      'Create polished announcement and welcome slides with templates that match your church brand.',
+    image: '/Photos/Announcements.png',
+    imageAlt: 'Announcement slide design',
+  },
+  {
+    id: 'service-slides-order',
+    categoryId: 'service-slides',
+    title: 'Plan your service flow',
+    description:
+      'Arrange songs, scripture, media, and announcements in one timeline so every moment flows smoothly.',
+    image: '/Photos/Service%20order.png',
+    imageAlt: 'Service slide order',
+  },
+  {
+    id: 'media-library',
+    categoryId: 'media',
+    title: 'Organize your media library',
+    description:
+      'Import videos and images, tag assets, and drop them into your service without hunting through folders.',
+    image: '/Photos/lightweight.png',
+    imageAlt: 'Media library interface',
+  },
+  {
+    id: 'media-live',
+    categoryId: 'media',
+    title: 'Play media during service',
+    description:
+      'Trigger videos and backgrounds from the Live Console with smooth transitions between slides and media.',
+    image: '/Photos/onlin%20and....png',
+    imageAlt: 'Media playback during service',
+  },
+  {
+    id: 'lower-third-design',
+    categoryId: 'lower-third',
+    title: 'Design lower thirds for speakers',
+    description:
+      'Create name and title overlays that match your stream and sanctuary displays from one builder.',
+    image: '/Photos/third-builder.png',
+    imageAlt: 'Lower third builder',
+  },
+  {
+    id: 'lower-third-live',
+    categoryId: 'lower-third',
+    title: 'Show lower thirds live',
+    description:
+      'Preview and project lower thirds alongside lyrics and scripture without switching apps.',
+    image: '/Photos/NDL.png',
+    imageAlt: 'Lower third on live output',
+  },
+]
+
+export const faqsHeroCopy = {
+  badge: 'FAQS',
+  heading: {
+    line1: 'Your Questions',
+    accent: 'Answered',
+  },
+  body: featuresHeroCopy.body,
+  primaryCta: 'Download',
+  secondaryCta: 'Get Started online',
+  image: featuresHeroCopy.image,
+}
+
+export const faqCategoryItems: FaqCategoryItem[] = [
+  { id: 'general', label: 'General' },
+  { id: 'hands-free-bible', label: 'Hands-Free Bible' },
+  { id: 'offline-and-online', label: 'Offline and Online' },
+  { id: 'pricing', label: 'Pricing' },
+  { id: 'service-slides', label: 'Service Slides' },
+  { id: 'my-media', label: 'My Media' },
+  { id: 'lower-third', label: 'Lower Third' },
+]
+
+export const faqItems: FaqItem[] = [
+  {
+    id: 'what-is-qworship',
+    categoryId: 'general',
+    question: 'What is Q-worship?',
+    answer:
+      "Q-worship is a complete church presentation platform built by pastors for churches of all sizes. It brings together voice-powered Bible search, live projection, song management, media, service slides, and lower thirds — everything your team needs to run Sunday morning from one place.",
+  },
+  {
+    id: 'just-speech-to-text',
+    categoryId: 'general',
+    question: 'Does Q-worship offer just speech to text Hands free Bible?',
+    answer:
+      'No. Hands-Free Bible is one of Q-worship\'s most powerful features, but the platform is much more than speech-to-text. You also get an on-screen Bible editor, songbook management, service slides, media playback, lower third builder, and integrations with tools like OBS and ProPresenter.',
+  },
+  {
+    id: 'who-is-it-for',
+    categoryId: 'general',
+    question: 'Who is Qworship designed for?',
+    answer:
+      'Q-worship was built for pastors, worship leaders, and tech volunteers who run live church services. Whether you are a single pastor running everything or a full team managing multiple outputs, Q-worship scales from small congregations to larger ministries.',
+  },
+  {
+    id: 'operating-systems',
+    categoryId: 'general',
+    question: 'What operating systems does Q-worship support?',
+    answer:
+      'Q-worship is available as a desktop application you can download and install. Visit our Downloads page for the latest supported platforms and installation instructions for your church\'s setup.',
+  },
+  {
+    id: 'setup-time',
+    categoryId: 'general',
+    question: 'How long does it take to set up?',
+    answer:
+      'Q-worship installs in minutes. No IT department, no server setup, and no configuration headaches. Download, open, and you can be ready for your first Sunday — many churches are live the same day they install.',
+  },
+  {
+    id: 'cloud-or-local',
+    categoryId: 'general',
+    question: 'Is Q-worship cloud-based or installed locally?',
+    answer:
+      'Both. Q-worship runs as a locally installed application and supports Online and Offline usage modes. Your core service tools work without internet, while online features like cloud media sync are available when you are connected.',
+  },
+  {
+    id: 'users-per-account',
+    categoryId: 'general',
+    question: 'How many users can be on one account?',
+    answer:
+      'Q-worship is designed for church teams. Your account can be shared across pastors, worship leaders, and tech volunteers on your team. Plan details and team limits vary by subscription tier — see our Pricing page for the plan that fits your church.',
+  },
+  {
+    id: 'voice-commands',
+    categoryId: 'hands-free-bible',
+    question: 'How do voice commands work during a service?',
+    answer:
+      'Simply say a Bible reference out loud — like "John 3:16" or "Psalm 23" — and Q-worship finds the verse and puts it on screen. Natural language processing understands spoken references so you never break stride at the pulpit.',
+  },
+  {
+    id: 'context-retention',
+    categoryId: 'hands-free-bible',
+    question: 'Can I say "next verse" or switch translations by voice?',
+    answer:
+      'Yes. Q-worship retains session context, so commands like "next verse", "change to NIV", "thank you", or "amen" are understood in context without re-stating the full reference.',
+  },
+  {
+    id: 'bible-translations',
+    categoryId: 'hands-free-bible',
+    question: 'Which Bible translations are supported?',
+    answer:
+      'Q-worship supports major Bible translations including KJV, NKJV, MSG, AMP, GN, and NIV. Switch between versions with a single voice command mid-service.',
+  },
+  {
+    id: 'hands-free-offline',
+    categoryId: 'hands-free-bible',
+    question: 'Does Hands-Free Bible work without internet?',
+    answer:
+      'Yes. With 31,406 verses cached locally across several translations, voice Bible search works just as fast offline as it does online — ideal for rural churches or venues with unreliable Wi-Fi.',
+  },
+  {
+    id: 'online-mode',
+    categoryId: 'offline-and-online',
+    question: 'What is the difference between Online and Offline mode?',
+    answer:
+      'Q-worship is available in two usage modes. Offline mode keeps your core presentation tools running without internet. Online mode unlocks cloud-connected features like media sync and web integrations while you are connected.',
+  },
+  {
+    id: 'offline-bible',
+    categoryId: 'offline-and-online',
+    question: 'What works offline during a service?',
+    answer:
+      'Voice Bible search, lyrics projection, service slides, and media you have already imported all work offline. Your congregation will not notice a difference when Wi-Fi drops mid-service.',
+  },
+  {
+    id: 'no-wifi',
+    categoryId: 'offline-and-online',
+    question: 'What if my church has no internet at all?',
+    answer:
+      'No Wi-Fi? No problem. Q-worship works fully offline so your service never stops — whether you are in a rural church, a school hall, or a venue with no internet connection.',
+  },
+  {
+    id: 'sync-when-online',
+    categoryId: 'offline-and-online',
+    question: 'Does my content sync when I go back online?',
+    answer:
+      'When you reconnect, cloud-connected features like your media library can sync so your team stays up to date across devices and service prep sessions.',
+  },
+  {
+    id: 'free-plan',
+    categoryId: 'pricing',
+    question: 'Is there a free plan?',
+    answer:
+      'Yes. Q-worship offers a Free plan at $0/month with no credit card required — a great way to explore the platform before committing to a paid tier.',
+  },
+  {
+    id: 'plan-tiers',
+    categoryId: 'pricing',
+    question: 'What plans are available?',
+    answer:
+      'Q-worship offers Starter, Premium, Enterprise, and Free plans with monthly and yearly billing options. Enterprise is our recommended tier for churches that want the full feature set.',
+  },
+  {
+    id: 'yearly-billing',
+    categoryId: 'pricing',
+    question: 'Can I pay yearly instead of monthly?',
+    answer:
+      'Yes. All paid plans support yearly billing at a reduced rate compared to monthly — switch between monthly and yearly on our Pricing page.',
+  },
+  {
+    id: 'cancel-anytime',
+    categoryId: 'pricing',
+    question: 'Can I cancel or change my plan?',
+    answer:
+      'You can upgrade, downgrade, or cancel your subscription at any time. Changes take effect at the start of your next billing cycle.',
+  },
+  {
+    id: 'announcement-slides',
+    categoryId: 'service-slides',
+    question: 'Can I create announcement and welcome slides?',
+    answer:
+      'Yes. Q-worship includes tools to design polished announcement and welcome slides with templates that match your church brand, so every service opens professionally.',
+  },
+  {
+    id: 'service-order',
+    categoryId: 'service-slides',
+    question: 'How do I plan my full service flow?',
+    answer:
+      'Arrange songs, scripture, media, and announcements in a single service timeline so every moment flows smoothly from welcome to closing without switching between apps.',
+  },
+  {
+    id: 'slide-canvas',
+    categoryId: 'service-slides',
+    question: 'Can I customise slide layouts?',
+    answer:
+      'The slide canvas lets you layer lyrics, Bible verses, media, and graphics on a fully customisable canvas — control backgrounds, logo positioning, and widget placement to match your church\'s look.',
+  },
+  {
+    id: 'media-library',
+    categoryId: 'my-media',
+    question: 'How does the media library work?',
+    answer:
+      'Upload your own images, videos, and audio or browse platform-provided assets. Every file is tagged, categorised, and searchable so you find the right background in seconds.',
+  },
+  {
+    id: 'import-media',
+    categoryId: 'my-media',
+    question: 'Can I import videos and images for Sunday?',
+    answer:
+      'Yes. Import videos and images into your library, tag them for easy access, and trigger them from the Live Console with smooth transitions between slides and media.',
+  },
+  {
+    id: 'unsplash-pexels',
+    categoryId: 'my-media',
+    question: 'Does Q-worship integrate with stock photo services?',
+    answer:
+      'Q-worship offers direct integration with Unsplash and Pexels so you can pull high-quality visuals into your service without leaving the app.',
+  },
+  {
+    id: 'lower-third-builder',
+    categoryId: 'lower-third',
+    question: 'What is the Lower Third Builder?',
+    answer:
+      'The Lower Third Builder lets you design name and title overlays for speakers and guests. Preview your design and project it alongside lyrics, Bible verses, and media from the same interface.',
+  },
+  {
+    id: 'lower-third-live',
+    categoryId: 'lower-third',
+    question: 'Can I show lower thirds during a live service?',
+    answer:
+      'Yes. Design, preview, and project lower thirds from the same Live Console you use for the rest of your service — no switching apps or losing your place in the order.',
+  },
+  {
+    id: 'lower-third-customise',
+    categoryId: 'lower-third',
+    question: 'Can I match lower thirds to my church brand?',
+    answer:
+      'The builder gives you full control over fonts, colours, and layout so your lower thirds match your stream and sanctuary displays consistently week after week.',
+  },
+]
+
+export const downloadsPageCopy: DownloadsPageCopy = {
+  banner: {
+    title: 'Get Started',
+    image: pastorForPastor,
+    imageAlt: 'Pastor speaking on stage',
+  },
+  product: {
+    title: 'Download',
+    subtitle: 'Q-worship Live Console',
+    version: 'Version 1.1.2 (35258370)',
+    highlights: 'Accuracy Improvements, Offline',
+    date: 'June 25, 2026',
+    image: featuresHeroCopy.image,
+    imageAlt: 'Team collaborating on church presentation software',
+  },
+  platforms: [
+    { id: 'windows', label: 'Windows', icon: 'desktop_windows' },
+    { id: 'mac', label: 'Mac Os' },
+  ],
+  resourceLinks: [
+    { id: 'feature-updates', label: 'Feature Updates', icon: 'featured_play_list' },
+    { id: 'release-notes', label: 'Release Notes', icon: 'description' },
+    { id: 'system-specifications', label: 'System Specifications', icon: 'layers' },
+  ],
+  onlineCta: {
+    heading: { before: 'Prefer to use', accent: 'Q-worship online ?' },
+    body: guideCardDescription,
+    primaryCta: 'Download',
+    secondaryCta: 'Get started online',
+    image: '/Photos/lastlast.png',
+    imageAlt: 'Church auditorium with scripture on screen',
+  },
+}
+
 export const images = {
   logo: '/Photos/logo.png',
   heroFrame: '/Photos/Frame%201171275872.png',
@@ -602,5 +1148,5 @@ export const images = {
   partners:
     'https://lh3.googleusercontent.com/aida-public/AB6AXuBEulfurEaig4HkDRWZHLhOHiW3eycUCF3M42BaGblBzntXMdMFWZZIEXqVqqIrey50IkNrT0h-EaWS_3gaQzosqVdYnyOarGCsB7yy0KKmOcudI0Kj8dCTT7h-XvilnTmE5j9bCMvtyVYEjnWfmuQf-NpRiS0qhXtF47hym7Y1fABSA9dqj8325BsvAKmjJjIIl-gdUhFGcZC0PJe2wpQXOAzHlxqFa1EvYrrNpg4dQK1slcfLmSBup_agmDtTv-4LD8SiCbEld0TO',
   cta: '/Photos/lastlast.png',
-  featuresHero: '/Photos/Rectangle%209.png',
+  featuresHero: '/Photos/features/Rectangle%2042300.png',
 }

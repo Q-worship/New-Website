@@ -5,6 +5,9 @@ import { Features } from '@/pages/Features'
 import { About } from '@/pages/About'
 import { Pricing } from '@/pages/Pricing'
 import { Resources } from '@/pages/Resources'
+import { Guides } from '@/pages/Guides'
+import { FAQs } from '@/pages/FAQs'
+import { Downloads } from '@/pages/Downloads'
 
 export function App() {
   return (
@@ -15,6 +18,9 @@ export function App() {
         <Route path="/about" component={About} />
         <Route path="/pricing" component={Pricing} />
         <Route path="/resources" component={Resources} />
+        <Route path="/guides" component={Guides} />
+        <Route path="/faqs" component={FAQs} />
+        <Route path="/downloads" component={Downloads} />
       </Switch>
     </Layout>
   )

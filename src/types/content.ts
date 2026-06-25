@@ -75,6 +75,71 @@ export interface FeaturesSubNavItem {
   href: string
 }
 
+export interface GuideCategoryItem {
+  id: string
+  label: string
+}
+
+export interface GuideCard {
+  id: string
+  categoryId: string
+  title: string
+  description: string
+  image: string
+  imageAlt: string
+}
+
+export interface FaqCategoryItem {
+  id: string
+  label: string
+}
+
+export interface FaqItem {
+  id: string
+  categoryId: string
+  question: string
+  answer: string
+}
+
+export interface DownloadPlatform {
+  id: string
+  label: string
+  icon?: string
+}
+
+export interface DownloadResourceLink {
+  id: string
+  label: string
+  icon: string
+}
+
+export interface DownloadsPageCopy {
+  banner: {
+    title: string
+    image: string
+    imageAlt: string
+  }
+  product: {
+    title: string
+    subtitle: string
+    version: string
+    highlights: string
+    date: string
+    image: string
+    imageAlt: string
+  }
+  platforms: DownloadPlatform[]
+  resourceLinks: DownloadResourceLink[]
+  onlineCta: {
+    heading: { before: string; accent: string }
+    body: string
+    primaryCta: string
+    secondaryCta: string
+    image: string
+    imageAlt: string
+  }
+}
+
 export interface FeatureSpotlightCard {
   title: string
   description: string

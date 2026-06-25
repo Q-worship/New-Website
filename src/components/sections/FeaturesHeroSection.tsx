@@ -5,9 +5,12 @@ interface FeaturesHeroSectionProps {
   id?: string
 }
 
-export function FeaturesHeroSection({ id = 'overview' }: FeaturesHeroSectionProps) {
+export function FeaturesHeroSection({ id }: FeaturesHeroSectionProps) {
   return (
-    <section id={id} className="features-hero-section pt-32 md:pt-36 pb-16 md:pb-20 reveal">
+    <section
+      {...(id ? { id } : {})}
+      className="features-hero-section pt-32 md:pt-36 pb-16 md:pb-20 reveal"
+    >
       <SiteContainer>
         <div className="features-hero-grid">
           <div className="features-hero-copy">

@@ -14,13 +14,13 @@ export function FAQSection() {
           </p>
           <div className="flex items-center justify-start gap-10 flex-wrap">
             <Link
-              href="/resources"
+              href="/faqs"
               className="glass-button text-white px-10 py-4 rounded-xl font-bold hover:bg-white hover:text-background transition-all inline-block"
             >
               View FAQs
             </Link>
             <Link
-              href="/resources"
+              href="/guides"
               className="flex items-center gap-2 text-on-surface-variant font-bold hover:text-primary group transition-colors"
             >
               Browse Guides{' '}

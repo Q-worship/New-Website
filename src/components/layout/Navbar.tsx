@@ -14,6 +14,14 @@ export function Navbar() {
 
   const isActive = (href: string) => {
     if (href === '/') return location === '/'
+    if (href === '/resources') {
+      return (
+        location.startsWith(href) ||
+        location.startsWith('/guides') ||
+        location.startsWith('/faqs') ||
+        location.startsWith('/downloads')
+      )
+    }
     return location.startsWith(href)
   }
 
@@ -48,7 +56,7 @@ export function Navbar() {
                 <button
                   type="button"
                   className={`navbar-dropdown__trigger transition-colors ${
-                    isActive(link.href) ? 'text-white' : 'text-on-surface-variant hover:text-white'
+                    isActive(link.href) ? 'text-[#A78BFA]' : 'text-on-surface-variant hover:text-white'
                   } ${resourcesOpen ? 'is-open' : ''}`}
                   aria-haspopup="menu"
                   aria-expanded={resourcesOpen}
@@ -80,7 +88,7 @@ export function Navbar() {
                 href={link.href}
                 className={`transition-colors ${
                   isActive(link.href)
-                    ? 'text-white'
+                    ? 'text-[#A78BFA]'
                     : 'text-on-surface-variant hover:text-white'
                 }`}
               >

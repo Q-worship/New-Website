@@ -8,13 +8,13 @@ const resourceLinks = [
   {
     title: 'FAQs',
     description: 'Quick answers to the most common questions about Q-Worship.',
-    href: '/resources',
+    href: '/faqs',
     icon: 'help',
   },
   {
     title: 'Guides',
     description: 'Step-by-step tutorials for setting up your first service.',
-    href: '/resources',
+    href: '/guides',
     icon: 'menu_book',
   },
   {
