@@ -1,7 +1,6 @@
-import { heroCopy, tabItems } from '@/lib/theme'
+import { heroCopy, images } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
-import { ShowcaseCard } from '@/components/sections/ShowcaseCard'
 
 export function HeroSection() {
   return (
@@ -46,7 +45,12 @@ export function HeroSection() {
             </button>
           </div>
 
-          <ShowcaseCard tabs={tabItems} idPrefix="hero" className="showcase-card--5-tabs mt-14" />
+          <img
+            src={images.heroFrame}
+            alt="Q-Worship hands-free Bible interface preview"
+            className="hero-frame block w-full mt-14"
+            loading="eager"
+          />
         </div>
       </SiteContainer>
     </section>
