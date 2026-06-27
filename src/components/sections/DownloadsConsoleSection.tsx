@@ -6,7 +6,7 @@ export function DownloadsConsoleSection() {
   const { product, platforms } = downloadsPageCopy
 
   return (
-    <section className="downloads-console-section reveal">
+    <section className="downloads-console-section section-gap reveal">
       <SiteContainer>
         <div className="downloads-console-grid">
           <div className="downloads-console-copy">

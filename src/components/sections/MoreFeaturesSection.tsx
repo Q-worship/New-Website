@@ -12,7 +12,7 @@ export function MoreFeaturesSection({ showViewAllLink = true }: MoreFeaturesSect
       <SiteContainer>
         <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="text-left">
-            <h2 className="font-headline text-4xl font-bold mb-4">More features</h2>
+            <h2 className="font-headline text-3xl sm:text-4xl font-bold mb-4">More features</h2>
             <p className="text-on-surface-variant">
               There&apos;s so much more — see for yourself.
             </p>
@@ -35,7 +35,7 @@ export function MoreFeaturesSection({ showViewAllLink = true }: MoreFeaturesSect
           {moreFeatures.map((feature) => (
             <div
               key={feature.title}
-              className="more-features-card p-6 md:p-8 rounded-lg text-left"
+              className="more-features-card p-5 md:p-8 rounded-2xl text-left"
             >
               <h4 className="font-bold text-lg mb-4 text-white">{feature.title}</h4>
               <p className="text-sm text-on-surface-variant leading-relaxed">

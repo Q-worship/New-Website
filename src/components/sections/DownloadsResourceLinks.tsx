@@ -6,7 +6,7 @@ export function DownloadsResourceLinks() {
   const { resourceLinks } = downloadsPageCopy
 
   return (
-    <section className="downloads-resource-links-section reveal">
+    <section className="downloads-resource-links-section section-gap reveal">
       <SiteContainer>
         <hr className="downloads-divider" />
 

@@ -6,9 +6,16 @@ import { MaterialIcon } from '@/components/ui/MaterialIcon'
 interface FAQAccordionListProps {
   categoryLabel: string
   items: FaqItem[]
+  hideCategoryHeading?: boolean
+  compact?: boolean
 }
 
-export function FAQAccordionList({ categoryLabel, items }: FAQAccordionListProps) {
+export function FAQAccordionList({
+  categoryLabel,
+  items,
+  hideCategoryHeading = false,
+  compact = false,
+}: FAQAccordionListProps) {
   const [openIds, setOpenIds] = useState<Set<string>>(new Set())
 
   const toggleItem = (id: string) => {
@@ -32,8 +39,10 @@ export function FAQAccordionList({ categoryLabel, items }: FAQAccordionListProps
   }
 
   return (
-    <div className="faq-accordion-section reveal">
-      <h2 className="faq-category-heading font-headline">{categoryLabel}</h2>
+    <div className={`faq-accordion-section reveal${compact ? ' faq-accordion-section--compact' : ''}`}>
+      {!hideCategoryHeading && (
+        <h2 className="faq-category-heading font-headline">{categoryLabel}</h2>
+      )}
 
       <div className="faq-accordion">
         {items.map((item) => {

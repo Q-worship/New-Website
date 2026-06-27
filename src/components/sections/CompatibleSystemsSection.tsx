@@ -1,14 +1,19 @@
+import { useRef } from 'react'
+
 import { compatibleSystems } from '@/lib/theme'
 
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { PartnerLogo } from '@/components/ui/PartnerLogos'
-
-const marqueeSystems = [...compatibleSystems, ...compatibleSystems]
+import { useMarqueeLoop } from '@/hooks/useMarqueeLoop'
 
 export function CompatibleSystemsSection() {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const copies = useMarqueeLoop(trackRef, compatibleSystems.length)
+  const marqueeSystems = Array.from({ length: copies }, () => compatibleSystems).flat()
+
   return (
-    <section className="compatible-systems-section section-gap reveal bg-black">
-      <SiteContainer>
+    <section className="compatible-systems-section section-gap bg-black">
+      <SiteContainer className="reveal">
         <h2 className="font-headline text-center text-2xl md:text-3xl font-medium text-white">
           Compatible with{' '}
           <span className="relative inline-block">
@@ -22,8 +27,8 @@ export function CompatibleSystemsSection() {
         </h2>
       </SiteContainer>
 
-      <div className="compatible-systems-marquee mt-28 overflow-hidden">
-        <div className="compatible-systems-track">
+      <div className="compatible-systems-marquee mt-12 md:mt-28 overflow-hidden">
+        <div ref={trackRef} className="compatible-systems-track">
           {marqueeSystems.map((system, index) => (
             <div
               key={`${system.icon}-${index}`}

@@ -37,7 +37,7 @@ export function TeamCarouselSection() {
             <div
               key={card.title}
               tabIndex={0}
-              className="team-carousel-card w-[85vw] sm:w-[70vw] lg:w-[44vw] xl:w-[32vw] max-w-[560px] snap-center flex-shrink-0 group cursor-pointer"
+              className="team-carousel-card w-[85vw] sm:w-[70vw] lg:w-[44vw] xl:w-[32vw] max-w-[560px] snap-center flex-shrink-0 group cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-400/60 focus-visible:outline-none"
             >
               <div className="aspect-[4/5] relative overflow-hidden">
                 <img

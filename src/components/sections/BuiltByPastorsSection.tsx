@@ -2,14 +2,29 @@ import { images } from '@/lib/theme'
 
 import { SiteContainer } from '@/components/layout/SiteContainer'
 
-import { MaterialIcon } from '@/components/ui/MaterialIcon'
-
 
 
 const checklistItems = [
   'Every feature solves a real Sunday-morning problem',
   'Direct integration with Unsplash & Pexels',
 ]
+
+function ChecklistIcon() {
+  return (
+    <span className="built-by-pastors-check-icon" aria-hidden>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="10" fill="#bf36ff" />
+        <path
+          d="M6 10.5L8.5 13L14 7.5"
+          stroke="#ffffff"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  )
+}
 
 
 
@@ -25,7 +40,7 @@ export function BuiltByPastorsSection() {
 
           <div className="space-y-6 lg:space-y-8">
 
-            <h2 className="font-headline text-4xl md:text-5xl font-bold leading-tight whitespace-nowrap">
+            <h2 className="font-headline text-4xl md:text-5xl font-bold leading-tight">
               Built By <span className="text-primary">Pastors for Pastors</span>
             </h2>
 
@@ -45,7 +60,7 @@ export function BuiltByPastorsSection() {
 
                 <div key={item} className="flex items-start gap-3">
 
-                  <MaterialIcon name="check_circle" filled className="text-primary shrink-0 mt-0.5" />
+                  <ChecklistIcon />
 
                   <span className="font-medium">{item}</span>
 

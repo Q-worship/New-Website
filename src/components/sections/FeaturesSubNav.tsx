@@ -1,15 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { featuresSubNavItems } from '@/lib/theme'
+import { featuresSubNavItems, images } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 
 const SCROLL_OFFSET = 120
 const TOP_SCROLL_THRESHOLD = 200
-
-const SECTION_TO_NAV_ID: Record<string, string> = {
-  overview: 'hands-free-bible',
-}
 
 function getHrefTargetId(href: string): string {
   return href.replace('#', '')
@@ -19,10 +15,6 @@ function getUniqueSectionIds(): string[] {
   return [
     ...new Set(featuresSubNavItems.map((item) => getHrefTargetId(item.href))),
   ]
-}
-
-function getNavIdForSection(sectionId: string): string {
-  return SECTION_TO_NAV_ID[sectionId] ?? sectionId
 }
 
 export function FeaturesSubNav() {
@@ -50,7 +42,7 @@ export function FeaturesSubNav() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
 
         if (visible.length > 0) {
-          setActiveId(getNavIdForSection(visible[0].target.id))
+          setActiveId(visible[0].target.id)
           return
         }
 
@@ -93,11 +85,10 @@ export function FeaturesSubNav() {
     <nav className="features-subnav" aria-label="Features sections">
       <SiteContainer>
         <div className="features-subnav-inner">
-          <img
-            src="/Photos/features/Group%202085663381.png"
-            alt="Q-worship Features"
-            className="features-subnav-brand-image"
-          />
+          <div className="features-subnav-brand">
+            <img src={images.logo} alt="" className="features-subnav-logo" />
+            <span className="features-subnav-brand-text">Q-worship Features</span>
+          </div>
 
           <div className="features-subnav-links hide-scrollbar" role="tablist">
             {featuresSubNavItems.map((item) => {

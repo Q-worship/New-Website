@@ -41,7 +41,7 @@ function BlockMedia({ image, alt }: { image?: string; alt: string }) {
 export function AlternatingBlocksSection() {
   return (
     <section className="alternating-blocks-section section-gap">
-      <SiteContainer className="space-y-32 lg:space-y-40">
+      <SiteContainer className="space-y-16 md:space-y-32 lg:space-y-40">
         {alternatingBlocks.map((block, index) => {
           const imageFirst = block.imageFirst ?? index % 2 === 1
 

@@ -5,7 +5,7 @@ export function DownloadsBannerSection() {
 
   return (
     <section
-      className="downloads-banner reveal"
+      className="downloads-banner reveal active"
       style={{ backgroundImage: `url(${banner.image})` }}
     >
       <div className="downloads-banner-overlay" aria-hidden />

@@ -7,8 +7,8 @@ export function FAQSection() {
     <section className="section-gap reveal">
       <SiteContainer>
         <div className="max-w-3xl text-left">
-          <h2 className="font-headline text-5xl font-bold mb-8">Questions ?</h2>
-          <p className="text-on-surface-variant text-xl mb-12 leading-relaxed">
+          <h2 className="font-headline text-3xl md:text-5xl font-bold mb-8">Questions ?</h2>
+          <p className="text-on-surface-variant text-base md:text-xl mb-12 leading-relaxed">
             Browse our FAQs or our Knowledge base that we&apos;ve made to answer your questions. Need
             additional help? Connect with a support team agent!
           </p>

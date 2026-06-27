@@ -1,10 +1,11 @@
-import { heroCopy, images } from '@/lib/theme'
+import { heroCopy, tabItems } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
+import { ShowcaseCard } from '@/components/sections/ShowcaseCard'
 
 export function HeroSection() {
   return (
-    <section className="pt-36 md:pt-40 lg:pt-44 pb-20 relative overflow-x-hidden reveal active isolate">
+    <section className="pt-28 md:pt-40 lg:pt-44 pb-20 relative overflow-x-hidden reveal active isolate">
       <div
         className="pointer-events-none absolute -top-20 inset-x-0 bottom-0 hero-gradient-bg -z-10"
         aria-hidden
@@ -20,7 +21,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          <h1 className="hero-heading font-body font-bold mb-6 w-full text-left">
+          <h1 className="hero-heading font-body font-bold mb-6 w-full text-center">
             <span className="text-white">{heroCopy.heading.line1} </span>
             <span className="hero-heading-accent">{heroCopy.heading.line2}</span>
           </h1>
@@ -29,7 +30,7 @@ export function HeroSection() {
             {heroCopy.body}
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
             <button
               type="button"
               className="hero-download-btn px-10 py-3.5 rounded-xl text-base font-bold"
@@ -45,12 +46,7 @@ export function HeroSection() {
             </button>
           </div>
 
-          <img
-            src={images.heroFrame}
-            alt="Q-Worship hands-free Bible interface preview"
-            className="hero-frame block w-full mt-14"
-            loading="eager"
-          />
+          <ShowcaseCard tabs={tabItems} idPrefix="hero" className="showcase-card--5-tabs mt-14" />
         </div>
       </SiteContainer>
     </section>

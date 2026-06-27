@@ -9,7 +9,7 @@ export function FeaturesHeroSection({ id }: FeaturesHeroSectionProps) {
   return (
     <section
       {...(id ? { id } : {})}
-      className="features-hero-section pt-32 md:pt-36 pb-16 md:pb-20 reveal"
+      className="features-hero-section pt-32 md:pt-36 pb-16 md:pb-20 reveal active"
     >
       <SiteContainer>
         <div className="features-hero-grid">

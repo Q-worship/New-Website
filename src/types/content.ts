@@ -170,3 +170,39 @@ export interface AccordionSpotlightContent {
   image: string
   imageAlt: string
 }
+
+export interface CoreBelief {
+  id: string
+  icon: 'create' | 'develop' | 'enable'
+  title: string
+  description: string
+}
+
+export interface InsightCard {
+  image: string
+  imageAlt: string
+  highlighted?: boolean
+  title: string
+  description: string
+}
+
+export interface WorkBenefit {
+  title: string
+  description: string
+}
+
+export interface JobOpening {
+  id: string
+  category: string
+  title: string
+  location: string
+  status: 'Active' | 'Closed'
+  intro?: string
+  philosophy?: string
+  skillsHeading?: string
+  skills?: string[]
+  valuesHeading?: string
+  values?: string[]
+  idealHeading?: string
+  ideal?: string[]
+}

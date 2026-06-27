@@ -3,6 +3,7 @@ import type {
   BuildTabItem,
   ChecklistSpotlightContent,
   CompatibleSystem,
+  CoreBelief,
   FeatureCard,
   FeaturesSubNavItem,
   GuideCard,
@@ -11,12 +12,15 @@ import type {
   FaqItem,
   DownloadsPageCopy,
   HandsFreeFeature,
+  InsightCard,
+  JobOpening,
   MoreFeature,
   NavDropdownItem,
   NavLink,
   PricingPlan,
   TabItem,
   TeamCard,
+  WorkBenefit,
 } from '@/types/content'
 
 export const navLinks: NavLink[] = [
@@ -241,6 +245,8 @@ export const handsFreeShowcaseTabs: TabItem[] = [
 
 const rectanglePortrait = '/Photos/Rectangle%209.png'
 const pastorForPastor = '/Photos/pastor%20for%20pastor.png'
+const downloadBannerImage = '/Photos/Download%201.png'
+const downloadOnlineCtaImage = '/Photos/Download%202.png'
 
 export const featureGridCards: FeatureCard[] = [
   {
@@ -431,8 +437,12 @@ export const featuresHeroCopy = {
 
 export const featuresSubNavItems: FeaturesSubNavItem[] = [
   { id: 'overview', label: 'Overview', href: '#overview' },
-  { id: 'on-screen-bible', label: 'On-screen Bible', href: '#on-screen-bible' },
   { id: 'hands-free-bible', label: 'Hands-Free Bible', href: '#hands-free-bible' },
+  { id: 'on-screen-bible', label: 'On-screen Bible', href: '#on-screen-bible' },
+  { id: 'songbook', label: 'Songbook', href: '#songbook' },
+  { id: 'service-slides', label: 'Service Slides', href: '#service-slides' },
+  { id: 'media', label: 'Media', href: '#media' },
+  { id: 'lower-third-builder', label: 'Lower Third Builder', href: '#lower-third-builder' },
   { id: 'pricing', label: 'Pricing', href: '#pricing' },
 ]
 
@@ -571,6 +581,35 @@ export const moreFeaturesAccordionSpotlight: AccordionSpotlightContent = {
 }
 
 export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
+  id: 'songbook',
+  title: {
+    before: 'Every Lyric.',
+    accent: 'Right on Time.',
+  },
+  body: buildTabItems.find((tab) => tab.id === 'songs')!.description,
+  checklist: buildTabItems.find((tab) => tab.id === 'songs')!.features.slice(0, 4),
+  cards: [
+    {
+      title: 'Section Navigation',
+      description:
+        'Navigate Verse, Chorus, Bridge, Tag and more with one click. What you see is what your congregation sees — always.',
+    },
+    {
+      title: 'Edit In-App',
+      description:
+        'Edit songs directly inside Q-worship, no extra tools needed. Bring in songs from Word documents, PDFs or text files.',
+    },
+    {
+      title: 'Song Metadata',
+      description:
+        'Keep your CCLI number, song key and tempo all in one place. Lead worship with complete confidence every Sunday.',
+    },
+  ],
+  image: '/Photos/Songs.png',
+  imageAlt: 'Songbook lyrics management interface',
+}
+
+export const prePastorsHandsFreeSpotlight: ChecklistSpotlightContent = {
   id: 'hands-free-bible',
   title: {
     before: 'Your Bible. Hands-free. Always ready,',
@@ -580,7 +619,7 @@ export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
   checklist: [
     'Natural language processing for spoken references',
     "Session context retention — 'next verse', 'change to NIV' understood in context",
-    'Full offline support — 31,102 verses cached locally across several Bible translations',
+    'Full offline support — 31,406 verses cached locally across several Bible translations',
     "Sleep/wake commands ('thank you', 'amen' to dismiss)",
   ],
   cards: [
@@ -602,6 +641,7 @@ export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
   ],
   image: '/Photos/features/song.png',
   imageAlt: 'Amazing Grace lyrics projected over a mountain landscape',
+  showListeningOverlay: true,
 }
 
 export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
@@ -1103,7 +1143,7 @@ export const faqItems: FaqItem[] = [
 export const downloadsPageCopy: DownloadsPageCopy = {
   banner: {
     title: 'Get Started',
-    image: pastorForPastor,
+    image: downloadBannerImage,
     imageAlt: 'Pastor speaking on stage',
   },
   product: {
@@ -1129,10 +1169,164 @@ export const downloadsPageCopy: DownloadsPageCopy = {
     body: guideCardDescription,
     primaryCta: 'Download',
     secondaryCta: 'Get started online',
-    image: '/Photos/lastlast.png',
+    image: downloadOnlineCtaImage,
     imageAlt: 'Church auditorium with scripture on screen',
   },
 }
+
+export const aboutHeroCopy = {
+  badge: 'WHO WE ARE',
+  heading: { before: 'About', accent: 'Q-worship' },
+  body: "Q-worship brings together voice-powered Bible search, live projection, song management, multi integrations, and rich features — all built by pastors who've stood where you stand.",
+  image: featuresHeroCopy.image,
+  imageAlt: 'Team collaborating on church presentation software',
+}
+
+export const aboutCoreBeliefs: CoreBelief[] = [
+  {
+    id: 'create',
+    icon: 'create',
+    title: 'Create',
+    description:
+      'Technologies that dramatically enhance environments and champion the user.',
+  },
+  {
+    id: 'develop',
+    icon: 'develop',
+    title: 'Develop',
+    description: 'Practical church software that is stable, affordable, and easy to use',
+  },
+  {
+    id: 'enable',
+    icon: 'enable',
+    title: 'Enable',
+    description:
+      'Oganizations to afford and benefit from these technologies by reducing cost and complexity.',
+  },
+]
+
+const aboutInsightBody =
+  "Q-worship brings together voice-powered Bible search, live projection, song management, multi integrations, and rich features — all built by pastors who've stood where you stand."
+
+export const aboutInsights = {
+  heading: 'Our collective insights are driven by experience but fueled by passion.',
+  items: [
+    {
+      image: '/Photos/features/ghgh.png',
+      imageAlt: 'Church presentation software on laptop in auditorium',
+      highlighted: true,
+      title: 'Focus is everything',
+      description: aboutInsightBody,
+    },
+    {
+      image: pastorForPastor,
+      imageAlt: 'Pastor speaking on stage',
+      title: 'Focus is everything',
+      description: aboutInsightBody,
+    },
+  ] satisfies InsightCard[],
+}
+
+const aboutWorkBenefitDescription =
+  'Take a break, recover, or get to an appointment, with paid time off. Starting with 16 paid days off and 7 paid holidays.'
+
+export const aboutWorkBenefits: WorkBenefit[] = Array.from({ length: 6 }, () => ({
+  title: 'Profit Sharing',
+  description: aboutWorkBenefitDescription,
+}))
+
+export const aboutJobOpeningsCopy = {
+  title: 'Current openings at Q-worship',
+  intro:
+    "Discover your own story while helping us empower others to tell theirs through our video software. Q-worship is growing! We need some first class individuals to help us achieve our goals. With the success of our products, the opportunities abound. We're very excited about our future and are eager to expand our team with passionate individuals looking to make a difference. Not all positions are needed immediately, but are listed here in case an exceptional candidate is discovered.",
+}
+
+export const aboutJobOpenings: JobOpening[] = [
+  {
+    id: 'core-rust',
+    category: 'Core',
+    title: 'Core Software Engineer | Rust',
+    location: 'Remote',
+    status: 'Active',
+    intro:
+      'As a Renewed Vision Core Software Engineer, you will develop the infrastructure and working technologies that power our platform.',
+    philosophy:
+      'We are looking for someone who enjoys working on the parts of an application that are invisible to the end user. You are language-agnostic and believe that innovation comes from discovery. You prioritize memory safety and concurrency in your work.',
+    skillsHeading: 'We are looking for individuals who possess the following skills:',
+    skills: [
+      'Proficiency in developing applications using Rust and modern C++',
+      'Experience in building libraries that can be utilized across multiple platforms',
+      'Ability to pay attention to details while understanding the significance of timely updates',
+      'Understanding of when to prioritize refactoring and when to defer it',
+      'Consistent willingness to learn and grow both personally and professionally',
+    ],
+    valuesHeading: 'Additionally, we highly value individuals who:',
+    values: [
+      'Are skilled in another programming language such as C# or Swift',
+      'Possess exceptional written and verbal communication skills',
+      'Take responsibility for projects, thrive with loosely defined specifications, and drive towards achieving results',
+    ],
+    idealHeading: 'Our top engineers will ideally have:',
+    ideal: [
+      'Experience in writing and debugging high-performance multi-threaded libraries',
+      'Familiarity with video and audio frameworks and low-level rendering',
+      'Hands-on experience developing multithreaded, decoupled systems using actor frameworks and async/await, emphasizing message-driven design, non-blocking I/O, and memory-safe concurrency',
+    ],
+  },
+  {
+    id: 'core-macos',
+    category: 'Core',
+    title: 'MacOS Software Engineer',
+    location: 'Remote',
+    status: 'Active',
+    intro:
+      'Join the Q-worship engineering team to build native macOS experiences for churches around the world.',
+    philosophy:
+      'You will help shape desktop software that pastors and tech volunteers rely on every Sunday. More details for this role will be published soon.',
+  },
+  {
+    id: 'sales-marketing',
+    category: 'Sales',
+    title: 'Sales & Marketing Representatives',
+    location: 'South Africa',
+    status: 'Active',
+    intro:
+      'Help Q-worship reach churches across South Africa through relationship-driven sales and marketing.',
+    philosophy:
+      'We are looking for passionate communicators who understand ministry needs and can represent Q-worship with integrity. Full role details coming soon.',
+  },
+  {
+    id: 'core-windows',
+    category: 'Core',
+    title: 'Windows Software Engineer',
+    location: 'Remote',
+    status: 'Active',
+    intro:
+      'Build reliable Windows-native features for Q-worship’s church presentation platform.',
+    philosophy:
+      'You will work on performance-critical desktop software used in live services. Additional requirements for this role will be added soon.',
+  },
+]
+
+export const jobApplicationCountries = [
+  'United States',
+  'Canada',
+  'United Kingdom',
+  'South Africa',
+  'Australia',
+  'Other',
+]
+
+export function getJobOpeningById(id: string): JobOpening | undefined {
+  return aboutJobOpenings.find((opening) => opening.id === id)
+}
+
+export const aboutFaqTeaserItems: FaqItem[] = [
+  faqItems.find((item) => item.id === 'what-is-qworship')!,
+  faqItems.find((item) => item.id === 'who-is-it-for')!,
+  { ...faqItems.find((item) => item.id === 'who-is-it-for')!, id: 'who-is-it-for-duplicate' },
+  faqItems.find((item) => item.id === 'operating-systems')!,
+]
 
 export const images = {
   logo: '/Photos/logo.png',

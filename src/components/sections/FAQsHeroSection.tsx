@@ -3,7 +3,7 @@ import { SiteContainer } from '@/components/layout/SiteContainer'
 
 export function FAQsHeroSection() {
   return (
-    <section className="features-hero-section pt-32 md:pt-36 pb-16 md:pb-20 reveal">
+    <section className="features-hero-section pt-32 md:pt-36 pb-16 md:pb-20 reveal active">
       <SiteContainer>
         <div className="features-hero-grid">
           <div className="features-hero-copy">

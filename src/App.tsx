@@ -8,6 +8,7 @@ import { Resources } from '@/pages/Resources'
 import { Guides } from '@/pages/Guides'
 import { FAQs } from '@/pages/FAQs'
 import { Downloads } from '@/pages/Downloads'
+import { JobDetailPage } from '@/pages/JobDetailPage'
 
 export function App() {
   return (
@@ -15,6 +16,7 @@ export function App() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/features" component={Features} />
+        <Route path="/about/careers/:jobId" component={JobDetailPage} />
         <Route path="/about" component={About} />
         <Route path="/pricing" component={Pricing} />
         <Route path="/resources" component={Resources} />
