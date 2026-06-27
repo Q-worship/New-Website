@@ -127,9 +127,11 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4 relative z-10 shrink-0">
-            <PrimaryButton className="px-4 sm:px-6 py-2.5 rounded-lg text-sm touch-target">
-              Sign in
-            </PrimaryButton>
+            <Link href="/login">
+              <PrimaryButton className="px-4 sm:px-6 py-2.5 rounded-lg text-sm touch-target">
+                Sign in
+              </PrimaryButton>
+            </Link>
             <GlassButton className="px-3 sm:px-6 py-2.5 rounded-lg text-sm border border-white/30 touch-target">
               Get started
             </GlassButton>

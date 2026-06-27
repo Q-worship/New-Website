@@ -9,21 +9,27 @@ import { Guides } from '@/pages/Guides'
 import { FAQs } from '@/pages/FAQs'
 import { Downloads } from '@/pages/Downloads'
 import { JobDetailPage } from '@/pages/JobDetailPage'
+import { Login } from '@/pages/Login'
 
 export function App() {
   return (
-    <Layout>
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/features" component={Features} />
-        <Route path="/about/careers/:jobId" component={JobDetailPage} />
-        <Route path="/about" component={About} />
-        <Route path="/pricing" component={Pricing} />
-        <Route path="/resources" component={Resources} />
-        <Route path="/guides" component={Guides} />
-        <Route path="/faqs" component={FAQs} />
-        <Route path="/downloads" component={Downloads} />
-      </Switch>
-    </Layout>
+    <Switch>
+      <Route path="/login" component={Login} />
+      <Route>
+        <Layout>
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/features" component={Features} />
+            <Route path="/about/careers/:jobId" component={JobDetailPage} />
+            <Route path="/about" component={About} />
+            <Route path="/pricing" component={Pricing} />
+            <Route path="/resources" component={Resources} />
+            <Route path="/guides" component={Guides} />
+            <Route path="/faqs" component={FAQs} />
+            <Route path="/downloads" component={Downloads} />
+          </Switch>
+        </Layout>
+      </Route>
+    </Switch>
   )
 }
