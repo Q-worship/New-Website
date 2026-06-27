@@ -76,13 +76,15 @@ export function JobDetailSection({ job }: JobDetailSectionProps) {
           </div>
         )}
 
-        <button type="button" className="careers-alert-link" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          Create a Job Alert
-        </button>
+        <div className="careers-detail-actions">
+          <button type="button" className="careers-alert-link" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            Create a Job Alert
+          </button>
 
-        <button type="button" className="careers-apply-btn" onClick={scrollToApply}>
-          Apply
-        </button>
+          <button type="button" className="careers-apply-btn" onClick={scrollToApply}>
+            Apply
+          </button>
+        </div>
       </SiteContainer>
     </section>
   )

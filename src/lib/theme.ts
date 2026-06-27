@@ -244,7 +244,7 @@ export const handsFreeShowcaseTabs: TabItem[] = [
 ]
 
 const rectanglePortrait = '/Photos/Rectangle%209.png'
-const pastorForPastor = '/Photos/pastor%20for%20pastor.png'
+const pastorForPastor = '/Photos/pASTORS%20(2).png'
 const downloadBannerImage = '/Photos/Download%201.png'
 const downloadOnlineCtaImage = '/Photos/Download%202.png'
 
