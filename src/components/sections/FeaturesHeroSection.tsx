@@ -17,7 +17,7 @@ export function FeaturesHeroSection({ id }: FeaturesHeroSectionProps) {
             <div className="features-hero-badge">{featuresHeroCopy.badge}</div>
 
             <h1 className="features-hero-heading font-headline font-bold">
-              <span className="features-hero-heading-accent">{featuresHeroCopy.heading.accent}</span>{' '}
+              <span className="build-section-entire-gradient">{featuresHeroCopy.heading.accent}</span>{' '}
               <span className="text-white">{featuresHeroCopy.heading.rest}</span>
             </h1>
 

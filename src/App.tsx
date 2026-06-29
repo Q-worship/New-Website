@@ -1,4 +1,5 @@
 import { Route, Switch } from 'wouter'
+import { ChatbotWidget } from '@/components/chat/ChatbotWidget'
 import { Layout } from '@/components/layout/Layout'
 import { Home } from '@/pages/Home'
 import { Features } from '@/pages/Features'
@@ -13,23 +14,26 @@ import { Login } from '@/pages/Login'
 
 export function App() {
   return (
-    <Switch>
-      <Route path="/login" component={Login} />
-      <Route>
-        <Layout>
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/features" component={Features} />
-            <Route path="/about/careers/:jobId" component={JobDetailPage} />
-            <Route path="/about" component={About} />
-            <Route path="/pricing" component={Pricing} />
-            <Route path="/resources" component={Resources} />
-            <Route path="/guides" component={Guides} />
-            <Route path="/faqs" component={FAQs} />
-            <Route path="/downloads" component={Downloads} />
-          </Switch>
-        </Layout>
-      </Route>
-    </Switch>
+    <>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route>
+          <Layout>
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/features" component={Features} />
+              <Route path="/about/careers/:jobId" component={JobDetailPage} />
+              <Route path="/about" component={About} />
+              <Route path="/pricing" component={Pricing} />
+              <Route path="/resources" component={Resources} />
+              <Route path="/guides" component={Guides} />
+              <Route path="/faqs" component={FAQs} />
+              <Route path="/downloads" component={Downloads} />
+            </Switch>
+          </Layout>
+        </Route>
+      </Switch>
+      <ChatbotWidget />
+    </>
   )
 }

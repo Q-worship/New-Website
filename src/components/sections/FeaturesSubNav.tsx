@@ -20,6 +20,7 @@ function getUniqueSectionIds(): string[] {
 export function FeaturesSubNav() {
   const [activeId, setActiveId] = useState(featuresSubNavItems[0].id)
   const overviewVisibleRef = useRef(false)
+  const linksRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const sectionIds = getUniqueSectionIds()
@@ -71,6 +72,13 @@ export function FeaturesSubNav() {
     }
   }, [])
 
+  const scrollActiveTabIntoView = (itemId: string) => {
+    const tab = linksRef.current?.querySelector<HTMLButtonElement>(
+      `[data-subnav-id="${itemId}"]`,
+    )
+    tab?.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' })
+  }
+
   const handleNavClick = (item: (typeof featuresSubNavItems)[number]) => {
     const targetId = getHrefTargetId(item.href)
     const target = document.getElementById(targetId)
@@ -79,6 +87,14 @@ export function FeaturesSubNav() {
     const top = target.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET
     window.scrollTo({ top, behavior: 'smooth' })
     setActiveId(item.id)
+    scrollActiveTabIntoView(item.id)
+  }
+
+  const handleScrollTabsForward = () => {
+    const links = linksRef.current
+    if (!links) return
+
+    links.scrollBy({ left: links.clientWidth * 0.65, behavior: 'smooth' })
   }
 
   return (
@@ -90,7 +106,11 @@ export function FeaturesSubNav() {
             <span className="features-subnav-brand-text">Q-worship Features</span>
           </div>
 
-          <div className="features-subnav-links hide-scrollbar" role="tablist">
+          <div
+            ref={linksRef}
+            className="features-subnav-links hide-scrollbar"
+            role="tablist"
+          >
             {featuresSubNavItems.map((item) => {
               const isActive = activeId === item.id
 
@@ -99,6 +119,7 @@ export function FeaturesSubNav() {
                   key={item.id}
                   type="button"
                   role="tab"
+                  data-subnav-id={item.id}
                   aria-selected={isActive}
                   className={`features-subnav-link${isActive ? ' features-subnav-link--active' : ''}`}
                   onClick={() => handleNavClick(item)}
@@ -109,11 +130,14 @@ export function FeaturesSubNav() {
             })}
           </div>
 
-          <MaterialIcon
-            name="chevron_right"
-            className="features-subnav-chevron shrink-0 lg:hidden"
-            aria-hidden
-          />
+          <button
+            type="button"
+            className="features-subnav-chevron-btn shrink-0 lg:hidden"
+            aria-label="Scroll feature tabs"
+            onClick={handleScrollTabsForward}
+          >
+            <MaterialIcon name="chevron_right" className="features-subnav-chevron" aria-hidden />
+          </button>
         </div>
       </SiteContainer>
     </nav>

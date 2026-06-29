@@ -247,7 +247,7 @@ export interface FeatureSpotlightCard {
 
 export interface ChecklistSpotlightContent {
   id: string
-  title: { before: string; accent: string; after?: string }
+  title: { line1: string; line2Before: string; accent: string }
   body: string
   checklist: string[]
   cards: FeatureSpotlightCard[]
@@ -265,7 +265,7 @@ export interface AccordionSpotlightItem {
 export interface AccordionSpotlightContent {
   id: string
   header: { line1: string; line2Before: string; accent: string }
-  subtitle: string
+  subtitle: { line1: string; line2: string }
   items: AccordionSpotlightItem[]
   image: string
   imageAlt: string

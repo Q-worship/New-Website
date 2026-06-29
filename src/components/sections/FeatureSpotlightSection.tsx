@@ -29,11 +29,8 @@ function ChecklistCardsSpotlight({ content, visualOverlay }: ChecklistCardsProps
 
           <div className="feature-spotlight-copy">
             <h2 className="feature-spotlight-title font-headline font-bold">
-              <span className="text-white">{content.title.before} </span>
-              <span className="text-primary">{content.title.accent}</span>
-              {content.title.after && (
-                <span className="text-white"> {content.title.after}</span>
-              )}
+              <span className="text-white block">{content.title.line1}</span>
+              <span className="build-section-entire-gradient block">{content.title.accent}</span>
             </h2>
 
             <p className="feature-spotlight-body">{content.body}</p>
@@ -229,13 +226,18 @@ function AccordionSpotlight({
       <SiteContainer>
         <div className="feature-spotlight-header">
           <h2 className="feature-spotlight-accordion-heading font-headline font-bold">
-            <span className="text-white block">{content.header.line1}</span>
-            <span className="block">
-              <span className="text-on-surface-variant">{content.header.line2Before}</span>
-              <span className="text-primary">{content.header.accent}</span>
+            <span className="feature-spotlight-accordion-heading-line text-white">
+              {content.header.line1}
+            </span>
+            <span className="feature-spotlight-accordion-heading-line">
+              <span className="text-white">{content.header.line2Before} </span>
+              <span className="build-section-entire-gradient">{content.header.accent}</span>
             </span>
           </h2>
-          <p className="feature-spotlight-accordion-subtitle">{content.subtitle}</p>
+          <p className="feature-spotlight-accordion-subtitle">
+            <span className="feature-spotlight-accordion-subtitle-line">{content.subtitle.line1}</span>{' '}
+            <span className="feature-spotlight-accordion-subtitle-line">{content.subtitle.line2}</span>
+          </p>
         </div>
 
         <div className="feature-spotlight-accordion-grid">

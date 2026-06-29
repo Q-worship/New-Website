@@ -36,11 +36,11 @@ export function BuiltByPastorsSection() {
 
       <SiteContainer>
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 lg:items-stretch">
+        <div className="built-by-pastors-section__grid">
 
-          <div className="space-y-6 lg:space-y-8">
+          <div className="built-by-pastors-section__copy">
 
-            <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+            <h2 className="built-by-pastors-section__heading font-headline font-bold">
               Built By <span className="text-primary">Pastors for Pastors</span>
             </h2>
 
@@ -54,7 +54,7 @@ export function BuiltByPastorsSection() {
               worship leader, or tech volunteer asked for it.
             </p>
 
-            <div className="space-y-4 pt-2">
+            <div className="built-by-pastors-section__checklist">
 
               {checklistItems.map((item) => (
 
@@ -70,7 +70,7 @@ export function BuiltByPastorsSection() {
 
             </div>
 
-            <button type="button" className="built-by-pastors-btn mt-4">
+            <button type="button" className="built-by-pastors-btn">
               Learn more
             </button>
 

@@ -1222,7 +1222,8 @@ export const featuresSubNavItems: FeaturesSubNavItem[] = [
 export const handsFreeFeatureSpotlight: ChecklistSpotlightContent = {
   id: 'overview',
   title: {
-    before: 'Your Bible. Voice-first. Always ready,',
+    line1: 'Your Bible. Voice-first. Always ready,',
+    line2Before: '',
     accent: 'Online and Offline',
   },
   body: 'Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
@@ -1258,11 +1259,13 @@ export const onScreenBibleSpotlight: AccordionSpotlightContent = {
   id: 'on-screen-bible',
   header: {
     line1: 'Effortless Manual Search',
-    line2Before: 'Q-worship , ',
+    line2Before: 'Q-worship,',
     accent: 'On-screen Bible',
   },
-  subtitle:
-    'A powerful visual editor for searching, selecting, and projecting Bible content. Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  subtitle: {
+    line1: 'A powerful visual editor for searching, selecting, and projecting Bible content.',
+    line2: 'Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  },
   items: [
     {
       id: 'search',
@@ -1291,11 +1294,13 @@ export const postPastorsAccordionSpotlight: AccordionSpotlightContent = {
   id: 'hands-free-accordion',
   header: {
     line1: 'Effortless Manual Search',
-    line2Before: 'Q-worship , ',
+    line2Before: 'Q-worship,',
     accent: 'On-screen Bible',
   },
-  subtitle:
-    'A powerful visual editor for searching, selecting, and projecting Bible content. Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  subtitle: {
+    line1: 'A powerful visual editor for searching, selecting, and projecting Bible content.',
+    line2: 'Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  },
   items: [
     {
       id: 'search',
@@ -1324,11 +1329,13 @@ export const moreFeaturesAccordionSpotlight: AccordionSpotlightContent = {
   id: 'on-screen-bible-showcase',
   header: {
     line1: 'Effortless Manual Search',
-    line2Before: 'Q-worship , ',
+    line2Before: 'Q-worship,',
     accent: 'On-screen Bible',
   },
-  subtitle:
-    'A powerful visual editor for searching, selecting, and projecting Bible content. Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  subtitle: {
+    line1: 'A powerful visual editor for searching, selecting, and projecting Bible content.',
+    line2: 'Search all 66 books, select verse ranges, and see a live preview before you go live.',
+  },
   items: [
     {
       id: 'search',
@@ -1356,7 +1363,8 @@ export const moreFeaturesAccordionSpotlight: AccordionSpotlightContent = {
 export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
   id: 'songbook',
   title: {
-    before: 'Every Lyric.',
+    line1: 'Every Lyric.',
+    line2Before: '',
     accent: 'Right on Time.',
   },
   body: buildTabItems.find((tab) => tab.id === 'songs')!.description,
@@ -1385,7 +1393,8 @@ export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
 export const prePastorsHandsFreeSpotlight: ChecklistSpotlightContent = {
   id: 'hands-free-bible',
   title: {
-    before: 'Your Bible. Hands-free. Always ready,',
+    line1: 'Your Bible. Hands-free. Always ready,',
+    line2Before: '',
     accent: 'Online and Offline',
   },
   body: 'For ages, pastors have paused mid-sermon to wait for a verse. Q-worship ends that. Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
@@ -1420,7 +1429,8 @@ export const prePastorsHandsFreeSpotlight: ChecklistSpotlightContent = {
 export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
   id: 'service-slides',
   title: {
-    before: 'Your Service.',
+    line1: 'Your Service.',
+    line2Before: '',
     accent: 'Fully in Your Hands.',
   },
   body: buildTabItems.find((tab) => tab.id === 'service')!.description,
@@ -1449,7 +1459,8 @@ export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
 export const mediaFeatureSpotlight: ChecklistSpotlightContent = {
   id: 'media',
   title: {
-    before: 'Keep Your Church',
+    line1: 'Keep Your Church',
+    line2Before: '',
     accent: 'In the Loop',
   },
   body: buildTabItems.find((tab) => tab.id === 'announcements')!.description,
@@ -1478,7 +1489,8 @@ export const mediaFeatureSpotlight: ChecklistSpotlightContent = {
 export const lowerThirdBuilderSpotlight: ChecklistSpotlightContent = {
   id: 'lower-third-builder',
   title: {
-    before: 'In-built',
+    line1: 'In-built',
+    line2Before: '',
     accent: 'Lower Third Builder',
   },
   body: 'Create broadcast-quality name and title graphics directly inside Q-worship. Display speaker names, sermon titles, and announcements on your live stream — no extra software needed.',
