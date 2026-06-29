@@ -7,7 +7,6 @@ export function MoreFeaturesAccordionFeatureSection() {
       content={moreFeaturesAccordionSpotlight}
       autoAdvance
       advanceDurationS={6}
-      nextSectionId="on-screen-bible"
       imagePosition="right"
       showListeningOverlay
     />

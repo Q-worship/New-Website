@@ -780,10 +780,6 @@ export const featuresSubNavItems: FeaturesSubNavItem[] = [
   { id: 'overview', label: 'Overview', href: '#overview' },
   { id: 'hands-free-bible', label: 'Hands-Free Bible', href: '#hands-free-bible' },
   { id: 'on-screen-bible', label: 'On-screen Bible', href: '#on-screen-bible' },
-  { id: 'songbook', label: 'Songbook', href: '#songbook' },
-  { id: 'service-slides', label: 'Service Slides', href: '#service-slides' },
-  { id: 'media', label: 'Media', href: '#media' },
-  { id: 'lower-third-builder', label: 'Lower Third Builder', href: '#lower-third-builder' },
   { id: 'pricing', label: 'Pricing', href: '#pricing' },
 ]
 

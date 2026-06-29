@@ -4698,6 +4698,10 @@ body.mobile-nav-open {
   background: linear-gradient(180deg, #360b43 0%, #190e21 50%, #120e19 100%);
 }
 
+.pricing-product-block {
+  background: #27262f;
+}
+
 .pricing-hero-section {
   position: relative;
   padding-top: 8rem;

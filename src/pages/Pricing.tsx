@@ -17,6 +17,8 @@ export function Pricing() {
     <>
       <div className="pricing-top-gradient">
         <PricingHeroSection />
+      </div>
+      <div className="pricing-product-block">
         <PricingProductNav />
         <PricingProductBanner />
       </div>

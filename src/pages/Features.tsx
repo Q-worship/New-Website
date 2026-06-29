@@ -8,14 +8,6 @@ import { OnScreenBibleFeatureSection } from '@/components/sections/OnScreenBible
 
 import { PrePastorsHandsFreeSection } from '@/components/sections/PrePastorsHandsFreeSection'
 
-import { SongbookFeatureSection } from '@/components/sections/SongbookFeatureSection'
-
-import { ServiceSlidesFeatureSection } from '@/components/sections/ServiceSlidesFeatureSection'
-
-import { MediaFeatureSection } from '@/components/sections/MediaFeatureSection'
-
-import { LowerThirdBuilderFeatureSection } from '@/components/sections/LowerThirdBuilderFeatureSection'
-
 import { BuiltByPastorsSection } from '@/components/sections/BuiltByPastorsSection'
 
 import { PostPastorsAccordionFeatureSection } from '@/components/sections/PostPastorsAccordionFeatureSection'
@@ -66,17 +58,9 @@ export function Features() {
 
       <BuiltByPastorsSection />
 
-      <SongbookFeatureSection />
-
-      <ServiceSlidesFeatureSection />
-
-      <MediaFeatureSection />
-
-      <LowerThirdBuilderFeatureSection />
-
       <PostPastorsAccordionFeatureSection />
 
-      <MoreFeaturesSection showViewAllLink={false} />
+      <MoreFeaturesSection showViewAllLink />
 
       <MoreFeaturesAccordionFeatureSection />
 
