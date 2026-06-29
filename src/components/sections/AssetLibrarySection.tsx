@@ -17,14 +17,18 @@ export function AssetLibrarySection() {
           Every background, motion graphic, and worship visual your church needs — all in one searchable
           library. Find the perfect backdrop in seconds, not minutes.
         </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 flex-wrap px-6 sm:px-0">
+        <div className="asset-library-actions cta-pair-mobile-inline flex flex-row flex-wrap justify-center gap-4 sm:gap-6 px-6 sm:px-0">
           <button
             type="button"
-            className="w-full sm:w-auto bg-white text-background px-10 py-4 rounded-xl font-bold hover:bg-primary hover:text-white transition-all touch-target"
+            className="asset-library-primary-btn bg-white text-background px-10 py-4 rounded-xl font-bold hover:bg-primary hover:text-white transition-all touch-target"
           >
             Start for free today
           </button>
-          <GlassButton icon="play_circle" iconFilled className="w-full sm:w-auto px-10 py-4 rounded-xl touch-target">
+          <GlassButton
+            icon="play_circle"
+            iconFilled
+            className="asset-library-demo-btn px-10 py-4 rounded-xl touch-target"
+          >
             Book Demo
           </GlassButton>
         </div>

@@ -22,6 +22,8 @@ import type {
   PricingIncludedFeature,
   PricingPageCopy,
   PricingPlan,
+  PricingProductContent,
+  PricingProductId,
   TabItem,
   TeamCard,
   WorkBenefit,
@@ -204,10 +206,20 @@ export const handsFreeFeatures: HandsFreeFeature[] = [
 export const handsFreeSectionCopy = {
   title: 'Meet the Q-worship Hands-Free Bible',
   tagline: {
-    line1: 'Your Scripture. Found by Speech.',
-    line2: 'Projected in Seconds.',
+    line1: 'Your Scripture. Found by Speech. Projected',
+    line2: 'in Seconds.',
   },
   body: 'For ages, pastors have paused mid-sermon to wait for a verse. Q-worship ends that. Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
+}
+
+export const finalCtaCopy = {
+  heading: {
+    line1: 'Ready to step into the',
+    line2: 'Future of church presentation?',
+  },
+  body: 'Join thousands of churches delivering high-impact church experiences with the power of Qworship.',
+  primaryCta: 'Get started for free',
+  downloadCta: 'Download',
 }
 
 export const handsFreeShowcaseTabs: TabItem[] = [
@@ -435,40 +447,21 @@ export const pricingPageCopy: PricingPageCopy = {
         id: 'live-console',
         label: 'Q-worship Live Console',
         badge: 'Desktop Application',
-        active: true,
       },
       {
         id: 'cloud',
         label: 'Q-worship Cloud Presentation System',
         badge: 'Cloud',
-        disabled: true,
       },
     ],
   },
-  productBanner: {
-    title: 'Live Console Desktop Application',
-    description:
-      'A lightweight, offline-first desktop app for Mac & Windows. Includes Hands-Free Bible, On-Screen Bible, Songbook, GO LIVE projection, and Media Library. Runs 100% without internet — ideal for any venue.',
-    primaryCta: 'Download for windows',
-    secondaryCta: 'Download for mac',
-  },
-  plansHeader: {
-    badge: 'QWORSHIP LIVE CONSOLE',
-    heading: { before: 'Pricing for', accent: 'Q-worship Live Console' },
-    subtitle:
-      'Start your 30-day free trial today — no credit card required, no watermarks, no limits. One subscription covers your entire team on Mac and Windows.',
-    tagline: "Choose the plan that's right for your church.",
-  },
-  includedHeading: 'Included with Every Plan',
-  compareHeading: 'Compare Plans',
-  compareSubtitle: "See exactly what's included in each tier.",
-  faqHeading: 'Frequently Asked Questions?',
+  faqHeading: 'Frequently Asked Questions',
   faqBody:
-    "Everything you need to know about Qworship pricing. Can't find what you're looking for? Reach out to our team.",
+    "Everything you need to know about Qworship pricing. Can't find what you're looking for?",
   faqCta: 'View more FAQs',
 }
 
-export const pricingPagePlans: PricingPlan[] = [
+const liveConsolePlans: PricingPlan[] = [
   {
     name: 'Free',
     monthlyPrice: '$0.00',
@@ -549,24 +542,81 @@ export const pricingPagePlans: PricingPlan[] = [
   },
 ]
 
-export const pricingIncludedFeatures: PricingIncludedFeature[] = [
+const liveConsoleIncludedFeatures: PricingIncludedFeature[] = [
   {
-    title: 'Voice Bible Search',
+    title: 'Hands-Free Bible',
     description:
-      'Search 31,406 verses across 6 translations using only your voice. No typing, no clicking.',
+      'Search 31,408 verses across 6 translations using only your voice. No typing, no clicking.',
     icon: 'mic',
   },
   {
-    title: 'Online & Offline Ready',
+    title: '100% Offline Ready',
     description:
-      'Full functionality with or without internet. Your service never stops, no matter the venue.',
+      'Full functionality with zero internet. Your service never stops, no matter the venue.',
     icon: 'wifi_off',
   },
   {
-    title: 'Multi Bible Translations',
+    title: '6 Bible Translations',
     description:
-      'KJV, NKJV, NIV, ESV, AMP, MSG and 20+ more bible versions. Switch translations mid-service with a single command.',
+      'KJV, NKJV, NIV, ESV, AMP, and MSG — switch translations mid-service with a single voice command.',
     icon: 'menu_book',
+  },
+  {
+    title: 'Songbook & Projection',
+    description:
+      'Build your church song library and project lyrics section by section with real-time sync.',
+    icon: 'music_note',
+  },
+  {
+    title: 'GO LIVE Mode',
+    description:
+      'Full-screen presentation mode with multi-screen output, logo overlay, and widget positioning.',
+    icon: 'tv',
+  },
+  {
+    title: 'Auto-Save & Recovery',
+    description:
+      'Your service is saved continuously. A crash or restart restores your workspace exactly.',
+    icon: 'save',
+  },
+]
+
+const cloudIncludedFeatures: PricingIncludedFeature[] = [
+  {
+    title: 'Order of Service Builder',
+    description:
+      'Build your full service flow with songs, Bible, announcements, videos, and images in one timeline.',
+    icon: 'event_note',
+  },
+  {
+    title: 'Hands-Free Bible',
+    description:
+      'Search 31,408 verses across multiple translations using only your voice — no typing, no clicking.',
+    icon: 'mic',
+  },
+  {
+    title: 'Rich Slide Canvas',
+    description:
+      'Layer text, elements, images, QR codes, and templates on a flexible worship slide canvas.',
+    icon: 'palette',
+  },
+  {
+    title: 'Cloud Media Library',
+    description:
+      'Upload, tag, and access your church media from any device with cloud sync.',
+    icon: 'cloud_queue',
+  },
+  {
+    title: 'Live Projection',
+    description:
+      'Project your service to screens and outputs with single-window or multi-screen support.',
+    icon: 'cast',
+  },
+  {
+    title: 'Auto-Save & Recovery',
+    description:
+      'Your order of service is saved continuously. A crash or restart restores your workspace exactly.',
+    icon: 'save',
   },
 ]
 
@@ -581,7 +631,7 @@ export const pricingCompareCategories: PricingCompareCategory[] = [
   { id: 'support', label: 'Support' },
 ]
 
-export const pricingCompareRows: PricingCompareRow[] = [
+const liveConsoleCompareRows: PricingCompareRow[] = [
   {
     id: 'voice-bible-search',
     label: 'Voice Bible search',
@@ -755,6 +805,388 @@ export const pricingCompareRows: PricingCompareRow[] = [
   },
 ]
 
+const cloudPlans: PricingPlan[] = [
+  {
+    name: 'Free',
+    monthlyPrice: '$0.00',
+    yearlyPrice: '$0.00',
+    badge: '',
+    description: 'Try the full cloud experience at no cost.',
+    features: [
+      'Order of service builder',
+      'Hands-Free Bible - KJV only',
+      'On-screen Bible search - KJV only',
+      'Song Library - Limited',
+      'Media Assets - limited to My media',
+      'Live projection - Single Window',
+      'Basic Slide Canvas Builder',
+      'Community Support & Resources',
+    ],
+    ctaLabel: 'Get Started Free',
+    ctaVariant: 'outline',
+  },
+  {
+    name: 'Essentials',
+    monthlyPrice: '$8.99',
+    yearlyPrice: '$6.99',
+    badge: 'CHEAPEST',
+    description: 'Everything you need to run a full church service.',
+    includesLabel: 'Everything in Free, plus:',
+    features: [
+      'Online Voice Bible Search (3 Bibles)',
+      'On-screen Bible - 3 Bibles',
+      'Full Service Item Library (Song, Bible, Announcement, Video, Image slide and more)',
+      'Slide Canvas with built-in templates',
+      'Cloud & My media assets library - limited access',
+      'Song Import from DOCX and PDF',
+      'NDI connectivity via Q-worship NDI Bridge',
+      'Auto-save & Crash Recovery',
+      'Email Support',
+    ],
+    ctaLabel: 'Start free trial',
+    ctaVariant: 'outline',
+  },
+  {
+    name: 'Pro',
+    monthlyPrice: '$12.99',
+    yearlyPrice: '$9.99',
+    badge: '',
+    popularLabel: 'MOST POPULAR',
+    highlighted: true,
+    description: 'The complete cloud platform for growing churches.',
+    includesLabel: 'Everything in Essentials, plus:',
+    features: [
+      'Online Voice Bible Search (6+ Bibles)',
+      'On-screen Bible - 6+ Bibles',
+      'Rich Slide Canvas — text, elements, images, QR codes, layers',
+      'Lower Third Builder & Pre-built templates',
+      'Advanced media tagging & collections',
+      'Multi-Branch Discount — Up to 5 branches',
+      'PowerPoint Export & Back-up',
+      'Priority Email Support',
+    ],
+    ctaLabel: 'Start free trial',
+    ctaVariant: 'gradient',
+  },
+  {
+    name: 'Enterprise',
+    monthlyPrice: '$15.99',
+    yearlyPrice: '$12.99',
+    badge: 'RECOMMENDED',
+    description: 'The complete solution for growing churches.',
+    includesLabel: 'Everything in Pro, plus:',
+    features: [
+      'Online Voice Bible Search (10+ Bibles)',
+      'On-screen Bible - 10+ Bibles',
+      'Multi-branch discount access - up to 10 Branches',
+      'Dedicated Account Manager',
+      'Custom Onboarding & Training',
+      'Priority phone and chat support',
+    ],
+    ctaLabel: 'Start free trial',
+    ctaVariant: 'outline',
+  },
+]
+
+export const cloudCompareCategories: PricingCompareCategory[] = [
+  { id: 'all', label: 'All' },
+  { id: 'bible', label: 'Bible' },
+  { id: 'songbook', label: 'Songbook' },
+  { id: 'media', label: 'Media' },
+  { id: 'integrations', label: 'Integrations' },
+  { id: 'lower-third', label: 'Lower Third' },
+  { id: 'size', label: 'Size' },
+  { id: 'service', label: 'Service' },
+  { id: 'support', label: 'Support' },
+]
+
+const cloudCompareRows: PricingCompareRow[] = [
+  {
+    id: 'hands-free-voice-bible-search',
+    label: 'Hands-Free Voice Bible Search',
+    category: 'bible',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'all-bible-translations',
+    label: 'All 10+ Bible Translations',
+    category: 'bible',
+    free: false,
+    starter: false,
+    premium: false,
+    enterprise: true,
+  },
+  {
+    id: 'verse-database',
+    label: '31,406 verse database',
+    category: 'bible',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'verse-range-selection',
+    label: 'Verse range selection',
+    category: 'bible',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'order-of-service-builder',
+    label: 'Order of service Builder',
+    category: 'service',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'service-items',
+    label: 'Songs, Bible, Announcements items',
+    category: 'service',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'video-image-slide-items',
+    label: 'Video & Image slide items',
+    category: 'service',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'web-page-item',
+    label: 'Web page item',
+    category: 'service',
+    free: false,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'basic-slide-canvas',
+    label: 'Basic slide canvas',
+    category: 'media',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'worship-slide-templates',
+    label: 'Built-in worship slide templates',
+    category: 'media',
+    free: false,
+    starter: 'Limited',
+    premium: 'Unlimited',
+    enterprise: 'Unlimited',
+  },
+  {
+    id: 'rich-canvas',
+    label: 'Rich canvas (text, elements, images, or layers)',
+    category: 'media',
+    free: false,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'lower-third-builder',
+    label: 'Lower Third Builder',
+    category: 'lower-third',
+    free: false,
+    starter: 'Limited',
+    premium: 'Unlimited',
+    enterprise: 'Unlimited',
+  },
+  {
+    id: 'song-library',
+    label: 'Song library',
+    category: 'songbook',
+    free: false,
+    starter: 'Limited',
+    premium: 'Unlimited',
+    enterprise: 'Unlimited',
+  },
+  {
+    id: 'song-import',
+    label: 'Song import (PDF, DOCX)',
+    category: 'songbook',
+    free: false,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'cloud-media-library',
+    label: 'Cloud media library',
+    category: 'media',
+    free: false,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'my-media',
+    label: 'My Media (user uploads)',
+    category: 'media',
+    free: '150MB',
+    starter: '1GB',
+    premium: '5GB',
+    enterprise: '10GB',
+  },
+  {
+    id: 'tagging-collections',
+    label: 'Advanced tagging & Collections',
+    category: 'media',
+    free: false,
+    starter: false,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'ndi-output',
+    label: 'NDI Output',
+    category: 'integrations',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'multi-branch',
+    label: 'Multi-branch discount',
+    category: 'size',
+    free: false,
+    starter: false,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'email-support',
+    label: 'Email Support',
+    category: 'support',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'community-support',
+    label: 'Community support',
+    category: 'support',
+    free: true,
+    starter: true,
+    premium: true,
+    enterprise: true,
+  },
+  {
+    id: 'priority-support',
+    label: 'Priority support',
+    category: 'support',
+    free: false,
+    starter: false,
+    premium: false,
+    enterprise: true,
+  },
+  {
+    id: 'custom-onboarding',
+    label: 'Custom Onboarding & Training',
+    category: 'support',
+    free: false,
+    starter: false,
+    premium: false,
+    enterprise: true,
+  },
+]
+
+const liveConsoleProduct: PricingProductContent = {
+  productBanner: {
+    title: 'Live Console Desktop Application',
+    description:
+      'A lightweight, offline-first desktop app for Mac & Windows. Includes Hands-Free Bible, On-Screen Bible, Songbook, GO LIVE projection, and Media Library. Runs 100% without internet — ideal for any venue.',
+    icon: 'desktop_windows',
+    primaryCta: 'Download for windows',
+    primaryHref: '/downloads',
+    secondaryCta: 'Download for mac',
+    secondaryHref: '/downloads',
+  },
+  plansHeader: {
+    badge: 'QWORSHIP LIVE CONSOLE',
+    heading: { before: 'Pricing for', accent: 'Q-worship Live Console' },
+    subtitle:
+      'Start your 30-day free trial today — no credit card required, no watermarks, no limits. One subscription covers your entire team on Mac and Windows.',
+    tagline: "Choose the plan that's right for your church.",
+  },
+  plans: liveConsolePlans,
+  includedHeading: 'Included with Every Plan',
+  includedSubtitle:
+    'No matter which tier you choose, every Live Console plan includes these core capabilities.',
+  includedFeatures: liveConsoleIncludedFeatures,
+  compareHeading: 'Compare Plans',
+  compareSubtitle: "See exactly what's included in each tier.",
+  compareRows: liveConsoleCompareRows,
+  compareCategories: pricingCompareCategories,
+  compareColumnLabels: {
+    free: 'Free',
+    starter: 'Starter',
+    premium: 'Premium',
+    enterprise: 'Enterprise',
+  },
+}
+
+const cloudProduct: PricingProductContent = {
+  productBanner: {
+    title: 'Q-worship Cloud Presentation System',
+    description:
+      'The complete cloud-based church service platform. Build your full order of service with songs, Bible, announcements, videos, images, and a rich slide canvas — all in one place. Includes everything in the Live Console, and much more.',
+    icon: 'cloud',
+    primaryCta: 'Get Started for free',
+    primaryHref: '/login',
+  },
+  plansHeader: {
+    badge: 'QWORSHIP CLOUD',
+    heading: { before: 'Pricing for', accent: 'Q-worship Cloud Presentation System' },
+    subtitle:
+      'Start your 30-day free trial today — no credit card required, no watermarks, no limits. One subscription covers your entire team.',
+    tagline: "Choose the plan that's right for your church.",
+  },
+  plans: cloudPlans,
+  includedHeading: 'Included with Every Plan',
+  includedSubtitle:
+    'No matter which tier you choose, every Cloud plan includes these core capabilities.',
+  includedFeatures: cloudIncludedFeatures,
+  compareHeading: 'Compare Plans',
+  compareSubtitle: "See exactly what's included in each tier.",
+  compareRows: cloudCompareRows,
+  compareCategories: cloudCompareCategories,
+  compareColumnLabels: {
+    free: 'Free',
+    starter: 'Essential',
+    premium: 'Pro',
+    enterprise: 'Enterprise',
+  },
+}
+
+export const pricingProducts: Record<PricingProductId, PricingProductContent> = {
+  'live-console': liveConsoleProduct,
+  cloud: cloudProduct,
+}
+
+export function getPricingProduct(id: PricingProductId): PricingProductContent {
+  return pricingProducts[id]
+}
+
 export const heroCopy = {
   badge: { label: 'NEW FEATURE RELEASE', version: 'V1.0.1 Complete Offline Capability' },
   heading: {
@@ -780,6 +1212,10 @@ export const featuresSubNavItems: FeaturesSubNavItem[] = [
   { id: 'overview', label: 'Overview', href: '#overview' },
   { id: 'hands-free-bible', label: 'Hands-Free Bible', href: '#hands-free-bible' },
   { id: 'on-screen-bible', label: 'On-screen Bible', href: '#on-screen-bible' },
+  { id: 'songbook', label: 'Songbook', href: '#songbook' },
+  { id: 'service-slides', label: 'Service Slides', href: '#service-slides' },
+  { id: 'media', label: 'Media', href: '#media' },
+  { id: 'lower-third-builder', label: 'Lower Third Builder', href: '#lower-third-builder' },
   { id: 'pricing', label: 'Pricing', href: '#pricing' },
 ]
 
@@ -1665,7 +2101,43 @@ export const aboutFaqTeaserItems: FaqItem[] = [
   faqItems.find((item) => item.id === 'operating-systems')!,
 ]
 
-export const pricingFaqTeaserItems: FaqItem[] = aboutFaqTeaserItems
+export const pricingFaqTeaserItems: FaqItem[] = [
+  {
+    id: 'pricing-free-trial',
+    categoryId: 'pricing',
+    question: 'Is there a free trial?',
+    answer:
+      'Yes. Every paid plan includes a 30-day free trial with no credit card required, no watermarks, and no limits. Your trial starts automatically when you create an account.',
+  },
+  {
+    id: 'pricing-live-console-vs-cloud',
+    categoryId: 'pricing',
+    question: 'What is the difference between the Live Console and the Cloud system?',
+    answer:
+      'Live Console is a lightweight, offline-first desktop app for Mac and Windows — ideal for venues with unreliable internet. Cloud is a browser-based platform for building your full order of service with songs, Bible, announcements, videos, images, and a rich slide canvas, accessible from any device with an internet connection.',
+  },
+  {
+    id: 'pricing-switch-plans',
+    categoryId: 'pricing',
+    question: 'Can I switch plans at any time?',
+    answer:
+      'You can upgrade, downgrade, or cancel your subscription at any time. Changes take effect at the start of your next billing cycle.',
+  },
+  {
+    id: 'pricing-yearly-discount',
+    categoryId: 'pricing',
+    question: 'Do you offer a yearly billing discount?',
+    answer:
+      'Yes. All paid plans support yearly billing at a reduced rate compared to monthly — switch between monthly and yearly on our Pricing page.',
+  },
+  {
+    id: 'pricing-payment-methods',
+    categoryId: 'pricing',
+    question: 'What payment methods are accepted?',
+    answer:
+      'We accept major credit and debit cards for monthly and yearly subscriptions. Contact our team if you need help with billing or enterprise invoicing.',
+  },
+]
 
 export const loginShowcaseSlides = [
   {
@@ -1702,5 +2174,6 @@ export const images = {
   partners:
     'https://lh3.googleusercontent.com/aida-public/AB6AXuBEulfurEaig4HkDRWZHLhOHiW3eycUCF3M42BaGblBzntXMdMFWZZIEXqVqqIrey50IkNrT0h-EaWS_3gaQzosqVdYnyOarGCsB7yy0KKmOcudI0Kj8dCTT7h-XvilnTmE5j9bCMvtyVYEjnWfmuQf-NpRiS0qhXtF47hym7Y1fABSA9dqj8325BsvAKmjJjIIl-gdUhFGcZC0PJe2wpQXOAzHlxqFa1EvYrrNpg4dQK1slcfLmSBup_agmDtTv-4LD8SiCbEld0TO',
   cta: '/Photos/lastlast.png',
+  ctaMobile: '/Photos/image-last-last.png',
   featuresHero: '/Photos/features/Rectangle%2042300.png',
 }

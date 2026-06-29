@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react'
-import {
-  pricingCompareCategories,
-  pricingCompareRows,
-  pricingPageCopy,
-} from '@/lib/theme'
-import type { PlanCell, PricingCompareCategoryId } from '@/types/content'
+import type {
+  PlanCell,
+  PricingCompareCategory,
+  PricingCompareCategoryId,
+  PricingCompareRow,
+  PricingProductContent,
+} from '@/types/content'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 
@@ -24,24 +25,38 @@ function CompareCell({ value }: { value: PlanCell }) {
   return <span className="pricing-compare-text">{value}</span>
 }
 
-export function PricingCompareSection() {
+interface PricingCompareSectionProps {
+  heading: string
+  subtitle: string
+  rows: PricingCompareRow[]
+  categories: PricingCompareCategory[]
+  columnLabels: PricingProductContent['compareColumnLabels']
+}
+
+export function PricingCompareSection({
+  heading,
+  subtitle,
+  rows,
+  categories,
+  columnLabels,
+}: PricingCompareSectionProps) {
   const [activeCategory, setActiveCategory] = useState<PricingCompareCategoryId>('all')
 
   const filteredRows = useMemo(() => {
-    if (activeCategory === 'all') return pricingCompareRows
-    return pricingCompareRows.filter((row) => row.category === activeCategory)
-  }, [activeCategory])
+    if (activeCategory === 'all') return rows
+    return rows.filter((row) => row.category === activeCategory)
+  }, [activeCategory, rows])
 
   return (
     <section id="compare" className="pricing-compare-section section-gap reveal scroll-mt-28">
       <SiteContainer>
         <div className="pricing-compare-header">
-          <h2 className="pricing-compare-heading font-headline">{pricingPageCopy.compareHeading}</h2>
-          <p className="pricing-compare-subtitle">{pricingPageCopy.compareSubtitle}</p>
+          <h2 className="pricing-compare-heading font-headline">{heading}</h2>
+          <p className="pricing-compare-subtitle">{subtitle}</p>
         </div>
 
         <div className="pricing-compare-filters hide-scrollbar">
-          {pricingCompareCategories.map((category) => (
+          {categories.map((category) => (
             <button
               key={category.id}
               type="button"
@@ -58,10 +73,10 @@ export function PricingCompareSection() {
             <thead>
               <tr>
                 <th scope="col">Feature</th>
-                <th scope="col">Free</th>
-                <th scope="col">Starter</th>
-                <th scope="col" className="pricing-compare-col-premium">Premium</th>
-                <th scope="col">Enterprise</th>
+                <th scope="col">{columnLabels.free}</th>
+                <th scope="col">{columnLabels.starter}</th>
+                <th scope="col" className="pricing-compare-col-premium">{columnLabels.premium}</th>
+                <th scope="col">{columnLabels.enterprise}</th>
               </tr>
             </thead>
             <tbody>

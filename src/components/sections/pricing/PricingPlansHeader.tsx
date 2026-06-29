@@ -1,15 +1,13 @@
-import { pricingPageCopy } from '@/lib/theme'
-import type { BillingPeriod } from '@/types/content'
+import type { BillingPeriod, PricingPlansHeaderCopy } from '@/types/content'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 
 interface PricingPlansHeaderProps {
+  plansHeader: PricingPlansHeaderCopy
   billing: BillingPeriod
   onBillingChange: (period: BillingPeriod) => void
 }
 
-export function PricingPlansHeader({ billing, onBillingChange }: PricingPlansHeaderProps) {
-  const { plansHeader } = pricingPageCopy
-
+export function PricingPlansHeader({ plansHeader, billing, onBillingChange }: PricingPlansHeaderProps) {
   return (
     <section id="plans" className="pricing-plans-header reveal scroll-mt-28">
       <SiteContainer>

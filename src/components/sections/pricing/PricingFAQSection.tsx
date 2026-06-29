@@ -7,15 +7,17 @@ export function PricingFAQSection() {
   return (
     <section className="pricing-faq-section section-gap reveal">
       <SiteContainer>
-        <div className="pricing-faq-grid">
-          <div className="pricing-faq-copy">
-            <h2 className="pricing-faq-heading font-headline">{pricingPageCopy.faqHeading}</h2>
-            <p className="pricing-faq-body">{pricingPageCopy.faqBody}</p>
-            <Link href="/faqs" className="pricing-faq-cta">
-              {pricingPageCopy.faqCta}
+        <div className="pricing-faq-header">
+          <h2 className="pricing-faq-heading font-headline">{pricingPageCopy.faqHeading}</h2>
+          <p className="pricing-faq-body">
+            {pricingPageCopy.faqBody}{' '}
+            <Link href="/about" className="pricing-faq-link">
+              Reach out to our team.
             </Link>
-          </div>
+          </p>
+        </div>
 
+        <div className="pricing-faq-accordion-wrap">
           <FAQAccordionList
             categoryLabel=""
             items={pricingFaqTeaserItems}

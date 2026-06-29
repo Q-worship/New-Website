@@ -65,6 +65,7 @@ export type PricingCompareCategoryId =
   | 'integrations'
   | 'lower-third'
   | 'size'
+  | 'service'
   | 'support'
 
 export type PlanCell = boolean | string
@@ -90,12 +91,48 @@ export interface PricingIncludedFeature {
   icon: string
 }
 
+export type PricingProductId = 'live-console' | 'cloud'
+
 export interface PricingProductNavItem {
-  id: string
+  id: PricingProductId
   label: string
   badge: string
-  active?: boolean
-  disabled?: boolean
+}
+
+export interface PricingPlansHeaderCopy {
+  badge: string
+  heading: { before: string; accent: string }
+  subtitle: string
+  tagline: string
+}
+
+export interface PricingProductBanner {
+  title: string
+  description: string
+  icon: string
+  primaryCta: string
+  primaryHref: string
+  secondaryCta?: string
+  secondaryHref?: string
+}
+
+export interface PricingProductContent {
+  productBanner: PricingProductBanner
+  plansHeader: PricingPlansHeaderCopy
+  plans: PricingPlan[]
+  includedHeading: string
+  includedSubtitle: string
+  includedFeatures: PricingIncludedFeature[]
+  compareHeading: string
+  compareSubtitle: string
+  compareRows: PricingCompareRow[]
+  compareCategories: PricingCompareCategory[]
+  compareColumnLabels: {
+    free: string
+    starter: string
+    premium: string
+    enterprise: string
+  }
 }
 
 export interface PricingPageCopy {
@@ -109,21 +146,6 @@ export interface PricingPageCopy {
     brand: string
     items: PricingProductNavItem[]
   }
-  productBanner: {
-    title: string
-    description: string
-    primaryCta: string
-    secondaryCta: string
-  }
-  plansHeader: {
-    badge: string
-    heading: { before: string; accent: string }
-    subtitle: string
-    tagline: string
-  }
-  includedHeading: string
-  compareHeading: string
-  compareSubtitle: string
   faqHeading: string
   faqBody: string
   faqCta: string

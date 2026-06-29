@@ -1,14 +1,21 @@
-import { pricingIncludedFeatures, pricingPageCopy } from '@/lib/theme'
+import type { PricingIncludedFeature } from '@/types/content'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 
-export function PricingIncludedSection() {
+interface PricingIncludedSectionProps {
+  heading: string
+  subtitle: string
+  features: PricingIncludedFeature[]
+}
+
+export function PricingIncludedSection({ heading, subtitle, features }: PricingIncludedSectionProps) {
   return (
     <section className="pricing-included-section section-gap reveal">
       <SiteContainer>
-        <h2 className="pricing-included-heading font-headline">{pricingPageCopy.includedHeading}</h2>
+        <h2 className="pricing-included-heading font-headline">{heading}</h2>
+        <p className="pricing-included-subtitle">{subtitle}</p>
         <div className="pricing-included-grid">
-          {pricingIncludedFeatures.map((feature) => (
+          {features.map((feature) => (
             <article key={feature.title} className="pricing-included-card">
               <div className="pricing-included-card-header">
                 <div className="pricing-included-icon-wrap">

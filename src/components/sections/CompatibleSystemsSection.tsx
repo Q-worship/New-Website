@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, type ReactNode } from 'react'
 
 import { compatibleSystems } from '@/lib/theme'
 
@@ -6,7 +6,13 @@ import { SiteContainer } from '@/components/layout/SiteContainer'
 import { PartnerLogo } from '@/components/ui/PartnerLogos'
 import { useMarqueeLoop } from '@/hooks/useMarqueeLoop'
 
-export function CompatibleSystemsSection() {
+interface CompatibleSystemsSectionProps {
+  afterMarquee?: ReactNode
+}
+
+export function CompatibleSystemsSection({
+  afterMarquee,
+}: CompatibleSystemsSectionProps = {}) {
   const trackRef = useRef<HTMLDivElement>(null)
   const copies = useMarqueeLoop(trackRef, compatibleSystems.length)
   const marqueeSystems = Array.from({ length: copies }, () => compatibleSystems).flat()
@@ -43,6 +49,8 @@ export function CompatibleSystemsSection() {
           ))}
         </div>
       </div>
+
+      {afterMarquee && <div className="mt-16 md:mt-24">{afterMarquee}</div>}
     </section>
   )
 }

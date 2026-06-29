@@ -70,7 +70,11 @@ export function Features() {
 
       </section>
 
-      <CompatibleSystemsSection />
+      <CompatibleSystemsSection
+        afterMarquee={
+          <PrePastorsHandsFreeSection sectionId="hands-free-bible-compatible" />
+        }
+      />
 
       <FinalCTASection />
 

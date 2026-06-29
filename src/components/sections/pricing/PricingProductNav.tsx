@@ -1,12 +1,14 @@
-import { useState } from 'react'
 import { pricingPageCopy, images } from '@/lib/theme'
+import type { PricingProductId } from '@/types/content'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 
-export function PricingProductNav() {
+interface PricingProductNavProps {
+  activeId: PricingProductId
+  onChange: (id: PricingProductId) => void
+}
+
+export function PricingProductNav({ activeId, onChange }: PricingProductNavProps) {
   const { productNav } = pricingPageCopy
-  const [activeId, setActiveId] = useState(
-    productNav.items.find((item) => item.active)?.id ?? productNav.items[0].id,
-  )
 
   return (
     <nav className="pricing-product-nav" aria-label="Q-worship products">
@@ -25,9 +27,8 @@ export function PricingProductNav() {
                 <button
                   key={item.id}
                   type="button"
-                  disabled={item.disabled}
-                  className={`pricing-product-nav-link${isActive ? ' pricing-product-nav-link--active' : ''}${item.disabled ? ' pricing-product-nav-link--disabled' : ''}`}
-                  onClick={() => !item.disabled && setActiveId(item.id)}
+                  className={`pricing-product-nav-link${isActive ? ' pricing-product-nav-link--active' : ''}`}
+                  onClick={() => onChange(item.id)}
                 >
                   <span>{item.label}</span>
                   <span className="pricing-product-nav-badge">{item.badge}</span>

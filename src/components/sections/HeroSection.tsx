@@ -13,10 +13,10 @@ export function HeroSection() {
         <div className="hero-inner mx-auto w-full max-w-5xl">
           <div className="text-center">
             <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full hero-badge mb-10">
-              <span className="hero-badge__label text-[10px] font-bold uppercase tracking-[0.2em]">
+              <span className="hero-badge__label">
                 {heroCopy.badge.label}
               </span>
-              <span className="text-xs hero-badge__version">{heroCopy.badge.version}</span>
+              <span className="hero-badge__version">{heroCopy.badge.version}</span>
             </div>
           </div>
 
