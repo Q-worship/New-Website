@@ -23,7 +23,7 @@ export function DownloadsOnlineCtaSection() {
 
             <p className="downloads-online-cta-body">{onlineCta.body}</p>
 
-            <div className="downloads-online-cta-actions">
+            <div className="downloads-online-cta-actions cta-pair-mobile-inline">
               <button type="button" className="features-hero-download-btn">
                 {onlineCta.primaryCta}
               </button>

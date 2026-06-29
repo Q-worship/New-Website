@@ -29,7 +29,7 @@ export function HeroSection() {
             {heroCopy.body}
           </p>
 
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+          <div className="flex flex-row flex-wrap justify-center gap-4 cta-pair-mobile-inline">
             <button
               type="button"
               className="hero-download-btn px-10 py-3.5 rounded-xl text-base font-bold"

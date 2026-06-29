@@ -19,7 +19,13 @@ export function GuideCardGrid({ cards }: GuideCardGridProps) {
       {cards.map((card) => (
         <article key={card.id} className="guide-card reveal">
           <div className="guide-card-media">
-            <img src={card.image} alt={card.imageAlt} className="guide-card-image" loading="lazy" />
+            <img
+              src={card.image}
+              alt={card.imageAlt}
+              className="guide-card-image"
+              loading="eager"
+              decoding="async"
+            />
           </div>
 
           <div className="guide-card-body">

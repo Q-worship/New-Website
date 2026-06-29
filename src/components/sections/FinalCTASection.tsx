@@ -10,13 +10,16 @@ export function FinalCTASection() {
     <section className="section-gap relative reveal">
       <SiteContainer>
         <GlassCard className="final-cta-card">
-          <img
-            src={images.cta}
-            alt=""
-            className="final-cta-image"
-            loading="lazy"
-            decoding="async"
-          />
+          <div className="final-cta-media">
+            <img
+              src={images.cta}
+              alt=""
+              className="final-cta-image"
+              loading="lazy"
+              decoding="async"
+            />
+            <span className="final-cta-download-patch" aria-hidden />
+          </div>
           <div className="sr-only">
             <h2>
               Ready to step into the Future of church presentation?

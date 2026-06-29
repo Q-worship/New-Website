@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { GuideCardGrid } from '@/components/sections/GuideCardGrid'
@@ -29,6 +29,14 @@ export function Guides() {
     setActiveCategory(categoryId)
     setSearchQuery('')
   }
+
+  useEffect(() => {
+    const urls = [...new Set(guideCards.map((card) => card.image))]
+    urls.forEach((url) => {
+      const img = new Image()
+      img.src = url
+    })
+  }, [])
 
   return (
     <>

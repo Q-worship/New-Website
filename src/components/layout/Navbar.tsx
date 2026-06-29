@@ -127,7 +127,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4 relative z-10 shrink-0">
-            <Link href="/login">
+            <Link href="/login" className="hidden md:block">
               <PrimaryButton className="px-4 sm:px-6 py-2.5 rounded-lg text-sm touch-target">
                 Sign in
               </PrimaryButton>
@@ -183,8 +183,13 @@ export function Navbar() {
                 </Link>
               ),
             )}
-            <div className="px-6 pt-4 mt-2 border-t border-white/10 md:hidden">
-              <GlassButton className="w-full py-3 rounded-lg text-sm border border-white/30 touch-target">
+            <div className="mobile-nav-actions">
+              <Link href="/login" onClick={closeMobileNav} className="mobile-nav-actions__item">
+                <PrimaryButton className="w-full py-3 rounded-lg text-sm touch-target">
+                  Sign in
+                </PrimaryButton>
+              </Link>
+              <GlassButton className="mobile-nav-actions__item w-full py-3 rounded-lg text-sm border border-white/30 touch-target">
                 Get started
               </GlassButton>
             </div>

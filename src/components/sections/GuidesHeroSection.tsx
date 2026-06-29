@@ -16,7 +16,7 @@ export function GuidesHeroSection() {
 
             <p className="features-hero-body">{guidesHeroCopy.body}</p>
 
-            <div className="features-hero-actions">
+            <div className="features-hero-actions cta-pair-mobile-inline">
               <button type="button" className="features-hero-download-btn">
                 {guidesHeroCopy.primaryCta}
               </button>

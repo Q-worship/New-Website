@@ -76,7 +76,7 @@ export function BuildTabsSection({ className = '' }: BuildTabsSectionProps) {
     >
       <SiteContainer>
         <div className="mb-16 text-left">
-          <h2 className="font-headline text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Build your <span className="build-section-entire-gradient">Entire</span> church
             presentation
           </h2>
@@ -127,7 +127,8 @@ export function BuildTabsSection({ className = '' }: BuildTabsSectionProps) {
                 src={activeTab.image}
                 alt=""
                 className={`build-tabs-preview-image build-tabs-preview-image--${activeTab.id}`}
-                loading="lazy"
+                loading="eager"
+                decoding="async"
               />
             </div>
 

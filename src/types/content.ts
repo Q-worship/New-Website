@@ -49,6 +49,84 @@ export interface PricingPlan {
   badge: string
   badgeVariant?: 'primary' | 'muted'
   highlighted?: boolean
+  description?: string
+  features?: string[]
+  includesLabel?: string
+  popularLabel?: string
+  ctaLabel?: string
+  ctaVariant?: 'outline' | 'gradient'
+}
+
+export type PricingCompareCategoryId =
+  | 'all'
+  | 'bible'
+  | 'songbook'
+  | 'media'
+  | 'integrations'
+  | 'lower-third'
+  | 'size'
+  | 'support'
+
+export type PlanCell = boolean | string
+
+export interface PricingCompareRow {
+  id: string
+  label: string
+  category: Exclude<PricingCompareCategoryId, 'all'>
+  free: PlanCell
+  starter: PlanCell
+  premium: PlanCell
+  enterprise: PlanCell
+}
+
+export interface PricingCompareCategory {
+  id: PricingCompareCategoryId
+  label: string
+}
+
+export interface PricingIncludedFeature {
+  title: string
+  description: string
+  icon: string
+}
+
+export interface PricingProductNavItem {
+  id: string
+  label: string
+  badge: string
+  active?: boolean
+  disabled?: boolean
+}
+
+export interface PricingPageCopy {
+  hero: {
+    heading: { before: string; accent: string }
+    body: string
+    footnote: string
+    platforms: { id: string; label: string; icon?: string }[]
+  }
+  productNav: {
+    brand: string
+    items: PricingProductNavItem[]
+  }
+  productBanner: {
+    title: string
+    description: string
+    primaryCta: string
+    secondaryCta: string
+  }
+  plansHeader: {
+    badge: string
+    heading: { before: string; accent: string }
+    subtitle: string
+    tagline: string
+  }
+  includedHeading: string
+  compareHeading: string
+  compareSubtitle: string
+  faqHeading: string
+  faqBody: string
+  faqCta: string
 }
 
 export interface MoreFeature {

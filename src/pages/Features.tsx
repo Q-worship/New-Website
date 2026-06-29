@@ -4,9 +4,9 @@ import { FeaturesSubNav } from '@/components/sections/FeaturesSubNav'
 
 import { HandsFreeFeatureSection } from '@/components/sections/HandsFreeFeatureSection'
 
-import { PrePastorsHandsFreeSection } from '@/components/sections/PrePastorsHandsFreeSection'
-
 import { OnScreenBibleFeatureSection } from '@/components/sections/OnScreenBibleFeatureSection'
+
+import { PrePastorsHandsFreeSection } from '@/components/sections/PrePastorsHandsFreeSection'
 
 import { SongbookFeatureSection } from '@/components/sections/SongbookFeatureSection'
 
@@ -50,17 +50,7 @@ export function Features() {
 
       <HandsFreeFeatureSection />
 
-      <PrePastorsHandsFreeSection />
-
       <OnScreenBibleFeatureSection />
-
-      <SongbookFeatureSection />
-
-      <ServiceSlidesFeatureSection />
-
-      <MediaFeatureSection />
-
-      <LowerThirdBuilderFeatureSection />
 
       <section id="pricing" className="section-gap reveal scroll-mt-28">
 
@@ -72,7 +62,17 @@ export function Features() {
 
       </section>
 
+      <PrePastorsHandsFreeSection />
+
       <BuiltByPastorsSection />
+
+      <SongbookFeatureSection />
+
+      <ServiceSlidesFeatureSection />
+
+      <MediaFeatureSection />
+
+      <LowerThirdBuilderFeatureSection />
 
       <PostPastorsAccordionFeatureSection />
 

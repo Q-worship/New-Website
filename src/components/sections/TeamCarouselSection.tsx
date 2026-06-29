@@ -13,7 +13,7 @@ export function TeamCarouselSection() {
     <section className="team-carousel-section section-gap reveal">
       <SiteContainer>
         <div className="team-carousel-header">
-          <h2 className="font-headline text-4xl md:text-5xl font-bold">
+          <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-bold">
             Built for all parts of the team
           </h2>
 
@@ -37,7 +37,7 @@ export function TeamCarouselSection() {
             <div
               key={card.title}
               tabIndex={0}
-              className="team-carousel-card w-[85vw] sm:w-[70vw] lg:w-[44vw] xl:w-[32vw] max-w-[560px] snap-center flex-shrink-0 group cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-400/60 focus-visible:outline-none"
+              className="team-carousel-card w-[85vw] sm:w-[70vw] lg:w-[44vw] xl:w-[32vw] max-w-[560px] snap-center flex-shrink-0 group cursor-default focus-visible:ring-2 focus-visible:ring-blue-400/60 focus-visible:outline-none"
             >
               <div className="aspect-[4/5] relative overflow-hidden">
                 <img
@@ -53,7 +53,7 @@ export function TeamCarouselSection() {
                         className="team-carousel-overlay-icon text-primary"
                       />
                     )}
-                    <h3 className="team-carousel-overlay-title font-headline text-2xl font-bold">
+                    <h3 className="team-carousel-overlay-title font-headline text-xl sm:text-2xl font-bold">
                       {card.title}
                     </h3>
                     {card.description && (

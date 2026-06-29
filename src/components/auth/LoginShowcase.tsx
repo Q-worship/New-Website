@@ -1,75 +1,76 @@
-import type { CSSProperties } from 'react'
-import { MaterialIcon } from '@/components/ui/MaterialIcon'
-import { images } from '@/lib/theme'
+import { useEffect, useState } from 'react'
+import { loginShowcaseSlides } from '@/lib/theme'
 
-const WAVEFORM_BARS = [3, 6, 9, 5, 11, 7, 10, 4, 8, 6, 9, 5]
-const VERSIONS = ['KJV', 'NKJV', 'NIV', 'GN'] as const
-
-const MATTHEW_8_20 =
-  'And Jesus saith unto him, The foxes have holes, and the birds of the air have nests; but the Son of man hath not where to lay his head.'
+const AUTO_ADVANCE_MS = 5000
 
 export function LoginShowcase() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [reduceMotion, setReduceMotion] = useState(false)
+
+  const activeSlide = loginShowcaseSlides[activeIndex]
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduceMotion(mediaQuery.matches)
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setReduceMotion(event.matches)
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
+  useEffect(() => {
+    if (reduceMotion) return
+
+    const intervalId = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % loginShowcaseSlides.length)
+    }, AUTO_ADVANCE_MS)
+
+    return () => window.clearInterval(intervalId)
+  }, [activeIndex, reduceMotion])
+
   return (
     <div className="login-showcase">
       <div className="login-showcase__visual">
         <div className="login-showcase__stage">
-          <img
-            src={images.handsFreeStage}
-            alt="Pastor singing on stage"
-            className="login-showcase__stage-image"
-          />
-
-          <div className="login-showcase__listening">
-            <div className="login-showcase__listening-header">
-              <MaterialIcon name="graphic_eq" className="login-showcase__listening-icon" />
-              <span className="login-showcase__listening-label">Listening</span>
-            </div>
-            <div className="login-showcase__listening-waveform" aria-hidden>
-              {WAVEFORM_BARS.map((height, index) => (
-                <span
-                  key={index}
-                  className="login-showcase__waveform-bar"
-                  style={{ '--bar-height': `${height}px` } as CSSProperties}
-                />
-              ))}
-            </div>
-            <p className="login-showcase__listening-text">
-              Show me Matthew Chapter 8 verse 20 (KJV)
-            </p>
-          </div>
-
-          <div className="login-showcase__scripture">
-            <p className="login-showcase__scripture-text">{MATTHEW_8_20}</p>
-            <div className="login-showcase__versions">
-              {VERSIONS.map((version) => (
-                <button
-                  key={version}
-                  type="button"
-                  className={`login-showcase__version-tab${
-                    version === 'KJV' ? ' login-showcase__version-tab--active' : ''
-                  }`}
-                >
-                  {version === 'KJV' && (
-                    <span className="login-showcase__version-dot" aria-hidden />
-                  )}
-                  {version}
-                </button>
-              ))}
-            </div>
-          </div>
+          {loginShowcaseSlides.map((slide, index) => (
+            <img
+              key={slide.image}
+              src={slide.image}
+              alt={slide.alt}
+              className={`login-showcase__slide${
+                index === activeIndex
+                  ? ' login-showcase__slide--active'
+                  : ' login-showcase__slide--inactive'
+              }`}
+            />
+          ))}
         </div>
       </div>
 
-      <div className="login-showcase__caption">
-        <p className="login-showcase__caption-title">Q-worship Hands free Bible</p>
-        <p className="login-showcase__caption-body">Your church service, Powered by voice.</p>
+      <div className="login-showcase__caption" aria-live="polite">
+        <p className="login-showcase__caption-title">{activeSlide.title}</p>
+        <p className="login-showcase__caption-body">{activeSlide.body}</p>
       </div>
 
-      <div className="login-showcase__dots" aria-hidden>
-        {[0, 1, 2, 3].map((index) => (
-          <span
-            key={index}
-            className={`login-showcase__dot${index === 0 ? ' login-showcase__dot--active' : ''}`}
+      <div
+        className="login-showcase__dots"
+        role="tablist"
+        aria-label="Login feature showcase"
+      >
+        {loginShowcaseSlides.map((slide, index) => (
+          <button
+            key={slide.image}
+            type="button"
+            role="tab"
+            aria-selected={index === activeIndex}
+            aria-label={slide.title}
+            className={`login-showcase__dot${
+              index === activeIndex ? ' login-showcase__dot--active' : ''
+            }`}
+            onClick={() => setActiveIndex(index)}
           />
         ))}
       </div>

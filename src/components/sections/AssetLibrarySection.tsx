@@ -10,7 +10,7 @@ export function AssetLibrarySection() {
   return (
     <>
       <SiteContainer className="text-center mb-10 lg:mb-12">
-        <h2 className="font-headline text-4xl md:text-5xl font-bold mb-8 text-primary">
+        <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-primary">
           Extensive Asset Library
         </h2>
         <p className="text-on-surface-variant text-lg max-w-3xl mx-auto mb-12">

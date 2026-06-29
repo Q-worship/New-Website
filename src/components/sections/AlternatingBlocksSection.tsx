@@ -46,26 +46,16 @@ export function AlternatingBlocksSection() {
           const imageFirst = block.imageFirst ?? index % 2 === 1
 
           return (
-            <div key={block.title} className="alternating-block reveal">
-              {imageFirst ? (
-                <>
-                  <BlockMedia image={block.image} alt={block.title} />
-                  <BlockCopy
-                    title={block.title}
-                    description={block.description}
-                    linkText={block.linkText}
-                  />
-                </>
-              ) : (
-                <>
-                  <BlockCopy
-                    title={block.title}
-                    description={block.description}
-                    linkText={block.linkText}
-                  />
-                  <BlockMedia image={block.image} alt={block.title} />
-                </>
-              )}
+            <div
+              key={block.title}
+              className={`alternating-block reveal${imageFirst ? ' alternating-block--image-first' : ''}`}
+            >
+              <BlockCopy
+                title={block.title}
+                description={block.description}
+                linkText={block.linkText}
+              />
+              <BlockMedia image={block.image} alt={block.title} />
             </div>
           )
         })}

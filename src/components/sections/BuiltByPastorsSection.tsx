@@ -40,7 +40,7 @@ export function BuiltByPastorsSection() {
 
           <div className="space-y-6 lg:space-y-8">
 
-            <h2 className="font-headline text-4xl md:text-5xl font-bold leading-tight">
+            <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
               Built By <span className="text-primary">Pastors for Pastors</span>
             </h2>
 
