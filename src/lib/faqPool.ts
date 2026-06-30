@@ -44,6 +44,27 @@ export const faqItems: FaqItem[] = [
       'Both. Q-worship runs as a locally installed application and supports Online and Offline usage modes. Your core service tools work without internet, while online features like cloud media sync are available when you are connected.',
   },
   {
+    id: 'offline-capability',
+    categoryId: 'offline-and-online',
+    question: 'Does Q-worship work offline?',
+    answer:
+      'Yes. Q-worship runs as a locally installed application and your core service tools work without internet — voice Bible search, lyrics projection, service slides, and imported media all keep running when Wi-Fi drops. Online mode adds cloud sync and web integrations when you are connected.',
+  },
+  {
+    id: 'features-overview',
+    categoryId: 'general',
+    question: 'What features does Q-worship include?',
+    answer:
+      'Q-worship is a complete church presentation platform: voice-powered Hands-Free Bible search, on-screen Bible editor, songbook management, service slides, media playback, lower third builder, and integrations with tools like OBS and ProPresenter — everything your team needs to run Sunday morning from one place.',
+  },
+  {
+    id: 'how-much-cost',
+    categoryId: 'pricing',
+    question: 'How much does Q-worship cost?',
+    answer:
+      'Q-worship offers a Free plan at $0/month with no credit card required, plus Starter, Premium, and Enterprise paid tiers with monthly and yearly billing options. Visit our Pricing page to compare plans and find the tier that fits your church.',
+  },
+  {
     id: 'users-per-account',
     categoryId: 'general',
     question: 'How many users can be on one account?',

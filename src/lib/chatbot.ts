@@ -37,6 +37,17 @@ const THANKS_PATTERNS = [
   /\b(god bless|amen|bless you)\b/i,
 ]
 
+const FRUSTRATION_PATTERNS = [
+  /\bare you (stupid|dumb|useless|broken|an idiot)\b/i,
+  /\byou(?:'re| are) (stupid|dumb|useless|terrible|awful|garbage|trash)\b/i,
+  /\b(this is|you are) (useless|terrible|awful|garbage|trash|stupid|dumb)\b/i,
+  /\bwhat(?:'s| is) wrong with you\b/i,
+  /\bnot helpful\b/i,
+]
+
+const FRUSTRATION_REPLY =
+  "I'm sorry I haven't been helpful. I'm best at questions about pricing, features, offline mode, Bible search, and plans — try one of those, or browse FAQs from the menu."
+
 const GREETING_REPLIES = [
   'Hello! How can I help you with Q-worship today?',
   'Hi there! What can I help you with?',
@@ -66,6 +77,12 @@ function isThanks(query: string): boolean {
   return THANKS_PATTERNS.some((pattern) => pattern.test(normalized))
 }
 
+function isFrustration(query: string): boolean {
+  const normalized = query.trim()
+  if (normalized.length > 120) return false
+  return FRUSTRATION_PATTERNS.some((pattern) => pattern.test(normalized))
+}
+
 export function resolveInstantChatbotReply(query: string): ChatbotReply | null {
   if (isGreeting(query)) {
     return { type: 'text', text: pickVariant(GREETING_REPLIES) }
@@ -73,6 +90,10 @@ export function resolveInstantChatbotReply(query: string): ChatbotReply | null {
 
   if (isThanks(query)) {
     return { type: 'text', text: pickVariant(THANKS_REPLIES) }
+  }
+
+  if (isFrustration(query)) {
+    return { type: 'text', text: FRUSTRATION_REPLY }
   }
 
   const match = matchFaqAnswer(query)

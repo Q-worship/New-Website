@@ -2,11 +2,14 @@ import { faqItems, pricingFaqTeaserItems } from './faqPool'
 import type { FaqItem } from '../types/content'
 import { normalizeForMatch, tokenize } from './faqMatchNormalize'
 import { expandQueryTokens } from './faqSynonyms'
+import { detectQueryIntent, rankFaqByIntent } from './faqQueryIntent'
 
 const MIN_OVERLAP_SCORE = 8
 const SCORE_MARGIN = 1.25
 const PHRASE_MIN_LENGTH = 12
 const PHRASE_HIT_SCORE = 24
+const INTENT_BOOST = 12
+const INTENT_PENALTY = 8
 
 const QUESTION_TOKEN_WEIGHT = 3
 const ANSWER_TOKEN_WEIGHT = 1
@@ -120,6 +123,37 @@ function computeOverlapScore(
   return score
 }
 
+function applyIntentAdjustment(query: string, faqId: string, score: number): number {
+  const intent = detectQueryIntent(query)
+  if (!intent) return score
+
+  const rank = rankFaqByIntent(intent, faqId)
+  if (rank > 0) return score + rank * INTENT_BOOST
+  if (rank < 0) return score + rank * INTENT_PENALTY
+  return score
+}
+
+function breakTieByIntent(
+  query: string,
+  candidates: { faq: FaqItem; score: number }[],
+): FaqItem | null {
+  const intent = detectQueryIntent(query)
+  if (!intent) return null
+
+  const ranked = [...candidates].sort(
+    (a, b) => rankFaqByIntent(intent, b.faq.id) - rankFaqByIntent(intent, a.faq.id),
+  )
+
+  const bestRank = rankFaqByIntent(intent, ranked[0].faq.id)
+  const secondRank = ranked[1] ? rankFaqByIntent(intent, ranked[1].faq.id) : Number.NEGATIVE_INFINITY
+
+  if (bestRank > 0 && bestRank > secondRank) {
+    return ranked[0].faq
+  }
+
+  return null
+}
+
 export function searchFaqByDiscriminativeTerms(query: string): FaqItem | null {
   const queryTokens = tokenize(query)
   if (queryTokens.length === 0) return null
@@ -164,7 +198,10 @@ function pickConfidentWinner(
   if (best.score < MIN_OVERLAP_SCORE) return null
 
   if (second && second.score * SCORE_MARGIN >= best.score) {
-    if (query && second.score === best.score) {
+    if (query) {
+      const intentWinner = breakTieByIntent(query, scores.slice(0, 5))
+      if (intentWinner) return intentWinner
+
       const { entries, docFreq, poolSize } = getSearchIndex()
       const tied = scores.filter((hit) => hit.score === best.score)
       const overlapRanked = tied
@@ -189,6 +226,9 @@ function pickConfidentWinner(
       ) {
         return overlapBest.faq
       }
+
+      const intentTieWinner = breakTieByIntent(query, tied)
+      if (intentTieWinner) return intentTieWinner
 
       const tiedIds = new Set(tied.map((hit) => hit.faq.id))
       for (const faq of getFaqPool()) {
@@ -252,6 +292,7 @@ export function searchFaqByOverlap(query: string): FaqItem | null {
     }
 
     if (score > 0) {
+      score = applyIntentAdjustment(query, entry.faq.id, score)
       scores.push({ faq: entry.faq, score })
     }
   }

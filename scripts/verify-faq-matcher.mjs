@@ -30,6 +30,13 @@ const cases = [
   { query: 'How many users can be on one account?', faqId: 'users-per-account' },
   { query: 'cloud based or installed locally', faqId: 'cloud-or-local' },
   { query: 'what payment methods do you accept', faqId: 'pricing-payment-methods' },
+  { query: 'does Qworship work offline', faqId: 'offline-capability' },
+  { query: 'what are the features?', faqId: 'features-overview' },
+  { query: 'how much does Qworship cost?', faqId: 'how-much-cost' },
+  {
+    query: 'how can i handle the pricing',
+    faqId: ['cancel-anytime', 'pricing-switch-plans', 'how-much-cost'],
+  },
 ]
 
 const server = await createServer({

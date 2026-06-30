@@ -22,6 +22,13 @@ const greetingCases = [
 
 const thanksCases = ['thanks', 'thank you', 'thx']
 
+const frustrationCases = [
+  'are you stupid',
+  "you're dumb",
+  'this is useless',
+  'not helpful',
+]
+
 const server = await createServer({
   root,
   server: { middlewareMode: true },
@@ -52,6 +59,17 @@ try {
       passed += 1
     } else {
       console.error(`FAIL: thanks "${query}" -> ${reply?.type ?? 'null'}`)
+      failed += 1
+    }
+  }
+
+  for (const query of frustrationCases) {
+    const reply = resolveInstantChatbotReply(query)
+    if (reply?.type === 'text' && reply.text.length > 0) {
+      console.log(`PASS: frustration "${query}"`)
+      passed += 1
+    } else {
+      console.error(`FAIL: frustration "${query}" -> ${reply?.type ?? 'null'}`)
       failed += 1
     }
   }

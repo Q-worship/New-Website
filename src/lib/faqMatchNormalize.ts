@@ -6,6 +6,7 @@ export const STOP_WORDS = new Set([
   'those', 'am', 'to', 'of', 'in', 'for', 'on', 'with', 'at', 'by',
   'from', 'as', 'into', 'about', 'what', 'how', 'when', 'where', 'why',
   'who', 'which', 'and', 'or', 'but', 'if', 'not', 'no', 'yes',
+  'work', 'works',
 ])
 
 export function normalizeForMatch(text: string): string {
@@ -21,7 +22,14 @@ export function normalizeForMatch(text: string): string {
 }
 
 export function tokenize(text: string): string[] {
-  return normalizeForMatch(text)
+  const normalized = normalizeForMatch(text)
+  const tokens = normalized
     .split(/\s+/)
     .filter((word) => word.length > 1 && !STOP_WORDS.has(word))
+
+  if (/\bhow much\b/.test(normalized)) {
+    tokens.push('cost')
+  }
+
+  return tokens
 }

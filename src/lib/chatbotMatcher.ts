@@ -2,6 +2,7 @@ import { faqItems, pricingFaqTeaserItems } from './faqPool'
 import type { FaqItem } from '../types/content'
 import { normalizeForMatch, tokenize } from './faqMatchNormalize'
 import { searchFaqByOverlap, searchFaqByPhrases, searchFaqByDiscriminativeTerms } from './faqSearchIndex'
+import { resolveIntentFaq } from './faqQueryIntent'
 
 const MATCH_CONFIG = {
   minSubstringLength: 12,
@@ -57,6 +58,9 @@ export function matchFaqAnswer(query: string): FaqItem | null {
 
   const exactMatch = findExactOrSubstringMatch(trimmed, pool)
   if (exactMatch) return exactMatch
+
+  const intentMatch = resolveIntentFaq(trimmed)
+  if (intentMatch) return intentMatch
 
   const discriminativeMatch = searchFaqByDiscriminativeTerms(trimmed)
   if (discriminativeMatch) return discriminativeMatch
