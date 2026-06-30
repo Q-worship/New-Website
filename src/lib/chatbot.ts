@@ -133,3 +133,26 @@ export function isValidEmail(value: string): boolean {
 export function formatChatTimestamp(date: Date): string {
   return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
 }
+
+const RETURN_TO_BOT_PATTERNS = [
+  /\bback to (the )?(bot|assistant)\b/i,
+  /\btalk to (the )?(bot|assistant)\b/i,
+  /\bcancel (the )?(agent|handoff|transfer)\b/i,
+  /\bnot an agent\b/i,
+  /\bwrong person\b/i,
+]
+
+export function isReturnToBotIntent(text: string): boolean {
+  const normalized = text.trim()
+  if (!normalized) return false
+
+  if (RETURN_TO_BOT_PATTERNS.some((pattern) => pattern.test(normalized))) {
+    return true
+  }
+
+  if (normalized.length <= 24 && /\b(never\s*mind|nevermind)\b/i.test(normalized)) {
+    return true
+  }
+
+  return false
+}

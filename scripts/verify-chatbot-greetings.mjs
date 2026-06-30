@@ -29,6 +29,18 @@ const frustrationCases = [
   'not helpful',
 ]
 
+const returnToBotCases = [
+  'back to bot',
+  'talk to the assistant',
+  'cancel agent',
+  'never mind',
+]
+
+const notReturnToBotCases = [
+  'what is qworship',
+  'can you help with pricing',
+]
+
 const server = await createServer({
   root,
   server: { middlewareMode: true },
@@ -36,7 +48,7 @@ const server = await createServer({
 })
 
 try {
-  const { resolveInstantChatbotReply } = await server.ssrLoadModule('/src/lib/chatbot.ts')
+  const { resolveInstantChatbotReply, isReturnToBotIntent } = await server.ssrLoadModule('/src/lib/chatbot.ts')
 
   let passed = 0
   let failed = 0
@@ -70,6 +82,26 @@ try {
       passed += 1
     } else {
       console.error(`FAIL: frustration "${query}" -> ${reply?.type ?? 'null'}`)
+      failed += 1
+    }
+  }
+
+  for (const query of returnToBotCases) {
+    if (isReturnToBotIntent(query)) {
+      console.log(`PASS: return-to-bot "${query}"`)
+      passed += 1
+    } else {
+      console.error(`FAIL: return-to-bot "${query}" should match`)
+      failed += 1
+    }
+  }
+
+  for (const query of notReturnToBotCases) {
+    if (!isReturnToBotIntent(query)) {
+      console.log(`PASS: not return-to-bot "${query}"`)
+      passed += 1
+    } else {
+      console.error(`FAIL: return-to-bot "${query}" should not match`)
       failed += 1
     }
   }

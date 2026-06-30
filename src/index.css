@@ -6541,6 +6541,30 @@ body.mobile-nav-open {
   color: #6b7280;
 }
 
+.chatbot-mode-switch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.chatbot-mode-switch-btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #8b5cf6;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.chatbot-mode-switch-btn:hover {
+  color: #7c3aed;
+}
+
 .chatbot-message-avatar-wrap {
   flex-shrink: 0;
   display: flex;

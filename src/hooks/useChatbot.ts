@@ -4,11 +4,13 @@ import {
   buildWhatsAppUrl,
   chatbotConfig,
   formatChatTimestamp,
+  isReturnToBotIntent,
   isValidEmail,
   resolveInstantChatbotReply,
 } from '@/lib/chatbot'
 import {
   checkChatApiHealth,
+  clearStoredSessionId,
   initWhatsAppChatHandoff,
   isWhatsAppChatConfigured,
   loadStoredSessionId,
@@ -204,6 +206,29 @@ export function useChatbot() {
     [appendAgentMessage, appendMessages, appendWhatsAppFallback, email],
   )
 
+  const returnToBot = useCallback(() => {
+    unsubscribeRef.current?.()
+    unsubscribeRef.current = null
+    sessionIdRef.current = null
+    clearStoredSessionId()
+    setChatMode('bot')
+    setIsAgentSearching(false)
+    appendMessages(
+      createMessage(
+        'bot',
+        "You're back with the Qworship assistant. Ask a question or browse FAQs from the menu.",
+      ),
+    )
+  }, [appendMessages])
+
+  const cancelAgentHandoff = useCallback(() => {
+    setIsAgentSearching(false)
+    setMessages((prev) => prev.filter((message) => message.kind !== 'agentSearch'))
+    appendMessages(
+      createMessage('bot', "No problem — I'm still here. How can I help?"),
+    )
+  }, [appendMessages])
+
   const replyWithResolved = useCallback(
     async (userText: string) => {
       const instant = resolveInstantChatbotReply(userText)
@@ -269,6 +294,12 @@ export function useChatbot() {
       if (isAgentSearching || isResolving) return
 
       if (chatMode === 'agent') {
+        if (isReturnToBotIntent(text)) {
+          appendMessages(createMessage('user', text))
+          returnToBot()
+          return
+        }
+
         void sendAgentMessage(text)
         return
       }
@@ -300,7 +331,7 @@ export function useChatbot() {
 
       void replyWithResolved(text)
     },
-    [appendMessages, chatMode, isAgentSearching, isResolving, phase, replyWithResolved, sendAgentMessage],
+    [appendMessages, chatMode, isAgentSearching, isResolving, phase, replyWithResolved, returnToBot, sendAgentMessage],
   )
 
   const selectFaq = useCallback(
@@ -371,5 +402,7 @@ export function useChatbot() {
     sendMessage,
     selectFaq,
     completeAgentHandoff,
+    returnToBot,
+    cancelAgentHandoff,
   }
 }

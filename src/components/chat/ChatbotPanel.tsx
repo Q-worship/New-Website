@@ -20,6 +20,8 @@ interface ChatbotPanelProps {
   onSendMessage: (text: string) => void
   onSelectFaq: (question: string, answer: string) => void
   onAgentSearchComplete: (query: string) => void
+  onReturnToBot: () => void
+  onCancelAgentHandoff: () => void
 }
 
 export function ChatbotPanel({
@@ -37,6 +39,8 @@ export function ChatbotPanel({
   onSendMessage,
   onSelectFaq,
   onAgentSearchComplete,
+  onReturnToBot,
+  onCancelAgentHandoff,
 }: ChatbotPanelProps) {
   const [input, setInput] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -106,17 +110,35 @@ export function ChatbotPanel({
 
           <footer className="chatbot-panel-footer">
             {isAgentSearching ? (
-              <p className="chatbot-agent-footer-note">
-                Connecting you with the next available agent…
-              </p>
+              <div className="chatbot-mode-switch">
+                <p className="chatbot-agent-footer-note">
+                  Connecting you with the next available agent…
+                </p>
+                <button
+                  type="button"
+                  className="chatbot-mode-switch-btn"
+                  onClick={onCancelAgentHandoff}
+                >
+                  Keep chatting with the assistant
+                </button>
+              </div>
             ) : isResolving ? (
               <p className="chatbot-agent-footer-note">Looking that up…</p>
             ) : (
               <>
                 {chatMode === 'agent' && (
-                  <p className="chatbot-agent-footer-note">
-                    Chatting with customer care — replies appear here.
-                  </p>
+                  <div className="chatbot-mode-switch">
+                    <p className="chatbot-agent-footer-note">
+                      Chatting with customer care — replies appear here.
+                    </p>
+                    <button
+                      type="button"
+                      className="chatbot-mode-switch-btn"
+                      onClick={onReturnToBot}
+                    >
+                      Back to Qworship assistant
+                    </button>
+                  </div>
                 )}
 
                 {!hasUserMessage && chatMode === 'bot' && (

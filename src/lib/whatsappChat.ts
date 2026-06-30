@@ -76,6 +76,14 @@ export function storeSessionId(sessionId: string) {
   }
 }
 
+export function clearStoredSessionId() {
+  try {
+    sessionStorage.removeItem(SESSION_STORAGE_KEY)
+  } catch {
+    // ignore storage errors
+  }
+}
+
 export type FaqResolveResponse =
   | { type: 'faq'; faqId: string; answer: string }
   | { type: 'handoff' }

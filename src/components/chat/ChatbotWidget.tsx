@@ -27,6 +27,8 @@ export function ChatbotWidget() {
           onSendMessage={chatbot.sendMessage}
           onSelectFaq={chatbot.selectFaq}
           onAgentSearchComplete={chatbot.completeAgentHandoff}
+          onReturnToBot={chatbot.returnToBot}
+          onCancelAgentHandoff={chatbot.cancelAgentHandoff}
         />
       )}
     </>
