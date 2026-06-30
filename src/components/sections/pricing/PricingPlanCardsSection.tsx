@@ -56,13 +56,15 @@ export function PricingPlanCardsSection({ plans, billing }: PricingPlanCardsSect
                   ))}
                 </ul>
 
-                <Link
-                  href="/login"
-                  className={`pricing-plan-card-cta pricing-plan-card-cta--${plan.ctaVariant ?? 'outline'}`}
-                >
-                  {plan.ctaLabel}
-                </Link>
-                <p className="pricing-plan-card-footnote">No credit card required</p>
+                <div className="pricing-plan-card-footer">
+                  <Link
+                    href="/login"
+                    className={`pricing-plan-card-cta pricing-plan-card-cta--${plan.ctaVariant ?? 'outline'}`}
+                  >
+                    {plan.ctaLabel}
+                  </Link>
+                  <p className="pricing-plan-card-footnote">No credit card required</p>
+                </div>
               </div>
             </article>
           ))}

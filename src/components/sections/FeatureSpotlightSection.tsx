@@ -29,8 +29,15 @@ function ChecklistCardsSpotlight({ content, visualOverlay }: ChecklistCardsProps
 
           <div className="feature-spotlight-copy">
             <h2 className="feature-spotlight-title font-headline font-bold">
-              <span className="text-white block">{content.title.line1}</span>
-              <span className="build-section-entire-gradient block">{content.title.accent}</span>
+              <span className="feature-spotlight-title-line text-white">
+                {content.title.line1}
+              </span>
+              <span className="feature-spotlight-title-line">
+                {content.title.line2Before ? (
+                  <span className="text-white">{content.title.line2Before} </span>
+                ) : null}
+                <span className="build-section-entire-gradient">{content.title.accent}</span>
+              </span>
             </h2>
 
             <p className="feature-spotlight-body">{content.body}</p>
@@ -230,7 +237,9 @@ function AccordionSpotlight({
               {content.header.line1}
             </span>
             <span className="feature-spotlight-accordion-heading-line">
-              <span className="text-white">{content.header.line2Before} </span>
+              {content.header.line2Before ? (
+                <span className="text-white">{content.header.line2Before} </span>
+              ) : null}
               <span className="build-section-entire-gradient">{content.header.accent}</span>
             </span>
           </h2>

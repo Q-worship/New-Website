@@ -1,0 +1,23 @@
+name = "qworship-whatsapp-chat"
+main = "src/index.ts"
+compatibility_date = "2026-06-24"
+
+[[durable_objects.bindings]]
+name = "CHAT_SESSION"
+class_name = "ChatSession"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["ChatSession"]
+
+[[kv_namespaces]]
+binding = "CHAT_KV"
+# Replace with output of: wrangler kv namespace create CHAT_KV
+id = "00000000000000000000000000000001"
+preview_id = "00000000000000000000000000000001"
+
+[vars]
+WHATSAPP_PHONE_NUMBER_ID = ""
+
+[ai]
+binding = "AI"

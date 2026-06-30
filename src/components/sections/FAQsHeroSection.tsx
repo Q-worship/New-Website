@@ -17,7 +17,7 @@ export function FAQsHeroSection() {
 
             <p className="features-hero-body">{faqsHeroCopy.body}</p>
 
-            <div className="features-hero-actions">
+            <div className="features-hero-actions cta-pair-mobile-inline">
               <button type="button" className="features-hero-download-btn">
                 {faqsHeroCopy.primaryCta}
               </button>

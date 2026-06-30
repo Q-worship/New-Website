@@ -1,5 +1,7 @@
-import { faqItems, images, pricingFaqTeaserItems } from '@/lib/theme'
-import type { FaqItem } from '@/types/content'
+import { images } from '@/lib/theme'
+import { matchFaqAnswer, getChatbotFaqPool } from '@/lib/chatbotMatcher'
+
+export { matchFaqAnswer, getChatbotFaqPool }
 
 export const chatbotConfig = {
   brandPurple: '#61459D',
@@ -9,25 +11,15 @@ export const chatbotConfig = {
   fabLogo: images.logo,
   botAvatarLogo: images.logo,
   initialBotMessage:
-    'Peace and blessings! Thanks for reaching out. To get started, please share your email address.',
+    'Peace! Thanks for reaching out. To get started, please share your email address.',
   emailStorageKey: 'qworship-chat-email',
-  matchScoreThreshold: 2,
 } as const
 
-export interface ChatbotReply {
-  text: string
-  whatsappUrl?: string
-}
+export type ChatbotReply =
+  | { type: 'text'; text: string }
+  | { type: 'handoff'; query: string }
 
-const STOP_WORDS = new Set([
-  'a', 'an', 'the', 'is', 'are', 'was', 'were', 'be', 'been', 'being',
-  'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could',
-  'should', 'may', 'might', 'can', 'i', 'me', 'my', 'we', 'our', 'you',
-  'your', 'it', 'its', 'they', 'them', 'their', 'this', 'that', 'these',
-  'those', 'am', 'to', 'of', 'in', 'for', 'on', 'with', 'at', 'by',
-  'from', 'as', 'into', 'about', 'what', 'how', 'when', 'where', 'why',
-  'who', 'which', 'and', 'or', 'but', 'if', 'not', 'no', 'yes',
-])
+export const agentSearchDurationMs = 3500
 
 const GREETING_PATTERNS = [
   /\b(hi|hello|hey|hiya|howdy)\b/i,
@@ -52,27 +44,6 @@ const THANKS_REPLIES = [
   'Amen — glad I could help! Do not hesitate to reach out again.',
 ]
 
-function tokenize(text: string): string[] {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s]/g, ' ')
-    .split(/\s+/)
-    .filter((word) => word.length > 1 && !STOP_WORDS.has(word))
-}
-
-function scoreFaq(queryTokens: string[], faq: FaqItem): number {
-  const questionTokens = tokenize(faq.question)
-  const answerTokens = tokenize(faq.answer)
-  let score = 0
-
-  for (const token of queryTokens) {
-    if (questionTokens.includes(token)) score += 2
-    if (answerTokens.includes(token)) score += 1
-  }
-
-  return score
-}
-
 function pickVariant(replies: string[]): string {
   return replies[Math.floor(Math.random() * replies.length)]
 }
@@ -89,63 +60,38 @@ function isThanks(query: string): boolean {
   return THANKS_PATTERNS.some((pattern) => pattern.test(normalized))
 }
 
-export function getChatbotFaqPool(): FaqItem[] {
-  const seen = new Set<string>()
-  const pool: FaqItem[] = []
-
-  for (const item of [...faqItems, ...pricingFaqTeaserItems]) {
-    if (!seen.has(item.id)) {
-      seen.add(item.id)
-      pool.push(item)
-    }
+export function resolveInstantChatbotReply(query: string): ChatbotReply | null {
+  if (isGreeting(query)) {
+    return { type: 'text', text: pickVariant(GREETING_REPLIES) }
   }
 
-  return pool
-}
-
-export function matchFaqAnswer(query: string): FaqItem | null {
-  const queryTokens = tokenize(query)
-  if (queryTokens.length === 0) return null
-
-  const pool = getChatbotFaqPool()
-  let bestMatch: FaqItem | null = null
-  let bestScore = 0
-
-  for (const faq of pool) {
-    const score = scoreFaq(queryTokens, faq)
-    if (score > bestScore) {
-      bestScore = score
-      bestMatch = faq
-    }
+  if (isThanks(query)) {
+    return { type: 'text', text: pickVariant(THANKS_REPLIES) }
   }
 
-  if (bestScore >= chatbotConfig.matchScoreThreshold) {
-    return bestMatch
+  const match = matchFaqAnswer(query)
+  if (match) {
+    return { type: 'text', text: match.answer }
   }
 
   return null
 }
 
 export function resolveChatbotReply(query: string): ChatbotReply {
-  if (isGreeting(query)) {
-    return { text: pickVariant(GREETING_REPLIES) }
+  const instant = resolveInstantChatbotReply(query)
+  if (instant) {
+    return instant
   }
 
-  if (isThanks(query)) {
-    return { text: pickVariant(THANKS_REPLIES) }
-  }
+  return { type: 'handoff', query }
+}
 
-  const match = matchFaqAnswer(query)
-  if (match) {
-    return { text: `I'd be glad to help. ${match.answer}` }
+export function buildAgentHandoffMessage(email: string | null, query: string): string {
+  const lines = [`Hi, I have a question about Q-worship: ${query}`]
+  if (email) {
+    lines.push(`My email: ${email}`)
   }
-
-  const whatsappUrl = buildWhatsAppUrl(`Hi, I have a question about Q-worship: ${query}`)
-
-  return {
-    text: `I may not have the answer for that just yet, but our team would love to walk with you. Chat with us on WhatsApp (${chatbotConfig.whatsappDisplayNumber}).`,
-    whatsappUrl,
-  }
+  return lines.join('\n')
 }
 
 export function buildWhatsAppUrl(message: string): string {

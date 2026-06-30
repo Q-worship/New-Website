@@ -75,8 +75,8 @@ export function BuildTabsSection({ className = '' }: BuildTabsSectionProps) {
       className={`build-tabs-section section-gap reveal ${className}`}
     >
       <SiteContainer>
-        <div className="mb-16 text-left">
-          <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+        <div className="build-tabs-header mb-16 text-left">
+          <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-bold">
             Build your <span className="build-section-entire-gradient">Entire</span> church
             presentation
           </h2>

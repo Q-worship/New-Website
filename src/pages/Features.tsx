@@ -34,7 +34,7 @@ export function Features() {
 
   return (
 
-    <>
+    <main className="features-page">
 
       <FeaturesHeroSection />
 
@@ -80,7 +80,7 @@ export function Features() {
 
       <FAQSection />
 
-    </>
+    </main>
 
   )
 

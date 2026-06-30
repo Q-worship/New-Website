@@ -13,7 +13,7 @@ export function FinalCTASection() {
           <div className="final-cta-copy">
             <h2 className="final-cta-heading font-headline font-bold">
               <span className="text-white">{finalCtaCopy.heading.line1} </span>
-              <span className="build-section-entire-gradient">{finalCtaCopy.heading.line2}</span>
+              <span className="final-cta-heading-accent">{finalCtaCopy.heading.line2}</span>
             </h2>
             <p className="final-cta-body">{finalCtaCopy.body}</p>
           </div>

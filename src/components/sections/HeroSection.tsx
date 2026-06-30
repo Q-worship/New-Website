@@ -12,11 +12,17 @@ export function HeroSection() {
       <SiteContainer className="relative z-10">
         <div className="hero-inner mx-auto w-full max-w-5xl">
           <div className="text-center">
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full hero-badge mb-10">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full hero-badge hero-badge--desktop mb-10">
               <span className="hero-badge__label">
                 {heroCopy.badge.label}
               </span>
               <span className="hero-badge__version">{heroCopy.badge.version}</span>
+            </div>
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full hero-badge hero-badge--mobile mb-10">
+              <span className="hero-badge__label">
+                {heroCopy.badgeMobile.label}
+              </span>
+              <span className="hero-badge__version">{heroCopy.badgeMobile.version}</span>
             </div>
           </div>
 

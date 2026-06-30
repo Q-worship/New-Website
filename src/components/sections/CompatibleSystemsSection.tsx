@@ -25,11 +25,19 @@ export function CompatibleSystemsSection({
           <span className="relative inline-block">
             all
             <span
-              className="absolute -bottom-1 left-1/2 h-px w-40 -translate-x-1/2 bg-[#6B6B6B]"
+              className="absolute -bottom-1 left-1/2 h-px w-40 -translate-x-1/2 bg-[#6B6B6B] hidden md:block"
               aria-hidden="true"
             />
           </span>{' '}
-          your favourite systems
+          your
+          <br className="md:hidden" />{' '}
+          <span className="relative inline-block">
+            favourite systems
+            <span
+              className="absolute -bottom-1 left-1/2 h-px w-40 -translate-x-1/2 bg-[#6B6B6B] md:hidden"
+              aria-hidden="true"
+            />
+          </span>
         </h2>
       </SiteContainer>
 

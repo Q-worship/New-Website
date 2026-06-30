@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import type { ChatMessage } from '@/hooks/useChatbot'
+import type { ChatMessage, ChatMode } from '@/hooks/useChatbot'
 import { ChatbotFaqDrawer } from './ChatbotFaqDrawer'
 import { ChatbotMessageList } from './ChatbotMessageList'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
@@ -8,6 +8,9 @@ import { chatbotConfig } from '@/lib/chatbot'
 interface ChatbotPanelProps {
   isMinimized: boolean
   isFaqOpen: boolean
+  chatMode: ChatMode
+  isAgentSearching: boolean
+  isResolving: boolean
   messages: ChatMessage[]
   onClose: () => void
   onMinimize: () => void
@@ -16,11 +19,15 @@ interface ChatbotPanelProps {
   onCloseFaq: () => void
   onSendMessage: (text: string) => void
   onSelectFaq: (question: string, answer: string) => void
+  onAgentSearchComplete: (query: string) => void
 }
 
 export function ChatbotPanel({
   isMinimized,
   isFaqOpen,
+  chatMode,
+  isAgentSearching,
+  isResolving,
   messages,
   onClose,
   onMinimize,
@@ -29,23 +36,25 @@ export function ChatbotPanel({
   onCloseFaq,
   onSendMessage,
   onSelectFaq,
+  onAgentSearchComplete,
 }: ChatbotPanelProps) {
   const [input, setInput] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const hasUserMessage = messages.some((message) => message.role === 'user')
+  const faqLocked = chatMode === 'agent' || isAgentSearching || isResolving
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
-    if (!input.trim()) return
+    if (!input.trim() || isAgentSearching || isResolving) return
     onSendMessage(input)
     setInput('')
   }
 
   useEffect(() => {
-    if (!isMinimized && !isFaqOpen) {
+    if (!isMinimized && !isFaqOpen && !isAgentSearching && !isResolving) {
       inputRef.current?.focus()
     }
-  }, [isMinimized, isFaqOpen, messages.length])
+  }, [isAgentSearching, isMinimized, isFaqOpen, isResolving, messages.length])
 
   return (
     <div className={`chatbot-panel${isMinimized ? ' chatbot-panel--minimized' : ''}`}>
@@ -55,6 +64,7 @@ export function ChatbotPanel({
           className="chatbot-panel-header-btn"
           onClick={onToggleFaq}
           aria-label="Browse frequently asked questions"
+          disabled={faqLocked}
         >
           <MaterialIcon name="menu" className="chatbot-panel-header-icon" />
         </button>
@@ -84,38 +94,65 @@ export function ChatbotPanel({
       {!isMinimized && (
         <>
           <div className="chatbot-panel-body">
-            <ChatbotMessageList messages={messages} />
+            <ChatbotMessageList
+              messages={messages}
+              onAgentSearchComplete={onAgentSearchComplete}
+            />
 
-            {isFaqOpen && (
+            {isResolving && (
+              <p className="chatbot-agent-footer-note">Looking that up…</p>
+            )}
+
+            {isFaqOpen && !faqLocked && (
               <ChatbotFaqDrawer onClose={onCloseFaq} onSelectFaq={onSelectFaq} />
             )}
           </div>
 
           <footer className="chatbot-panel-footer">
-            {!hasUserMessage && (
-              <p className="chatbot-privacy">
-                By using this chatbot, you agree to your data being processed by third parties as
-                described in our{' '}
-                <a href={chatbotConfig.privacyPolicyHref} className="chatbot-privacy-link">
-                  Privacy Policy
-                </a>
+            {isAgentSearching ? (
+              <p className="chatbot-agent-footer-note">
+                Connecting you with the next available agent…
               </p>
-            )}
+            ) : isResolving ? (
+              <p className="chatbot-agent-footer-note">Looking that up…</p>
+            ) : (
+              <>
+                {chatMode === 'agent' && (
+                  <p className="chatbot-agent-footer-note">
+                    Chatting with customer care — replies appear here.
+                  </p>
+                )}
 
-            <form className="chatbot-input-form" onSubmit={handleSubmit}>
-              <div className="chatbot-input-wrap">
-                <MaterialIcon name="attach_file" className="chatbot-input-attach" aria-hidden />
-                <input
-                  ref={inputRef}
-                  type="text"
-                  className="chatbot-input"
-                  placeholder="Ask a detailed question"
-                  value={input}
-                  onChange={(event) => setInput(event.target.value)}
-                  aria-label="Chat message"
-                />
-              </div>
-            </form>
+                {!hasUserMessage && chatMode === 'bot' && (
+                  <p className="chatbot-privacy">
+                    By using this chatbot, you agree to your data being processed by third parties as
+                    described in our{' '}
+                    <a href={chatbotConfig.privacyPolicyHref} className="chatbot-privacy-link">
+                      Privacy Policy
+                    </a>
+                  </p>
+                )}
+
+                <form className="chatbot-input-form" onSubmit={handleSubmit}>
+                  <div className="chatbot-input-wrap">
+                    <MaterialIcon name="attach_file" className="chatbot-input-attach" aria-hidden />
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      className="chatbot-input"
+                      placeholder={
+                        chatMode === 'agent'
+                          ? 'Message customer care…'
+                          : 'Ask a detailed question'
+                      }
+                      value={input}
+                      onChange={(event) => setInput(event.target.value)}
+                      aria-label="Chat message"
+                    />
+                  </div>
+                </form>
+              </>
+            )}
           </footer>
         </>
       )}

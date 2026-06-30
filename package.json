@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:chat-api": "wrangler dev --config workers/whatsapp-chat/wrangler.toml --port 8787",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:chat-api": "wrangler deploy --config workers/whatsapp-chat/wrangler.toml"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -14,6 +16,7 @@
     "wouter": "^3.9.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260630.1",
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",

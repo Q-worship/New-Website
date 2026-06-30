@@ -15,6 +15,9 @@ export function ChatbotWidget() {
         <ChatbotPanel
           isMinimized={chatbot.isMinimized}
           isFaqOpen={chatbot.isFaqOpen}
+          chatMode={chatbot.chatMode}
+          isAgentSearching={chatbot.isAgentSearching}
+          isResolving={chatbot.isResolving}
           messages={chatbot.messages}
           onClose={chatbot.close}
           onMinimize={chatbot.minimize}
@@ -23,6 +26,7 @@ export function ChatbotWidget() {
           onCloseFaq={chatbot.closeFaq}
           onSendMessage={chatbot.sendMessage}
           onSelectFaq={chatbot.selectFaq}
+          onAgentSearchComplete={chatbot.completeAgentHandoff}
         />
       )}
     </>
