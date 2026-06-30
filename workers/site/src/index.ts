@@ -1,6 +1,6 @@
 interface Env {
   ASSETS: Fetcher
-  CHAT_API_ORIGIN?: string
+  CHAT_API: Fetcher
 }
 
 const corsHeaders: Record<string, string> = {
@@ -27,40 +27,7 @@ async function proxyChatApi(request: Request, env: Env): Promise<Response> {
     return new Response(null, { headers: corsHeaders })
   }
 
-  const origin = env.CHAT_API_ORIGIN?.trim().replace(/\/$/, '')
-  if (!origin) {
-    return new Response(JSON.stringify({ error: 'CHAT_API_ORIGIN not configured' }), {
-      status: 502,
-      headers: {
-        ...corsHeaders,
-        'Content-Type': 'application/json',
-      },
-    })
-  }
-
-  const requestUrl = new URL(request.url)
-  const targetUrl = `${origin}${requestUrl.pathname}${requestUrl.search}`
-
-  const proxyHeaders = new Headers()
-  const contentType = request.headers.get('Content-Type')
-  if (contentType) {
-    proxyHeaders.set('Content-Type', contentType)
-  }
-  const authorization = request.headers.get('Authorization')
-  if (authorization) {
-    proxyHeaders.set('Authorization', authorization)
-  }
-
-  const proxyInit: RequestInit = {
-    method: request.method,
-    headers: proxyHeaders,
-  }
-
-  if (request.method !== 'GET' && request.method !== 'HEAD') {
-    proxyInit.body = await request.text()
-  }
-
-  const response = await fetch(targetUrl, proxyInit)
+  const response = await env.CHAT_API.fetch(request)
   return withCors(response)
 }
 

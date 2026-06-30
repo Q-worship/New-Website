@@ -44,19 +44,31 @@ This repo has **two** Cloudflare deployments:
 
 
 
-## Step 1 — Cloudflare Pages environment variables
+## Step 1 — Site build environment variables
 
 
 
-The site uses a **same-origin API proxy** so the browser calls `/api/chat/*` on your site domain (no CORS). The site Worker ([`workers/site/src/index.ts`](workers/site/src/index.ts)) forwards those requests to the chat worker via `run_worker_first`.
+The site uses a **same-origin API proxy** so the browser calls `/api/chat/*` on your site domain (no CORS). The site Worker ([`workers/site/src/index.ts`](workers/site/src/index.ts)) forwards those requests to the chat worker via a **Service Binding** defined in [`wrangler.jsonc`](wrangler.jsonc):
 
 
 
-1. Open **Cloudflare Dashboard → Workers & Pages → your Pages project**
+```jsonc
+"services": [
+  { "binding": "CHAT_API", "service": "qworship-whatsapp-chat" }
+]
+```
+
+
+
+No `CHAT_API_ORIGIN` env var is needed — Worker-to-Worker HTTP fetch on the same account causes error **1042**; the service binding avoids that.
+
+
+
+1. Open **Cloudflare Dashboard → Workers & Pages → your site project**
 
 2. **Settings → Environment variables**
 
-3. Add for **Production** (and Preview if desired):
+3. For **Production** (and Preview if desired):
 
 
 
@@ -64,25 +76,15 @@ The site uses a **same-origin API proxy** so the browser calls `/api/chat/*` on 
 
    |----------|------|--------|
 
-   | `CHAT_API_ORIGIN` | Runtime (site Worker) | `https://qworship-whatsapp-chat.YOUR_ACCOUNT_SUBDOMAIN.workers.dev` |
-
    | `VITE_CHAT_API_URL` | Build time | **Leave unset or empty** (recommended) |
 
 
 
-   Copy the worker URL from `npm run deploy:chat-api` output. The subdomain is your **Cloudflare account** workers.dev hostname — not the Pages project name (`new-website` in `wrangler.jsonc`).
+   **Do not set** `VITE_CHAT_API_URL` to the worker URL unless you intentionally want cross-origin calls.
 
 
 
-   **Do not set** `VITE_CHAT_API_URL` to the worker URL unless you intentionally want cross-origin calls (can trigger CORS issues).
-
-
-
-4. **Deployments → Retry deployment** after changing variables.
-
-
-
-Without `CHAT_API_ORIGIN`, the proxy returns 502 and the chatbot falls back to the WhatsApp link.
+4. **Deploy the chat worker first** (`npm run deploy:chat-api`), then deploy the site (`npm run deploy:site` or push to GitHub). The service binding requires `qworship-whatsapp-chat` to exist before `new-website` deploys.
 
 
 
@@ -268,9 +270,8 @@ Or leave `VITE_CHAT_API_URL` unset — Vite proxies `/api` to port 8787 in dev (
 
 POST requests return **405** when the static asset server handles `/api/chat/*` instead of the site Worker. Fix:
 
-1. Ensure [`wrangler.jsonc`](wrangler.jsonc) has `main`, `ASSETS` binding, and `run_worker_first: ["/api/chat/*"]`.
-2. **Set** `CHAT_API_ORIGIN` on the **new-website** Worker (runtime variable).
-3. **Redeploy** the site (`npm run deploy:site`).
+1. Ensure [`wrangler.jsonc`](wrangler.jsonc) has `main`, `ASSETS` binding, `run_worker_first: ["/api/chat/*"]`, and the `CHAT_API` service binding.
+2. **Deploy** the chat worker first, then the site (`npm run deploy:site`).
 
 Verify the proxy on your site URL (not the chat worker URL):
 
@@ -283,6 +284,14 @@ curl -X POST https://new-website.YOUR_ACCOUNT_SUBDOMAIN.workers.dev/api/chat/faq
 
 Expected: health `{"ok":true}`; faq-resolve returns JSON (not 405).
 
+### Error 1042 on `/api/chat/health` or `/api/chat/faq-resolve`
+
+Cloudflare error **1042** means the site Worker tried to `fetch()` another Worker on the same account via HTTP. Fix: use the **Service Binding** in [`wrangler.jsonc`](wrangler.jsonc) (already in this repo) — do not proxy via `CHAT_API_ORIGIN` HTTP fetch.
+
+1. Confirm `services` binding points to `qworship-whatsapp-chat`.
+2. Deploy chat worker, then site worker.
+3. Remove any `CHAT_API_ORIGIN` variable from the dashboard (no longer used).
+
 ### CORS blocked on `/api/chat/sessions`
 
 
@@ -291,11 +300,9 @@ If DevTools shows a CORS error from `new-website.*` to `qworship-whatsapp-chat.*
 
 
 
-1. **Remove** `VITE_CHAT_API_URL` from Pages build env (use same-origin proxy).
+1. **Remove** `VITE_CHAT_API_URL` from build env (use same-origin proxy).
 
-2. **Set** `CHAT_API_ORIGIN` to the worker URL (runtime env).
-
-3. **Redeploy** the site so [`workers/site/src/index.ts`](workers/site/src/index.ts) is active (`npm run deploy:site` or push to GitHub).
+2. **Redeploy** the site so [`workers/site/src/index.ts`](workers/site/src/index.ts) is active (`npm run deploy:site` or push to GitHub).
 
 
 
@@ -315,7 +322,7 @@ This means the chat API is unreachable. Common causes:
 
 
 
-2. **`CHAT_API_ORIGIN` not set** — the Pages proxy needs this runtime variable pointing at the worker.
+2. **Chat worker not deployed** — the site Worker's `CHAT_API` service binding requires `qworship-whatsapp-chat` to exist. Run `npm run deploy:chat-api` first.
 
 
 
@@ -331,7 +338,7 @@ This means the chat API is unreachable. Common causes:
 
 
 
-The chatbot calls `GET /api/chat/health` before showing the loader. If health fails, it skips the animation and shows the WhatsApp link immediately. Fix worker deploy and `CHAT_API_ORIGIN` first.
+The chatbot calls `GET /api/chat/health` before showing the loader. If health fails, it skips the animation and shows the WhatsApp link immediately. Deploy the chat worker and site worker (with service binding) first.
 
 
 
