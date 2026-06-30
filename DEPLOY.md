@@ -184,7 +184,9 @@ Add these **GitHub repository secrets**:
 
 The workflow [`.github/workflows/deploy-chat-api.yml`](.github/workflows/deploy-chat-api.yml) deploys the chat worker on every push to `main` (requires the secrets above). You can also run it manually via **Actions → Deploy chat API worker → Run workflow**.
 
-For Cloudflare Git-connected builds, set the **deploy command** to `npm run deploy:production` so the chat worker deploys before the site on every build (see error **10143** in Troubleshooting).
+For Cloudflare Git-connected builds, set the **deploy command** to `npm run deploy:production` (or `npm run deploy`) so the chat worker deploys before the site on every build (see error **10143** in Troubleshooting).
+
+> **Quick fix if chat worker already exists:** retry the failed Cloudflare build with the current `npx wrangler deploy` command — error 10143 only blocks site deploy when `qworship-whatsapp-chat` is missing.
 
 
 

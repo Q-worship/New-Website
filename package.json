@@ -12,6 +12,7 @@
     "deploy:chat-api": "node scripts/ensure-chat-kv.mjs && wrangler deploy --config workers/whatsapp-chat/wrangler.toml",
     "deploy:site": "npm run build && wrangler deploy",
     "deploy:production": "npm run deploy:chat-api && wrangler deploy",
+    "deploy": "npm run deploy:production",
     "verify:faq-matcher": "node scripts/verify-faq-matcher.mjs",
     "verify:chatbot-greetings": "node scripts/verify-chatbot-greetings.mjs"
   },
