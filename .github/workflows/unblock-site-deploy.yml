@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Build site assets
+        run: npm run build
+
       - name: Update Cloudflare deploy command
         continue-on-error: true
         run: node scripts/cf-update-deploy-command.mjs
