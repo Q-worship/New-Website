@@ -1,7 +1,7 @@
 import { Link } from 'wouter'
 import { pricingPageCopy } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
-import { MaterialIcon } from '@/components/ui/MaterialIcon'
+import { PlatformLogo } from '@/components/ui/PlatformLogos'
 
 export function PricingHeroSection() {
   const { hero } = pricingPageCopy
@@ -19,7 +19,7 @@ export function PricingHeroSection() {
             <Link key={platform.id} href="/downloads" className="pricing-hero-platform-btn">
               <span>{platform.label}</span>
               {platform.icon && (
-                <MaterialIcon name={platform.icon} className="pricing-hero-platform-icon" aria-hidden />
+                <PlatformLogo platform={platform.icon} className="pricing-hero-platform-icon" />
               )}
             </Link>
           ))}

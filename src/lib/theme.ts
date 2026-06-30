@@ -436,8 +436,8 @@ export const pricingPageCopy: PricingPageCopy = {
     body: 'Start your 30-day free trial today — no credit card required, no watermarks, no limits. One subscription covers your entire team on Mac and Windows.',
     footnote: 'Your free trial starts automatically when you create an account.',
     platforms: [
-      { id: 'windows', label: 'Windows', icon: 'desktop_windows' },
-      { id: 'mac', label: 'Mac Os', icon: 'laptop_mac' },
+      { id: 'windows', label: 'Windows', icon: 'windows' },
+      { id: 'mac', label: 'Mac Os', icon: 'mac' },
     ],
   },
   productNav: {
@@ -1747,8 +1747,8 @@ export const downloadsPageCopy: DownloadsPageCopy = {
     imageAlt: 'Team collaborating on church presentation software',
   },
   platforms: [
-    { id: 'windows', label: 'Windows', icon: 'desktop_windows' },
-    { id: 'mac', label: 'Mac Os' },
+    { id: 'windows', label: 'Windows', icon: 'windows' },
+    { id: 'mac', label: 'Mac Os', icon: 'mac' },
   ],
   resourceLinks: [
     { id: 'feature-updates', label: 'Feature Updates', icon: 'featured_play_list' },

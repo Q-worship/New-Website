@@ -1,6 +1,6 @@
 import { downloadsPageCopy } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
-import { MaterialIcon } from '@/components/ui/MaterialIcon'
+import { PlatformLogo } from '@/components/ui/PlatformLogos'
 
 export function DownloadsConsoleSection() {
   const { product, platforms } = downloadsPageCopy
@@ -24,7 +24,7 @@ export function DownloadsConsoleSection() {
                 <button key={platform.id} type="button" className="downloads-platform-btn">
                   <span>{platform.label}</span>
                   {platform.icon && (
-                    <MaterialIcon name={platform.icon} className="downloads-platform-icon" aria-hidden />
+                    <PlatformLogo platform={platform.icon} className="downloads-platform-icon" />
                   )}
                 </button>
               ))}

@@ -140,7 +140,7 @@ export interface PricingPageCopy {
     heading: { before: string; accent: string }
     body: string
     footnote: string
-    platforms: { id: string; label: string; icon?: string }[]
+    platforms: { id: PlatformId; label: string; icon?: PlatformId }[]
   }
   productNav: {
     brand: string
@@ -201,10 +201,12 @@ export interface FaqItem {
   answer: string
 }
 
+export type PlatformId = 'windows' | 'mac'
+
 export interface DownloadPlatform {
-  id: string
+  id: PlatformId
   label: string
-  icon?: string
+  icon?: PlatformId
 }
 
 export interface DownloadResourceLink {
