@@ -8,6 +8,7 @@
     "dev:chat-api": "wrangler dev --config workers/whatsapp-chat/wrangler.toml --port 8787",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "setup:chat-api": "node scripts/setup-chat-worker.mjs",
     "deploy:chat-api": "wrangler deploy --config workers/whatsapp-chat/wrangler.toml"
   },
   "dependencies": {

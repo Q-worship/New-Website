@@ -1,6 +1,7 @@
 import { ChatSession } from './chat-session'
 import type { Env } from './whatsapp'
-import { resolveFaqWithAi } from './faq-ai'import {
+import { resolveFaqWithAi } from './faq-ai'
+import {
   buildAgentNotification,
   isWhatsAppConfigured,
   parseAgentReply,

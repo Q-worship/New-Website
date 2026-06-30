@@ -266,7 +266,7 @@ export function useChatbot() {
         return
       }
 
-      replyWithResolved(text)
+      void replyWithResolved(text)
     },
     [appendMessages, chatMode, isAgentSearching, isResolving, phase, replyWithResolved, sendAgentMessage],
   )

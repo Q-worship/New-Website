@@ -1189,6 +1189,7 @@ export function getPricingProduct(id: PricingProductId): PricingProductContent {
 
 export const heroCopy = {
   badge: { label: 'NEW FEATURE RELEASE', version: 'V1.0.1 Complete Offline Capability' },
+  badgeMobile: { label: 'NEW RELEASE', version: 'V1.0.1' },
   heading: {
     line1: 'Your church service,',
     line2: 'Powered by voice.',
@@ -1222,8 +1223,8 @@ export const featuresSubNavItems: FeaturesSubNavItem[] = [
 export const handsFreeFeatureSpotlight: ChecklistSpotlightContent = {
   id: 'overview',
   title: {
-    line1: 'Your Bible. Voice-first. Always ready,',
-    line2Before: '',
+    line1: 'Your Bible. Voice-first.',
+    line2Before: 'Always ready,',
     accent: 'Online and Offline',
   },
   body: 'Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
@@ -1393,8 +1394,8 @@ export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
 export const prePastorsHandsFreeSpotlight: ChecklistSpotlightContent = {
   id: 'hands-free-bible',
   title: {
-    line1: 'Your Bible. Hands-free. Always ready,',
-    line2Before: '',
+    line1: 'Your Bible. Hands-free.',
+    line2Before: 'Always ready,',
     accent: 'Online and Offline',
   },
   body: 'For ages, pastors have paused mid-sermon to wait for a verse. Q-worship ends that. Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
@@ -1726,8 +1727,9 @@ export const faqCategoryItems: FaqCategoryItem[] = [
   { id: 'lower-third', label: 'Lower Third' },
 ]
 
-export { faqItems, pricingFaqTeaserItems } from '@/lib/faqPool'
-import { faqItems } from '@/lib/faqPool'
+import { faqItems, pricingFaqTeaserItems } from '@/lib/faqPool'
+
+export { faqItems, pricingFaqTeaserItems }
 
 export const downloadsPageCopy: DownloadsPageCopy = {
   banner: {
@@ -1915,44 +1917,6 @@ export const aboutFaqTeaserItems: FaqItem[] = [
   faqItems.find((item) => item.id === 'who-is-it-for')!,
   { ...faqItems.find((item) => item.id === 'who-is-it-for')!, id: 'who-is-it-for-duplicate' },
   faqItems.find((item) => item.id === 'operating-systems')!,
-]
-
-export const pricingFaqTeaserItems: FaqItem[] = [
-  {
-    id: 'pricing-free-trial',
-    categoryId: 'pricing',
-    question: 'Is there a free trial?',
-    answer:
-      'Yes. Every paid plan includes a 30-day free trial with no credit card required, no watermarks, and no limits. Your trial starts automatically when you create an account.',
-  },
-  {
-    id: 'pricing-live-console-vs-cloud',
-    categoryId: 'pricing',
-    question: 'What is the difference between the Live Console and the Cloud system?',
-    answer:
-      'Live Console is a lightweight, offline-first desktop app for Mac and Windows — ideal for venues with unreliable internet. Cloud is a browser-based platform for building your full order of service with songs, Bible, announcements, videos, images, and a rich slide canvas, accessible from any device with an internet connection.',
-  },
-  {
-    id: 'pricing-switch-plans',
-    categoryId: 'pricing',
-    question: 'Can I switch plans at any time?',
-    answer:
-      'You can upgrade, downgrade, or cancel your subscription at any time. Changes take effect at the start of your next billing cycle.',
-  },
-  {
-    id: 'pricing-yearly-discount',
-    categoryId: 'pricing',
-    question: 'Do you offer a yearly billing discount?',
-    answer:
-      'Yes. All paid plans support yearly billing at a reduced rate compared to monthly — switch between monthly and yearly on our Pricing page.',
-  },
-  {
-    id: 'pricing-payment-methods',
-    categoryId: 'pricing',
-    question: 'What payment methods are accepted?',
-    answer:
-      'We accept major credit and debit cards for monthly and yearly subscriptions. Contact our team if you need help with billing or enterprise invoicing.',
-  },
 ]
 
 export const loginShowcaseSlides = [

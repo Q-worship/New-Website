@@ -99,10 +99,6 @@ export function ChatbotPanel({
               onAgentSearchComplete={onAgentSearchComplete}
             />
 
-            {isResolving && (
-              <p className="chatbot-agent-footer-note">Looking that up…</p>
-            )}
-
             {isFaqOpen && !faqLocked && (
               <ChatbotFaqDrawer onClose={onCloseFaq} onSelectFaq={onSelectFaq} />
             )}

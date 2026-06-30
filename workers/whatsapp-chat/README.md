@@ -1,5 +1,7 @@
 # Direct WhatsApp Business Cloud API — Meta setup
 
+Production deployment checklist: [`DEPLOY.md`](../../DEPLOY.md) in the repo root.
+
 Complete these steps in the Meta dashboards before the chat worker can send or receive messages.
 
 ## 1. Meta Business and Developer app
@@ -45,19 +47,20 @@ The session ID is included in every notification sent to the agent phone.
 
 ## 5. Webhook URL
 
-After deploying the worker, in **WhatsApp → Configuration → Webhook**:
+After deploying the worker (`npm run deploy:chat-api`), in **WhatsApp → Configuration → Webhook**:
 
-- **Callback URL:** `https://your-worker.workers.dev/webhooks/whatsapp`
+- **Callback URL:** `https://qworship-whatsapp-chat.<your-subdomain>.workers.dev/webhooks/whatsapp`
 - **Verify token:** same as `WHATSAPP_VERIFY_TOKEN`
 - Subscribe to **messages**
+
+Use the worker hostname from deploy output — not your Cloudflare Pages URL.
 
 ## 6. Wrangler secrets
 
 ```bash
-cd workers/whatsapp-chat
-wrangler kv namespace create CHAT_KV
-# Put the returned id in wrangler.toml [[kv_namespaces]]
+node scripts/setup-chat-worker.mjs   # creates KV + updates wrangler.toml
 
+cd workers/whatsapp-chat
 wrangler secret put WHATSAPP_TOKEN
 wrangler secret put WHATSAPP_APP_SECRET
 wrangler secret put WHATSAPP_VERIFY_TOKEN
@@ -73,15 +76,24 @@ WHATSAPP_PHONE_NUMBER_ID = "your_phone_number_id"
 
 ## 7. Frontend env
 
-In the site root `.env`:
+**Local** — site root `.env`:
 
 ```
-VITE_CHAT_API_URL=https://your-worker.workers.dev
+VITE_CHAT_API_URL=http://localhost:8787
 ```
+
+**Production** — Cloudflare Pages → Settings → Environment variables (see [`DEPLOY.md`](../../DEPLOY.md)):
+
+```
+VITE_CHAT_API_URL=https://qworship-whatsapp-chat.<your-subdomain>.workers.dev
+```
+
+Redeploy Pages after adding the variable.
 
 For local development, run the chat API alongside the site:
 
 ```bash
+wrangler login   # required once for remote Workers AI in dev
 npm run dev:chat-api
 ```
 
