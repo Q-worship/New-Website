@@ -33,7 +33,7 @@ jobs:
           CF_TRIGGER_BUILD: 'false'
 
       - name: Deploy chat worker and site
-        run: npm run deploy:chat-api && wrangler deploy
+        run: npm run deploy:chat-api && npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
