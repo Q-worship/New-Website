@@ -9,6 +9,7 @@ export interface ChatMessageRecord {
 
 const SESSION_STORAGE_KEY = 'qworship-chat-session-id'
 const FETCH_TIMEOUT_MS = 8000
+const HEALTH_CHECK_TIMEOUT_MS = 3000
 
 const PLACEHOLDER_HOST_PATTERNS = [
   /your[-_]account[-_]subdomain/i,
@@ -40,11 +41,23 @@ export function isValidChatApiUrl(url: string): boolean {
 
 export function getChatApiUrl(): string {
   const raw = import.meta.env.VITE_CHAT_API_URL?.trim().replace(/\/$/, '') ?? ''
+  if (!raw) {
+    return ''
+  }
   return isValidChatApiUrl(raw) ? raw : ''
 }
 
 export function isWhatsAppChatConfigured(): boolean {
-  return Boolean(getChatApiUrl())
+  const raw = import.meta.env.VITE_CHAT_API_URL?.trim() ?? ''
+  if (!raw) {
+    return true
+  }
+  return isValidChatApiUrl(raw)
+}
+
+function chatApiPath(path: string): string {
+  const base = getChatApiUrl()
+  return `${base}${path}`
 }
 
 export function loadStoredSessionId(): string | null {
@@ -82,12 +95,36 @@ async function fetchWithTimeout(
   }
 }
 
-export async function resolveFaqWithAi(query: string): Promise<FaqResolveResponse | null> {
-  const base = getChatApiUrl()
-  if (!base) return null
+export async function checkChatApiHealth(): Promise<boolean> {
+  if (!isWhatsAppChatConfigured()) {
+    return false
+  }
 
   try {
-    const response = await fetchWithTimeout(`${base}/api/chat/faq-resolve`, {
+    const response = await fetchWithTimeout(
+      chatApiPath('/api/chat/health'),
+      { method: 'GET' },
+      HEALTH_CHECK_TIMEOUT_MS,
+    )
+
+    if (!response.ok) {
+      return false
+    }
+
+    const data = (await response.json()) as { ok?: boolean }
+    return data.ok === true
+  } catch {
+    return false
+  }
+}
+
+export async function resolveFaqWithAi(query: string): Promise<FaqResolveResponse | null> {
+  if (!isWhatsAppChatConfigured()) {
+    return null
+  }
+
+  try {
+    const response = await fetchWithTimeout(chatApiPath('/api/chat/faq-resolve'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
@@ -105,11 +142,12 @@ export async function createChatSession(
   email: string | null,
   query: string,
 ): Promise<string | null> {
-  const base = getChatApiUrl()
-  if (!base) return null
+  if (!isWhatsAppChatConfigured()) {
+    return null
+  }
 
   try {
-    const response = await fetchWithTimeout(`${base}/api/chat/sessions`, {
+    const response = await fetchWithTimeout(chatApiPath('/api/chat/sessions'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, query }),
@@ -126,11 +164,12 @@ export async function createChatSession(
 }
 
 export async function sendVisitorMessage(sessionId: string, text: string): Promise<boolean> {
-  const base = getChatApiUrl()
-  if (!base) return false
+  if (!isWhatsAppChatConfigured()) {
+    return false
+  }
 
   try {
-    const response = await fetch(`${base}/api/chat/sessions/${sessionId}/messages`, {
+    const response = await fetch(chatApiPath(`/api/chat/sessions/${sessionId}/messages`), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
@@ -146,11 +185,12 @@ export function subscribeToSession(
   sessionId: string,
   onAgentMessage: (message: ChatMessageRecord) => void,
 ): () => void {
-  const base = getChatApiUrl()
-  if (!base) return () => undefined
+  if (!isWhatsAppChatConfigured()) {
+    return () => undefined
+  }
 
   try {
-    const source = new EventSource(`${base}/api/chat/sessions/${sessionId}/events`)
+    const source = new EventSource(chatApiPath(`/api/chat/sessions/${sessionId}/events`))
 
     source.onmessage = (event) => {
       try {

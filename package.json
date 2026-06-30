@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "setup:chat-api": "node scripts/setup-chat-worker.mjs",
     "deploy:chat-api": "wrangler deploy --config workers/whatsapp-chat/wrangler.toml",
-    "verify:faq-matcher": "node scripts/verify-faq-matcher.mjs"
+    "verify:faq-matcher": "node scripts/verify-faq-matcher.mjs",
+    "verify:chatbot-greetings": "node scripts/verify-chatbot-greetings.mjs"
   },
   "dependencies": {
     "react": "^18.2.0",

@@ -8,6 +8,7 @@ import {
   resolveInstantChatbotReply,
 } from '@/lib/chatbot'
 import {
+  checkChatApiHealth,
   initWhatsAppChatHandoff,
   isWhatsAppChatConfigured,
   loadStoredSessionId,
@@ -153,6 +154,20 @@ export function useChatbot() {
     setIsFaqOpen(false)
   }, [])
 
+  const appendWhatsAppFallback = useCallback(
+    (query: string) => {
+      const whatsappUrl = buildWhatsAppUrl(buildAgentHandoffMessage(email, query))
+      appendMessages(
+        createMessage(
+          'bot',
+          `Our team would love to help. Continue on WhatsApp (${chatbotConfig.whatsappDisplayNumber}).`,
+          { whatsappUrl },
+        ),
+      )
+    },
+    [appendMessages, email],
+  )
+
   const completeAgentHandoff = useCallback(
     async (query: string) => {
       if (handoffInProgressRef.current) return
@@ -178,29 +193,15 @@ export function useChatbot() {
             ),
           )
         } else {
-          const whatsappUrl = buildWhatsAppUrl(buildAgentHandoffMessage(email, query))
-          appendMessages(
-            createMessage(
-              'bot',
-              `Our team would love to help. Continue on WhatsApp (${chatbotConfig.whatsappDisplayNumber}).`,
-              { whatsappUrl },
-            ),
-          )
+          appendWhatsAppFallback(query)
         }
       } catch {
-        const whatsappUrl = buildWhatsAppUrl(buildAgentHandoffMessage(email, query))
-        appendMessages(
-          createMessage(
-            'bot',
-            `Our team would love to help. Continue on WhatsApp (${chatbotConfig.whatsappDisplayNumber}).`,
-            { whatsappUrl },
-          ),
-        )
+        appendWhatsAppFallback(query)
       } finally {
         handoffInProgressRef.current = false
       }
     },
-    [appendAgentMessage, appendMessages, email],
+    [appendAgentMessage, appendMessages, appendWhatsAppFallback, email],
   )
 
   const replyWithResolved = useCallback(
@@ -221,18 +222,32 @@ export function useChatbot() {
             appendMessages(createMessage('bot', aiResult.answer))
             return
           }
+
+          const healthy = await checkChatApiHealth()
+          if (!healthy) {
+            appendWhatsAppFallback(userText)
+            return
+          }
         }
 
         setIsAgentSearching(true)
         appendMessages(createAgentSearchMessage(userText))
       } catch {
+        if (isWhatsAppChatConfigured()) {
+          const healthy = await checkChatApiHealth()
+          if (!healthy) {
+            appendWhatsAppFallback(userText)
+            return
+          }
+        }
+
         setIsAgentSearching(true)
         appendMessages(createAgentSearchMessage(userText))
       } finally {
         setIsResolving(false)
       }
     },
-    [appendMessages],
+    [appendMessages, appendWhatsAppFallback],
   )
 
   const sendAgentMessage = useCallback(

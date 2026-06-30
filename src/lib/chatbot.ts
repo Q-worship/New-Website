@@ -24,7 +24,12 @@ export const agentSearchDurationMs = 3500
 const GREETING_PATTERNS = [
   /\b(hi|hello|hey|hiya|howdy)\b/i,
   /\bgood\s+(morning|afternoon|evening|day)\b/i,
-  /\b(peace|blessings?|shalom|greetings?)\b/i,
+  /\bgreetings?\b/i,
+  /\bhow\s+are\s+you\b/i,
+  /\bhow'?s\s+it\s+going\b/i,
+  /\bhow\s+is\s+it\s+going\b/i,
+  /\bhow\s+have\s+you\s+been\b/i,
+  /\b(nice|pleased)\s+to\s+meet\s+you\b/i,
 ]
 
 const THANKS_PATTERNS = [
@@ -36,6 +41,7 @@ const GREETING_REPLIES = [
   'Hello! How can I help you with Q-worship today?',
   'Hi there! What can I help you with?',
   'Hello! Ask a question or browse FAQs from the menu.',
+  "I'm here to help with Q-worship. What would you like to know?",
 ]
 
 const THANKS_REPLIES = [
