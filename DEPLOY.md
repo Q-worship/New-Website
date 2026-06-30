@@ -146,6 +146,16 @@ This means the browser cannot reach the chat worker. Common causes:
 
 4. **Pages not redeployed** — after changing `VITE_CHAT_API_URL`, retry the Pages deployment so the new URL is baked into the build.
 
+### `ERR_NAME_NOT_RESOLVED` and `%20` in the request URL
+
+If DevTools shows requests like `https://qworship-whatsapp-chat.vianneycm.workers.dev%20/api/chat/...`, the `%20` is a **trailing space** in `VITE_CHAT_API_URL`.
+
+1. Open **Cloudflare Pages → Settings → Environment variables**
+2. Edit `VITE_CHAT_API_URL` — value must be exactly `https://qworship-whatsapp-chat.vianneycm.workers.dev` with **no leading/trailing spaces** and no trailing slash
+3. **Retry deployment** so the build picks up the corrected value
+
+The app trims whitespace at runtime, but fixing the env var avoids confusion and keeps builds clean.
+
 ### Verify the worker is live
 
 After deploy:

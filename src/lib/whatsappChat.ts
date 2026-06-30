@@ -16,7 +16,7 @@ const PLACEHOLDER_HOST_PATTERNS = [
 ]
 
 export function isValidChatApiUrl(url: string): boolean {
-  if (!url || url.includes('<') || url.includes('>')) {
+  if (!url || url !== url.trim() || url.includes('<') || url.includes('>')) {
     return false
   }
 
@@ -39,7 +39,7 @@ export function isValidChatApiUrl(url: string): boolean {
 }
 
 export function getChatApiUrl(): string {
-  const raw = import.meta.env.VITE_CHAT_API_URL?.replace(/\/$/, '') ?? ''
+  const raw = import.meta.env.VITE_CHAT_API_URL?.trim().replace(/\/$/, '') ?? ''
   return isValidChatApiUrl(raw) ? raw : ''
 }
 
