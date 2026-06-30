@@ -1,6 +1,5 @@
-/// <reference types="@cloudflare/workers-types" />
-
 interface Env {
+  ASSETS: Fetcher
   CHAT_API_ORIGIN?: string
 }
 
@@ -11,15 +10,19 @@ const corsHeaders: Record<string, string> = {
   'Access-Control-Max-Age': '86400',
 }
 
-function pathSegments(params: Record<string, string | string[] | undefined>): string {
-  const path = params.path
-  if (!path) return ''
-  return Array.isArray(path) ? path.join('/') : path
+function withCors(response: Response): Response {
+  const headers = new Headers(response.headers)
+  for (const [key, value] of Object.entries(corsHeaders)) {
+    headers.set(key, value)
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
 }
 
-export const onRequest: PagesFunction<Env> = async (context) => {
-  const { request, env, params } = context
-
+async function proxyChatApi(request: Request, env: Env): Promise<Response> {
   if (request.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
@@ -35,9 +38,8 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     })
   }
 
-  const suffix = pathSegments(params as Record<string, string | string[] | undefined>)
   const requestUrl = new URL(request.url)
-  const targetUrl = `${origin}/api/chat/${suffix}${requestUrl.search}`
+  const targetUrl = `${origin}${requestUrl.pathname}${requestUrl.search}`
 
   const proxyHeaders = new Headers()
   const contentType = request.headers.get('Content-Type')
@@ -59,14 +61,17 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   }
 
   const response = await fetch(targetUrl, proxyInit)
-  const responseHeaders = new Headers(response.headers)
-  for (const [key, value] of Object.entries(corsHeaders)) {
-    responseHeaders.set(key, value)
-  }
+  return withCors(response)
+}
 
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: responseHeaders,
-  })
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url)
+
+    if (url.pathname.startsWith('/api/chat')) {
+      return proxyChatApi(request, env)
+    }
+
+    return env.ASSETS.fetch(request)
+  },
 }
