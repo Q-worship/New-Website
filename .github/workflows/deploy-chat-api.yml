@@ -3,11 +3,6 @@ name: Deploy chat API worker
 on:
   push:
     branches: [main]
-    paths:
-      - 'workers/whatsapp-chat/**'
-      - 'src/lib/faqPool.ts'
-      - 'src/lib/chatbotMatcher.ts'
-      - '.github/workflows/deploy-chat-api.yml'
   workflow_dispatch:
 
 jobs:

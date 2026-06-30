@@ -182,7 +182,9 @@ Add these **GitHub repository secrets**:
 
 
 
-The workflow [`.github/workflows/deploy-chat-api.yml`](.github/workflows/deploy-chat-api.yml) deploys the worker when chat-related files change on `main`.
+The workflow [`.github/workflows/deploy-chat-api.yml`](.github/workflows/deploy-chat-api.yml) deploys the chat worker on every push to `main` (requires the secrets above). You can also run it manually via **Actions → Deploy chat API worker → Run workflow**.
+
+For Cloudflare Git-connected builds, set the **deploy command** to `npm run deploy:production` so the chat worker deploys before the site on every build (see error **10143** in Troubleshooting).
 
 
 
@@ -291,6 +293,36 @@ Cloudflare error **1042** means the site Worker tried to `fetch()` another Worke
 1. Confirm `services` binding points to `qworship-whatsapp-chat`.
 2. Deploy chat worker, then site worker.
 3. Remove any `CHAT_API_ORIGIN` variable from the dashboard (no longer used).
+
+### Error 10143 — `CHAT_API` service binding worker not found
+
+Site deploy fails with:
+
+```
+Service binding 'CHAT_API' references Worker 'qworship-whatsapp-chat' which was not found. [code: 10143]
+```
+
+The site Worker ([`wrangler.jsonc`](wrangler.jsonc)) binds to `qworship-whatsapp-chat`, which must exist **before** `new-website` can deploy.
+
+**One-time bootstrap:**
+
+1. Authenticate: `wrangler login` locally, or set GitHub secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+2. Create KV namespaces: `npm run setup:chat-api` (or let `ensure-chat-kv.mjs` run automatically in CI).
+3. Deploy chat worker: `npm run deploy:chat-api`.
+4. Retry the site deploy.
+
+**Prevent recurrence (Cloudflare Git build):**
+
+In **Workers & Pages → new-website → Settings → Build**:
+
+| Setting | Value |
+|---------|--------|
+| Build command | `npm run build` |
+| Deploy command | `npm run deploy:production` |
+
+`deploy:production` runs `deploy:chat-api` (chat worker) then `wrangler deploy` (site). Cloudflare already runs the build step before deploy.
+
+**Deploy order:** `setup:chat-api` → `deploy:chat-api` → site deploy.
 
 ### CORS blocked on `/api/chat/sessions`
 
