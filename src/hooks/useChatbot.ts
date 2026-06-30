@@ -161,22 +161,33 @@ export function useChatbot() {
       setIsAgentSearching(false)
       setMessages((prev) => prev.filter((message) => message.kind !== 'agentSearch'))
 
-      const { connected, sessionId } = await initWhatsAppChatHandoff({ email, query })
+      try {
+        const { connected, sessionId } = await initWhatsAppChatHandoff({ email, query })
 
-      if (connected && sessionId) {
-        sessionIdRef.current = sessionId
-        unsubscribeRef.current?.()
-        unsubscribeRef.current = subscribeToSession(sessionId, (message) => {
-          appendAgentMessage(message.text)
-        })
-        setChatMode('agent')
-        appendMessages(
-          createMessage(
-            'bot',
-            "You're now connected with our customer care team. Continue chatting here.",
-          ),
-        )
-      } else {
+        if (connected && sessionId) {
+          sessionIdRef.current = sessionId
+          unsubscribeRef.current?.()
+          unsubscribeRef.current = subscribeToSession(sessionId, (message) => {
+            appendAgentMessage(message.text)
+          })
+          setChatMode('agent')
+          appendMessages(
+            createMessage(
+              'bot',
+              "You're now connected with our customer care team. Continue chatting here.",
+            ),
+          )
+        } else {
+          const whatsappUrl = buildWhatsAppUrl(buildAgentHandoffMessage(email, query))
+          appendMessages(
+            createMessage(
+              'bot',
+              `Our team would love to help. Continue on WhatsApp (${chatbotConfig.whatsappDisplayNumber}).`,
+              { whatsappUrl },
+            ),
+          )
+        }
+      } catch {
         const whatsappUrl = buildWhatsAppUrl(buildAgentHandoffMessage(email, query))
         appendMessages(
           createMessage(
@@ -185,9 +196,9 @@ export function useChatbot() {
             { whatsappUrl },
           ),
         )
+      } finally {
+        handoffInProgressRef.current = false
       }
-
-      handoffInProgressRef.current = false
     },
     [appendAgentMessage, appendMessages, email],
   )
@@ -201,19 +212,25 @@ export function useChatbot() {
         return
       }
 
-      if (isWhatsAppChatConfigured()) {
-        setIsResolving(true)
-        const aiResult = await resolveFaqWithAi(userText)
-        setIsResolving(false)
+      try {
+        if (isWhatsAppChatConfigured()) {
+          setIsResolving(true)
+          const aiResult = await resolveFaqWithAi(userText)
 
-        if (aiResult?.type === 'faq') {
-          appendMessages(createMessage('bot', aiResult.answer))
-          return
+          if (aiResult?.type === 'faq') {
+            appendMessages(createMessage('bot', aiResult.answer))
+            return
+          }
         }
-      }
 
-      setIsAgentSearching(true)
-      appendMessages(createAgentSearchMessage(userText))
+        setIsAgentSearching(true)
+        appendMessages(createAgentSearchMessage(userText))
+      } catch {
+        setIsAgentSearching(true)
+        appendMessages(createAgentSearchMessage(userText))
+      } finally {
+        setIsResolving(false)
+      }
     },
     [appendMessages],
   )

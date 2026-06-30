@@ -103,6 +103,10 @@ export default {
       return new Response('OK', { status: 200 })
     }
 
+    if (url.pathname === '/api/chat/health' && request.method === 'GET') {
+      return json({ ok: true })
+    }
+
     if (url.pathname === '/api/chat/faq-resolve' && request.method === 'POST') {
       const body = (await request.json()) as { query?: string }
       const query = body.query?.trim()

@@ -31,13 +31,17 @@ This repo has **two** Cloudflare deployments:
 
    | Variable | Value |
    |----------|--------|
-   | `VITE_CHAT_API_URL` | `https://qworship-whatsapp-chat.<your-subdomain>.workers.dev` |
+   | `VITE_CHAT_API_URL` | `https://qworship-whatsapp-chat.YOUR_ACCOUNT_SUBDOMAIN.workers.dev` |
 
-   Use the URL printed after `npm run deploy:chat-api` (worker name is `qworship-whatsapp-chat`).
+   Copy the exact URL printed by `npm run deploy:chat-api`. The subdomain is your **Cloudflare account** workers.dev hostname — not the Pages project name (`new-website` in `wrangler.jsonc`).
+
+   **Invalid (do not use):**
+   - `https://qworship-whatsapp-chat.<new-website>.workers.dev` (angle brackets break fetch)
+   - Any URL containing `<` or `>` characters
 
 4. **Deployments → Retry deployment** (or push a new commit) so the build picks up the variable.
 
-Without this, the chatbot skips the AI tier and WhatsApp handoff API calls.
+Without a valid URL, the chatbot skips the AI tier and WhatsApp API calls (rule-based FAQs still work).
 
 ---
 
@@ -92,7 +96,7 @@ After the worker is deployed, in **Meta Developer → WhatsApp → Configuration
 
 | Field | Value |
 |-------|--------|
-| Callback URL | `https://qworship-whatsapp-chat.<your-subdomain>.workers.dev/webhooks/whatsapp` |
+| Callback URL | `https://qworship-whatsapp-chat.YOUR_ACCOUNT_SUBDOMAIN.workers.dev/webhooks/whatsapp` |
 | Verify token | Same string as `WHATSAPP_VERIFY_TOKEN` |
 | Subscribed fields | `messages` |
 
@@ -119,3 +123,45 @@ VITE_CHAT_API_URL=http://localhost:8787
 ```
 
 Vite proxies `/api` to port 8787 in dev ([`vite.config.ts`](vite.config.ts)).
+
+---
+
+## Troubleshooting
+
+### `ERR_QUIC_PROTOCOL_ERROR` or `Failed to fetch` on `/api/chat/sessions`
+
+This means the browser cannot reach the chat worker. Common causes:
+
+1. **Worker not deployed** — `npm run deploy:chat-api` must exit successfully. If local deploy fails (VPN, corporate proxy, certificate errors), use the GitHub Action with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets instead.
+
+2. **Wrong `VITE_CHAT_API_URL`** — use the URL printed by deploy output, not the Pages project name.
+
+   | Wrong | Right |
+   |-------|-------|
+   | `https://qworship-whatsapp-chat.new-website.vianneycm.workers.dev` | `https://qworship-whatsapp-chat.vianneycm.workers.dev` |
+
+   `new-website` is the Pages site name in [`wrangler.jsonc`](wrangler.jsonc). It is **not** part of the worker hostname unless deploy output explicitly includes it.
+
+3. **Placeholder KV** — run `npm run setup:chat-api` before first deploy so [`wrangler.toml`](workers/whatsapp-chat/wrangler.toml) has real KV namespace ids (not `00000000000000000000000000000001`).
+
+4. **Pages not redeployed** — after changing `VITE_CHAT_API_URL`, retry the Pages deployment so the new URL is baked into the build.
+
+### Verify the worker is live
+
+After deploy:
+
+```bash
+curl https://qworship-whatsapp-chat.YOUR_ACCOUNT_SUBDOMAIN.workers.dev/api/chat/health
+```
+
+Expected response: `{"ok":true}`
+
+If health check fails, fix worker deploy before updating Pages env vars.
+
+### Local deploy blocked by VPN or proxy
+
+Wrangler may warn about corporate proxy certificate mismatch. Options:
+
+- Install your corporate root CA and set `NODE_EXTRA_CA_CERTS` to that cert file
+- Deploy from a network without the proxy
+- Push to `main` and let [`.github/workflows/deploy-chat-api.yml`](.github/workflows/deploy-chat-api.yml) deploy using GitHub secrets

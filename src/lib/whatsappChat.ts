@@ -8,10 +8,39 @@ export interface ChatMessageRecord {
 }
 
 const SESSION_STORAGE_KEY = 'qworship-chat-session-id'
+const FETCH_TIMEOUT_MS = 8000
+
+const PLACEHOLDER_HOST_PATTERNS = [
+  /your[-_]account[-_]subdomain/i,
+  /your[-_]subdomain/i,
+]
+
+export function isValidChatApiUrl(url: string): boolean {
+  if (!url || url.includes('<') || url.includes('>')) {
+    return false
+  }
+
+  try {
+    const parsed = new URL(url)
+    const host = parsed.hostname
+
+    if (PLACEHOLDER_HOST_PATTERNS.some((pattern) => pattern.test(host) || pattern.test(url))) {
+      return false
+    }
+
+    if (parsed.protocol === 'http:') {
+      return host === 'localhost' || host === '127.0.0.1'
+    }
+
+    return parsed.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
 
 export function getChatApiUrl(): string {
-  const url = import.meta.env.VITE_CHAT_API_URL
-  return url?.replace(/\/$/, '') ?? ''
+  const raw = import.meta.env.VITE_CHAT_API_URL?.replace(/\/$/, '') ?? ''
+  return isValidChatApiUrl(raw) ? raw : ''
 }
 
 export function isWhatsAppChatConfigured(): boolean {
@@ -38,12 +67,27 @@ export type FaqResolveResponse =
   | { type: 'faq'; faqId: string; answer: string }
   | { type: 'handoff' }
 
+async function fetchWithTimeout(
+  url: string,
+  init: RequestInit,
+  timeoutMs = FETCH_TIMEOUT_MS,
+): Promise<Response> {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+
+  try {
+    return await fetch(url, { ...init, signal: controller.signal })
+  } finally {
+    clearTimeout(timeoutId)
+  }
+}
+
 export async function resolveFaqWithAi(query: string): Promise<FaqResolveResponse | null> {
   const base = getChatApiUrl()
   if (!base) return null
 
   try {
-    const response = await fetch(`${base}/api/chat/faq-resolve`, {
+    const response = await fetchWithTimeout(`${base}/api/chat/faq-resolve`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
@@ -64,30 +108,38 @@ export async function createChatSession(
   const base = getChatApiUrl()
   if (!base) return null
 
-  const response = await fetch(`${base}/api/chat/sessions`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, query }),
-  })
+  try {
+    const response = await fetchWithTimeout(`${base}/api/chat/sessions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, query }),
+    })
 
-  if (!response.ok) return null
+    if (!response.ok) return null
 
-  const data = (await response.json()) as { sessionId: string }
-  storeSessionId(data.sessionId)
-  return data.sessionId
+    const data = (await response.json()) as { sessionId: string }
+    storeSessionId(data.sessionId)
+    return data.sessionId
+  } catch {
+    return null
+  }
 }
 
 export async function sendVisitorMessage(sessionId: string, text: string): Promise<boolean> {
   const base = getChatApiUrl()
   if (!base) return false
 
-  const response = await fetch(`${base}/api/chat/sessions/${sessionId}/messages`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text }),
-  })
+  try {
+    const response = await fetch(`${base}/api/chat/sessions/${sessionId}/messages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+    })
 
-  return response.ok
+    return response.ok
+  } catch {
+    return false
+  }
 }
 
 export function subscribeToSession(
@@ -97,21 +149,29 @@ export function subscribeToSession(
   const base = getChatApiUrl()
   if (!base) return () => undefined
 
-  const source = new EventSource(`${base}/api/chat/sessions/${sessionId}/events`)
+  try {
+    const source = new EventSource(`${base}/api/chat/sessions/${sessionId}/events`)
 
-  source.onmessage = (event) => {
-    try {
-      const message = JSON.parse(event.data) as ChatMessageRecord
-      if (message.role === 'agent') {
-        onAgentMessage(message)
+    source.onmessage = (event) => {
+      try {
+        const message = JSON.parse(event.data) as ChatMessageRecord
+        if (message.role === 'agent') {
+          onAgentMessage(message)
+        }
+      } catch {
+        // ignore malformed events
       }
-    } catch {
-      // ignore malformed events
     }
-  }
 
-  return () => {
-    source.close()
+    source.onerror = () => {
+      source.close()
+    }
+
+    return () => {
+      source.close()
+    }
+  } catch {
+    return () => undefined
   }
 }
 

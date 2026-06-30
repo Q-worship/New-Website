@@ -31,7 +31,11 @@ export function ChatbotMessageList({
           return (
             <div key={message.id} className="chatbot-message chatbot-message--system">
               <ChatbotAgentSearch
-                onComplete={() => onAgentSearchComplete(message.handoffQuery ?? '')}
+                onComplete={() => {
+                  void Promise.resolve(
+                    onAgentSearchComplete(message.handoffQuery ?? ''),
+                  ).catch(() => undefined)
+                }}
               />
             </div>
           )

@@ -49,7 +49,7 @@ The session ID is included in every notification sent to the agent phone.
 
 After deploying the worker (`npm run deploy:chat-api`), in **WhatsApp → Configuration → Webhook**:
 
-- **Callback URL:** `https://qworship-whatsapp-chat.<your-subdomain>.workers.dev/webhooks/whatsapp`
+- **Callback URL:** `https://qworship-whatsapp-chat.YOUR_ACCOUNT_SUBDOMAIN.workers.dev/webhooks/whatsapp`
 - **Verify token:** same as `WHATSAPP_VERIFY_TOKEN`
 - Subscribe to **messages**
 
@@ -85,10 +85,10 @@ VITE_CHAT_API_URL=http://localhost:8787
 **Production** — Cloudflare Pages → Settings → Environment variables (see [`DEPLOY.md`](../../DEPLOY.md)):
 
 ```
-VITE_CHAT_API_URL=https://qworship-whatsapp-chat.<your-subdomain>.workers.dev
+VITE_CHAT_API_URL=https://qworship-whatsapp-chat.YOUR_ACCOUNT_SUBDOMAIN.workers.dev
 ```
 
-Redeploy Pages after adding the variable.
+Copy the exact URL from `npm run deploy:chat-api` output. Do not use placeholder text with `<` or `>` characters.
 
 For local development, run the chat API alongside the site:
 
