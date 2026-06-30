@@ -19,6 +19,15 @@ if (!toml.includes(PLACEHOLDER_ID)) {
   process.exit(0)
 }
 
+if (!process.env.CLOUDFLARE_API_TOKEN) {
+  console.error(
+    'Placeholder KV IDs detected but CLOUDFLARE_API_TOKEN is not set.\n' +
+      'Run: npm run setup:chat-api (after wrangler login)\n' +
+      'Or set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in GitHub secrets / Cloudflare build env.',
+  )
+  process.exit(1)
+}
+
 console.log('Placeholder KV IDs detected — creating CHAT_KV namespaces...')
 execSync('node scripts/setup-chat-worker.mjs', {
   cwd: root,
