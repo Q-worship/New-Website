@@ -3,6 +3,9 @@
   "name": "new-website",
   "compatibility_date": "2026-06-24",
   "main": "./workers/site/src/index.ts",
+  "vars": {
+    "CHAT_API_ORIGIN": "https://qworship-whatsapp-chat.vianneycm.workers.dev"
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
