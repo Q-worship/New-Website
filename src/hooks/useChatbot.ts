@@ -111,7 +111,7 @@ export function useChatbot() {
       if (!initializedRef.current) {
         initializedRef.current = true
         appendMessages(
-          createMessage('bot', 'Welcome back — blessings! How can I help you today?'),
+          createMessage('bot', 'Welcome back. How can I help you today?'),
         )
       }
       return
@@ -248,7 +248,7 @@ export function useChatbot() {
           appendMessages(
             createMessage(
               'bot',
-              'Thank you for your patience — please enter a valid email address so we may follow up if needed.',
+              'Please enter a valid email address so we can follow up if needed.',
             ),
           )
           return
@@ -260,7 +260,7 @@ export function useChatbot() {
         appendMessages(
           createMessage(
             'bot',
-            'Thank you! How can I serve you today? Ask a question or browse FAQs from the menu.',
+            'Thank you. How can I help you today? Ask a question or browse FAQs from the menu.',
           ),
         )
         return
@@ -283,7 +283,7 @@ export function useChatbot() {
         appendMessages(
           createMessage(
             'bot',
-            'Peace and blessings — please share your email address first so we can assist you.',
+            'Please share your email address first so we can assist you.',
           ),
         )
         return

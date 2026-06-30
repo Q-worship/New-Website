@@ -1954,6 +1954,6 @@ export const images = {
   partners:
     'https://lh3.googleusercontent.com/aida-public/AB6AXuBEulfurEaig4HkDRWZHLhOHiW3eycUCF3M42BaGblBzntXMdMFWZZIEXqVqqIrey50IkNrT0h-EaWS_3gaQzosqVdYnyOarGCsB7yy0KKmOcudI0Kj8dCTT7h-XvilnTmE5j9bCMvtyVYEjnWfmuQf-NpRiS0qhXtF47hym7Y1fABSA9dqj8325BsvAKmjJjIIl-gdUhFGcZC0PJe2wpQXOAzHlxqFa1EvYrrNpg4dQK1slcfLmSBup_agmDtTv-4LD8SiCbEld0TO',
   cta: '/Photos/lastlast.png',
-  ctaMobile: '/Photos/image-last-last.png',
+  ctaMobile: '/Photos/Pastors.png',
   featuresHero: '/Photos/features/Rectangle%2042300.png',
 }

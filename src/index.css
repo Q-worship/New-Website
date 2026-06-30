@@ -2204,12 +2204,6 @@ body.mobile-nav-open {
     padding: 1.25rem 1.5rem;
   }
 
-  .team-carousel-card:hover .team-carousel-overlay,
-  .team-carousel-card:focus-within .team-carousel-overlay {
-    top: 45%;
-    padding: 1.5rem 1.25rem;
-  }
-
   .team-carousel-overlay-title {
     font-size: 1.125rem;
   }
@@ -2258,6 +2252,47 @@ body.mobile-nav-open {
 
   .team-carousel-card:focus-within .team-carousel-card-btn {
     margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .team-carousel-card.team-carousel-card--expanded .team-carousel-overlay,
+  .team-carousel-card:focus-within .team-carousel-overlay {
+    top: 45%;
+    bottom: 0;
+    height: auto;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .team-carousel-card.team-carousel-card--expanded .team-carousel-overlay-content,
+  .team-carousel-card:focus-within .team-carousel-overlay-content {
+    justify-content: flex-start;
+    height: 100%;
+    gap: 0.75rem;
+  }
+
+  .team-carousel-card.team-carousel-card--expanded .team-carousel-overlay-icon,
+  .team-carousel-card:focus-within .team-carousel-overlay-icon {
+    opacity: 1;
+    max-height: 2rem;
+    margin-bottom: 0;
+  }
+
+  .team-carousel-card.team-carousel-card--expanded .team-carousel-overlay-desc,
+  .team-carousel-card:focus-within .team-carousel-overlay-desc {
+    opacity: 1;
+    max-height: none;
+    overflow: visible;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .team-carousel-card.team-carousel-card--expanded .team-carousel-card-btn,
+  .team-carousel-card:focus-within .team-carousel-card-btn {
+    opacity: 1;
+    max-height: none;
+    overflow: visible;
+    margin-top: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }

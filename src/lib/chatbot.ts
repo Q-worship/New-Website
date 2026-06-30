@@ -11,7 +11,7 @@ export const chatbotConfig = {
   fabLogo: images.logo,
   botAvatarLogo: images.logo,
   initialBotMessage:
-    'Peace! Thanks for reaching out. To get started, please share your email address.',
+    'Thank you for reaching out. Please share your email address.',
   emailStorageKey: 'qworship-chat-email',
 } as const
 
@@ -33,15 +33,15 @@ const THANKS_PATTERNS = [
 ]
 
 const GREETING_REPLIES = [
-  'Peace and blessings! Welcome to Q-worship — how may I help you today?',
-  'Hello! It is a joy to hear from you. I am here to help with anything about Q-worship.',
-  'Greetings! May the Lord bless your day. What can I assist you with?',
+  'Hello! How can I help you with Q-worship today?',
+  'Hi there! What can I help you with?',
+  'Hello! Ask a question or browse FAQs from the menu.',
 ]
 
 const THANKS_REPLIES = [
-  "You're very welcome! Blessings to you and your ministry.",
-  'It is my pleasure to help. May God continue to bless the work of your hands.',
-  'Amen — glad I could help! Do not hesitate to reach out again.',
+  "You're welcome! Let me know if you need anything else.",
+  'Happy to help. Feel free to ask another question anytime.',
+  'Glad I could help! Reach out again if you need more assistance.',
 ]
 
 function pickVariant(replies: string[]): string {
