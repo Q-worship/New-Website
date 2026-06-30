@@ -33,7 +33,12 @@ jobs:
           CF_TRIGGER_BUILD: 'false'
 
       - name: Deploy chat worker and site
-        run: npm run deploy:production
+        run: npm run deploy:chat-api && wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify site is live
+        run: |
+          curl -sf https://new-website.vianneycm.workers.dev/ | head -c 200 | grep -qi doctype
+          curl -sf https://new-website.vianneycm.workers.dev/api/chat/health

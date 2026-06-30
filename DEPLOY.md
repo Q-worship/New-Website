@@ -326,6 +326,45 @@ In **Workers & Pages → new-website → Settings → Build**:
 
 **Deploy order:** `setup:chat-api` → `deploy:chat-api` → site deploy.
 
+### Error 10064 — `ChatSession` Durable Object on site worker
+
+Site deploy fails with:
+
+```
+New version of script does not export class 'ChatSession' which is depended on by existing Durable Objects [code: 10064]
+```
+
+`ChatSession` belongs on `qworship-whatsapp-chat`, not `new-website`. This happens if the chat worker was ever deployed against the site worker name.
+
+**Fix:** [`wrangler.jsonc`](wrangler.jsonc) includes a one-time migration:
+
+```jsonc
+"migrations": [
+  { "tag": "v1-remove-chat-session", "deleted_classes": ["ChatSession"] }
+]
+```
+
+Commit, push, then redeploy (`npm run deploy:site` or re-run the **Unblock site deploy** workflow).
+
+### Homepage 404 — site worker live but assets missing
+
+`GET /` returns plain `Not found` while `/api/chat/health` still returns `{"ok":true}`.
+
+The site Worker is running but the **ASSETS** binding has no `dist/` files (deploy failed or assets were never uploaded).
+
+**Fix:**
+
+1. Resolve any blocking deploy error (e.g. **10064** above).
+2. Build and deploy: `npm run deploy:site` (runs `npm run build && wrangler deploy`).
+3. Verify:
+
+```bash
+curl -sf https://new-website.YOUR_ACCOUNT_SUBDOMAIN.workers.dev/ | head -c 200 | grep -qi doctype
+curl -sf https://new-website.YOUR_ACCOUNT_SUBDOMAIN.workers.dev/api/chat/health
+```
+
+Expected: HTML with `<!doctype` and `{"ok":true}`.
+
 ### CORS blocked on `/api/chat/sessions`
 
 

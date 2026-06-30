@@ -31,6 +31,28 @@ async function proxyChatApi(request: Request, env: Env): Promise<Response> {
   return withCors(response)
 }
 
+function isSpaRoute(pathname: string): boolean {
+  if (pathname === '/') return true
+  const lastSegment = pathname.split('/').pop() ?? ''
+  return !lastSegment.includes('.')
+}
+
+async function fetchAsset(request: Request, env: Env): Promise<Response> {
+  let response = await env.ASSETS.fetch(request)
+
+  if (response.status !== 404 || request.method !== 'GET') {
+    return response
+  }
+
+  const url = new URL(request.url)
+  if (!isSpaRoute(url.pathname)) {
+    return response
+  }
+
+  const indexUrl = new URL('/index.html', url.origin)
+  return env.ASSETS.fetch(new Request(indexUrl, request))
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
@@ -39,6 +61,6 @@ export default {
       return proxyChatApi(request, env)
     }
 
-    return env.ASSETS.fetch(request)
+    return fetchAsset(request, env)
   },
 }
