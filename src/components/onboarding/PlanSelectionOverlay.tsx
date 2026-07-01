@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import {
   formatPlanPrice,
+  getMonthlyComparePrice,
   onboardingPlans,
+  shouldShowYearlyCompare,
   type BillingPeriod,
   type PlanId,
 } from '@/lib/onboardingPlans'
@@ -80,6 +82,11 @@ export function PlanSelectionOverlay({
               ) : null}
 
               <h2 className="plan-selection__card-name">{plan.name}</h2>
+              {shouldShowYearlyCompare(plan, billing) ? (
+                <p className="plan-selection__card-price-compare">
+                  {getMonthlyComparePrice(plan)}
+                </p>
+              ) : null}
               <p className="plan-selection__card-price">{formatPlanPrice(plan, billing)}</p>
               {plan.description ? (
                 <p className="plan-selection__card-desc">{plan.description}</p>

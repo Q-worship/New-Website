@@ -50,7 +50,39 @@ export const onboardingPlans: PlanDefinition[] = getPricingProduct('cloud').plan
   mapCloudPlan,
 )
 
+export function parsePlanAmount(price: string): number {
+  const parsed = Number.parseFloat(price.replace(/[^0-9.]/g, ''))
+  return Number.isFinite(parsed) ? parsed : 0
+}
+
 export function formatPlanPrice(plan: PlanDefinition, billing: BillingPeriod): string {
-  const price = billing === 'yearly' ? plan.yearlyPrice : plan.monthlyPrice
-  return `${price}/mo`
+  const monthlyAmount = parsePlanAmount(plan.monthlyPrice)
+  const yearlyAmount = parsePlanAmount(plan.yearlyPrice)
+
+  if (billing === 'yearly') {
+    if (yearlyAmount > 0 && yearlyAmount >= monthlyAmount) {
+      return `${plan.monthlyPrice}/mo`
+    }
+    return `${plan.yearlyPrice}/mo`
+  }
+
+  return `${plan.monthlyPrice}/mo`
+}
+
+export function getMonthlyComparePrice(plan: PlanDefinition): string | null {
+  const monthlyAmount = parsePlanAmount(plan.monthlyPrice)
+  const yearlyAmount = parsePlanAmount(plan.yearlyPrice)
+
+  if (monthlyAmount <= 0 || yearlyAmount <= 0 || yearlyAmount >= monthlyAmount) {
+    return null
+  }
+
+  return `${plan.monthlyPrice}/mo`
+}
+
+export function shouldShowYearlyCompare(
+  plan: PlanDefinition,
+  billing: BillingPeriod,
+): boolean {
+  return billing === 'yearly' && getMonthlyComparePrice(plan) !== null
 }

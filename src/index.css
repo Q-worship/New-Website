@@ -7168,6 +7168,44 @@ body.mobile-nav-open {
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
 }
 
+@media (min-width: 1280px) {
+  .onboarding-overlay__content {
+    max-width: min(84rem, 92vw);
+  }
+
+  .onboarding-modal {
+    min-height: 42rem;
+    grid-template-columns: 1.45fr 1fr;
+  }
+
+  .onboarding-modal__panel--form {
+    padding: 2.5rem 3rem;
+  }
+
+  .onboarding-step__heading--welcome {
+    font-size: clamp(2.25rem, 2.2vw, 3rem);
+    line-height: 1.2;
+  }
+
+  .onboarding-step__heading--welcome .onboarding-step__heading-accent {
+    white-space: nowrap;
+  }
+
+  .onboarding-showcase {
+    padding: 2rem 2.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .onboarding-overlay__content {
+    max-width: min(88rem, 92vw);
+  }
+
+  .onboarding-modal {
+    min-height: 44rem;
+  }
+}
+
 .onboarding-modal__panel {
   position: relative;
   display: flex;
@@ -7581,18 +7619,52 @@ body.mobile-nav-open {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .onboarding-modal {
-    grid-template-columns: 1fr;
-    max-height: calc(100dvh - 2rem);
-    overflow-y: auto;
+  .onboarding-overlay {
+    padding: clamp(1.25rem, 5vw, 2.5rem);
   }
 
-  .onboarding-showcase {
-    order: 2;
+  .onboarding-modal {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    max-height: min(82dvh, 40rem);
+    overflow-y: auto;
   }
 
   .onboarding-modal__panel--form {
     order: 1;
+    padding: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  .onboarding-showcase {
+    order: 2;
+    padding: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .onboarding-progress {
+    margin-bottom: 1.25rem;
+  }
+
+  .onboarding-step__heading--welcome {
+    font-size: clamp(1.5rem, 4.5vw, 2rem);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .onboarding-step__heading--compact {
+    font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+  }
+
+  .onboarding-step__description {
+    margin-bottom: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .onboarding-showcase__title {
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
+  }
+
+  .onboarding-showcase__body {
+    font-size: 0.8125rem;
   }
 
   .onboarding-features {
@@ -7611,6 +7683,19 @@ body.mobile-nav-open {
 
   .dashboard-backdrop__grid {
     grid-template-columns: 1fr;
+  }
+
+  .onboarding-modal {
+    max-height: min(78dvh, 36rem);
+  }
+
+  .onboarding-step__heading--welcome {
+    font-size: clamp(1.375rem, 5.5vw, 1.625rem);
+  }
+
+  .onboarding-showcase__image {
+    max-height: 10rem;
+    object-fit: cover;
   }
 
   .onboarding-step__actions {
@@ -7777,6 +7862,14 @@ body.mobile-nav-open {
   font-size: 1.5rem;
   font-weight: 700;
   color: #fff;
+}
+
+.plan-selection__card-price-compare {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: line-through;
 }
 
 .plan-selection__card-desc {

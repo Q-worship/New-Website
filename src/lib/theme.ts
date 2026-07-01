@@ -396,7 +396,7 @@ export const assetLibraryVideos = [
 export const pricingPlans: PricingPlan[] = [
   {
     name: 'Enterprise',
-    monthlyPrice: '$15.00',
+    monthlyPrice: '$15.99',
     yearlyPrice: '$12.99',
     badge: 'Recommended',
     highlighted: true,
