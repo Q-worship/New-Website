@@ -8074,15 +8074,10 @@ body.mobile-nav-open {
 /* Project selection (final account screen) */
 .project-selection {
   --onboarding-bg: #1d0d46;
-  --onboarding-panel-raised: #261456;
-  --onboarding-panel-border: rgba(255, 255, 255, 0.08);
+  --onboarding-panel-raised: #150830;
+  --onboarding-panel-border: rgba(255, 255, 255, 0.06);
   min-height: 100dvh;
   background: var(--onboarding-bg);
-  background-image: radial-gradient(
-    ellipse at top left,
-    rgba(61, 42, 110, 0.45) 0%,
-    transparent 55%
-  );
   color: #fff;
   position: relative;
 }
@@ -8093,9 +8088,8 @@ body.mobile-nav-open {
   justify-content: space-between;
   gap: 1rem;
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--onboarding-panel-border);
+  background: transparent;
 }
 
 .project-selection__header-left {
@@ -8218,9 +8212,9 @@ body.mobile-nav-open {
 .project-selection__search {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0.5rem;
-  background: rgba(15, 9, 32, 0.8);
+  background: rgba(10, 5, 24, 0.9);
   color: #fff;
   font-family: inherit;
   font-size: 0.875rem;
@@ -8244,9 +8238,9 @@ body.mobile-nav-open {
 .project-selection__list-item {
   width: 100%;
   padding: 0.875rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 0.5rem;
-  background: rgba(15, 9, 32, 0.6);
+  background: rgba(10, 5, 24, 0.75);
   color: inherit;
   font-family: inherit;
   text-align: left;

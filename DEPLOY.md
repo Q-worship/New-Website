@@ -82,6 +82,8 @@ No `CHAT_API_ORIGIN` env var is needed — Worker-to-Worker HTTP fetch on the sa
 
    | `VITE_API_URL` | Build time | **Leave unset or empty** (recommended) |
 
+   **Auth UI preview:** Sign-up/login currently use **mock auth** hardcoded in [`src/lib/authApi.ts`](src/lib/authApi.ts) (`MOCK_AUTH = true`). No `/api/auth/*` calls are made until you set `MOCK_AUTH = false` and redeploy. Do **not** set `VITE_MOCK_AUTH=false` in Cloudflare until the real auth API is wired.
+
 
 
    **Do not set** `VITE_CHAT_API_URL` or `VITE_API_URL` to external URLs unless you intentionally want cross-origin calls.
@@ -108,9 +110,9 @@ Sign-up and email verification call same-origin `/api/auth/signup`, `/api/auth/v
 
 |------|------|-------------------------|
 
-| `https://new-website.vianneycm.workers.dev` | Marketing site (this repo) | Set `AUTH_API_ORIGIN=https://app.qworship.com` on the **site Worker** |
+| `https://new-website.vianneycm.workers.dev` | Marketing site (this repo) | Set `AUTH_API_ORIGIN=https://qworship-auth-api.onrender.com` on the **site Worker** |
 
-| `https://app.qworship.com` | v2 Express API + MongoDB (same as main app) | `RESEND_API_KEY`, `EMAIL_FROM`, `MONGODB_URI`, `JWT_SECRET`, `NODE_ENV=production` |
+| `https://qworship-auth-api.onrender.com` | Auth-only API (deploy via [`render.yaml`](render.yaml)) | `RESEND_API_KEY`, `EMAIL_FROM`, `MONGODB_URI`, `JWT_SECRET`, `NODE_ENV=production` |
 
 
 
@@ -118,7 +120,7 @@ Sign-up and email verification call same-origin `/api/auth/signup`, `/api/auth/v
 
 
 
-1. Deploy the v2 auth API (Express) to a reachable HTTPS origin, e.g. `https://app.qworship.com` (must serve routes under `/api/auth/...`).
+1. Deploy the auth API using [`Qworship-v2/apps/server/AUTH_DEPLOY.md`](Qworship-v2/apps/server/AUTH_DEPLOY.md) (Render blueprint [`render.yaml`](render.yaml) → `https://qworship-auth-api.onrender.com`).
 
 2. Open **Cloudflare Dashboard → Workers & Pages → your site project → Settings → Variables**
 
@@ -212,17 +214,17 @@ Deploy OTP auth from [`Qworship-v2/apps/server`](Qworship-v2/apps/server) to thi
 
 1. Resend: API key + verified sending domain (or sandbox `onboarding@resend.dev` for testing).
 
-2. **app.qworship.com** (v2 API host): Deploy [`Qworship-v2/apps/server`](Qworship-v2/apps/server) with OTP + Resend env vars (see [`Qworship-v2/apps/server/.env.example`](Qworship-v2/apps/server/.env.example)). Smoke test:
+2. **qworship-auth-api** (Render): Deploy [`Qworship-v2/apps/server`](Qworship-v2/apps/server) via [`render.yaml`](render.yaml). Smoke test:
 
    ```bash
-   curl -X POST https://app.qworship.com/api/auth/signup \
+   curl -X POST https://qworship-auth-api.onrender.com/api/auth/signup \
      -H "Content-Type: application/json" \
      -d '{"firstName":"Test","lastName":"User","email":"you@example.com","password":"TestPass123!"}'
    ```
 
    Expected: `{"success":true,"email":"...","nextStep":"/verify"}` and OTP email (when Resend is configured).
 
-3. **new-website** (marketing): `AUTH_API_ORIGIN=https://app.qworship.com` in [`wrangler.jsonc`](wrangler.jsonc) or Cloudflare dashboard; redeploy (`npm run deploy:site`).
+3. **new-website** (marketing): `AUTH_API_ORIGIN=https://qworship-auth-api.onrender.com` in [`wrangler.jsonc`](wrangler.jsonc) or Cloudflare dashboard; redeploy (`npm run deploy:site`).
 
 4. Live test: `https://new-website.vianneycm.workers.dev/signup` → inbox → `/verify`.
 
@@ -448,11 +450,36 @@ Or leave `VITE_CHAT_API_URL` unset — Vite proxies `/api` to port 8787 in dev (
 
 
 
+### 405 Method Not Allowed on `/api/auth/signup`
+
+POST returns **405** when `AUTH_API_ORIGIN` points at a host that does not implement the auth API (e.g. a static SPA on `app.qworship.com`).
+
+**Diagnose:**
+
+```bash
+# Proxied (marketing site)
+curl -i -X POST https://new-website.vianneycm.workers.dev/api/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{"firstName":"T","lastName":"U","email":"t@example.com","password":"TestPass123!"}'
+
+# Direct upstream (replace with your AUTH_API_ORIGIN)
+curl -i -X POST https://qworship-auth-api.onrender.com/api/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{"firstName":"T","lastName":"U","email":"t@example.com","password":"TestPass123!"}'
+```
+
+| Result | Meaning |
+|--------|---------|
+| **503** on marketing site | `AUTH_API_ORIGIN` not set on site Worker |
+| **405** on both URLs | Deploy auth API per [`AUTH_DEPLOY.md`](Qworship-v2/apps/server/AUTH_DEPLOY.md) and update `AUTH_API_ORIGIN` |
+| **405** only on marketing site | Redeploy site Worker; ensure `run_worker_first` includes `/api/auth/*` in [`wrangler.jsonc`](wrangler.jsonc) |
+| **201** on direct URL, **405** on marketing site | `AUTH_API_ORIGIN` wrong or stale deploy |
+
 ### 405 Method Not Allowed on `/api/chat/faq-resolve` or `/api/chat/sessions`
 
 POST requests return **405** when the static asset server handles `/api/chat/*` instead of the site Worker. Fix:
 
-1. Ensure [`wrangler.jsonc`](wrangler.jsonc) has `main`, `ASSETS` binding, `run_worker_first: ["/api/chat/*"]`, and the `CHAT_API` service binding.
+1. Ensure [`wrangler.jsonc`](wrangler.jsonc) has `main`, `ASSETS` binding, `run_worker_first: ["/api/chat/*", "/api/auth/*"]`, and the `CHAT_API` service binding.
 2. **Deploy** the chat worker first, then the site (`npm run deploy:site`).
 
 Verify the proxy on your site URL (not the chat worker URL):
@@ -582,6 +609,28 @@ This means the chat API is unreachable. Common causes:
 
 
 4. **Pages not redeployed** — after changing env vars, retry the Pages deployment.
+
+
+
+### `ERR_CONNECTION_RESET` on `/api/chat/sessions/{id}/events`
+
+Live agent replies use **Server-Sent Events** (SSE). The site Worker proxies the stream to the chat Worker via a service binding. If the stream is re-wrapped, mobile networks may reset the connection.
+
+**Fixes (in this repo):**
+
+1. Site Worker passes through `text/event-stream` responses without re-wrapping ([`workers/site/src/index.ts`](workers/site/src/index.ts)).
+2. Client falls back to polling `GET /api/chat/sessions/{id}/messages` when SSE fails ([`src/lib/whatsappChat.ts`](src/lib/whatsappChat.ts)).
+3. Redeploy: `npm run deploy:production` (chat worker, then site).
+4. Leave `VITE_CHAT_API_URL` **unset** in Cloudflare build env (same-origin proxy).
+
+**Verify SSE:**
+
+```bash
+# Create a session first, then:
+curl -N "https://new-website.vianneycm.workers.dev/api/chat/sessions/SESSION_ID/events"
+```
+
+Expected: `data: {"id":"...","role":"visitor",...}` lines (not HTML, not immediate disconnect).
 
 
 

@@ -12,15 +12,65 @@ const MOCK_DELAY_MS = 400
 
 
 
-/** Default ON — set VITE_MOCK_AUTH=false at build time to restore real API */
+/** UI preview mode — bypasses real /api/auth calls. Set to false when auth API is live. */
 
-export const MOCK_AUTH = import.meta.env.VITE_MOCK_AUTH !== 'false'
+export const MOCK_AUTH = true
 
 
 
 export const MOCK_SIGNUP_USER_KEY = 'mock_signup_user'
 
 export const ONBOARDING_COMPLETE_KEY = 'onboarding_complete'
+
+
+
+function normalizeEmail(email: string): string {
+
+  return email.trim().toLowerCase()
+
+}
+
+
+
+export function onboardingCompleteKey(email: string): string {
+
+  return `${ONBOARDING_COMPLETE_KEY}:${normalizeEmail(email)}`
+
+}
+
+
+
+export function isOnboardingComplete(email?: string | null): boolean {
+
+  if (email) {
+
+    return sessionStorage.getItem(onboardingCompleteKey(email)) === 'true'
+
+  }
+
+  return sessionStorage.getItem(ONBOARDING_COMPLETE_KEY) === 'true'
+
+}
+
+
+
+export function setOnboardingComplete(email: string): void {
+
+  sessionStorage.setItem(onboardingCompleteKey(email), 'true')
+
+  sessionStorage.removeItem(ONBOARDING_COMPLETE_KEY)
+
+}
+
+
+
+export function resetOnboardingForUser(email: string): void {
+
+  sessionStorage.removeItem(onboardingCompleteKey(email))
+
+  sessionStorage.removeItem(ONBOARDING_COMPLETE_KEY)
+
+}
 
 
 
@@ -406,7 +456,9 @@ export function getStoredAuthUser(): AuthUser | null {
 
 export function getPostAuthPath(): string {
 
-  if (sessionStorage.getItem(ONBOARDING_COMPLETE_KEY) === 'true') {
+  const user = getStoredAuthUser()
+
+  if (isOnboardingComplete(user?.email)) {
 
     return '/account'
 
