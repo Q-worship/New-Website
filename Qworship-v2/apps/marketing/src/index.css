@@ -6966,7 +6966,7 @@ body.mobile-nav-open {
 .onboarding-page {
   --onboarding-bg: #1d0d46;
   --onboarding-panel: #27252f;
-  --onboarding-panel-raised: #261456;
+  --onboarding-panel-raised: #27252f;
   --onboarding-panel-border: rgba(255, 255, 255, 0.08);
   --onboarding-scrim: rgba(0, 0, 0, 0.72);
   --onboarding-showcase: #1d0d46;
@@ -7341,6 +7341,15 @@ body.mobile-nav-open {
   background: #7c3aed;
 }
 
+.onboarding-step__cta:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.onboarding-step__cta:disabled:hover {
+  background: #8b5cf6;
+}
+
 .onboarding-step__actions {
   display: flex;
   align-items: center;
@@ -7439,6 +7448,13 @@ body.mobile-nav-open {
   color: rgba(255, 255, 255, 0.4);
 }
 
+.onboarding-field__error {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #f87171;
+}
+
 /* Custom dropdown */
 .onboarding-dropdown {
   width: 100%;
@@ -7505,6 +7521,80 @@ body.mobile-nav-open {
 .onboarding-dropdown__option:hover,
 .onboarding-dropdown__option--active {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.onboarding-dropdown__option--highlighted {
+  background: rgba(139, 92, 246, 0.2);
+}
+
+.onboarding-dropdown__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  background: var(--onboarding-panel-raised);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.onboarding-dropdown__search {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.onboarding-dropdown__search::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.onboarding-dropdown__search:focus {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.onboarding-dropdown__menu--scrollable {
+  position: static;
+  max-height: 16rem;
+  overflow-y: auto;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+.onboarding-dropdown__menu--scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.onboarding-dropdown__menu--scrollable::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.onboarding-dropdown__menu--scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.onboarding-dropdown__separator {
+  height: 1px;
+  margin: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.onboarding-dropdown__empty {
+  padding: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.875rem;
+  text-align: center;
 }
 
 /* Feature checkboxes */
@@ -7719,7 +7809,7 @@ body.mobile-nav-open {
   max-height: calc(100dvh - 2rem);
   overflow-y: auto;
   border-radius: 1.5rem;
-  background: var(--onboarding-bg);
+  background: #27252f;
   border: 1px solid var(--onboarding-panel-border);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
 }
@@ -7818,7 +7908,7 @@ body.mobile-nav-open {
   padding: 1.25rem;
   border-radius: 0.875rem;
   border: 1px solid var(--onboarding-panel-border);
-  background: var(--onboarding-panel-raised);
+  background: #27252f;
   min-height: 18rem;
 }
 
@@ -7932,7 +8022,7 @@ body.mobile-nav-open {
 
 .plan-selection__card-btn--ghost {
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: transparent;
+  background: #27252f;
   color: #fff;
 }
 
@@ -7960,7 +8050,7 @@ body.mobile-nav-open {
 
 .plan-selection__footer-btn--outline {
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: transparent;
+  background: #27252f;
   color: #fff;
 }
 
@@ -8028,7 +8118,7 @@ body.mobile-nav-open {
   padding: 1.25rem;
   border-radius: 0.875rem;
   border: 1px solid var(--onboarding-panel-border);
-  background: var(--onboarding-panel-raised);
+  background: #27252f;
 }
 
 .trial-welcome__card--features {
@@ -8167,7 +8257,7 @@ body.mobile-nav-open {
 /* Project selection (final account screen) */
 .project-selection {
   --onboarding-bg: #1d0d46;
-  --onboarding-panel-raised: #150830;
+  --onboarding-panel-raised: #27252f;
   --onboarding-panel-border: rgba(255, 255, 255, 0.06);
   min-height: 100dvh;
   background: var(--onboarding-bg);
@@ -8231,7 +8321,7 @@ body.mobile-nav-open {
   padding: 1.5rem;
   border-radius: 1rem;
   border: 1px solid var(--onboarding-panel-border);
-  background: var(--onboarding-panel-raised);
+  background: #27252f;
   backdrop-filter: blur(16px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
 }

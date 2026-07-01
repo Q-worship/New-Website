@@ -6966,7 +6966,7 @@ body.mobile-nav-open {
 .onboarding-page {
   --onboarding-bg: #1d0d46;
   --onboarding-panel: #27252f;
-  --onboarding-panel-raised: #261456;
+  --onboarding-panel-raised: #27252f;
   --onboarding-panel-border: rgba(255, 255, 255, 0.08);
   --onboarding-scrim: rgba(0, 0, 0, 0.72);
   --onboarding-showcase: #1d0d46;
@@ -7719,7 +7719,7 @@ body.mobile-nav-open {
   max-height: calc(100dvh - 2rem);
   overflow-y: auto;
   border-radius: 1.5rem;
-  background: var(--onboarding-bg);
+  background: #27252f;
   border: 1px solid var(--onboarding-panel-border);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
 }
@@ -7818,7 +7818,7 @@ body.mobile-nav-open {
   padding: 1.25rem;
   border-radius: 0.875rem;
   border: 1px solid var(--onboarding-panel-border);
-  background: var(--onboarding-panel-raised);
+  background: #27252f;
   min-height: 18rem;
 }
 
@@ -7932,7 +7932,7 @@ body.mobile-nav-open {
 
 .plan-selection__card-btn--ghost {
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: transparent;
+  background: #27252f;
   color: #fff;
 }
 
@@ -7960,7 +7960,7 @@ body.mobile-nav-open {
 
 .plan-selection__footer-btn--outline {
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: transparent;
+  background: #27252f;
   color: #fff;
 }
 
@@ -8028,7 +8028,7 @@ body.mobile-nav-open {
   padding: 1.25rem;
   border-radius: 0.875rem;
   border: 1px solid var(--onboarding-panel-border);
-  background: var(--onboarding-panel-raised);
+  background: #27252f;
 }
 
 .trial-welcome__card--features {
@@ -8167,7 +8167,7 @@ body.mobile-nav-open {
 /* Project selection (final account screen) */
 .project-selection {
   --onboarding-bg: #1d0d46;
-  --onboarding-panel-raised: #150830;
+  --onboarding-panel-raised: #27252f;
   --onboarding-panel-border: rgba(255, 255, 255, 0.06);
   min-height: 100dvh;
   background: var(--onboarding-bg);
@@ -8231,7 +8231,7 @@ body.mobile-nav-open {
   padding: 1.5rem;
   border-radius: 1rem;
   border: 1px solid var(--onboarding-panel-border);
-  background: var(--onboarding-panel-raised);
+  background: #27252f;
   backdrop-filter: blur(16px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
 }
