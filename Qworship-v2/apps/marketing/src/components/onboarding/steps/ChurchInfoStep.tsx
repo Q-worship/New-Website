@@ -1,93 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { COUNTRY_OPTIONS } from '@/lib/countries'
+import { OnboardingDropdown } from '../OnboardingDropdown'
+import { OnboardingSearchableDropdown } from '../OnboardingSearchableDropdown'
 import { OnboardingProgress } from '../OnboardingProgress'
 
 const DENOMINATION_OPTIONS = ['Catholic', 'Baptist', 'Pentecostal', 'Enter yours'] as const
-
-const COUNTRY_OPTIONS = [
-  'United Kingdom',
-  'United States',
-  'Canada',
-  'Australia',
-  'Nigeria',
-  'Ghana',
-  'South Africa',
-  'Kenya',
-] as const
-
-interface OnboardingDropdownProps {
-  id: string
-  label: string
-  value: string
-  placeholder: string
-  options: readonly string[]
-  onChange: (value: string) => void
-}
-
-function OnboardingDropdown({
-  id,
-  label,
-  value,
-  placeholder,
-  options,
-  onChange,
-}: OnboardingDropdownProps) {
-  const [open, setOpen] = useState(false)
-  const rootRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) {
-        setOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  return (
-    <div className="onboarding-field" ref={rootRef}>
-      <label className="onboarding-field__label" htmlFor={id}>
-        {label}
-      </label>
-      <button
-        id={id}
-        type="button"
-        className={`onboarding-dropdown${open ? ' onboarding-dropdown--open' : ''}`}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        onClick={() => setOpen((current) => !current)}
-      >
-        <span className={value ? '' : 'onboarding-dropdown__placeholder'}>
-          {value || placeholder}
-        </span>
-        <span className="onboarding-dropdown__chevron" aria-hidden="true" />
-      </button>
-      {open ? (
-        <ul className="onboarding-dropdown__menu" role="listbox">
-          {options.map((option) => (
-            <li key={option}>
-              <button
-                type="button"
-                role="option"
-                aria-selected={value === option}
-                className={`onboarding-dropdown__option${
-                  value === option ? ' onboarding-dropdown__option--active' : ''
-                }`}
-                onClick={() => {
-                  onChange(option)
-                  setOpen(false)
-                }}
-              >
-                {option}
-              </button>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-    </div>
-  )
-}
+const PRESET_DENOMINATIONS = ['Catholic', 'Baptist', 'Pentecostal'] as const
+const CUSTOM_DENOMINATION = 'Enter yours'
 
 export interface ChurchInfoData {
   churchName: string
@@ -104,9 +23,67 @@ interface ChurchInfoStepProps {
   onBack: () => void
 }
 
+function isPresetDenomination(value: string): value is (typeof PRESET_DENOMINATIONS)[number] {
+  return (PRESET_DENOMINATIONS as readonly string[]).includes(value)
+}
+
+function isCustomDenominationValue(value: string): boolean {
+  return value !== '' && !isPresetDenomination(value) && value !== CUSTOM_DENOMINATION
+}
+
 export function ChurchInfoStep({ data, onChange, onNext, onBack }: ChurchInfoStepProps) {
+  const [denominationIsCustom, setDenominationIsCustom] = useState(
+    () => isCustomDenominationValue(data.denomination),
+  )
+  const [denominationError, setDenominationError] = useState('')
+
   const updateField = <K extends keyof ChurchInfoData>(field: K, value: ChurchInfoData[K]) => {
     onChange({ ...data, [field]: value })
+  }
+
+  const handleDenominationChange = (value: string) => {
+    if (value === CUSTOM_DENOMINATION) {
+      setDenominationIsCustom(true)
+      updateField('denomination', '')
+      setDenominationError('')
+      return
+    }
+
+    setDenominationIsCustom(false)
+    updateField('denomination', value)
+    setDenominationError('')
+  }
+
+  const handleCustomDenominationChange = (value: string) => {
+    updateField('denomination', value)
+    if (value.trim()) {
+      setDenominationError('')
+    }
+  }
+
+  const denominationDisplayValue = denominationIsCustom
+    ? data.denomination.trim() || CUSTOM_DENOMINATION
+    : data.denomination
+
+  const denominationDropdownValue = denominationIsCustom ? CUSTOM_DENOMINATION : data.denomination
+
+  const isFormValid =
+    data.churchName.trim() !== '' &&
+    data.country.trim() !== '' &&
+    data.city.trim() !== '' &&
+    (denominationIsCustom ? data.denomination.trim() !== '' : data.denomination !== '')
+
+  const handleContinue = () => {
+    if (denominationIsCustom && !data.denomination.trim()) {
+      setDenominationError('Please enter your denomination.')
+      return
+    }
+
+    if (!isFormValid) {
+      return
+    }
+
+    onNext()
   }
 
   return (
@@ -145,13 +122,33 @@ export function ChurchInfoStep({ data, onChange, onNext, onBack }: ChurchInfoSte
           <OnboardingDropdown
             id="denomination"
             label="Denomination"
-            value={data.denomination}
+            value={denominationDropdownValue}
+            displayValue={denominationDisplayValue}
             placeholder="Please select a denomination for your church, e.g Baptist"
             options={DENOMINATION_OPTIONS}
-            onChange={(value) => updateField('denomination', value)}
+            onChange={handleDenominationChange}
           />
 
-          <OnboardingDropdown
+          {denominationIsCustom ? (
+            <div className="onboarding-field">
+              <label className="onboarding-field__label" htmlFor="custom-denomination">
+                Your denomination
+              </label>
+              <input
+                id="custom-denomination"
+                type="text"
+                className="onboarding-field__input onboarding-field__input--filled"
+                placeholder="Enter your denomination"
+                value={data.denomination}
+                onChange={(event) => handleCustomDenominationChange(event.target.value)}
+              />
+              {denominationError ? (
+                <p className="onboarding-field__error">{denominationError}</p>
+              ) : null}
+            </div>
+          ) : null}
+
+          <OnboardingSearchableDropdown
             id="country"
             label="Please enter your church address"
             value={data.country}
@@ -193,7 +190,12 @@ export function ChurchInfoStep({ data, onChange, onNext, onBack }: ChurchInfoSte
       </div>
 
       <div className="onboarding-step__actions">
-        <button type="button" className="onboarding-step__cta" onClick={onNext}>
+        <button
+          type="button"
+          className="onboarding-step__cta"
+          onClick={handleContinue}
+          disabled={!isFormValid}
+        >
           Continue to preferences
         </button>
         <button type="button" className="onboarding-step__link" onClick={onBack}>
