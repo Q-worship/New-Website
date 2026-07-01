@@ -6,10 +6,19 @@ import {
   notifyWelcome,
   notifyPasswordChange,
 } from "../notifications/notification.service.js";
+import {
+  generateVerificationCode,
+  sendVerificationCode,
+  storeVerificationCode,
+  storePendingSignup,
+  getPendingSignup,
+  clearPendingSignup,
+  verifyStoredCode,
+} from "./verification.service.js";
 
 const JWT_SECRET = process.env.JWT_SECRET || "qworship-super-secret-key-123!";
 
-// Normal Sign Up Handler
+// Sign Up — stores pending signup and sends verification code (no User row until OTP verified)
 export const signUp = async (req: Request, res: Response) => {
   try {
     const {
@@ -24,13 +33,23 @@ export const signUp = async (req: Request, res: Response) => {
       organizationName,
       accountType,
       isActive,
-      emailVerified,
       role,
     } = req.body;
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required",
+      });
+    }
+
+    const normalizedEmail = String(email).trim().toLowerCase();
+
+    const existingVerified = await User.findOne({
+      email: normalizedEmail,
+      emailVerified: true,
+    });
+    if (existingVerified) {
       return res.status(400).json({
         success: false,
         message: "Email already in use",
@@ -38,38 +57,107 @@ export const signUp = async (req: Request, res: Response) => {
       });
     }
 
-    // Hash Password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create User
-    const newUser = await User.create({
-      username: username || email, // Fallback if missing
-      email,
-      password: hashedPassword,
+    storePendingSignup(normalizedEmail, {
       firstName,
       lastName,
+      hashedPassword,
+      username: username || normalizedEmail,
       countryCode,
       phoneNumber,
       agreeToMarketing,
       organizationName,
       accountType: accountType || "free",
       isActive: isActive !== undefined ? isActive : true,
-      emailVerified: emailVerified || false,
       role: role || "user",
     });
 
-    // Generate JWT
-    const token = jwt.sign(
-      { id: newUser._id, role: newUser.role },
-      JWT_SECRET,
-      { expiresIn: "7d" },
-    );
-
-    // Fire-and-forget: Welcome notification
-    notifyWelcome(newUser._id, newUser.firstName).catch(() => {});
+    const code = generateVerificationCode();
+    storeVerificationCode(normalizedEmail, code);
+    sendVerificationCode(normalizedEmail, code);
 
     res.status(201).json({
+      success: true,
+      email: normalizedEmail,
+      message: "Verification code sent to your email.",
+      nextStep: "/verify",
+    });
+  } catch (error) {
+    console.error("Sign-up error:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error during sign up" });
+  }
+};
+
+export const verifyEmail = async (req: Request, res: Response) => {
+  try {
+    const { email, code } = req.body;
+
+    if (!email || !code) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and verification code are required",
+      });
+    }
+
+    const normalizedEmail = String(email).trim().toLowerCase();
+    const pending = getPendingSignup(normalizedEmail);
+
+    if (!pending) {
+      return res.status(404).json({
+        success: false,
+        message: "No pending sign-up found for this email. Please sign up again.",
+      });
+    }
+
+    const existingVerified = await User.findOne({
+      email: normalizedEmail,
+      emailVerified: true,
+    });
+    if (existingVerified) {
+      clearPendingSignup(normalizedEmail);
+      return res.status(400).json({
+        success: false,
+        message: "Email is already registered",
+      });
+    }
+
+    const isValid = verifyStoredCode(normalizedEmail, String(code));
+    if (!isValid) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired verification code",
+      });
+    }
+
+    const newUser = await User.create({
+      username: pending.username || normalizedEmail,
+      email: normalizedEmail,
+      password: pending.hashedPassword,
+      firstName: pending.firstName,
+      lastName: pending.lastName,
+      countryCode: pending.countryCode,
+      phoneNumber: pending.phoneNumber,
+      agreeToMarketing: pending.agreeToMarketing,
+      organizationName: pending.organizationName,
+      accountType: pending.accountType || "free",
+      isActive: pending.isActive !== undefined ? pending.isActive : true,
+      emailVerified: true,
+      role: pending.role || "user",
+    });
+
+    clearPendingSignup(normalizedEmail);
+
+    const token = jwt.sign({ id: newUser._id, role: newUser.role }, JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    notifyWelcome(newUser._id, newUser.firstName).catch(() => {});
+
+    res.status(200).json({
       success: true,
       token,
       user: {
@@ -83,10 +171,61 @@ export const signUp = async (req: Request, res: Response) => {
       nextStep: "/dashboard",
     });
   } catch (error) {
-    console.error("Sign-up error:", error);
-    res
-      .status(500)
-      .json({ success: false, message: "Server error during sign up" });
+    console.error("Verify email error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error during email verification",
+    });
+  }
+};
+
+export const resendVerification = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is required",
+      });
+    }
+
+    const normalizedEmail = String(email).trim().toLowerCase();
+    const pending = getPendingSignup(normalizedEmail);
+
+    if (!pending) {
+      return res.status(404).json({
+        success: false,
+        message: "No pending sign-up found for this email. Please sign up again.",
+      });
+    }
+
+    const existingVerified = await User.findOne({
+      email: normalizedEmail,
+      emailVerified: true,
+    });
+    if (existingVerified) {
+      clearPendingSignup(normalizedEmail);
+      return res.status(400).json({
+        success: false,
+        message: "Email is already registered",
+      });
+    }
+
+    const code = generateVerificationCode();
+    storeVerificationCode(normalizedEmail, code);
+    sendVerificationCode(normalizedEmail, code);
+
+    res.status(200).json({
+      success: true,
+      message: "Verification code resent.",
+    });
+  } catch (error) {
+    console.error("Resend verification error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error resending verification code",
+    });
   }
 };
 

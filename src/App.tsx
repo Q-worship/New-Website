@@ -11,12 +11,16 @@ import { FAQs } from '@/pages/FAQs'
 import { Downloads } from '@/pages/Downloads'
 import { JobDetailPage } from '@/pages/JobDetailPage'
 import { Login } from '@/pages/Login'
+import { SignUp } from '@/pages/SignUp'
+import { Verify } from '@/pages/Verify'
 
 export function App() {
   return (
     <>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/verify" component={Verify} />
         <Route>
           <Layout>
             <Switch>

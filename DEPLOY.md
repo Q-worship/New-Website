@@ -38,6 +38,8 @@ This repo has **two** Cloudflare deployments:
 
 - WhatsApp webhooks
 
+- Sign-up / email verification (`/api/auth/*`) — requires v2 auth API + `AUTH_API_ORIGIN` on the site Worker
+
 
 
 ---
@@ -78,13 +80,51 @@ No `CHAT_API_ORIGIN` env var is needed — Worker-to-Worker HTTP fetch on the sa
 
    | `VITE_CHAT_API_URL` | Build time | **Leave unset or empty** (recommended) |
 
+   | `VITE_API_URL` | Build time | **Leave unset or empty** (recommended) |
 
 
-   **Do not set** `VITE_CHAT_API_URL` to the worker URL unless you intentionally want cross-origin calls.
+
+   **Do not set** `VITE_CHAT_API_URL` or `VITE_API_URL` to external URLs unless you intentionally want cross-origin calls.
 
 
 
 4. **Deploy the chat worker first** (`npm run deploy:chat-api`), then deploy the site (`npm run deploy:site` or push to GitHub). The service binding requires `qworship-whatsapp-chat` to exist before `new-website` deploys.
+
+
+
+### Auth API proxy (`/api/auth/*`)
+
+
+
+Sign-up and email verification call same-origin `/api/auth/signup`, `/api/auth/verify-email`, and `/api/auth/resend-verification`. The site Worker ([`workers/site/src/index.ts`](workers/site/src/index.ts)) forwards those requests to your deployed **Qworship v2 API** using the runtime variable `AUTH_API_ORIGIN`.
+
+
+
+1. Deploy the v2 auth API (Express) to a reachable HTTPS origin, e.g. `https://api.qworship.com` (must serve routes under `/api/auth/...`).
+
+2. Open **Cloudflare Dashboard → Workers & Pages → your site project → Settings → Variables**
+
+3. Add a **Worker** (runtime) variable:
+
+
+
+   | Variable | When | Value |
+
+   |----------|------|--------|
+
+   | `AUTH_API_ORIGIN` | Runtime | Your v2 API origin, e.g. `https://api.qworship.com` (no trailing slash) |
+
+
+
+4. Redeploy the site Worker after setting `AUTH_API_ORIGIN`.
+
+
+
+**Local dev:** run the v2 server on port 5000 and `npm run dev`. Vite proxies `/api/auth` → `http://localhost:5000`. OTP codes are logged in the v2 server console (`[dev] Verification code for ...`).
+
+
+
+If `AUTH_API_ORIGIN` is missing in production, sign-up returns HTTP 503 with a JSON error instead of a browser "Failed to fetch".
 
 
 

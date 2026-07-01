@@ -17,7 +17,7 @@ export function LoginForm() {
       <h1 className="login-form__title">Sign in</h1>
       <p className="login-form__subtitle">
         New to Q-worship?{' '}
-        <Link href="#" className="login-form__link">
+        <Link href="/signup" className="login-form__link">
           Sign up
         </Link>
       </p>

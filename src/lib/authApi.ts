@@ -1,0 +1,144 @@
+const AUTH_TOKEN_KEY = 'authToken'
+const FETCH_TIMEOUT_MS = 15000
+
+const NETWORK_ERROR_MESSAGE = 'Unable to reach the server. Please try again.'
+
+export interface AuthUser {
+  id: string
+  email: string
+  firstName?: string
+  lastName?: string
+  role?: string
+  organizationName?: string
+}
+
+export interface SignUpPayload {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
+
+export interface SignUpResponse {
+  success: boolean
+  email?: string
+  message?: string
+  errorType?: string
+}
+
+export interface VerifyEmailPayload {
+  email: string
+  code: string
+}
+
+export interface VerifyEmailResponse {
+  success: boolean
+  token?: string
+  user?: AuthUser
+  message?: string
+}
+
+export interface ResendVerificationResponse {
+  success: boolean
+  message?: string
+}
+
+export function getAuthApiUrl(): string {
+  const raw = import.meta.env.VITE_API_URL?.trim().replace(/\/$/, '') ?? ''
+  return raw || '/api'
+}
+
+function authPath(path: string): string {
+  return `${getAuthApiUrl()}${path}`
+}
+
+function toAuthError(error: unknown): Error {
+  if (error instanceof DOMException && error.name === 'AbortError') {
+    return new Error(NETWORK_ERROR_MESSAGE)
+  }
+  if (error instanceof TypeError) {
+    return new Error(NETWORK_ERROR_MESSAGE)
+  }
+  if (error instanceof Error) {
+    return error
+  }
+  return new Error(NETWORK_ERROR_MESSAGE)
+}
+
+async function authFetch<T>(
+  path: string,
+  init: RequestInit,
+): Promise<T> {
+  const controller = new AbortController()
+  const timeoutId = window.setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
+
+  try {
+    const response = await fetch(authPath(path), {
+      ...init,
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        ...init.headers,
+      },
+    })
+
+    let data: T & { message?: string }
+    try {
+      data = (await response.json()) as T & { message?: string }
+    } catch {
+      if (!response.ok) {
+        throw new Error(`Request failed (${response.status})`)
+      }
+      throw new Error(NETWORK_ERROR_MESSAGE)
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        (data as { message?: string }).message ?? `Request failed (${response.status})`,
+      )
+    }
+
+    return data
+  } catch (error) {
+    throw toAuthError(error)
+  } finally {
+    window.clearTimeout(timeoutId)
+  }
+}
+
+export function getAuthToken(): string | null {
+  return localStorage.getItem(AUTH_TOKEN_KEY)
+}
+
+export function setAuthToken(token: string | null): void {
+  if (token) {
+    localStorage.setItem(AUTH_TOKEN_KEY, token)
+  } else {
+    localStorage.removeItem(AUTH_TOKEN_KEY)
+  }
+}
+
+export async function signUp(payload: SignUpPayload): Promise<SignUpResponse> {
+  return authFetch<SignUpResponse>('/auth/signup', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
+export async function verifyEmail(
+  payload: VerifyEmailPayload,
+): Promise<VerifyEmailResponse> {
+  return authFetch<VerifyEmailResponse>('/auth/verify-email', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
+export async function resendVerification(
+  email: string,
+): Promise<ResendVerificationResponse> {
+  return authFetch<ResendVerificationResponse>('/auth/resend-verification', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  })
+}

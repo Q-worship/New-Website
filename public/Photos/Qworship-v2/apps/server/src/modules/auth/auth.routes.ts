@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { signIn, signUp, updateProfile, updatePassword } from './auth.controller.js';
+import { signIn, signUp, updateProfile, updatePassword, verifyEmail, resendVerification } from './auth.controller.js';
 
 export const authRouter = Router();
 
@@ -10,6 +10,8 @@ authRouter.post('/login', signIn);
 // Registration flows
 authRouter.post('/signup', signUp);
 authRouter.post('/register', signUp);
+authRouter.post('/verify-email', verifyEmail);
+authRouter.post('/resend-verification', resendVerification);
 
 authRouter.post('/logout', (req, res) => {
   res.json({ message: 'Logged out successfully' });

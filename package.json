@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:chat-api": "wrangler dev --config workers/whatsapp-chat/wrangler.toml --port 8787",
+    "dev:auth-api": "node scripts/dev-auth-server.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "setup:chat-api": "node scripts/setup-chat-worker.mjs",

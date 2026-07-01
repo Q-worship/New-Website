@@ -1,12 +1,12 @@
 import { AuthPageShell } from '@/components/auth/AuthPageShell'
 import { AuthShowcase } from '@/components/auth/AuthShowcase'
-import { LoginForm } from '@/components/auth/LoginForm'
+import { SignUpForm } from '@/components/auth/SignUpForm'
 
-export function Login() {
+export function SignUp() {
   return (
     <AuthPageShell>
-      <LoginForm />
-      <AuthShowcase variant="plain" ariaLabel="Login feature showcase" />
+      <SignUpForm />
+      <AuthShowcase variant="card" ariaLabel="Sign up feature showcase" />
     </AuthPageShell>
   )
 }

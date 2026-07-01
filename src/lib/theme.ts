@@ -1919,12 +1919,13 @@ export const aboutFaqTeaserItems: FaqItem[] = [
   faqItems.find((item) => item.id === 'operating-systems')!,
 ]
 
-export const loginShowcaseSlides = [
+export const authShowcaseSlides = [
   {
     image: '/Photos/login/Group%201171276018.png',
     alt: 'Hands-free Bible voice search with scripture on screen',
     title: 'Q-worship Hands free Bible',
     body: 'Your church service, Powered by voice.',
+    badge: 'AI Features',
   },
   {
     image: '/Photos/login/Group%201171276012.png',
@@ -1938,7 +1939,16 @@ export const loginShowcaseSlides = [
     title: 'Announcements',
     body: 'Keep your church in the loop — right inside your service.',
   },
+  {
+    image: '/Photos/login/Group%201171276012.png',
+    alt: 'Team collaboration with live production tools',
+    title: 'Built For the Entire Team',
+    body: 'Built with tools to support the entire team',
+  },
 ] as const
+
+/** @deprecated Use authShowcaseSlides */
+export const loginShowcaseSlides = authShowcaseSlides
 
 export const images = {
   logo: '/Photos/logo.png',

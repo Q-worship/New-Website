@@ -1,11 +1,12 @@
 interface Env {
   ASSETS: Fetcher
   CHAT_API: Fetcher
+  AUTH_API_ORIGIN?: string
 }
 
 const corsHeaders: Record<string, string> = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   'Access-Control-Max-Age': '86400',
 }
@@ -28,6 +29,43 @@ async function proxyChatApi(request: Request, env: Env): Promise<Response> {
   }
 
   const response = await env.CHAT_API.fetch(request)
+  return withCors(response)
+}
+
+async function proxyAuthApi(request: Request, env: Env): Promise<Response> {
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders })
+  }
+
+  const origin = env.AUTH_API_ORIGIN?.trim().replace(/\/$/, '')
+  if (!origin) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: 'Auth API is not configured. Set AUTH_API_ORIGIN on the site Worker.',
+      }),
+      {
+        status: 503,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders },
+      },
+    )
+  }
+
+  const url = new URL(request.url)
+  const targetUrl = new URL(`${url.pathname}${url.search}`, origin)
+
+  const headers = new Headers(request.headers)
+  headers.delete('host')
+
+  const response = await fetch(
+    new Request(targetUrl, {
+      method: request.method,
+      headers,
+      body: request.method !== 'GET' && request.method !== 'HEAD' ? request.body : undefined,
+      redirect: 'manual',
+    }),
+  )
+
   return withCors(response)
 }
 
@@ -59,6 +97,10 @@ export default {
 
     if (url.pathname.startsWith('/api/chat')) {
       return proxyChatApi(request, env)
+    }
+
+    if (url.pathname.startsWith('/api/auth')) {
+      return proxyAuthApi(request, env)
     }
 
     return fetchAsset(request, env)
