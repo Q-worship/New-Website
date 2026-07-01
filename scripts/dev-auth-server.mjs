@@ -1,7 +1,7 @@
 /**
- * Local auth API for website sign-up / verify flow (port 5000).
- * Mirrors v2 /api/auth/signup, verify-email, resend-verification.
- * OTP codes are logged to the console in development.
+ * Local in-memory auth API fallback (port 5000).
+ * Prefer `npm run dev:auth-api` (real Qworship v2 + MongoDB).
+ * Use this only when MongoDB is unavailable: `npm run dev:auth-api:mock`
  */
 import http from 'node:http'
 import crypto from 'node:crypto'

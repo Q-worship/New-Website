@@ -36,6 +36,7 @@ export interface VerifyEmailResponse {
   token?: string
   user?: AuthUser
   message?: string
+  nextStep?: string
 }
 
 export interface ResendVerificationResponse {
@@ -116,6 +117,16 @@ export function setAuthToken(token: string | null): void {
   } else {
     localStorage.removeItem(AUTH_TOKEN_KEY)
   }
+}
+
+/** Persist v2 app session keys for future handoff to the main app. */
+export function persistAuthSession(token: string, user?: AuthUser): void {
+  setAuthToken(token)
+  if (!user) return
+
+  const userId = String(user.id)
+  sessionStorage.setItem('qworship_user_id', userId)
+  sessionStorage.setItem('qworship_user_data', JSON.stringify(user))
 }
 
 export async function signUp(payload: SignUpPayload): Promise<SignUpResponse> {

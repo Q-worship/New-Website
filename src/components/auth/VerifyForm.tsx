@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ClipboardEvent, type FormEvent, type KeyboardEvent } from 'react'
 import { useLocation } from 'wouter'
-import { resendVerification, setAuthToken, verifyEmail } from '@/lib/authApi'
+import { persistAuthSession, resendVerification, verifyEmail } from '@/lib/authApi'
 
 const OTP_LENGTH = 6
 
@@ -102,8 +102,9 @@ export function VerifyForm() {
         return
       }
 
-      setAuthToken(response.token)
+      persistAuthSession(response.token, response.user)
       sessionStorage.removeItem('verifyEmail')
+      // Marketing site stays on home; v2 may suggest response.nextStep (e.g. /dashboard)
       setLocation('/')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Verification failed. Please try again.')

@@ -62,7 +62,7 @@ export function AuthShowcase({
         >
           {slides.map((slide, index) => (
             <img
-              key={slide.image}
+              key={slide.id}
               src={slide.image}
               alt={slide.alt}
               className={`login-showcase__slide${
@@ -83,7 +83,7 @@ export function AuthShowcase({
       <div className="login-showcase__dots" role="tablist" aria-label={ariaLabel}>
         {slides.map((slide, index) => (
           <button
-            key={slide.image}
+            key={slide.id}
             type="button"
             role="tab"
             aria-selected={index === activeIndex}

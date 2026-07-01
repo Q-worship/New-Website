@@ -1921,6 +1921,7 @@ export const aboutFaqTeaserItems: FaqItem[] = [
 
 export const authShowcaseSlides = [
   {
+    id: 'hands-free-bible',
     image: '/Photos/login/Group%201171276018.png',
     alt: 'Hands-free Bible voice search with scripture on screen',
     title: 'Q-worship Hands free Bible',
@@ -1928,18 +1929,21 @@ export const authShowcaseSlides = [
     badge: 'AI Features',
   },
   {
+    id: 'on-screen-bible',
     image: '/Photos/login/Group%201171276012.png',
     alt: 'On-screen Bible search and verse selection',
     title: 'On-screen Bible',
     body: 'Search any scripture across all 66 books in seconds.',
   },
   {
+    id: 'announcements',
     image: '/Photos/login/image%20149.png',
     alt: 'Sunday announcements slide preview',
     title: 'Announcements',
     body: 'Keep your church in the loop — right inside your service.',
   },
   {
+    id: 'entire-team',
     image: '/Photos/login/Group%201171276012.png',
     alt: 'Team collaboration with live production tools',
     title: 'Built For the Entire Team',

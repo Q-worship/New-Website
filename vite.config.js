@@ -10,7 +10,11 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '/api': {
+            '/api/auth': {
+                target: 'http://localhost:5000',
+                changeOrigin: true,
+            },
+            '/api/chat': {
                 target: 'http://localhost:8787',
                 changeOrigin: true,
             },

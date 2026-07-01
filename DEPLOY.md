@@ -100,7 +100,25 @@ Sign-up and email verification call same-origin `/api/auth/signup`, `/api/auth/v
 
 
 
-1. Deploy the v2 auth API (Express) to a reachable HTTPS origin, e.g. `https://api.qworship.com` (must serve routes under `/api/auth/...`).
+#### Your production topology
+
+
+
+| Host | Role | `AUTH_API_ORIGIN` / env |
+
+|------|------|-------------------------|
+
+| `https://new-website.vianneycm.workers.dev` | Marketing site (this repo) | Set `AUTH_API_ORIGIN=https://app.qworship.com` on the **site Worker** |
+
+| `https://app.qworship.com` | v2 Express API + MongoDB (same as main app) | `RESEND_API_KEY`, `EMAIL_FROM`, `MONGODB_URI`, `JWT_SECRET`, `NODE_ENV=production` |
+
+
+
+[`wrangler.jsonc`](wrangler.jsonc) includes `vars.AUTH_API_ORIGIN` for deploys from this repo. You can override in the Cloudflare dashboard if needed.
+
+
+
+1. Deploy the v2 auth API (Express) to a reachable HTTPS origin, e.g. `https://app.qworship.com` (must serve routes under `/api/auth/...`).
 
 2. Open **Cloudflare Dashboard → Workers & Pages → your site project → Settings → Variables**
 
@@ -125,6 +143,88 @@ Sign-up and email verification call same-origin `/api/auth/signup`, `/api/auth/v
 
 
 If `AUTH_API_ORIGIN` is missing in production, sign-up returns HTTP 503 with a JSON error instead of a browser "Failed to fetch".
+
+
+
+### OTP email (Resend — v2 API host only)
+
+
+
+Verification codes are emailed by the **v2 Express server**, not the marketing site Worker. Set these on your v2 API host (Railway, Render, VPS, etc.):
+
+
+
+| Variable | Required (prod) | Example |
+
+|----------|-----------------|--------|
+
+| `RESEND_API_KEY` | Yes | `re_...` from [resend.com](https://resend.com) → API Keys |
+
+| `EMAIL_FROM` | Yes | `Qworship <verify@qworship.com>` — must be a verified domain in Resend |
+
+| `MONGODB_URI` | Yes | Atlas or self-hosted connection string |
+
+| `JWT_SECRET` | Yes | Long random string |
+
+| `NODE_ENV` | Yes | `production` |
+
+
+
+**Do not** put `RESEND_API_KEY` on the Cloudflare site Worker. See [`Qworship-v2/apps/server/.env.example`](Qworship-v2/apps/server/.env.example).
+
+
+
+#### app.qworship.com server checklist
+
+
+
+On the host running Express behind **https://app.qworship.com**, set:
+
+
+
+| Variable | Notes |
+
+|----------|--------|
+
+| `MONGODB_URI` | Same database as the main app |
+
+| `JWT_SECRET` | Auth token signing |
+
+| `NODE_ENV` | `production` (enables Resend email) |
+
+| `RESEND_API_KEY` | From [resend.com](https://resend.com) |
+
+| `EMAIL_FROM` | e.g. `Qworship <verify@qworship.com>` — verified in Resend |
+
+
+
+Deploy OTP auth from [`Qworship-v2/apps/server`](Qworship-v2/apps/server) to this host, then run the `curl` signup test in **Production deploy order** below.
+
+
+
+**Local dev:** OTP is logged in the auth server terminal (`[dev] Verification code for ...`); Resend is not required unless you set `NODE_ENV=production`.
+
+
+
+### Production deploy order (sign-up)
+
+
+
+1. Resend: API key + verified sending domain (or sandbox `onboarding@resend.dev` for testing).
+
+2. **app.qworship.com** (v2 API host): Deploy [`Qworship-v2/apps/server`](Qworship-v2/apps/server) with OTP + Resend env vars (see [`Qworship-v2/apps/server/.env.example`](Qworship-v2/apps/server/.env.example)). Smoke test:
+
+   ```bash
+   curl -X POST https://app.qworship.com/api/auth/signup \
+     -H "Content-Type: application/json" \
+     -d '{"firstName":"Test","lastName":"User","email":"you@example.com","password":"TestPass123!"}'
+   ```
+
+   Expected: `{"success":true,"email":"...","nextStep":"/verify"}` and OTP email (when Resend is configured).
+
+3. **new-website** (marketing): `AUTH_API_ORIGIN=https://app.qworship.com` in [`wrangler.jsonc`](wrangler.jsonc) or Cloudflare dashboard; redeploy (`npm run deploy:site`).
+
+4. Live test: `https://new-website.vianneycm.workers.dev/signup` → inbox → `/verify`.
 
 
 
@@ -272,17 +372,55 @@ Full Meta setup details: [`workers/whatsapp-chat/README.md`](workers/whatsapp-ch
 
 ```bash
 
-# Terminal 1
+# Terminal 1 — marketing site (port 5173)
 
 npm run dev
 
 
 
-# Terminal 2 (requires wrangler login for Workers AI)
+# Terminal 2 — chat API (port 8787, requires wrangler login for Workers AI)
 
 npm run dev:chat-api
 
+
+
+# Terminal 3 — Qworship v2 auth API (port 5000, MongoDB)
+
+npm run dev:auth-api
+
 ```
+
+
+
+### Auth API + MongoDB (sign-up / verify)
+
+
+
+The marketing site proxies `/api/auth/*` to the **Qworship v2 Express server** on port 5000. Users are stored in MongoDB only after OTP verification.
+
+
+
+**One-time setup:**
+
+
+
+```bash
+
+cd Qworship-v2 && pnpm install
+
+```
+
+
+
+Ensure MongoDB is running locally (or set `MONGODB_URI` in `Qworship-v2/apps/server/.env`). Default database: `mongodb://127.0.0.1:27017/qworship-v2`.
+
+
+
+Sign up on `http://localhost:5173/signup`; the 6-digit code appears in the v2 server terminal (`[dev] Verification code for ...`).
+
+
+
+**Fallback (no MongoDB):** `npm run dev:auth-api:mock` runs an in-memory mock at `scripts/dev-auth-server.mjs`.
 
 
 

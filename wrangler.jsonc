@@ -20,5 +20,8 @@
       "tag": "v1-remove-chat-session",
       "deleted_classes": ["ChatSession"]
     }
-  ]
+  ],
+  "vars": {
+    "AUTH_API_ORIGIN": "https://app.qworship.com"
+  }
 }
