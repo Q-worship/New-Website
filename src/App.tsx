@@ -13,6 +13,7 @@ import { JobDetailPage } from '@/pages/JobDetailPage'
 import { Login } from '@/pages/Login'
 import { SignUp } from '@/pages/SignUp'
 import { Verify } from '@/pages/Verify'
+import { Onboarding } from '@/pages/Onboarding'
 
 export function App() {
   return (
@@ -21,6 +22,8 @@ export function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/verify" component={Verify} />
+        <Route path="/onboarding" component={Onboarding} />
+        <Route path="/account" component={Onboarding} />
         <Route>
           <Layout>
             <Switch>

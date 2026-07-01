@@ -104,8 +104,7 @@ export function VerifyForm() {
 
       persistAuthSession(response.token, response.user)
       sessionStorage.removeItem('verifyEmail')
-      // Marketing site stays on home; v2 may suggest response.nextStep (e.g. /dashboard)
-      setLocation('/')
+      setLocation('/onboarding')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Verification failed. Please try again.')
     } finally {

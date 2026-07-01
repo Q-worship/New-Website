@@ -1,5 +1,15 @@
 const AUTH_TOKEN_KEY = 'authToken'
+/** v2 product SPA session key */
+const V2_TOKEN_KEY = 'token'
+const V2_USER_KEY = 'qworship_user'
 const FETCH_TIMEOUT_MS = 15000
+const MOCK_DELAY_MS = 400
+
+/** Default ON — set VITE_MOCK_AUTH=false at build time to restore real API */
+export const MOCK_AUTH = import.meta.env.VITE_MOCK_AUTH !== 'false'
+
+export const MOCK_SIGNUP_USER_KEY = 'mock_signup_user'
+export const ONBOARDING_COMPLETE_KEY = 'onboarding_complete'
 
 const NETWORK_ERROR_MESSAGE = 'Unable to reach the server. Please try again.'
 
@@ -44,6 +54,19 @@ export interface ResendVerificationResponse {
   message?: string
 }
 
+export interface SignInPayload {
+  email: string
+  password: string
+}
+
+export interface SignInResponse {
+  success: boolean
+  token?: string
+  user?: AuthUser
+  message?: string
+  nextStep?: string
+}
+
 export function getAuthApiUrl(): string {
   const raw = import.meta.env.VITE_API_URL?.trim().replace(/\/$/, '') ?? ''
   return raw || '/api'
@@ -64,6 +87,40 @@ function toAuthError(error: unknown): Error {
     return error
   }
   return new Error(NETWORK_ERROR_MESSAGE)
+}
+
+function mockDelay<T>(value: T): Promise<T> {
+  return new Promise((resolve) => {
+    window.setTimeout(() => resolve(value), MOCK_DELAY_MS)
+  })
+}
+
+function readMockSignupUser(email: string): AuthUser {
+  try {
+    const raw = sessionStorage.getItem(MOCK_SIGNUP_USER_KEY)
+    if (raw) {
+      const draft = JSON.parse(raw) as {
+        firstName?: string
+        lastName?: string
+        email?: string
+      }
+      return {
+        id: 'mock-user-1',
+        email: draft.email ?? email,
+        firstName: draft.firstName ?? 'John',
+        lastName: draft.lastName ?? 'Doe',
+      }
+    }
+  } catch {
+    // ignore parse errors
+  }
+
+  return {
+    id: 'mock-user-1',
+    email,
+    firstName: 'John',
+    lastName: 'Doe',
+  }
 }
 
 async function authFetch<T>(
@@ -114,12 +171,14 @@ export function getAuthToken(): string | null {
 export function setAuthToken(token: string | null): void {
   if (token) {
     localStorage.setItem(AUTH_TOKEN_KEY, token)
+    localStorage.setItem(V2_TOKEN_KEY, token)
   } else {
     localStorage.removeItem(AUTH_TOKEN_KEY)
+    localStorage.removeItem(V2_TOKEN_KEY)
   }
 }
 
-/** Persist v2 app session keys for future handoff to the main app. */
+/** Persist session for marketing site and v2 product app handoff. */
 export function persistAuthSession(token: string, user?: AuthUser): void {
   setAuthToken(token)
   if (!user) return
@@ -127,9 +186,37 @@ export function persistAuthSession(token: string, user?: AuthUser): void {
   const userId = String(user.id)
   sessionStorage.setItem('qworship_user_id', userId)
   sessionStorage.setItem('qworship_user_data', JSON.stringify(user))
+  localStorage.setItem(V2_USER_KEY, JSON.stringify(user))
+}
+
+export function getStoredAuthUser(): AuthUser | null {
+  try {
+    const raw =
+      sessionStorage.getItem('qworship_user_data') ??
+      localStorage.getItem(V2_USER_KEY)
+    if (!raw) return null
+    return JSON.parse(raw) as AuthUser
+  } catch {
+    return null
+  }
+}
+
+export function getPostAuthPath(): string {
+  if (sessionStorage.getItem(ONBOARDING_COMPLETE_KEY) === 'true') {
+    return '/account'
+  }
+  return '/onboarding'
 }
 
 export async function signUp(payload: SignUpPayload): Promise<SignUpResponse> {
+  if (MOCK_AUTH) {
+    return mockDelay({
+      success: true,
+      email: payload.email.trim().toLowerCase(),
+      message: 'Verification code sent.',
+    })
+  }
+
   return authFetch<SignUpResponse>('/auth/signup', {
     method: 'POST',
     body: JSON.stringify(payload),
@@ -139,6 +226,16 @@ export async function signUp(payload: SignUpPayload): Promise<SignUpResponse> {
 export async function verifyEmail(
   payload: VerifyEmailPayload,
 ): Promise<VerifyEmailResponse> {
+  if (MOCK_AUTH) {
+    const email = payload.email.trim().toLowerCase()
+    return mockDelay({
+      success: true,
+      token: `mock-token-${Date.now()}`,
+      user: readMockSignupUser(email),
+      nextStep: '/onboarding',
+    })
+  }
+
   return authFetch<VerifyEmailResponse>('/auth/verify-email', {
     method: 'POST',
     body: JSON.stringify(payload),
@@ -148,8 +245,35 @@ export async function verifyEmail(
 export async function resendVerification(
   email: string,
 ): Promise<ResendVerificationResponse> {
+  if (MOCK_AUTH) {
+    return mockDelay({
+      success: true,
+      message: 'Verification code resent.',
+    })
+  }
+
   return authFetch<ResendVerificationResponse>('/auth/resend-verification', {
     method: 'POST',
     body: JSON.stringify({ email }),
+  })
+}
+
+export async function signIn(payload: SignInPayload): Promise<SignInResponse> {
+  if (MOCK_AUTH) {
+    const email = payload.email.trim().toLowerCase()
+    return mockDelay({
+      success: true,
+      token: `mock-token-${Date.now()}`,
+      user: readMockSignupUser(email),
+      nextStep: getPostAuthPath(),
+    })
+  }
+
+  return authFetch<SignInResponse>('/auth/signin', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      password: payload.password,
+    }),
   })
 }

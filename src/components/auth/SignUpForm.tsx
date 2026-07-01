@@ -57,6 +57,14 @@ export function SignUpForm() {
       }
 
       const verifiedEmail = response.email ?? email.trim().toLowerCase()
+      sessionStorage.setItem(
+        'mock_signup_user',
+        JSON.stringify({
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          email: verifiedEmail,
+        }),
+      )
       sessionStorage.setItem('verifyEmail', verifiedEmail)
       setLocation(`/verify?email=${encodeURIComponent(verifiedEmail)}`)
     } catch (err) {
