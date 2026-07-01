@@ -8156,18 +8156,7 @@ body.mobile-nav-open {
   margin: 0;
   font-size: 0.875rem;
   font-weight: 700;
-}
-
-.trial-welcome__card-title--purple {
   color: #c4b5fd;
-}
-
-.trial-welcome__card-title--teal {
-  color: #5eead4;
-}
-
-.trial-welcome__card-title--yellow {
-  color: #fde047;
 }
 
 .trial-welcome__list {
