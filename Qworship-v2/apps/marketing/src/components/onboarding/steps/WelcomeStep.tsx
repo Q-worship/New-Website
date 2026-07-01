@@ -14,10 +14,8 @@ export function WelcomeStep({ onNext }: WelcomeStepProps) {
           Welcome to
           <br />
           <span className="onboarding-step__heading-accent">
-            Q-worship Cloud Presentation
+            Q-worship Cloud Presentation Platform
           </span>
-          <br />
-          <span className="onboarding-step__heading-accent">Platform</span>
         </h1>
 
         <p className="onboarding-step__description">

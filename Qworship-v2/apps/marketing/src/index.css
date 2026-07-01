@@ -6965,11 +6965,11 @@ body.mobile-nav-open {
 /* Onboarding page */
 .onboarding-page {
   --onboarding-bg: #1d0d46;
-  --onboarding-panel: #1d0d46;
+  --onboarding-panel: #27252f;
   --onboarding-panel-raised: #261456;
   --onboarding-panel-border: rgba(255, 255, 255, 0.08);
-  --onboarding-scrim: rgba(29, 13, 70, 0.85);
-  --onboarding-showcase: #3d2a6e;
+  --onboarding-scrim: rgba(0, 0, 0, 0.72);
+  --onboarding-showcase: #1d0d46;
   position: relative;
   min-height: 100dvh;
   overflow: hidden;
@@ -6978,7 +6978,7 @@ body.mobile-nav-open {
 /* Dashboard backdrop (account shell behind overlay) */
 .dashboard-backdrop {
   min-height: 100dvh;
-  background: var(--onboarding-bg);
+  background: #0f1117;
   color: #e5e7eb;
   display: flex;
   flex-direction: column;
@@ -6989,8 +6989,8 @@ body.mobile-nav-open {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--onboarding-panel-border);
-  background: var(--onboarding-panel-raised);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: #12141c;
 }
 
 .dashboard-backdrop__logo {
@@ -7040,8 +7040,8 @@ body.mobile-nav-open {
   width: 14rem;
   flex-shrink: 0;
   padding: 1.25rem 0.75rem;
-  border-right: 1px solid var(--onboarding-panel-border);
-  background: var(--onboarding-panel-raised);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  background: #10121a;
 }
 
 .dashboard-backdrop__nav {
