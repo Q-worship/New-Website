@@ -5576,6 +5576,18 @@ body.mobile-nav-open {
 }
 
 /* Sign-up form extras */
+.login-form--signup .login-form__subtitle {
+  margin-bottom: 3.25rem;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .login-form--signup {
+    width: 100%;
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+}
+
 .login-form__row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5627,6 +5639,26 @@ body.mobile-nav-open {
   line-height: 1.5;
 }
 
+/* Verify card: wider vertical rhythm while preserving card height */
+.login-form--verify .verify-form__subtitle {
+  margin-bottom: 2.75rem;
+}
+
+.login-form--verify .login-form__fields {
+  gap: 2.25rem;
+}
+
+.login-form--verify .login-form__field {
+  gap: 0.875rem;
+}
+
+/* Large screens: taller verify card while keeping it below full-screen height */
+@media (min-width: 1440px) {
+  .login-form--verify {
+    min-height: min(42rem, 78vh);
+  }
+}
+
 .verify-form__email {
   color: #c026d3;
   font-weight: 500;
@@ -5635,13 +5667,15 @@ body.mobile-nav-open {
 .verify-form__otp {
   display: flex;
   gap: 0.625rem;
-  justify-content: center;
-  margin-bottom: 1.5rem;
+  justify-content: flex-start;
+  width: auto;
+  margin-bottom: 0;
 }
 
 .verify-form__otp-input {
   width: 3rem;
   height: 3rem;
+  flex-shrink: 0;
   text-align: center;
   font-size: 1.25rem;
   font-weight: 600;
@@ -5658,11 +5692,26 @@ body.mobile-nav-open {
   border-color: #c026d3;
 }
 
+.login-form--verify .login-form__error,
+.login-form--verify .login-form__success {
+  text-align: left;
+}
+
 .verify-form__resend {
   margin: 0 0 1.5rem;
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.75);
-  text-align: center;
+  text-align: left;
+}
+
+.login-form--verify .verify-form__resend {
+  margin-bottom: 2.25rem;
+}
+
+.login-form--verify .login-form__submit {
+  margin-top: 0.75rem;
+  background: #8356f3;
+  box-shadow: 0 4px 20px rgba(131, 86, 243, 0.25);
 }
 
 .verify-form__resend-btn {
@@ -7161,8 +7210,8 @@ body.mobile-nav-open {
 /* Two-pane modal */
 .onboarding-modal {
   display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  min-height: 32rem;
+  grid-template-columns: 1.22fr 1fr;
+  min-height: 36rem;
   border-radius: 1.5rem;
   overflow: hidden;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
@@ -7170,12 +7219,12 @@ body.mobile-nav-open {
 
 @media (min-width: 1280px) {
   .onboarding-overlay__content {
-    max-width: min(84rem, 92vw);
+    max-width: min(60rem, 82vw);
   }
 
   .onboarding-modal {
-    min-height: 42rem;
-    grid-template-columns: 1.45fr 1fr;
+    min-height: 36rem;
+    grid-template-columns: 1.22fr 1fr;
   }
 
   .onboarding-modal__panel--form {
@@ -7183,12 +7232,8 @@ body.mobile-nav-open {
   }
 
   .onboarding-step__heading--welcome {
-    font-size: clamp(2.25rem, 2.2vw, 3rem);
+    font-size: clamp(1.3rem, 1.3vw, 1.55rem);
     line-height: 1.2;
-  }
-
-  .onboarding-step__heading--welcome .onboarding-step__heading-accent {
-    white-space: nowrap;
   }
 
   .onboarding-showcase {
@@ -7198,11 +7243,22 @@ body.mobile-nav-open {
 
 @media (min-width: 1536px) {
   .onboarding-overlay__content {
-    max-width: min(88rem, 92vw);
+    max-width: min(64rem, 82vw);
   }
 
   .onboarding-modal {
-    min-height: 44rem;
+    min-height: 38rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .onboarding-overlay__content {
+    max-width: min(56rem, 90vw);
+  }
+
+  .onboarding-modal {
+    min-height: 32rem;
+    max-height: min(88dvh, 40rem);
   }
 }
 
@@ -7289,7 +7345,7 @@ body.mobile-nav-open {
 }
 
 .onboarding-step__heading--welcome {
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
   line-height: 1.15;
   margin-bottom: 1.25rem;
 }
@@ -7305,9 +7361,19 @@ body.mobile-nav-open {
 
 .onboarding-step__description {
   margin: 0 0 1.25rem;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.65);
+}
+
+.onboarding-step--welcome .onboarding-step__content {
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+.onboarding-step--welcome .onboarding-step__cta {
+  margin-top: 1rem;
+  align-self: flex-start;
 }
 
 .onboarding-step__instruction {
@@ -7713,10 +7779,14 @@ body.mobile-nav-open {
     padding: clamp(1.25rem, 5vw, 2.5rem);
   }
 
+  .onboarding-overlay__content {
+    max-width: min(40rem, 92vw);
+  }
+
   .onboarding-modal {
     grid-template-columns: 1fr;
     min-height: auto;
-    max-height: min(82dvh, 40rem);
+    max-height: min(82dvh, 34rem);
     overflow-y: auto;
   }
 

@@ -1,0 +1,25 @@
+# Render Blueprint — auth API for marketing sign-up.
+# See Qworship-v2/apps/server/AUTH_DEPLOY.md
+services:
+  - type: web
+    name: qworship-auth-api
+    runtime: docker
+    dockerfilePath: ./Qworship-v2/apps/server/Dockerfile.auth
+    dockerContext: ./Qworship-v2/apps/server
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        value: Qworship <onboarding@resend.dev>
+      - key: FRONTEND_URL
+        value: https://new-website.vianneycm.workers.dev

@@ -1,0 +1,182 @@
+import { QueryClient, QueryFunction } from "@tanstack/react-query";
+
+async function throwIfResNotOk(res: Response) {
+  if (!res.ok) {
+    const text = (await res.text()) || res.statusText;
+    throw new Error(`${res.status}: ${text}`);
+  }
+}
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+export function buildUrl(path: string): string {
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  
+  // Clean up API_BASE to strip trailing slash
+  const cleanApiBase = API_BASE.replace(/\/$/, '');
+  
+  // Clean up path to ensure it starts with a slash
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // If cleanApiBase ends with '/api' and cleanPath starts with '/api',
+  // we must avoid '/api/api/something'.
+  if (cleanApiBase.endsWith('/api') && cleanPath.startsWith('/api')) {
+     return cleanApiBase.slice(0, -4) + cleanPath;
+  }
+  
+  return cleanApiBase + cleanPath;
+}
+
+export const resolveMediaUrl = (url: string | null | undefined): string | undefined => {
+  if (!url) return undefined;
+  if (url === "Worship background image" || url === "Inspirational worship video" || url === "Background Image" || url === "Ready for content") return undefined;
+  
+  // Strip hardcoded UI API origins that might have leaked into Database from previous buggy app clients
+  let cleanUrl = url;
+  if (cleanUrl.startsWith('https://app.qworship.com/api/')) {
+    cleanUrl = cleanUrl.replace('https://app.qworship.com/api/', '/api/');
+  } else if (cleanUrl.startsWith('https://api.qworship.com/api/')) {
+    cleanUrl = cleanUrl.replace('https://api.qworship.com/api/', '/api/');
+  } else if (cleanUrl.startsWith('http://localhost:5000/api/')) {
+    cleanUrl = cleanUrl.replace('http://localhost:5000/api/', '/api/');
+  }
+  
+  if (cleanUrl.startsWith('data:') || cleanUrl.startsWith('blob:')) return cleanUrl;
+  if (cleanUrl.startsWith('/api/') || cleanUrl.startsWith('/uploads/')) return buildUrl(cleanUrl);
+
+  // If a raw unsigned R2 URL somehow got saved to a slide, bounce it to the backend resolver explicitly 
+  if (cleanUrl.includes('.r2.cloudflarestorage.com')) {
+    return buildUrl(`/api/user-media-assets/resolve-r2?url=${encodeURIComponent(cleanUrl)}`);
+  }
+
+  if (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://')) return cleanUrl;
+  return undefined;
+};
+
+export async function apiRequest(
+  method: string,
+  url: string,
+  data?: unknown | undefined,
+): Promise<Response> {
+  const fullUrl = buildUrl(url);
+  const headers: Record<string, string> = data ? { "Content-Type": "application/json" } : {};
+  
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+  }
+
+  const res = await fetch(fullUrl, {
+    method,
+    headers,
+    body: data ? JSON.stringify(data) : undefined,
+  });
+
+  await throwIfResNotOk(res);
+  return res;
+}
+
+// Admin API request function (now identical to apiRequest since adminKey bypass was removed)
+export async function adminApiRequest(
+  method: string,
+  url: string,
+  data?: unknown | undefined,
+): Promise<Response> {
+  const fullUrl = buildUrl(url);
+  
+  const headers: Record<string, string> = {};
+  
+  // For FormData (file uploads), don't set Content-Type - let the browser set it
+  if (data && !(data instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+  }
+  
+  const res = await fetch(fullUrl, {
+    method,
+    headers,
+    body: data instanceof FormData ? data : (data ? JSON.stringify(data) : undefined),
+  });
+
+  await throwIfResNotOk(res);
+  return res;
+}
+
+type UnauthorizedBehavior = "returnNull" | "throw";
+export const getQueryFn: <T>(options: {
+  on401: UnauthorizedBehavior;
+}) => QueryFunction<T> =
+  ({ on401: unauthorizedBehavior }) =>
+  async ({ queryKey }) => {
+    const headers: Record<string, string> = {};
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+    }
+
+    const fullUrl = buildUrl(queryKey[0] as string);
+    const res = await fetch(fullUrl, {
+      headers,
+    });
+
+    if (unauthorizedBehavior === "returnNull" && res.status === 401) {
+      return null;
+    }
+
+    await throwIfResNotOk(res);
+    return await res.json();
+  };
+
+// Admin query function (now identical to getQueryFn since adminKey bypass was removed)
+export const getAdminQueryFn: <T>(options: {
+  on401: UnauthorizedBehavior;
+}) => QueryFunction<T> =
+  ({ on401: unauthorizedBehavior }) =>
+  async ({ queryKey }) => {
+    const originalUrl = queryKey[0] as string;
+    const fullUrl = buildUrl(originalUrl);
+    
+    const headers: Record<string, string> = {};
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+    }
+
+    const res = await fetch(fullUrl, {
+      headers,
+    });
+
+    if (unauthorizedBehavior === "returnNull" && res.status === 401) {
+      return null;
+    }
+
+    await throwIfResNotOk(res);
+    return await res.json();
+  };
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      queryFn: getQueryFn({ on401: "throw" }),
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
+      retry: false,
+    },
+    mutations: {
+      retry: false,
+    },
+  },
+});

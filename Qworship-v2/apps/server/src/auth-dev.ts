@@ -20,6 +20,7 @@ const allowedOrigins = [
   'https://www.app.qworship.com',
   'https://qworship.com',
   'https://www.qworship.com',
+  'https://new-website.vianneycm.workers.dev',
   process.env.FRONTEND_URL,
 ].filter(Boolean)
 

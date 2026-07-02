@@ -76,7 +76,7 @@ export function SignUpForm() {
   }
 
   return (
-    <div className="login-form">
+    <div className="login-form login-form--signup">
       <h1 className="login-form__title login-form__title--single-line">
         Welcome, lets get you started
       </h1>

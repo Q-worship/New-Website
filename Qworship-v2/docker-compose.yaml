@@ -5,13 +5,15 @@ services:
     build:
       context: .
       dockerfile: apps/server/Dockerfile
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
     environment:
-      # Inject necessary backend environment variables.
-      # When deployed on Coolify, these will be populated from the application's Secret configurations.
       - NODE_ENV=production
       - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - FRONTEND_URL=${FRONTEND_URL:-https://app.qworship.com}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - SESSION_SECRET=${SESSION_SECRET}
       - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
@@ -25,17 +27,40 @@ services:
       - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
     restart: unless-stopped
 
-  client:
+  marketing:
+    build:
+      context: .
+      dockerfile: apps/marketing/Dockerfile
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  # v2 product SPA (internal only — reached via gateway)
+  product:
     build:
       context: .
       dockerfile: apps/client/Dockerfile
       args:
-        # Vite requires these values AT BUILD TIME to inject them into the static bundle.
-        # You will set these in Coolify's environment variables.
-        - VITE_API_URL=${VITE_API_URL}
-        - VITE_WS_URL=${VITE_WS_URL}
-    ports:
-      - "3000:80"
+        - VITE_API_URL=${VITE_API_URL:-/api}
+        - VITE_WS_URL=${VITE_WS_URL:-wss://app.qworship.com}
+    expose:
+      - "80"
     depends_on:
       - server
+    restart: unless-stopped
+
+  # Public entry for app.qworship.com (Coolify domain target).
+  # Runs gateway nginx so existing "client" domain mappings work without panel changes.
+  client:
+    build:
+      context: .
+      dockerfile: infra/gateway/Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - CHAT_API_ORIGIN=${CHAT_API_ORIGIN:-https://new-website.vianneycm.workers.dev}
+    depends_on:
+      - server
+      - marketing
+      - product
     restart: unless-stopped

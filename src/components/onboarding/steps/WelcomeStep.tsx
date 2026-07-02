@@ -6,7 +6,7 @@ interface WelcomeStepProps {
 
 export function WelcomeStep({ onNext }: WelcomeStepProps) {
   return (
-    <div className="onboarding-step">
+    <div className="onboarding-step onboarding-step--welcome">
       <OnboardingProgress step={1} />
 
       <div className="onboarding-step__content">

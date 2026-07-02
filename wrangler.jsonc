@@ -22,6 +22,6 @@
     }
   ],
   "vars": {
-    "AUTH_API_ORIGIN": "https://app.qworship.com"
+    "AUTH_API_ORIGIN": "https://qworship-auth-api.onrender.com"
   }
 }
