@@ -26,7 +26,7 @@ export function FeatureInterestsStep({
       <OnboardingProgress step={3} />
 
       <div className="onboarding-step__content">
-        <h1 className="onboarding-step__heading onboarding-step__heading--compact">
+        <h1 className="onboarding-step__heading">
           Which Q-worship features are you interested in?
         </h1>
 

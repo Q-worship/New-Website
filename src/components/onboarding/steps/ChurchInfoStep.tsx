@@ -91,7 +91,7 @@ export function ChurchInfoStep({ data, onChange, onNext, onBack }: ChurchInfoSte
       <OnboardingProgress step={2} />
 
       <div className="onboarding-step__content">
-        <h1 className="onboarding-step__heading onboarding-step__heading--compact">
+        <h1 className="onboarding-step__heading onboarding-step__heading--small">
           Ready to Elevate your church experience?
         </h1>
 
