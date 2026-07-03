@@ -9,6 +9,56 @@ const trialFeatures = [
   'Priority Email Support',
 ] as const
 
+const iconProps = {
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 1.75,
+  strokeLinecap: 'round' as const,
+  strokeLinejoin: 'round' as const,
+  'aria-hidden': true,
+}
+
+function TrialIconLayers() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 2 2 7l10 5 10-5-10-5z" />
+      <path d="m2 17 10 5 10-5" />
+      <path d="m2 12 10 5 10-5" />
+    </svg>
+  )
+}
+
+function TrialIconCalendar() {
+  return (
+    <svg {...iconProps}>
+      <rect x="3" y="4" width="18" height="18" rx="2" />
+      <path d="M16 2v4M8 2v4M3 10h18" />
+    </svg>
+  )
+}
+
+function TrialIconCalendarClock() {
+  return (
+    <svg {...iconProps}>
+      <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+      <path d="M16 2v4M8 2v4M3 10h5" />
+      <circle cx="16" cy="16" r="6" />
+      <path d="M16 14v2l1 1" />
+    </svg>
+  )
+}
+
+function TrialIconWarning() {
+  return (
+    <svg {...iconProps}>
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+      <path d="M12 9v4" />
+      <path d="M12 17h.01" />
+    </svg>
+  )
+}
+
 interface TrialWelcomeModalProps {
   onStartTrial: () => void
 }
@@ -35,7 +85,9 @@ export function TrialWelcomeModal({ onStartTrial }: TrialWelcomeModalProps) {
       <div className="trial-welcome__grid">
         <section className="trial-welcome__card trial-welcome__card--features">
           <div className="trial-welcome__card-head">
-            <span className="trial-welcome__icon trial-welcome__icon--purple" aria-hidden="true" />
+            <span className="trial-welcome__icon trial-welcome__icon--purple" aria-hidden="true">
+              <TrialIconLayers />
+            </span>
             <h2 className="trial-welcome__card-title">
               Features
             </h2>
@@ -56,20 +108,25 @@ export function TrialWelcomeModal({ onStartTrial }: TrialWelcomeModalProps) {
         <div className="trial-welcome__stack">
           <section className="trial-welcome__card">
             <div className="trial-welcome__card-head">
-              <span className="trial-welcome__icon trial-welcome__icon--teal" aria-hidden="true" />
+              <span className="trial-welcome__icon trial-welcome__icon--teal" aria-hidden="true">
+                <TrialIconCalendar />
+              </span>
               <h2 className="trial-welcome__card-title">
                 Trial Duration
               </h2>
             </div>
             <p className="trial-welcome__card-body">
-              Your trial starts today and runs for 30 full days. You&apos;ll receive
-              email reminders as your trial approaches its end.
+              Your trial starts today and runs for{' '}
+              <strong className="trial-welcome__emphasis">30 full days</strong>.
+              You&apos;ll receive email reminders as your trial approaches its end.
             </p>
           </section>
 
           <section className="trial-welcome__card">
             <div className="trial-welcome__card-head">
-              <span className="trial-welcome__icon trial-welcome__icon--teal" aria-hidden="true" />
+              <span className="trial-welcome__icon trial-welcome__icon--teal" aria-hidden="true">
+                <TrialIconCalendarClock />
+              </span>
               <h2 className="trial-welcome__card-title">
                 What happens after my free trial
               </h2>
@@ -84,7 +141,9 @@ export function TrialWelcomeModal({ onStartTrial }: TrialWelcomeModalProps) {
 
         <section className="trial-welcome__card">
           <div className="trial-welcome__card-head">
-            <span className="trial-welcome__icon trial-welcome__icon--yellow" aria-hidden="true" />
+            <span className="trial-welcome__icon trial-welcome__icon--yellow" aria-hidden="true">
+              <TrialIconWarning />
+            </span>
             <h2 className="trial-welcome__card-title">
               Important
             </h2>
