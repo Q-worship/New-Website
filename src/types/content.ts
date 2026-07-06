@@ -249,7 +249,7 @@ export interface FeatureSpotlightCard {
 
 export interface ChecklistSpotlightContent {
   id: string
-  title: { line1: string; line2Before: string; accent: string }
+  title: { line1: string; line2Before: string; accent: string; gradientLine?: 1 | 2 }
   body: string
   checklist: string[]
   cards: FeatureSpotlightCard[]

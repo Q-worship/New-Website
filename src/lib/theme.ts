@@ -1211,7 +1211,7 @@ export const featuresHeroCopy = {
 
 export const featuresSubNavItems: FeaturesSubNavItem[] = [
   { id: 'overview', label: 'Overview', href: '#overview' },
-  { id: 'hands-free-bible', label: 'Hands-Free Bible', href: '#hands-free-bible' },
+  { id: 'hands-free-bible', label: 'Hands-Free Bible', href: '#overview' },
   { id: 'on-screen-bible', label: 'On-screen Bible', href: '#on-screen-bible' },
   { id: 'songbook', label: 'Songbook', href: '#songbook' },
   { id: 'service-slides', label: 'Service Slides', href: '#service-slides' },
@@ -1227,7 +1227,7 @@ export const handsFreeFeatureSpotlight: ChecklistSpotlightContent = {
     line2Before: 'Always ready,',
     accent: 'Online and Offline',
   },
-  body: 'Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
+  body: 'For ages, pastors have paused mid-sermon to wait for a verse. Q-worship ends that. Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
   checklist: [
     'Natural language processing for spoken references',
     "Session context retention — 'next verse', 'change to NIV' understood in context",
@@ -1251,9 +1251,9 @@ export const handsFreeFeatureSpotlight: ChecklistSpotlightContent = {
         'Switch between all the major Bible translations- KJV, NKJV, MSG, AMP, GN, and NIV with a single voice command mid service. Your congregation hears the version that speaks to them',
     },
   ],
-  image: '/Photos/features/Group%202085663381.png',
+  image: '/Photos/feature%201.png',
   imageAlt: 'Church auditorium with Bible verse on screen',
-  showListeningOverlay: true,
+  showListeningOverlay: false,
 }
 
 export const onScreenBibleSpotlight: AccordionSpotlightContent = {
@@ -1364,31 +1364,38 @@ export const moreFeaturesAccordionSpotlight: AccordionSpotlightContent = {
 export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
   id: 'songbook',
   title: {
-    line1: 'Every Lyric.',
+    line1: 'Every lyric. Every section.',
     line2Before: '',
-    accent: 'Right on Time.',
+    accent: 'Always one click ahead.',
+    gradientLine: 1,
   },
-  body: buildTabItems.find((tab) => tab.id === 'songs')!.description,
-  checklist: buildTabItems.find((tab) => tab.id === 'songs')!.features.slice(0, 4),
+  body: "Q-worship's Songbook is a complete song management and live projection system built for worship teams. Build your library once, import from any format, and navigate every verse, chorus, and bridge with a single click — while your congregation sees perfectly formatted lyrics on the big screen in real time.",
+  checklist: [
+    'Section-based navigation — Verse, Chorus, Bridge, Pre-Chorus, Tag, Intro, Outro',
+    'Real-time sync between control and projection windows',
+    'Song import from TEXT, PDF, and DOCX files',
+    'Easy to use song editor with undo/redo',
+  ],
   cards: [
     {
-      title: 'Section Navigation',
+      title: 'Section-Based Navigation',
       description:
-        'Navigate Verse, Chorus, Bridge, Tag and more with one click. What you see is what your congregation sees — always.',
+        'Move through Verse, Chorus, Bridge, Tag, Intro, and Outro with a single click. Your worship leader always knows exactly where they are in the song — and the projection screen follows instantly, with zero lag.',
     },
     {
-      title: 'Edit In-App',
+      title: 'Import from Any Format',
       description:
-        'Edit songs directly inside Q-worship, no extra tools needed. Bring in songs from Word documents, PDFs or text files.',
+        'Already have your songs in Word, PDF, or plain text? Bring them straight in. Qworship parses your existing files and structures them into sections automatically — no manual re-entry, no copy-pasting, no starting from scratch.',
     },
     {
-      title: 'Song Metadata',
+      title: 'Sing-Along Pace Setter',
       description:
-        'Keep your CCLI number, song key and tempo all in one place. Lead worship with complete confidence every Sunday.',
+        "Keep your congregation singing in sync with the Sing-Along Pace Setter — a real-time lyric progress indicator that highlights the current line as it's being sung. No more congregation falling behind or jumping ahead.",
     },
   ],
-  image: '/Photos/Songs.png',
-  imageAlt: 'Songbook lyrics management interface',
+  image: '/Photos/features/song.png',
+  imageAlt: 'Amazing Grace lyrics projected over a mountain landscape',
+  showListeningOverlay: false,
 }
 
 export const prePastorsHandsFreeSpotlight: ChecklistSpotlightContent = {
@@ -1427,6 +1434,42 @@ export const prePastorsHandsFreeSpotlight: ChecklistSpotlightContent = {
   showListeningOverlay: true,
 }
 
+export const serviceSlidesAccordionSpotlight: AccordionSpotlightContent = {
+  id: 'service-slides',
+  header: {
+    line1: 'Build your entire service.',
+    line2Before: '',
+    accent: 'Slide by slide. In minutes.',
+  },
+  subtitle: {
+    line1:
+      "Qworship's Service Slides system lets you build a complete order of service — announcements, scripture, song lyrics, videos, image slides, and custom canvas slides — all in one place. Every item is a slide. Every slide is live-ready. And when it's time to go, one click puts it all on screen.",
+    line2: '',
+  },
+  items: [
+    {
+      id: 'builder',
+      title: 'Drag-and-Drop Service Builder',
+      description:
+        'Organise your entire service into sections — Pre-Service, Warm-Up, Service Items, and Post-Service Loop — and populate each one with songs, Bible verses, announcements, videos, image slides, or custom canvas slides. Your service order is always exactly how you want it.',
+    },
+    {
+      id: 'canvas',
+      title: 'Custom Slide Canvas',
+      description:
+        'Design bespoke slides directly inside Qworship with the built-in Slide Canvas editor. Add headlines, subheadings, body text, images, and QR codes — then position every element exactly where you want it. No external design tool needed; your custom slides live right alongside your scripture and song content.',
+    },
+    {
+      id: 'preview',
+      title: 'Live Preview Before You Go Live',
+      description:
+        'Every slide in your service generates a real-time preview before it hits the big screen. See exactly what your congregation will see — background, text, layout, and all — before you click GO LIVE. No wrong slides. No awkward corrections. No surprises mid-service.',
+    },
+  ],
+  image: '/Photos/feature%203.png',
+  imageAlt: 'Service Slides canvas editor with Easter slide preview',
+}
+
 export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
   id: 'service-slides',
   title: {
@@ -1455,6 +1498,42 @@ export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
   ],
   image: '/Photos/Service%20order.png',
   imageAlt: 'Service order management interface',
+}
+
+export const mediaAccordionSpotlight: AccordionSpotlightContent = {
+  id: 'media',
+  header: {
+    line1: 'The right background for every verse, song or',
+    line2Before: 'announcement.',
+    accent: 'Found in seconds, not minutes.',
+  },
+  subtitle: {
+    line1:
+      "Qworship's dual-layer Media Library gives your team instant access to a curated collection of platform-provided worship\nbackgrounds and motion videos, alongside every asset your church has ever uploaded.\nOne searchable, tag-organised library — so the right visual is always one click away,\nnever buried in a folder somewhere.",
+    line2: '',
+  },
+  items: [
+    {
+      id: 'cloud-assets',
+      title: 'Cloud + Your Own Assets',
+      description:
+        'Browse a built-in library of professionally curated worship backgrounds, motion videos, and seasonal templates — or upload your own images, videos, and audio files. Everything lives in one place, searchable and filterable, so your operator never has to leave Qworship to find what they need.',
+    },
+    {
+      id: 'tags',
+      title: 'Advanced Tag System & Collections',
+      description:
+        'Tag every asset by mood, colour, season, theme, or service item type. Filter by category, browse by collection, and find the right background in seconds — even with hundreds of assets in your library. The more your library grows, the faster you find things.',
+    },
+    {
+      id: 'thumbnails',
+      title: 'Video Thumbnail Generation',
+      description:
+        'Every video file you upload automatically generates a visual thumbnail using FFmpeg. Browse your entire motion background library visually — no playing files one by one to find the right one. What you see is exactly what you get on screen.',
+    },
+  ],
+  image: '/Photos/feature%204.png',
+  imageAlt: 'Media library background picker with Matthew 8:20 verse preview',
 }
 
 export const mediaFeatureSpotlight: ChecklistSpotlightContent = {
@@ -1490,36 +1569,37 @@ export const mediaFeatureSpotlight: ChecklistSpotlightContent = {
 export const lowerThirdBuilderSpotlight: ChecklistSpotlightContent = {
   id: 'lower-third-builder',
   title: {
-    line1: 'In-built',
+    line1: 'Professional broadcast Lower Third.',
     line2Before: '',
-    accent: 'Lower Third Builder',
+    accent: 'Built right in. No extra software.',
   },
-  body: 'Create broadcast-quality name and title graphics directly inside Q-worship. Display speaker names, sermon titles, and announcements on your live stream — no extra software needed.',
+  body: "Qworship's In-Built Lower Third Builder lets you create, style, and display broadcast-quality lower thirds — speaker names, scripture references, song titles, announcements — directly from inside the platform. No After Effects, no external graphics software, no extra operator. Your stream and your in-room display look professional from the very first service.",
   checklist: [
-    'Broadcast-quality lower thirds built right into Q-worship',
-    'Display speaker names and sermon titles on your live stream',
-    'Customise fonts, colours, and positioning to match your brand',
-    'No extra graphics software required — design and go live in one app',
+    'Built-in lower third editor — no external software needed',
+    'Custom text, colours, fonts, and logo support',
+    'Live push to projection screen and OBS simultaneously',
+    'Syncs with service order for seamless live operation',
   ],
   cards: [
     {
-      title: 'Broadcast-Quality Graphics',
+      title: 'Design Without Leaving Qworship',
       description:
-        'Create professional name and title overlays that look great on any stream or projector output.',
+        "Build lower thirds directly inside Qworship using the built-in editor. Add speaker names, titles, scripture references, or any custom text — then style them with your church's colours, fonts, and logo. No external design tool, no file exports, no switching between apps mid-service.",
     },
     {
-      title: 'Live Stream Ready',
+      title: 'Live Display on Screen and Stream',
       description:
-        'Display speaker names, sermon titles, and announcements on your live stream without switching applications.',
+        'Push your lower thirds to the projection screen and OBS simultaneously with one click. What your in-room congregation sees is exactly what your online audience sees — branded, consistent, and perfectly timed to the moment it\'s needed.',
     },
     {
-      title: 'All In One Place',
+      title: 'Instant Recall During Service',
       description:
-        'Design, preview, and project lower thirds from the same interface you use for lyrics, Bible verses, and media.',
+        'Save your most-used lower thirds — speaker names, sermon series titles, recurring announcements — and recall them instantly during a live service. No rebuilding from scratch each week. Your graphics are ready before your worship team arrives.',
     },
   ],
-  image: '/Photos/third-builder.png',
-  imageAlt: 'Lower third builder interface',
+  image: '/Photos/features/song.png',
+  imageAlt: 'Amazing Grace lyrics projected over a mountain landscape',
+  showListeningOverlay: false,
 }
 
 const guideCardDescription =

@@ -29,14 +29,24 @@ function ChecklistCardsSpotlight({ content, visualOverlay }: ChecklistCardsProps
 
           <div className="feature-spotlight-copy">
             <h2 className="feature-spotlight-title font-headline font-bold">
-              <span className="feature-spotlight-title-line text-white">
+              <span
+                className={`feature-spotlight-title-line ${
+                  content.title.gradientLine === 1 ? 'build-section-entire-gradient' : 'text-white'
+                }`}
+              >
                 {content.title.line1}
               </span>
               <span className="feature-spotlight-title-line">
                 {content.title.line2Before ? (
                   <span className="text-white">{content.title.line2Before} </span>
                 ) : null}
-                <span className="build-section-entire-gradient">{content.title.accent}</span>
+                <span
+                  className={
+                    content.title.gradientLine === 1 ? 'text-white' : 'build-section-entire-gradient'
+                  }
+                >
+                  {content.title.accent}
+                </span>
               </span>
             </h2>
 
@@ -75,6 +85,7 @@ interface AccordionSpotlightProps {
   nextSectionId?: string
   imagePosition?: 'left' | 'right'
   showListeningOverlay?: boolean
+  visualSlot?: ReactNode
 }
 
 function AccordionSpotlight({
@@ -84,6 +95,7 @@ function AccordionSpotlight({
   nextSectionId,
   imagePosition = 'right',
   showListeningOverlay = false,
+  visualSlot,
 }: AccordionSpotlightProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const activeItemIdRef = useRef(content.items[0].id)
@@ -214,12 +226,14 @@ function AccordionSpotlight({
 
   const visualColumn = (
     <div className="feature-spotlight-visual">
-      <img
-        src={content.image}
-        alt={content.imageAlt}
-        className="feature-spotlight-image"
-        loading="lazy"
-      />
+      {visualSlot ?? (
+        <img
+          src={content.image}
+          alt={content.imageAlt}
+          className="feature-spotlight-image"
+          loading="lazy"
+        />
+      )}
       {showListeningOverlay && <HandsFreeTranscriptionOverlay variant="features" />}
     </div>
   )
@@ -289,6 +303,7 @@ export function FeatureSpotlightAccordionSection({
   nextSectionId,
   imagePosition,
   showListeningOverlay,
+  visualSlot,
 }: AccordionSpotlightProps) {
   return (
     <AccordionSpotlight
@@ -298,6 +313,7 @@ export function FeatureSpotlightAccordionSection({
       nextSectionId={nextSectionId}
       imagePosition={imagePosition}
       showListeningOverlay={showListeningOverlay}
+      visualSlot={visualSlot}
     />
   )
 }
