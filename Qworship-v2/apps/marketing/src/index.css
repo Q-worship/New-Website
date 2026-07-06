@@ -3849,6 +3849,7 @@ body.mobile-nav-open {
   min-height: 11rem;
   padding: 1.25rem;
   background: linear-gradient(180deg, rgba(45, 27, 77, 0.65) 0%, rgba(45, 27, 77, 0.35) 100%);
+  text-decoration: none;
 }
 
 .guide-card-image {
@@ -3873,6 +3874,15 @@ body.mobile-nav-open {
   margin-bottom: 0.75rem;
 }
 
+.guide-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.guide-card-title a:hover {
+  opacity: 0.9;
+}
+
 .guide-card-description {
   flex: 1;
   font-size: 0.875rem;
@@ -3891,6 +3901,7 @@ body.mobile-nav-open {
 .guide-card-btn {
   color: #fff;
   background: #2c2c3e;
+  text-decoration: none;
 }
 
 .guide-card-btn:hover {

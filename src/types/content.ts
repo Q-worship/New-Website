@@ -187,6 +187,7 @@ export interface GuideCard {
   description: string
   image: string
   imageAlt: string
+  href: string
 }
 
 export interface FaqCategoryItem {

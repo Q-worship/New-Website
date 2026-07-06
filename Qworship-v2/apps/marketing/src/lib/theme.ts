@@ -1552,17 +1552,20 @@ export const guideCards: GuideCard[] = [
     id: 'live-console-first-sunday',
     categoryId: 'general',
     title: 'Setting up Q-worship Live Console for your first Sunday',
-    description: guideCardDescription,
+    description:
+      'Download, open, and you can be ready for your first Sunday — many churches are live the same day they install.',
     image: '/Photos/On-screen%20bible.png',
     imageAlt: 'Q-worship Live Console Bible interface',
+    href: '/downloads',
   },
   {
     id: 'no-need-to-type-general-1',
     categoryId: 'general',
     title: 'No need to Type. Just Speak',
     description: guideCardDescription,
-    image: '/Photos/Announcements.png',
-    imageAlt: 'Sunday announcements slide preview',
+    image: '/Photos/Hands%20free%20Bible.png',
+    imageAlt: 'Hands-free Bible voice search',
+    href: '/features#hands-free-bible',
   },
   {
     id: 'no-need-to-type-general-2',
@@ -1571,30 +1574,34 @@ export const guideCards: GuideCard[] = [
     description: guideCardDescription,
     image: '/Photos/hands-free-stage.png',
     imageAlt: 'Pastor using hands-free Bible search on stage',
+    href: '/features#hands-free-bible',
   },
   {
-    id: 'live-console-first-sunday-2',
+    id: 'on-screen-bible-general',
     categoryId: 'general',
-    title: 'Setting up Q-worship Live Console for your first Sunday',
-    description: guideCardDescription,
+    title: 'Search Any Scripture. In Any Version.',
+    description: buildTabItems.find((tab) => tab.id === 'onscreen')!.description,
     image: '/Photos/On-screen%20bible.png',
-    imageAlt: 'Q-worship Live Console Bible interface',
+    imageAlt: 'On-screen Bible search interface',
+    href: '/features#on-screen-bible',
   },
   {
-    id: 'no-need-to-type-general-1-2',
+    id: 'service-order-general',
     categoryId: 'general',
-    title: 'No need to Type. Just Speak',
-    description: guideCardDescription,
+    title: 'Your Service. Fully in Your Hands.',
+    description: buildTabItems.find((tab) => tab.id === 'service')!.description,
+    image: '/Photos/Service%20order.png',
+    imageAlt: 'Service order planning interface',
+    href: '/features#service-slides',
+  },
+  {
+    id: 'announcements-general',
+    categoryId: 'general',
+    title: 'Keep Your Church In the Loop',
+    description: buildTabItems.find((tab) => tab.id === 'announcements')!.description,
     image: '/Photos/Announcements.png',
     imageAlt: 'Sunday announcements slide preview',
-  },
-  {
-    id: 'no-need-to-type-general-2-2',
-    categoryId: 'general',
-    title: 'No need to Type. Just Speak',
-    description: guideCardDescription,
-    image: '/Photos/hands-free-stage.png',
-    imageAlt: 'Pastor using hands-free Bible search on stage',
+    href: '/features#media',
   },
   {
     id: 'first-sunday-checklist',
@@ -1604,6 +1611,7 @@ export const guideCards: GuideCard[] = [
       'Walk through service order setup, display outputs, and a quick rehearsal so your team is confident before doors open.',
     image: '/Photos/Service%20order.png',
     imageAlt: 'Service order planning interface',
+    href: '/features#service-slides',
   },
   {
     id: 'first-sunday-rehearsal',
@@ -1613,6 +1621,7 @@ export const guideCards: GuideCard[] = [
       'Run through lyrics, announcements, and scripture in presentation mode so transitions feel natural when the congregation arrives.',
     image: '/Photos/eas%20to%20use.png',
     imageAlt: 'Team rehearsing with Q-worship',
+    href: '/onboarding',
   },
   {
     id: 'hands-free-getting-started',
@@ -1621,6 +1630,7 @@ export const guideCards: GuideCard[] = [
     description: guideCardDescription,
     image: '/Photos/Hands%20free%20Bible.png',
     imageAlt: 'Hands-free Bible voice search',
+    href: '/features#hands-free-bible',
   },
   {
     id: 'hands-free-offline',
@@ -1630,6 +1640,7 @@ export const guideCards: GuideCard[] = [
       'Cache translations locally and keep preaching without Wi-Fi — voice commands work the same online or off.',
     image: '/Photos/hands-free-stage.png',
     imageAlt: 'Hands-free Bible on stage',
+    href: '/features#hands-free-bible',
   },
   {
     id: 'songbook-import',
@@ -1639,6 +1650,7 @@ export const guideCards: GuideCard[] = [
       'Import songs, organize sets, and project lyrics with the fonts and layouts your worship team prefers.',
     image: '/Photos/Songs.png',
     imageAlt: 'Songbook management interface',
+    href: '/features#songbook',
   },
   {
     id: 'songbook-live',
@@ -1648,6 +1660,7 @@ export const guideCards: GuideCard[] = [
       'Switch songs quickly, follow song sections, and keep the band and congregation in sync from the Live Console.',
     image: '/Photos/Praise%20and%20Worship.png',
     imageAlt: 'Worship lyrics on screen',
+    href: '/features#songbook',
   },
   {
     id: 'service-slides-announcements',
@@ -1657,6 +1670,7 @@ export const guideCards: GuideCard[] = [
       'Create polished announcement and welcome slides with templates that match your church brand.',
     image: '/Photos/Announcements.png',
     imageAlt: 'Announcement slide design',
+    href: '/features#media',
   },
   {
     id: 'service-slides-order',
@@ -1666,6 +1680,7 @@ export const guideCards: GuideCard[] = [
       'Arrange songs, scripture, media, and announcements in one timeline so every moment flows smoothly.',
     image: '/Photos/Service%20order.png',
     imageAlt: 'Service slide order',
+    href: '/features#service-slides',
   },
   {
     id: 'media-library',
@@ -1675,6 +1690,7 @@ export const guideCards: GuideCard[] = [
       'Import videos and images, tag assets, and drop them into your service without hunting through folders.',
     image: '/Photos/lightweight.png',
     imageAlt: 'Media library interface',
+    href: '/features#media',
   },
   {
     id: 'media-live',
@@ -1684,6 +1700,7 @@ export const guideCards: GuideCard[] = [
       'Trigger videos and backgrounds from the Live Console with smooth transitions between slides and media.',
     image: '/Photos/onlin%20and....png',
     imageAlt: 'Media playback during service',
+    href: '/features#media',
   },
   {
     id: 'lower-third-design',
@@ -1693,6 +1710,7 @@ export const guideCards: GuideCard[] = [
       'Create name and title overlays that match your stream and sanctuary displays from one builder.',
     image: '/Photos/third-builder.png',
     imageAlt: 'Lower third builder',
+    href: '/features#lower-third-builder',
   },
   {
     id: 'lower-third-live',
@@ -1702,6 +1720,7 @@ export const guideCards: GuideCard[] = [
       'Preview and project lower thirds alongside lyrics and scripture without switching apps.',
     image: '/Photos/NDL.png',
     imageAlt: 'Lower third on live output',
+    href: '/features#lower-third-builder',
   },
 ]
 
