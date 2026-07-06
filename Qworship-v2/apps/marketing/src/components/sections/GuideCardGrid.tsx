@@ -1,5 +1,4 @@
 import type { GuideCard } from '@/types/content'
-import { Link } from 'wouter'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 
 interface GuideCardGridProps {
@@ -19,7 +18,7 @@ export function GuideCardGrid({ cards }: GuideCardGridProps) {
     <div className="guides-card-grid">
       {cards.map((card) => (
         <article key={card.id} className="guide-card reveal">
-          <Link href={card.href} className="guide-card-media">
+          <div className="guide-card-media">
             <img
               src={card.image}
               alt={card.imageAlt}
@@ -27,18 +26,16 @@ export function GuideCardGrid({ cards }: GuideCardGridProps) {
               loading="eager"
               decoding="async"
             />
-          </Link>
+          </div>
 
           <div className="guide-card-body">
-            <h3 className="guide-card-title font-headline">
-              <Link href={card.href}>{card.title}</Link>
-            </h3>
+            <h3 className="guide-card-title font-headline">{card.title}</h3>
             <p className="guide-card-description">{card.description}</p>
 
             <div className="guide-card-footer">
-              <Link href={card.href} className="guide-card-btn">
+              <button type="button" className="guide-card-btn">
                 Learn more
-              </Link>
+              </button>
               <MaterialIcon name="article" className="guide-card-doc-icon" aria-hidden />
             </div>
           </div>
