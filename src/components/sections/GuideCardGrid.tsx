@@ -23,7 +23,7 @@ export function GuideCardGrid({ cards }: GuideCardGridProps) {
             <img
               src={card.image}
               alt={card.imageAlt}
-              className="guide-card-image"
+              className={`guide-card-image${card.imageFit === 'cover' ? ' guide-card-image--cover' : ''}`}
               loading="eager"
               decoding="async"
             />

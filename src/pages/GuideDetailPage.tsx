@@ -4,6 +4,7 @@ import { getGuideArticleContent, getGuideById, getRelatedGuides } from '@/lib/th
 import { GuideArticleSection } from '@/components/sections/GuideArticleSection'
 import { GuideDetailHeroSection } from '@/components/sections/GuideDetailHeroSection'
 import { GuideRelatedSection } from '@/components/sections/GuideRelatedSection'
+import { GuideStepsSection } from '@/components/sections/GuideStepsSection'
 
 export function GuideDetailPage() {
   const [, params] = useRoute('/guides/:guideId')
@@ -28,6 +29,7 @@ export function GuideDetailPage() {
     <>
       <GuideDetailHeroSection guide={guide} />
       <GuideArticleSection content={articleContent} />
+      <GuideStepsSection guide={guide} />
       <GuideRelatedSection cards={relatedGuides} />
     </>
   )

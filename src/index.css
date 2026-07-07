@@ -4088,9 +4088,13 @@ body.mobile-nav-open {
 .guide-card-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 0;
+}
+
+.guide-card-image--cover {
+  object-fit: cover;
 }
 
 .guide-card-body {
@@ -4180,13 +4184,13 @@ body.mobile-nav-open {
 .guide-article-section {
   background: #000;
   padding-top: 200px;
-  padding-bottom: 600px;
+  padding-bottom: 6rem;
 }
 
 @media (max-width: 767px) {
   .guide-article-section {
     padding-top: 7rem;
-    padding-bottom: 21rem;
+    padding-bottom: 3rem;
   }
 }
 
@@ -4234,6 +4238,284 @@ body.mobile-nav-open {
 
 .guides-empty-state {
   font-size: 1rem;
+}
+
+/* ─── Guide detail: steps accordion ─────────────────────────────────────── */
+
+.guide-steps-section {
+  background: #000;
+  padding-top: 2rem;
+  padding-bottom: 7rem;
+}
+
+@media (max-width: 767px) {
+  .guide-steps-section {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.guide-steps-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .guide-steps-grid {
+    grid-template-columns: 20rem 1fr;
+    gap: 5rem;
+  }
+}
+
+.guide-steps-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: static;
+}
+
+@media (min-width: 1024px) {
+  .guide-steps-sidebar {
+    position: sticky;
+    top: 6.5rem;
+  }
+}
+
+.guide-steps-sidebar-card {
+  padding: 1.75rem;
+  border-radius: 1rem;
+  background: #131316;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.guide-steps-sidebar-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+}
+
+.guide-steps-sidebar-summary {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #9ca3af;
+  margin-bottom: 1.5rem;
+}
+
+.guide-steps-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 1024px) {
+  .guide-steps-download-btn {
+    padding: 1.125rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+}
+
+.guide-steps-download-icon {
+  font-size: 1.125rem;
+}
+
+.guide-steps-nav-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0;
+}
+
+.guide-steps-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.guide-steps-nav-item {
+  text-align: left;
+  padding: 0.625rem 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.guide-steps-nav-item:hover {
+  color: #d1d5db;
+}
+
+.guide-steps-nav-item--active {
+  color: #fff;
+  font-weight: 700;
+}
+
+.guide-steps-content-heading {
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  font-weight: 700;
+  color: #bf36ff;
+  margin-bottom: 1rem;
+}
+
+.guide-steps-content-description {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #9ca3af;
+  max-width: 40rem;
+  margin: 0 0 2.5rem;
+}
+
+.guide-steps-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.guide-steps-item {
+  border-radius: 0.75rem;
+  background: #131316;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.guide-steps-item--open {
+  border-color: rgba(191, 54, 255, 0.35);
+}
+
+.guide-steps-item-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.5rem 1.75rem;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.guide-steps-item-number {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background: #ff4db8;
+  color: #000;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.guide-steps-item-number--active {
+  background: #bf36ff;
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(191, 54, 255, 0.25);
+}
+
+.guide-steps-item-title {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.guide-steps-item-chevron {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  color: #9ca3af;
+  transition: transform 0.2s ease;
+}
+
+.guide-steps-item--open .guide-steps-item-chevron {
+  transform: rotate(180deg);
+  color: #fff;
+}
+
+.guide-steps-item-body {
+  padding: 0 1.75rem 2rem 4.5rem;
+}
+
+.guide-steps-item-body p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.guide-steps-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-top: 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-steps-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+.guide-steps-checklist-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 3px;
+  color: #fff;
+  background: #bf36ff;
+}
+
+.guide-steps-next-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #ff4db8, #bf36ff);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  float: right;
+}
+
+.guide-steps-next-btn:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 767px) {
+  .guide-steps-item-body {
+    padding-left: 1.5rem;
+  }
+
+  .guide-steps-next-btn {
+    float: none;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ─── FAQs page ───────────────────────────────────────────────────────────── */
@@ -6939,7 +7221,7 @@ body.mobile-nav-open {
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 9999px;
-  background: #61459d;
+  background: linear-gradient(135deg, #bf36ff 0%, #8e20c1 100%);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;

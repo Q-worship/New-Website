@@ -188,12 +188,33 @@ export interface GuideCard {
   description: string
   image: string
   imageAlt: string
+  imageFit?: 'cover' | 'contain'
   article: GuideArticleContent
+  steps?: GuideStepsContent
 }
 
 export interface GuideArticleContent {
   title: { line1: string; line2Before?: string; accent?: string; gradientLine?: 1 | 2 }
   body: string
+}
+
+export interface GuideStep {
+  id: string
+  title: string
+  body: string
+  checklist?: string[]
+}
+
+export interface GuideStepSection {
+  id: string
+  label: string
+  description: string
+  steps: GuideStep[]
+}
+
+export interface GuideStepsContent {
+  summary: string
+  sections: GuideStepSection[]
 }
 
 export interface FaqCategoryItem {

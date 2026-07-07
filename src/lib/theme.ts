@@ -1624,14 +1624,108 @@ export const guideCards: GuideCard[] = [
       },
       body: 'The Live Console is where your operator runs the entire service — scripture, lyrics, announcements, and media from one screen. Start by connecting your main and stage displays, then open a sample service order to familiarise your team with the GO LIVE workflow. A five-minute test run on Saturday saves every awkward pause on Sunday morning.',
     },
+    steps: {
+      summary: 'A step-by-step walkthrough for your first live service — from install to wrap-up.',
+      sections: [
+        {
+          id: 'before-the-service',
+          label: 'Before the Service',
+          description:
+            "Arrive at least 30 minutes before the service starts. These steps take under 10 minutes once you've done them once — but give yourself time the first week.",
+          steps: [
+            {
+              id: 'download-and-install',
+              title: 'Download and Install Q-worship',
+              body: 'Download the Q-worship Live Console installer for your operating system (Windows or macOS) from Q-worship.com/download. Run the installer and follow the on-screen prompts. The app installs in under two minutes and requires no server setup.',
+              checklist: [
+                'Windows 10/11 (64-bit) or macOS 11+',
+                'Minimum 4GB RAM, 2GB free disk space',
+                'Internet connection for first-time Bible data download',
+                'Projector or secondary display connected',
+              ],
+            },
+            {
+              id: 'launch-and-login',
+              title: 'Launch Q-worship and Login',
+              body: 'Open the Live Console and sign in with your church account. Your Bible translations, songbook, and saved service orders sync automatically the first time you log in.',
+            },
+            {
+              id: 'configure-microphone',
+              title: 'Configure Your Microphone (Hands-free Bible)',
+              body: "Open Settings > Audio and select the microphone your pastor will use at the pulpit. Run the quick calibration prompt so Q-worship recognises the stage mic clearly before the service starts.",
+            },
+            {
+              id: 'setup-projection-display',
+              title: 'Set-up Your Projection Display for Go-Live',
+              body: 'Under Display, assign your projector or secondary screen as the output. Use Preview mode to confirm the audience sees exactly what’s on the output screen, separate from your operator view.',
+            },
+            {
+              id: 'load-songs',
+              title: 'Load Your Songs to Songbook',
+              body: "Import or search for this week's setlist in the Songbook tab. Arrange verse and chorus order for each song so your operator can jump between sections with a single click during worship.",
+            },
+          ],
+        },
+        {
+          id: 'during-the-service',
+          label: 'During the Service',
+          description:
+            "Once you're live, the console does the heavy lifting. Follow these steps to keep scripture, songs, and slides moving without a hitch.",
+          steps: [
+            {
+              id: 'go-live',
+              title: 'Go Live',
+              body: 'Toggle GO LIVE from the Live Console to start sending output to the projector. A status indicator confirms the audience display is active before you begin.',
+            },
+            {
+              id: 'follow-hands-free-bible',
+              title: 'Follow Along with the Hands-Free Bible',
+              body: 'When your pastor references a verse aloud, Q-worship listens, matches the reference, and puts it on screen automatically — no typing, no searching mid-sermon.',
+            },
+            {
+              id: 'switch-songs-scripture',
+              title: 'Switch Between Songs and Scripture',
+              body: 'Use the Bible, Songs, and Slides tabs to move between service elements without breaking the flow. Each tab remembers your last position so transitions stay smooth.',
+            },
+            {
+              id: 'handle-changes',
+              title: 'Handle Last-Minute Changes',
+              body: 'If the order changes on the fly, drag any item to a new position in the queue or search for a new song or verse directly — the audience display updates the moment you confirm.',
+            },
+          ],
+        },
+        {
+          id: 'after-the-service',
+          label: 'After the Service',
+          description: 'Wrapping up well makes next Sunday easier. A few minutes now saves guesswork later.',
+          steps: [
+            {
+              id: 'exit-live',
+              title: 'Exit Live and Review',
+              body: 'Select EXIT LIVE to end output cleanly. Q-worship logs the songs and scriptures used so you can reference them for next week’s planning.',
+            },
+            {
+              id: 'save-order',
+              title: "Save This Week's Service Order",
+              body: "Save the current order as a template if it worked well, so next Sunday's setup starts from a working baseline instead of a blank slate.",
+            },
+            {
+              id: 'note-fixes',
+              title: 'Note Any Fixes for Next Time',
+              body: 'Jot down anything that needs adjusting — mic levels, display timing, song order — directly in the service notes so your team can improve before the next service.',
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     id: 'no-need-to-type-announcements',
     categoryId: 'general',
-    title: 'No need to Type. Just Speak',
+    title: 'Announcements, ready without a script',
     titleLines: {
-      line1: 'No need to Type.',
-      line2: 'Just Speak',
+      line1: 'Announcements, ready',
+      line2: 'without a script',
     },
     description:
       'Build polished Sunday announcement slides in minutes — welcome messages, event promos, and countdowns that match your church brand.',
@@ -1658,6 +1752,7 @@ export const guideCards: GuideCard[] = [
       'Stay in the moment at the pulpit — say a reference out loud and Q-worship finds the verse and puts it on screen instantly.',
     image: '/Photos/hands-free-stage.png',
     imageAlt: 'Pastor using hands-free Bible search on stage',
+    imageFit: 'cover',
     article: {
       title: {
         line1: 'Your Bible. Hands-free.',
@@ -1677,8 +1772,8 @@ export const guideCards: GuideCard[] = [
     },
     description:
       'Walk through service order setup, display outputs, and a quick rehearsal so your team is confident before doors open.',
-    image: '/Photos/Service%20order.png',
-    imageAlt: 'Service order planning interface',
+    image: '/Photos/Easy%20to%20use.png',
+    imageAlt: 'Q-worship Live Console multi-panel setup view',
     article: {
       title: {
         line1: 'Ready before doors open.',
@@ -1686,6 +1781,77 @@ export const guideCards: GuideCard[] = [
         accent: 'your first Sunday.',
       },
       body: 'A smooth first Sunday starts the night before. Build your service order with every song, scripture, and announcement in sequence. Confirm display outputs on both sanctuary and stage screens. Assign roles — who runs the console, who handles lyrics, who manages media. Finish with a full run-through in presentation mode so every transition feels natural when the congregation arrives.',
+    },
+    steps: {
+      summary: 'A practical checklist to get your team ready before doors open.',
+      sections: [
+        {
+          id: 'plan-the-order',
+          label: 'Plan the Order',
+          description: 'Start planning a few days out so nothing is left to guesswork on Sunday morning.',
+          steps: [
+            {
+              id: 'build-service-order',
+              title: 'Build the Service Order',
+              body: "List every item — songs, scripture readings, announcements, and media — in the sequence they'll happen. Group them into sections like Pre-Service, Worship, and Message so the flow is easy to follow at a glance.",
+            },
+            {
+              id: 'confirm-scripture-references',
+              title: 'Confirm Scripture References',
+              body: 'Double check every verse reference in your service order against the translation your church uses. A quick pass now avoids a wrong reference showing up live.',
+            },
+            {
+              id: 'time-announcements',
+              title: 'Time the Announcements',
+              body: "Keep welcome and announcement slides to a fixed window so they don't run long. A countdown timer keeps the pre-service segment on schedule.",
+            },
+          ],
+        },
+        {
+          id: 'confirm-displays-roles',
+          label: 'Confirm Displays & Roles',
+          description: 'With the order set, make sure every screen and every teammate knows their part.',
+          steps: [
+            {
+              id: 'test-outputs',
+              title: 'Test Sanctuary and Stage Outputs',
+              body: 'Connect both the main sanctuary screen and the stage confidence monitor, then confirm each shows the correct content — lyrics on stage, full slides for the congregation.',
+            },
+            {
+              id: 'assign-roles',
+              title: 'Assign Operator Roles',
+              body: "Decide who runs the console, who manages media cues, and who's on standby for last-minute changes. Clear roles prevent two people reaching for the same control mid-service.",
+            },
+            {
+              id: 'check-audio-routing',
+              title: 'Check Audio Routing',
+              body: "Confirm the stage microphone feeding the Hands-Free Bible is the correct input, and that monitor audio isn't picked up as a false trigger.",
+            },
+          ],
+        },
+        {
+          id: 'run-the-rehearsal',
+          label: 'Run the Rehearsal',
+          description: "One full run-through catches the small things a written plan can't.",
+          steps: [
+            {
+              id: 'walk-full-order',
+              title: 'Walk the Full Order in Presentation Mode',
+              body: 'Run through every item in your service order exactly as it will play Sunday, including transitions between songs, scripture, and announcements.',
+            },
+            {
+              id: 'time-run-through',
+              title: 'Time the Full Run-Through',
+              body: 'Note how long the walkthrough takes versus your target service length, and trim or adjust pacing where needed.',
+            },
+            {
+              id: 'debrief-team',
+              title: 'Debrief with the Team',
+              body: 'Gather the operator and any stage volunteers for a two-minute recap — what worked, what to watch for — so everyone starts Sunday morning aligned.',
+            },
+          ],
+        },
+      ],
     },
   },
   {
@@ -1700,6 +1866,7 @@ export const guideCards: GuideCard[] = [
       'Switch songs quickly, follow verse and chorus sections, and keep the band and congregation in sync from the Live Console.',
     image: '/Photos/Praise%20and%20Worship.png',
     imageAlt: 'Worship lyrics on screen',
+    imageFit: 'cover',
     article: {
       title: {
         line1: 'Every lyric. Every section.',
@@ -1728,6 +1895,77 @@ export const guideCards: GuideCard[] = [
         accent: 'Fully in Your Hands.',
       },
       body: 'A great service is a story told in order. Q-worship\'s Service Slides system lets you arrange every item — songs, scripture, announcements, videos, and custom slides — into sections like Pre-Service, Worship, and Message. Drag to reorder on the fly, preview each slide before going live, and navigate the entire flow with simple keyboard shortcuts.',
+    },
+    steps: {
+      summary: 'Arrange every part of your service into one smooth, presentable flow.',
+      sections: [
+        {
+          id: 'build-the-timeline',
+          label: 'Build the Timeline',
+          description: 'Lay out every part of the service before you touch a single cue.',
+          steps: [
+            {
+              id: 'create-sections',
+              title: 'Create Service Sections',
+              body: 'Start with sections like Pre-Service, Worship, and Message, then drop songs, scripture, announcements, and media into each one as you plan the flow.',
+            },
+            {
+              id: 'add-custom-slides',
+              title: 'Add Custom Slides',
+              body: "Use the slide editor to design one-off content — sermon titles, event promos, or scripture callouts — that don't belong to a song or Bible passage.",
+            },
+            {
+              id: 'insert-media-cues',
+              title: 'Insert Media Cues',
+              body: 'Drop videos or images directly into the timeline where they belong in the service, so playback triggers automatically in sequence.',
+            },
+          ],
+        },
+        {
+          id: 'preview-reorder',
+          label: 'Preview & Reorder',
+          description: 'Check your work and adjust before anyone sees it live.',
+          steps: [
+            {
+              id: 'preview-each-slide',
+              title: 'Preview Each Slide',
+              body: 'Step through the timeline in preview mode to catch typos, mistimed cues, or slides in the wrong order before the service starts.',
+            },
+            {
+              id: 'drag-to-reorder',
+              title: 'Drag to Reorder',
+              body: 'If the pastor moves a segment or drops an item, drag it to its new position in the timeline — the rest of the order shifts automatically.',
+            },
+            {
+              id: 'save-as-template',
+              title: 'Save as a Reusable Template',
+              body: "Once the flow feels right, save the section layout as a template so future services start from a proven structure.",
+            },
+          ],
+        },
+        {
+          id: 'go-live',
+          label: 'Go Live',
+          description: 'Keep both hands free and your eyes on the room while you run the service.',
+          steps: [
+            {
+              id: 'navigate-shortcuts',
+              title: 'Navigate with Keyboard Shortcuts',
+              body: 'Use simple keyboard shortcuts to move forward and backward through the timeline without touching the mouse, keeping your eyes on the room.',
+            },
+            {
+              id: 'handle-adjustments',
+              title: 'Handle On-the-Fly Adjustments',
+              body: 'Jump to any section directly from the timeline if the service order changes mid-service — no need to click through everything in between.',
+            },
+            {
+              id: 'close-out',
+              title: 'Close Out the Service',
+              body: 'End on your closing slide or media cue, then archive the timeline so it’s available for reference next time you plan a similar service.',
+            },
+          ],
+        },
+      ],
     },
   },
 ]
