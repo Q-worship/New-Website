@@ -1504,9 +1504,8 @@ export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
 export const mediaAccordionSpotlight: AccordionSpotlightContent = {
   id: 'media',
   header: {
-    line1: 'The right background for every',
-    line2: 'verse, song or announcement.',
-    line2Before: '',
+    line1: 'The right background for every verse, song or',
+    line2Before: 'announcement.',
     accent: 'Found in seconds, not minutes.',
   },
   subtitle: {

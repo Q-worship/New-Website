@@ -3298,7 +3298,23 @@ body.mobile-nav-open {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     margin-bottom: 4rem;
+    align-items: start;
+  }
+
+  .feature-spotlight-grid .feature-spotlight-visual {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    max-height: var(--spotlight-copy-height, none);
+    min-height: 0;
+  }
+
+  .feature-spotlight-grid .feature-spotlight-image {
+    width: 100%;
+    height: 100%;
+    max-height: var(--spotlight-copy-height, none);
+    object-fit: contain;
+    object-position: center;
   }
 
   .feature-spotlight-copy {
@@ -3708,15 +3724,18 @@ body.mobile-nav-open {
   .feature-spotlight-accordion-grid .feature-spotlight-visual {
     display: flex;
     align-self: stretch;
-    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    max-height: var(--spotlight-copy-height, none);
   }
 
   .feature-spotlight-accordion-grid .feature-spotlight-image {
     width: 100%;
     height: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    object-position: center top;
+    max-height: var(--spotlight-copy-height, none);
+    object-fit: contain;
+    object-position: center;
   }
 
   .feature-spotlight-accordion-list {
@@ -3828,11 +3847,6 @@ body.mobile-nav-open {
 
   .feature-spotlight-accordion-list {
     gap: 0.75rem;
-  }
-
-  .feature-spotlight-accordion-grid .feature-spotlight-image {
-    object-fit: contain;
-    object-position: center top;
   }
 }
 
@@ -4062,30 +4076,28 @@ body.mobile-nav-open {
 }
 
 .guide-card-media {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 22rem;
-  padding: 1.5rem;
-  background: linear-gradient(180deg, rgba(45, 27, 77, 0.65) 0%, rgba(45, 27, 77, 0.35) 100%);
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  padding: 0;
+  background: linear-gradient(180deg, #2d1b4d 0%, #1a0f2e 100%);
   text-decoration: none;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .guide-card-image {
   width: 100%;
-  height: auto;
-  max-height: none;
-  object-fit: contain;
-  border-radius: 0.5rem;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
 }
 
 .guide-card-body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-height: 16rem;
-  padding: 1.75rem 1.5rem 2rem;
+  padding: 2.5rem 1.25rem 1.5rem;
 }
 
 .guide-card-title {
@@ -4094,7 +4106,6 @@ body.mobile-nav-open {
   color: #fff;
   line-height: 1.35;
   margin-bottom: 1.5rem;
-  min-height: 2.7em;
 }
 
 .guide-card-title-line {
@@ -4111,19 +4122,17 @@ body.mobile-nav-open {
 }
 
 .guide-card-description {
-  flex: 1;
   font-size: 0.875rem;
   line-height: 1.55;
   color: #9ca3af;
-  margin: 0 0 1.75rem;
-  min-height: 6.5rem;
+  margin: 0 0 2rem;
 }
 
 .guide-card-footer {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .guide-card-btn {
@@ -4143,18 +4152,7 @@ body.mobile-nav-open {
 
 @media (min-width: 1024px) {
   .guide-card-media {
-    min-height: 28rem;
-    padding: 1.75rem;
-  }
-
-  .guide-card-body {
-    min-height: 20rem;
-    padding: 2rem 1.75rem 2.25rem;
-  }
-
-  .guide-card-description {
-    min-height: 8rem;
-    margin-bottom: 2rem;
+    aspect-ratio: 16 / 11;
   }
 }
 
