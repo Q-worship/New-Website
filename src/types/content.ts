@@ -273,7 +273,7 @@ export interface AccordionSpotlightItem {
 
 export interface AccordionSpotlightContent {
   id: string
-  header: { line1: string; line2Before: string; accent: string }
+  header: { line1: string; line2?: string; line2Before?: string; accent: string }
   subtitle: { line1: string; line2: string }
   items: AccordionSpotlightItem[]
   image: string

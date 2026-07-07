@@ -3539,6 +3539,17 @@ body.mobile-nav-open {
     margin-bottom: 0;
   }
 
+  .features-page #lower-third-builder .feature-spotlight-title {
+    font-size: clamp(1.05rem, 4vw, 1.2rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .features-page #lower-third-builder .feature-spotlight-title-line {
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
   .feature-spotlight-title-line {
     white-space: normal;
     overflow-wrap: break-word;
@@ -3657,6 +3668,12 @@ body.mobile-nav-open {
     line-height: 1.2;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
+  }
+
+  .features-page #media .feature-spotlight-accordion-heading {
+    font-size: clamp(1.15rem, 4.2vw, 1.35rem);
+    line-height: 1.22;
+    letter-spacing: -0.02em;
   }
 
   .feature-spotlight-accordion-heading-line {

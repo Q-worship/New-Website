@@ -250,6 +250,11 @@ function AccordionSpotlight({
             <span className="feature-spotlight-accordion-heading-line text-white">
               {content.header.line1}
             </span>
+            {content.header.line2 ? (
+              <span className="feature-spotlight-accordion-heading-line text-white">
+                {content.header.line2}
+              </span>
+            ) : null}
             <span className="feature-spotlight-accordion-heading-line">
               {content.header.line2Before ? (
                 <span className="text-white">{content.header.line2Before} </span>
