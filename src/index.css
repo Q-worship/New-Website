@@ -4209,12 +4209,12 @@ body.mobile-nav-open {
 }
 
 .guide-article-section--compact {
-  padding-top: 2rem;
+  padding-top: 4rem;
 }
 
 @media (max-width: 767px) {
   .guide-article-section--compact {
-    padding-top: 2rem;
+    padding-top: 3rem;
   }
 }
 

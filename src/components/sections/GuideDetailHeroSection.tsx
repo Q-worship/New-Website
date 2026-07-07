@@ -11,7 +11,7 @@ export function GuideDetailHeroSection({ guide, compact = false }: GuideDetailHe
   return (
     <section
       className={`guide-detail-hero-section pt-32 md:pt-36 reveal active ${
-        compact ? 'pb-8' : 'pb-16 md:pb-20'
+        compact ? 'pb-16' : 'pb-16 md:pb-20'
       }`}
     >
       <SiteContainer>
