@@ -191,6 +191,7 @@ export interface GuideCard {
   imageFit?: 'cover' | 'contain'
   article: GuideArticleContent
   steps?: GuideStepsContent
+  cloudSteps?: GuideStepsContent
 }
 
 export interface GuideArticleContent {

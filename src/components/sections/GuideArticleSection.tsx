@@ -3,11 +3,12 @@ import { SiteContainer } from '@/components/layout/SiteContainer'
 
 interface GuideArticleSectionProps {
   content: GuideArticleContent
+  compact?: boolean
 }
 
-export function GuideArticleSection({ content }: GuideArticleSectionProps) {
+export function GuideArticleSection({ content, compact = false }: GuideArticleSectionProps) {
   return (
-    <section className="guide-article-section reveal">
+    <section className={`guide-article-section reveal${compact ? ' guide-article-section--compact' : ''}`}>
       <SiteContainer>
         <div className="guide-article-inner">
           <h2 className="guide-article-title font-headline font-bold">

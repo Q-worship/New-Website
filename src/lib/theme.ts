@@ -1718,6 +1718,39 @@ export const guideCards: GuideCard[] = [
         },
       ],
     },
+    cloudSteps: {
+      summary: 'A lightweight walkthrough for running your first service entirely from the browser.',
+      sections: [
+        {
+          id: 'cloud-overview',
+          label: 'Get Started in the Browser',
+          description:
+            "No install, no downloads — sign in and you're ready to go live from any computer.",
+          steps: [
+            {
+              id: 'sign-in-browser',
+              title: 'Sign In at cloud.q-worship.com',
+              body: 'Open any modern browser, go to cloud.q-worship.com, and sign in with your church account. Your Bible translations, songbook, and saved service orders are already synced from the Live Console.',
+            },
+            {
+              id: 'open-output-window',
+              title: 'Open the Output Window',
+              body: 'Click "Open Output" to launch a second browser window, drag it onto your projector or secondary display, and make it full screen.',
+            },
+            {
+              id: 'run-service-cloud',
+              title: 'Run the Service',
+              body: 'Use the same Bible, Songs, and Slides controls as the desktop app, right in your browser tab, to advance through your service order.',
+            },
+            {
+              id: 'share-service-link',
+              title: 'Share a View-Only Link',
+              body: "Need a volunteer to follow along remotely? Generate a share link so they can see the live output from their own device without needing an account.",
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     id: 'no-need-to-type-announcements',
@@ -1853,6 +1886,33 @@ export const guideCards: GuideCard[] = [
         },
       ],
     },
+    cloudSteps: {
+      summary: 'The same first-Sunday checklist, adapted for teams running entirely from the Cloud Presentation System.',
+      sections: [
+        {
+          id: 'cloud-overview',
+          label: 'Cloud Checklist Overview',
+          description: 'Everything from the desktop checklist still applies — just swap install steps for a browser tab.',
+          steps: [
+            {
+              id: 'build-order-cloud',
+              title: 'Build the Order Online',
+              body: 'Sign in at cloud.q-worship.com and build your service order the same way you would in the desktop app — no install required.',
+            },
+            {
+              id: 'test-browser-output',
+              title: 'Test the Browser Output',
+              body: 'Open the output window on the sanctuary display and confirm it renders correctly in full-screen before doors open.',
+            },
+            {
+              id: 'confirm-network',
+              title: 'Confirm a Stable Connection',
+              body: "Since the Cloud Presentation System runs live over the internet, confirm your venue's Wi-Fi or ethernet connection is stable before the rehearsal.",
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     id: 'songbook-live',
@@ -1962,6 +2022,33 @@ export const guideCards: GuideCard[] = [
               id: 'close-out',
               title: 'Close Out the Service',
               body: 'End on your closing slide or media cue, then archive the timeline so it’s available for reference next time you plan a similar service.',
+            },
+          ],
+        },
+      ],
+    },
+    cloudSteps: {
+      summary: 'Build and run the same service flow from any browser, with nothing to install.',
+      sections: [
+        {
+          id: 'cloud-overview',
+          label: 'Cloud Overview',
+          description: 'The Cloud Presentation System mirrors the desktop timeline, so your flow stays identical.',
+          steps: [
+            {
+              id: 'open-timeline-cloud',
+              title: 'Open Your Timeline in the Browser',
+              body: 'Sign in at cloud.q-worship.com to access the same service timeline you built on desktop, synced automatically.',
+            },
+            {
+              id: 'preview-cloud',
+              title: 'Preview from Any Device',
+              body: 'Step through the timeline from a laptop, tablet, or shared computer — no software installation needed on the machine running the display.',
+            },
+            {
+              id: 'go-live-cloud',
+              title: 'Go Live from the Browser',
+              body: 'Open the output window on your display screen and control playback from a second tab or device, keeping the same keyboard shortcuts as desktop.',
             },
           ],
         },

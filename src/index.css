@@ -3324,6 +3324,13 @@ body.mobile-nav-open {
   }
 }
 
+@media (min-width: 1920px) {
+  .feature-spotlight-grid .feature-spotlight-visual,
+  .feature-spotlight-grid .feature-spotlight-image {
+    max-height: calc(var(--spotlight-copy-height, none) * 1.4);
+  }
+}
+
 @media (min-width: 1280px) {
   .feature-spotlight-copy .feature-spotlight-title {
     font-size: clamp(2rem, 3vw, 3rem);
@@ -3741,6 +3748,13 @@ body.mobile-nav-open {
   .feature-spotlight-accordion-list {
     justify-content: flex-start;
     gap: 0.75rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .feature-spotlight-accordion-grid .feature-spotlight-visual,
+  .feature-spotlight-accordion-grid .feature-spotlight-image {
+    max-height: calc(var(--spotlight-copy-height, none) * 1.4);
   }
 }
 
@@ -4194,6 +4208,16 @@ body.mobile-nav-open {
   }
 }
 
+.guide-article-section--compact {
+  padding-top: 2rem;
+}
+
+@media (max-width: 767px) {
+  .guide-article-section--compact {
+    padding-top: 2rem;
+  }
+}
+
 .guide-article-inner {
   max-width: 52rem;
   margin: 0 auto;
@@ -4241,6 +4265,57 @@ body.mobile-nav-open {
 }
 
 /* ─── Guide detail: steps accordion ─────────────────────────────────────── */
+
+.guide-product-nav {
+  position: sticky;
+  top: 5rem;
+  z-index: 40;
+  background: #27252f;
+}
+
+.guide-product-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  overflow-x: auto;
+}
+
+.guide-product-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.625rem 1.125rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.guide-product-nav-link:hover {
+  color: #fff;
+}
+
+.guide-product-nav-link--active {
+  background: #0a0510;
+  color: #fff;
+  font-weight: 600;
+}
+
+.guide-product-nav-badge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
 
 .guide-steps-section {
   background: #000;

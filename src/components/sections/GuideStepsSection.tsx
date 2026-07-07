@@ -1,19 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { GuideCard } from '@/types/content'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
+import type { GuideProductId } from '@/components/sections/GuideProductNav'
 
 interface GuideStepsSectionProps {
   guide: GuideCard
+  activeProduct: GuideProductId
 }
 
-export function GuideStepsSection({ guide }: GuideStepsSectionProps) {
-  const steps = guide.steps
-  const sections = steps?.sections ?? []
+export function GuideStepsSection({ guide, activeProduct }: GuideStepsSectionProps) {
+  const activeContent = activeProduct === 'cloud' ? guide.cloudSteps : guide.steps
+  const sections = activeContent?.sections ?? []
+
   const [activeSectionId, setActiveSectionId] = useState<string | undefined>(sections[0]?.id)
   const [activeStepId, setActiveStepId] = useState<string | undefined>(sections[0]?.steps[0]?.id)
 
-  if (!steps || sections.length === 0) {
+  useEffect(() => {
+    setActiveSectionId(sections[0]?.id)
+    setActiveStepId(sections[0]?.steps[0]?.id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeProduct, guide.id])
+
+  if (!guide.steps || sections.length === 0) {
     return null
   }
 
@@ -39,7 +48,7 @@ export function GuideStepsSection({ guide }: GuideStepsSectionProps) {
           <aside className="guide-steps-sidebar">
             <div className="guide-steps-sidebar-card">
               <h2 className="guide-steps-sidebar-title font-headline">{guide.titleLines.line1}</h2>
-              <p className="guide-steps-sidebar-summary">{steps.summary}</p>
+              <p className="guide-steps-sidebar-summary">{activeContent?.summary}</p>
               <button type="button" className="features-hero-download-btn guide-steps-download-btn">
                 Download
                 <MaterialIcon name="download" className="guide-steps-download-icon" aria-hidden />

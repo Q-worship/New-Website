@@ -4,11 +4,16 @@ import { SiteContainer } from '@/components/layout/SiteContainer'
 
 interface GuideDetailHeroSectionProps {
   guide: GuideCard
+  compact?: boolean
 }
 
-export function GuideDetailHeroSection({ guide }: GuideDetailHeroSectionProps) {
+export function GuideDetailHeroSection({ guide, compact = false }: GuideDetailHeroSectionProps) {
   return (
-    <section className="guide-detail-hero-section pt-32 md:pt-36 pb-16 md:pb-20 reveal active">
+    <section
+      className={`guide-detail-hero-section pt-32 md:pt-36 reveal active ${
+        compact ? 'pb-8' : 'pb-16 md:pb-20'
+      }`}
+    >
       <SiteContainer>
         <div className="features-hero-grid">
           <div className="features-hero-copy">
