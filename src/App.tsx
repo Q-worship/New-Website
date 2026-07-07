@@ -7,6 +7,7 @@ import { About } from '@/pages/About'
 import { Pricing } from '@/pages/Pricing'
 import { Resources } from '@/pages/Resources'
 import { Guides } from '@/pages/Guides'
+import { GuideDetailPage } from '@/pages/GuideDetailPage'
 import { FAQs } from '@/pages/FAQs'
 import { Downloads } from '@/pages/Downloads'
 import { JobDetailPage } from '@/pages/JobDetailPage'
@@ -33,6 +34,7 @@ export function App() {
               <Route path="/about" component={About} />
               <Route path="/pricing" component={Pricing} />
               <Route path="/resources" component={Resources} />
+              <Route path="/guides/:guideId" component={GuideDetailPage} />
               <Route path="/guides" component={Guides} />
               <Route path="/faqs" component={FAQs} />
               <Route path="/downloads" component={Downloads} />

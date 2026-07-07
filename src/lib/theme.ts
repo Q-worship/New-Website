@@ -7,6 +7,7 @@ import type {
   FeatureCard,
   FeaturesSubNavItem,
   GuideCard,
+  GuideArticleContent,
   GuideCategoryItem,
   FaqCategoryItem,
   FaqItem,
@@ -1602,8 +1603,134 @@ export const lowerThirdBuilderSpotlight: ChecklistSpotlightContent = {
   showListeningOverlay: false,
 }
 
-const guideCardDescription =
-  'Stay in the moment. Just say the reference out loud — Qworship hears you, finds the verse, and puts it on screen. No pausing, no searching, no breaking your stride at the pulpit.'
+export const guideCards: GuideCard[] = [
+  {
+    id: 'live-console-first-sunday',
+    categoryId: 'general',
+    title: 'Setting up Q-worship Live Console for your first Sunday',
+    titleLines: {
+      line1: 'Setting up Q-worship Live Console',
+      line2: 'for your first Sunday',
+    },
+    description:
+      'Connect your displays, walk through the Live Console layout, and run a quick test so your team is ready before the congregation arrives.',
+    image: '/Photos/On-screen%20bible.png',
+    imageAlt: 'Q-worship Live Console Bible interface',
+    article: {
+      title: {
+        line1: 'Your first Sunday.',
+        line2Before: 'Set up the Live Console with',
+        accent: 'confidence.',
+      },
+      body: 'The Live Console is where your operator runs the entire service — scripture, lyrics, announcements, and media from one screen. Start by connecting your main and stage displays, then open a sample service order to familiarise your team with the GO LIVE workflow. A five-minute test run on Saturday saves every awkward pause on Sunday morning.',
+    },
+  },
+  {
+    id: 'no-need-to-type-announcements',
+    categoryId: 'general',
+    title: 'No need to Type. Just Speak',
+    titleLines: {
+      line1: 'No need to Type.',
+      line2: 'Just Speak',
+    },
+    description:
+      'Build polished Sunday announcement slides in minutes — welcome messages, event promos, and countdowns that match your church brand.',
+    image: '/Photos/Announcements.png',
+    imageAlt: 'Sunday announcements slide preview',
+    article: {
+      title: {
+        line1: 'Announcements that look professional.',
+        line2Before: 'Built in minutes,',
+        accent: 'not hours.',
+      },
+      body: "Sunday announcements set the tone before worship begins. With Q-worship's Service Slides, you can design welcome slides, event promos, and countdown timers using templates that match your church brand — then drop them straight into your service order. No switching apps, no last-minute PowerPoint edits.",
+    },
+  },
+  {
+    id: 'no-need-to-type-stage',
+    categoryId: 'general',
+    title: 'No need to Type. Just Speak',
+    titleLines: {
+      line1: 'No need to Type.',
+      line2: 'Just Speak',
+    },
+    description:
+      'Stay in the moment at the pulpit — say a reference out loud and Q-worship finds the verse and puts it on screen instantly.',
+    image: '/Photos/hands-free-stage.png',
+    imageAlt: 'Pastor using hands-free Bible search on stage',
+    article: {
+      title: {
+        line1: 'Your Bible. Hands-free.',
+        line2Before: 'Always ready,',
+        accent: 'Online and Offline',
+      },
+      body: 'For ages, pastors have paused mid-sermon to wait for a verse. Q-worship ends that. Powered by our advanced speech-to-text engine, the Q-worship Hands-Free Bible listens as you lead, understanding natural language, retaining context, and instantly surfacing the exact scripture you need across major Bible translations.',
+    },
+  },
+  {
+    id: 'first-sunday-checklist',
+    categoryId: 'general',
+    title: 'Your first Sunday checklist',
+    titleLines: {
+      line1: 'Your first Sunday',
+      line2: 'checklist',
+    },
+    description:
+      'Walk through service order setup, display outputs, and a quick rehearsal so your team is confident before doors open.',
+    image: '/Photos/Service%20order.png',
+    imageAlt: 'Service order planning interface',
+    article: {
+      title: {
+        line1: 'Ready before doors open.',
+        line2Before: 'A checklist for',
+        accent: 'your first Sunday.',
+      },
+      body: 'A smooth first Sunday starts the night before. Build your service order with every song, scripture, and announcement in sequence. Confirm display outputs on both sanctuary and stage screens. Assign roles — who runs the console, who handles lyrics, who manages media. Finish with a full run-through in presentation mode so every transition feels natural when the congregation arrives.',
+    },
+  },
+  {
+    id: 'songbook-live',
+    categoryId: 'general',
+    title: 'Project lyrics during live worship',
+    titleLines: {
+      line1: 'Project lyrics during',
+      line2: 'live worship',
+    },
+    description:
+      'Switch songs quickly, follow verse and chorus sections, and keep the band and congregation in sync from the Live Console.',
+    image: '/Photos/Praise%20and%20Worship.png',
+    imageAlt: 'Worship lyrics on screen',
+    article: {
+      title: {
+        line1: 'Every lyric. Every section.',
+        line2Before: '',
+        accent: 'Always one click ahead.',
+      },
+      body: "During live worship, timing is everything. Q-worship's Songbook lets your operator jump between verses, choruses, and bridges with a single click while the congregation sees perfectly formatted lyrics on the big screen. Real-time sync between the control window and projection output means the band, the operator, and the congregation are always on the same bar.",
+    },
+  },
+  {
+    id: 'service-slides-order',
+    categoryId: 'general',
+    title: 'Plan your service flow',
+    titleLines: {
+      line1: 'Plan your service',
+      line2: 'flow',
+    },
+    description:
+      'Arrange songs, scripture, media, and announcements in one timeline so every moment of your service flows smoothly.',
+    image: '/Photos/Service%20order.png',
+    imageAlt: 'Service slide order',
+    article: {
+      title: {
+        line1: 'Your Service.',
+        line2Before: '',
+        accent: 'Fully in Your Hands.',
+      },
+      body: 'A great service is a story told in order. Q-worship\'s Service Slides system lets you arrange every item — songs, scripture, announcements, videos, and custom slides — into sections like Pre-Service, Worship, and Message. Drag to reorder on the fly, preview each slide before going live, and navigate the entire flow with simple keyboard shortcuts.',
+    },
+  },
+]
 
 export const guidesHeroCopy = {
   badge: 'ARTICLES & GUIDES',
@@ -1627,163 +1754,35 @@ export const guidesCategoryItems: GuideCategoryItem[] = [
   { id: 'lower-third', label: 'Lower third' },
 ]
 
-export const guideCards: GuideCard[] = [
-  {
-    id: 'live-console-first-sunday',
-    categoryId: 'general',
-    title: 'Setting up Q-worship Live Console for your first Sunday',
-    description: guideCardDescription,
-    image: '/Photos/On-screen%20bible.png',
-    imageAlt: 'Q-worship Live Console Bible interface',
-  },
-  {
-    id: 'no-need-to-type-general-1',
-    categoryId: 'general',
-    title: 'No need to Type. Just Speak',
-    description: guideCardDescription,
-    image: '/Photos/Announcements.png',
-    imageAlt: 'Sunday announcements slide preview',
-  },
-  {
-    id: 'no-need-to-type-general-2',
-    categoryId: 'general',
-    title: 'No need to Type. Just Speak',
-    description: guideCardDescription,
-    image: '/Photos/hands-free-stage.png',
-    imageAlt: 'Pastor using hands-free Bible search on stage',
-  },
-  {
-    id: 'live-console-first-sunday-2',
-    categoryId: 'general',
-    title: 'Setting up Q-worship Live Console for your first Sunday',
-    description: guideCardDescription,
-    image: '/Photos/On-screen%20bible.png',
-    imageAlt: 'Q-worship Live Console Bible interface',
-  },
-  {
-    id: 'no-need-to-type-general-1-2',
-    categoryId: 'general',
-    title: 'No need to Type. Just Speak',
-    description: guideCardDescription,
-    image: '/Photos/Announcements.png',
-    imageAlt: 'Sunday announcements slide preview',
-  },
-  {
-    id: 'no-need-to-type-general-2-2',
-    categoryId: 'general',
-    title: 'No need to Type. Just Speak',
-    description: guideCardDescription,
-    image: '/Photos/hands-free-stage.png',
-    imageAlt: 'Pastor using hands-free Bible search on stage',
-  },
-  {
-    id: 'first-sunday-checklist',
-    categoryId: 'my-first-sunday',
-    title: 'Your first Sunday checklist',
-    description:
-      'Walk through service order setup, display outputs, and a quick rehearsal so your team is confident before doors open.',
-    image: '/Photos/Service%20order.png',
-    imageAlt: 'Service order planning interface',
-  },
-  {
-    id: 'first-sunday-rehearsal',
-    categoryId: 'my-first-sunday',
-    title: 'Rehearse like it is Sunday',
-    description:
-      'Run through lyrics, announcements, and scripture in presentation mode so transitions feel natural when the congregation arrives.',
-    image: '/Photos/eas%20to%20use.png',
-    imageAlt: 'Team rehearsing with Q-worship',
-  },
-  {
-    id: 'hands-free-getting-started',
-    categoryId: 'hands-free-bible',
-    title: 'Getting started with Hands-Free Bible',
-    description: guideCardDescription,
-    image: '/Photos/Hands%20free%20Bible.png',
-    imageAlt: 'Hands-free Bible voice search',
-  },
-  {
-    id: 'hands-free-offline',
-    categoryId: 'hands-free-bible',
-    title: 'Using voice Bible search offline',
-    description:
-      'Cache translations locally and keep preaching without Wi-Fi — voice commands work the same online or off.',
-    image: '/Photos/hands-free-stage.png',
-    imageAlt: 'Hands-free Bible on stage',
-  },
-  {
-    id: 'songbook-import',
-    categoryId: 'my-songbook',
-    title: 'Build your church songbook',
-    description:
-      'Import songs, organize sets, and project lyrics with the fonts and layouts your worship team prefers.',
-    image: '/Photos/Songs.png',
-    imageAlt: 'Songbook management interface',
-  },
-  {
-    id: 'songbook-live',
-    categoryId: 'my-songbook',
-    title: 'Project lyrics during live worship',
-    description:
-      'Switch songs quickly, follow song sections, and keep the band and congregation in sync from the Live Console.',
-    image: '/Photos/Praise%20and%20Worship.png',
-    imageAlt: 'Worship lyrics on screen',
-  },
-  {
-    id: 'service-slides-announcements',
-    categoryId: 'service-slides',
-    title: 'Design Sunday announcement slides',
-    description:
-      'Create polished announcement and welcome slides with templates that match your church brand.',
-    image: '/Photos/Announcements.png',
-    imageAlt: 'Announcement slide design',
-  },
-  {
-    id: 'service-slides-order',
-    categoryId: 'service-slides',
-    title: 'Plan your service flow',
-    description:
-      'Arrange songs, scripture, media, and announcements in one timeline so every moment flows smoothly.',
-    image: '/Photos/Service%20order.png',
-    imageAlt: 'Service slide order',
-  },
-  {
-    id: 'media-library',
-    categoryId: 'media',
-    title: 'Organize your media library',
-    description:
-      'Import videos and images, tag assets, and drop them into your service without hunting through folders.',
-    image: '/Photos/lightweight.png',
-    imageAlt: 'Media library interface',
-  },
-  {
-    id: 'media-live',
-    categoryId: 'media',
-    title: 'Play media during service',
-    description:
-      'Trigger videos and backgrounds from the Live Console with smooth transitions between slides and media.',
-    image: '/Photos/onlin%20and....png',
-    imageAlt: 'Media playback during service',
-  },
-  {
-    id: 'lower-third-design',
-    categoryId: 'lower-third',
-    title: 'Design lower thirds for speakers',
-    description:
-      'Create name and title overlays that match your stream and sanctuary displays from one builder.',
-    image: '/Photos/third-builder.png',
-    imageAlt: 'Lower third builder',
-  },
-  {
-    id: 'lower-third-live',
-    categoryId: 'lower-third',
-    title: 'Show lower thirds live',
-    description:
-      'Preview and project lower thirds alongside lyrics and scripture without switching apps.',
-    image: '/Photos/NDL.png',
-    imageAlt: 'Lower third on live output',
-  },
-]
+export function getGuideById(id: string): GuideCard | undefined {
+  return guideCards.find((guide) => guide.id === id)
+}
+
+export function getRelatedGuides(currentGuideId: string, categoryId: string, limit = 3): GuideCard[] {
+  const sameCategory = guideCards.filter(
+    (guide) => guide.categoryId === categoryId && guide.id !== currentGuideId,
+  )
+  const others = guideCards.filter(
+    (guide) => guide.categoryId !== categoryId && guide.id !== currentGuideId,
+  )
+
+  return [...sameCategory, ...others].slice(0, limit)
+}
+
+export function getGuideArticleContent(guideId: string): GuideArticleContent {
+  const guide = getGuideById(guideId)
+  if (guide) {
+    return guide.article
+  }
+
+  return {
+    title: { line1: 'Guide not found' },
+    body: '',
+  }
+}
+
+const guideCardDescription =
+  'Stay in the moment. Just say the reference out loud — Qworship hears you, finds the verse, and puts it on screen. No pausing, no searching, no breaking your stride at the pulpit.'
 
 export const faqsHeroCopy = {
   badge: 'FAQS',

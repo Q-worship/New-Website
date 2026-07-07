@@ -184,9 +184,16 @@ export interface GuideCard {
   id: string
   categoryId: string
   title: string
+  titleLines: { line1: string; line2: string }
   description: string
   image: string
   imageAlt: string
+  article: GuideArticleContent
+}
+
+export interface GuideArticleContent {
+  title: { line1: string; line2Before?: string; accent?: string; gradientLine?: 1 | 2 }
+  body: string
 }
 
 export interface FaqCategoryItem {
