@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { GuideCard } from '@/types/content'
+import { guideProductInfo } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import type { GuideProductId } from '@/components/sections/GuideProductNav'
@@ -47,9 +48,11 @@ export function GuideStepsSection({ guide, activeProduct }: GuideStepsSectionPro
         <div className="guide-steps-grid">
           <aside className="guide-steps-sidebar">
             <div className="guide-steps-sidebar-card">
-              <h2 className="guide-steps-sidebar-title font-headline">{guide.titleLines.line1}</h2>
-              <p className="guide-steps-sidebar-summary">{activeContent?.summary}</p>
-              <button type="button" className="features-hero-download-btn guide-steps-download-btn">
+              <h2 className="guide-steps-sidebar-title font-headline">
+                {guideProductInfo[activeProduct].title}
+              </h2>
+              <p className="guide-steps-sidebar-summary">{guideProductInfo[activeProduct].description}</p>
+              <button type="button" className="guide-steps-download-btn">
                 Download
                 <MaterialIcon name="download" className="guide-steps-download-icon" aria-hidden />
               </button>

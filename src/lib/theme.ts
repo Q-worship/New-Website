@@ -462,6 +462,19 @@ export const pricingPageCopy: PricingPageCopy = {
   faqCta: 'View more FAQs',
 }
 
+export const guideProductInfo: Record<'live-console' | 'cloud', { title: string; description: string }> = {
+  'live-console': {
+    title: 'Q-worship Live Console',
+    description:
+      'is a desktop application for Windows and macOS. It works offline once Bible data is downloaded, and connects to the internet for voice transcription and cloud sync. Best for churches with a dedicated operator machine connected to a projector.',
+  },
+  cloud: {
+    title: 'Q-worship Cloud Presentation System',
+    description:
+      'is a browser-based presentation tool. Nothing to install — sign in from any computer and your Bible data, songs, and service orders sync automatically. Best for teams that run service from a shared or borrowed machine.',
+  },
+}
+
 const liveConsolePlans: PricingPlan[] = [
   {
     name: 'Free',
