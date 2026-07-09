@@ -199,11 +199,17 @@ export interface GuideArticleContent {
   body: string
 }
 
+export type GuideStepBlock =
+  | { type: 'checklist'; items: string[] }
+  | { type: 'tip'; body: string }
+  | { type: 'warning'; body: string }
+  | { type: 'modes'; items: { label: string; body: string }[] }
+
 export interface GuideStep {
   id: string
   title: string
   body: string
-  checklist?: string[]
+  blocks?: GuideStepBlock[]
 }
 
 export interface GuideStepSection {

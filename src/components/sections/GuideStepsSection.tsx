@@ -112,18 +112,54 @@ export function GuideStepsSection({ guide, activeProduct }: GuideStepsSectionPro
                     {isOpen && (
                       <div className="guide-steps-item-body">
                         <p>{step.body}</p>
-                        {step.checklist && step.checklist.length > 0 && (
-                          <ul className="guide-steps-checklist">
-                            {step.checklist.map((item) => (
-                              <li key={item} className="guide-steps-checklist-item">
-                                <span className="guide-steps-checklist-icon">
-                                  <MaterialIcon name="check" filled className="text-[12px]" />
-                                </span>
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
+                        {step.blocks?.map((block, blockIndex) => {
+                          if (block.type === 'checklist') {
+                            return (
+                              <ul key={blockIndex} className="guide-steps-checklist">
+                                {block.items.map((item) => (
+                                  <li key={item} className="guide-steps-checklist-item">
+                                    <span className="guide-steps-checklist-icon">
+                                      <MaterialIcon name="check" filled className="text-[12px]" />
+                                    </span>
+                                    <span>{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )
+                          }
+
+                          if (block.type === 'tip') {
+                            return (
+                              <div key={blockIndex} className="guide-steps-note guide-steps-note--tip">
+                                <MaterialIcon name="lightbulb" className="guide-steps-note-icon" aria-hidden />
+                                <p>{block.body}</p>
+                              </div>
+                            )
+                          }
+
+                          if (block.type === 'warning') {
+                            return (
+                              <div key={blockIndex} className="guide-steps-note guide-steps-note--warning">
+                                <MaterialIcon name="warning" className="guide-steps-note-icon" aria-hidden />
+                                <p>{block.body}</p>
+                              </div>
+                            )
+                          }
+
+                          return (
+                            <div key={blockIndex} className="guide-steps-modes">
+                              {block.items.map((mode) => (
+                                <div key={mode.label} className="guide-steps-mode-card">
+                                  <div className="guide-steps-mode-header">
+                                    <MaterialIcon name="wifi" className="guide-steps-mode-icon" aria-hidden />
+                                    <span className="guide-steps-mode-label">{mode.label}</span>
+                                  </div>
+                                  <p className="guide-steps-mode-body">{mode.body}</p>
+                                </div>
+                              ))}
+                            </div>
+                          )
+                        })}
                       </div>
                     )}
                   </div>

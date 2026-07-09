@@ -1650,32 +1650,90 @@ export const guideCards: GuideCard[] = [
               id: 'download-and-install',
               title: 'Download and Install Q-worship',
               body: 'Download the Q-worship Live Console installer for your operating system (Windows or macOS) from Q-worship.com/download. Run the installer and follow the on-screen prompts. The app installs in under two minutes and requires no server setup.',
-              checklist: [
-                'Windows 10/11 (64-bit) or macOS 11+',
-                'Minimum 4GB RAM, 2GB free disk space',
-                'Internet connection for first-time Bible data download',
-                'Projector or secondary display connected',
+              blocks: [
+                {
+                  type: 'checklist',
+                  items: [
+                    'Windows 10/11 (64-bit) or macOS 11+',
+                    'Minimum 4GB RAM, 2GB free disk space',
+                    'Internet connection for first-time Bible data download',
+                    'Projector or secondary display connected',
+                  ],
+                },
               ],
             },
             {
               id: 'launch-and-login',
               title: 'Launch Q-worship and Login',
-              body: 'Open the Live Console and sign in with your church account. Your Bible translations, songbook, and saved service orders sync automatically the first time you log in.',
+              body: 'Open Q-worship Live Console. Sign in with your church account credentials. If your church is on a free trial, your account was created when you registered — check your email for the welcome message with your login link.',
+              blocks: [
+                {
+                  type: 'tip',
+                  body: "If you're the first person setting up Q-worship for your church, you'll be prompted to create your Organisation during first login. Enter your church name, denomination, and approximate congregation size — this helps Q-worship tailor the experience.",
+                },
+              ],
+            },
+            {
+              id: 'select-usage-mode',
+              title: 'Select Your Usage Mode',
+              body: 'Go to Settings > Usage Mode. Select between the Offline mode and the Online mode depending on your preferences and circumstances.',
+              blocks: [
+                {
+                  type: 'modes',
+                  items: [
+                    {
+                      label: 'Offline Mode',
+                      body: 'Offline mode is the recommended default for local resilience and fast service-time Bible access. In noisier rooms or with weaker microphones, recognition quality will still depend on microphone placement and speech clarity.',
+                    },
+                    {
+                      label: 'ONLINE MODE',
+                      body: 'A stable internet connection is needed for online mode to ensure you get the best results for your Q-worship Hands-free Bible. The speed and quality of the hands-free Bible is dependent on the quality of your internet connection.',
+                    },
+                  ],
+                },
+              ],
             },
             {
               id: 'configure-microphone',
               title: 'Configure Your Microphone (Hands-free Bible)',
-              body: "Open Settings > Audio and select the microphone your pastor will use at the pulpit. Run the quick calibration prompt so Q-worship recognises the stage mic clearly before the service starts.",
+              body: "Go to Settings > Audio Settings. Select the microphone your pastor will use — this can be a USB mic, a feed from your soundboard via a virtual audio device, or sound card, a dedicated lapel mic connected to the operator's machine. Speak a verse reference aloud and confirm the voice transcription display shows the text in real time.",
+              blocks: [
+                {
+                  type: 'tip',
+                  body: "Q-worship's voice engine understands natural language. Your pastor just needs to say 'John chapter 3 verse 16' or 'John 3:16'. The system retains session context, so 'next verse' and 'change to NIV' are understood mid-service.",
+                },
+                {
+                  type: 'warning',
+                  body: 'The quality of your audio input is the single biggest factor in detection accuracy. If your soundboard feed is too loud or too quiet, the voice engine will struggle. Aim for a waveform that peaks at around 60-70% of the visualizer height — not clipping, not whispering.',
+                },
+              ],
             },
             {
               id: 'setup-projection-display',
               title: 'Set-up Your Projection Display for Go-Live',
-              body: 'Under Display, assign your projector or secondary screen as the output. Use Preview mode to confirm the audience sees exactly what’s on the output screen, separate from your operator view.',
+              body: "Connect your projector or secondary display to the operator's machine. In Q-worship, go to Settings > Display and select your projection screen as the output. Click 'Test Display' — a full-screen test slide should appear on the projection screen. If nothing appears, check your OS display settings to confirm the second screen is detected.",
+              blocks: [
+                {
+                  type: 'checklist',
+                  items: [
+                    'Projector or TV connected and powered on',
+                    'OS display settings: extended display (not mirror)',
+                    'Q-worship output set to the correct screen',
+                    'Test audience screen and lower third is confirmed visible on projection screen',
+                  ],
+                },
+              ],
             },
             {
               id: 'load-songs',
               title: 'Load Your Songs to Songbook',
-              body: "Import or search for this week's setlist in the Songbook tab. Arrange verse and chorus order for each song so your operator can jump between sections with a single click during worship.",
+              body: "Go to the Songbook tab. If your church already has songs in Word or PDF format, click Import and select your files — Q-worship parses them into sections automatically. If you're starting fresh, use the built-in WYSIWYG editor to add your worship set songs. Organise each song into sections: Verse 1, Chorus, Bridge, etc.",
+              blocks: [
+                {
+                  type: 'tip',
+                  body: "Q-worship's voice engine understands natural language. Your pastor just needs to say 'John chapter 3 verse 16' or 'John 3:16'. The system retains session context, so 'next verse' and 'change to NIV' are understood mid-service.",
+                },
+              ],
             },
           ],
         },
@@ -1744,6 +1802,12 @@ export const guideCards: GuideCard[] = [
               id: 'sign-in-browser',
               title: 'Sign In at cloud.q-worship.com',
               body: 'Open any modern browser, go to cloud.q-worship.com, and sign in with your church account. Your Bible translations, songbook, and saved service orders are already synced from the Live Console.',
+              blocks: [
+                {
+                  type: 'tip',
+                  body: "There's nothing to install or update — the Cloud Presentation System always runs the latest version, so a borrowed laptop or a Chromebook in the lobby works just as well as your usual operator machine.",
+                },
+              ],
             },
             {
               id: 'open-output-window',
@@ -1754,6 +1818,12 @@ export const guideCards: GuideCard[] = [
               id: 'run-service-cloud',
               title: 'Run the Service',
               body: 'Use the same Bible, Songs, and Slides controls as the desktop app, right in your browser tab, to advance through your service order.',
+              blocks: [
+                {
+                  type: 'warning',
+                  body: "The Cloud Presentation System has no offline mode — it needs a live internet connection for the full service. Confirm your venue's Wi-Fi or ethernet is stable before you go live, since a dropped connection will interrupt output.",
+                },
+              ],
             },
             {
               id: 'share-service-link',

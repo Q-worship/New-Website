@@ -4573,6 +4573,93 @@ body.mobile-nav-open {
   background: #bf36ff;
 }
 
+.guide-steps-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  margin-top: 1.25rem;
+  padding: 1.125rem 1.25rem;
+  border-radius: 0.75rem;
+  background: #241a38;
+}
+
+.guide-steps-note p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.guide-steps-note-icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.guide-steps-note--tip {
+  background: #241a38;
+}
+
+.guide-steps-note--tip .guide-steps-note-icon {
+  color: #c9a6ff;
+}
+
+.guide-steps-note--tip p {
+  color: #d8c8f2;
+}
+
+.guide-steps-note--warning {
+  background: #241a38;
+}
+
+.guide-steps-note--warning .guide-steps-note-icon {
+  color: #ff3399;
+}
+
+.guide-steps-note--warning p {
+  color: #d8c8f2;
+}
+
+.guide-steps-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-top: 1.25rem;
+}
+
+.guide-steps-mode-card {
+  padding: 1.125rem 1.25rem;
+  border-radius: 0.75rem;
+  background: #241a38;
+}
+
+.guide-steps-mode-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.5rem;
+}
+
+.guide-steps-mode-icon {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: #ff3399;
+}
+
+.guide-steps-mode-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ff3399;
+}
+
+.guide-steps-mode-body {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #d8c8f2;
+}
+
 .guide-steps-next-btn {
   display: inline-flex;
   align-items: center;
