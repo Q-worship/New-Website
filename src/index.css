@@ -5147,10 +5147,17 @@ body.mobile-nav-open {
 }
 
 .about-core-beliefs-heading {
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.15;
+  font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+  line-height: 1.25;
   margin-bottom: 3rem;
-  max-width: 42rem;
+  max-width: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .about-core-beliefs-heading {
+    white-space: normal;
+  }
 }
 
 .about-core-beliefs-accent {
@@ -5212,6 +5219,7 @@ body.mobile-nav-open {
   color: #000000;
   margin-bottom: 3rem;
   max-width: 52rem;
+  white-space: pre-line;
 }
 
 .about-insights-grid {
@@ -5277,9 +5285,9 @@ body.mobile-nav-open {
 .about-work-benefits-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   gap: 1rem;
   padding: 2.5rem 2rem;
   min-height: 12rem;
@@ -5290,6 +5298,7 @@ body.mobile-nav-open {
 .about-work-benefits-card-title {
   font-size: 1.125rem;
   color: #000000;
+  text-align: center;
 }
 
 .about-work-benefits-card-body {
@@ -5297,7 +5306,6 @@ body.mobile-nav-open {
   font-size: 0.875rem;
   line-height: 1.6;
   color: #4a4a4a;
-  max-width: 18rem;
 }
 
 .about-openings-intro {
@@ -5306,7 +5314,7 @@ body.mobile-nav-open {
 
 .about-openings-body {
   margin: 1.25rem 0 0;
-  max-width: 52rem;
+  max-width: 70rem;
   font-size: 1rem;
   line-height: 1.65;
   color: #4a4a4a;
@@ -5667,10 +5675,26 @@ body.mobile-nav-open {
 }
 
 .careers-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
   margin: 0;
   font-size: 1rem;
   line-height: 1.6;
   color: #4a4a4a;
+}
+
+.careers-list-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+  border-radius: 9999px;
+  color: #ffffff;
+  background: #ec4899;
 }
 
 .careers-detail-actions {

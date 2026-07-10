@@ -3113,54 +3113,78 @@ export const aboutCoreBeliefs: CoreBelief[] = [
   {
     id: 'create',
     icon: 'create',
-    title: 'Create',
+    title: 'We Imagine',
     description:
-      'Technologies that dramatically enhance environments and champion the user.',
+      'We build tools that feel invisible in the moment and powerful in the result — so your team can focus entirely on ministry, not mechanics.',
   },
   {
     id: 'develop',
     icon: 'develop',
-    title: 'Develop',
-    description: 'Practical church software that is stable, affordable, and easy to use',
+    title: 'We Build',
+    description:
+      'Practical church software that is stable, affordable, and easy to use. We believe every church — regardless of size or budget.',
   },
   {
     id: 'enable',
     icon: 'enable',
-    title: 'Enable',
+    title: 'We Empower',
     description:
-      'Oganizations to afford and benefit from these technologies by reducing cost and complexity.',
+      'DDT actively works to lower the barrier to entry so that the smallest congregation can present the Word with the same quality and confidence as the largest.',
   },
 ]
 
-const aboutInsightBody =
-  "Q-worship brings together voice-powered Bible search, live projection, song management, multi integrations, and rich features — all built by pastors who've stood where you stand."
-
-export const aboutInsights = {
-  heading: 'Our collective insights are driven by experience but fueled by passion.',
+export const aboutInsights: { heading: string; items: InsightCard[] } = {
+  heading: 'Built from the pulpit.\nRefined by every Sunday.',
   items: [
     {
       image: '/Photos/features/ghgh.png',
-      imageAlt: 'Church presentation software on laptop in auditorium',
-      highlighted: true,
-      title: 'Focus is everything',
-      description: aboutInsightBody,
+      imageAlt: 'Laptop running Q-worship on a church stage',
+      title: 'Ministry first. Technology second.',
+      description:
+        "At Devine Digital Technologies, we don't build features for feature lists. Q-worship exists because real pastors in real churches needed real solutions — on a real Sunday morning. Every decision we make is filtered through one question: does this make Sunday easier for the person standing at the pulpit?",
     },
     {
-      image: pastorForPastor,
-      imageAlt: 'Pastor speaking on stage',
-      title: 'Focus is everything',
-      description: aboutInsightBody,
+      image: '/Photos/Praise%20and%20Worship.png',
+      imageAlt: 'Cross and congregation with hands raised in worship',
+      title: 'Built for the moment that matters',
+      description:
+        "The moment a pastor opens their mouth to preach, the moment a worship leader lifts their hands, the moment a verse appears on screen — those are the moments DDT builds for. Q-worship exists so that technology never gets in the way of those moments again. That's not a mission statement. That's a Sunday-morning promise.",
     },
-  ] satisfies InsightCard[],
+  ],
 }
 
-const aboutWorkBenefitDescription =
-  'Take a break, recover, or get to an appointment, with paid time off. Starting with 16 paid days off and 7 paid holidays.'
-
-export const aboutWorkBenefits: WorkBenefit[] = Array.from({ length: 6 }, () => ({
-  title: 'Profit Sharing',
-  description: aboutWorkBenefitDescription,
-}))
+export const aboutWorkBenefits: WorkBenefit[] = [
+  {
+    title: 'Profit Sharing',
+    description:
+      "Every team member shares in the success of the platform. As Q-worship grows, so does your stake in it. We believe the people who build it should benefit from it. Join our referral program.",
+  },
+  {
+    title: 'Flexible Remote Work',
+    description:
+      'Work from anywhere in the world. Our team spans multiple continents and time zones — united by a shared mission and a culture of trust and autonomy.',
+  },
+  {
+    title: 'Mission-Driven Culture',
+    description:
+      "You're not just shipping software — you're equipping churches. Every line of code, every design decision, every support ticket is part of something bigger than a product.",
+  },
+  {
+    title: 'Growth & Learning',
+    description:
+      "We invest in our team's growth. Access to courses, conferences, and mentorship — because the best version of Q-worship starts with the best version of you.",
+  },
+  {
+    title: 'Meaningful Impact',
+    description:
+      'Q-worship is used in churches across multiple countries every Sunday. Your work reaches real congregations, real pastors, and real moments of worship — every single week.',
+  },
+  {
+    title: 'Equipment Allowance',
+    description:
+      "Do your best work with the right tools. Every team member receives a dedicated equipment allowance to set up their ideal workspace — whether that's a home office, a co-working space, or a church tech booth.",
+  },
+]
 
 export const aboutJobOpeningsCopy = {
   title: 'Current openings at Q-worship',
@@ -3176,40 +3200,70 @@ export const aboutJobOpenings: JobOpening[] = [
     location: 'Remote',
     status: 'Active',
     intro:
-      'As a Renewed Vision Core Software Engineer, you will develop the infrastructure and working technologies that power our platform.',
+      'As a Q-worship Core Software Engineer, you will develop the infrastructure and foundational technologies that power our platform. You will work on the engine that drives real-time Bible projection, voice command processing, and cross-platform presentation delivery — the invisible backbone that makes Sunday mornings run without a hitch.',
     philosophy:
-      'We are looking for someone who enjoys working on the parts of an application that are invisible to the end user. You are language-agnostic and believe that innovation comes from discovery. You prioritize memory safety and concurrency in your work.',
+      'We are looking for someone who enjoys working on the parts of an application that are invisible to the end user. You are language-agnostic and believe that innovation comes from discovery. You prioritize memory safety and concurrency in your work, and you understand that the stakes are high — when a pastor is mid-sermon, the software cannot fail.',
     skillsHeading: 'We are looking for individuals who possess the following skills:',
     skills: [
       'Proficiency in developing applications using Rust and modern C++',
-      'Experience in building libraries that can be utilized across multiple platforms',
-      'Ability to pay attention to details while understanding the significance of timely updates',
-      'Understanding of when to prioritize refactoring and when to defer it',
+      'Experience in building libraries that can be utilized across multiple platforms (macOS, Windows)',
+      'Ability to pay attention to details while understanding the significance of timely, reliable updates',
+      'Understanding of when to prioritize refactoring and when to defer it — especially in a live-service context',
       'Consistent willingness to learn and grow both personally and professionally',
+      'Solid understanding of systems programming concepts including memory management, threading, and IPC',
     ],
     valuesHeading: 'Additionally, we highly value individuals who:',
     values: [
       'Are skilled in another programming language such as C# or Swift',
       'Possess exceptional written and verbal communication skills',
       'Take responsibility for projects, thrive with loosely defined specifications, and drive towards achieving results',
+      'Have contributed to or maintained open-source Rust crates or cross-platform libraries',
+      'Understand the unique performance demands of real-time presentation software',
     ],
     idealHeading: 'Our top engineers will ideally have:',
     ideal: [
       'Experience in writing and debugging high-performance multi-threaded libraries',
-      'Familiarity with video and audio frameworks and low-level rendering',
+      'Familiarity with video and audio frameworks and low-level rendering pipelines',
       'Hands-on experience developing multithreaded, decoupled systems using actor frameworks and async/await, emphasizing message-driven design, non-blocking I/O, and memory-safe concurrency',
+      'Experience with WebSocket-based real-time communication (relevant to our OBS Studio integration)',
+      'A background in or genuine appreciation for church technology, AV production, or live event software',
     ],
   },
   {
     id: 'core-macos',
     category: 'Core',
-    title: 'MacOS Software Engineer',
+    title: 'macOS Software Engineer',
     location: 'Remote',
     status: 'Active',
     intro:
-      'Join the Q-worship engineering team to build native macOS experiences for churches around the world.',
+      'As a Q-worship macOS Software Engineer, you will own the native macOS experience of the Q-worship Live Console — the desktop application that pastors and worship leaders rely on every Sunday. You will work at the intersection of performance, reliability, and user experience, ensuring that the macOS build of Q-worship feels native, fast, and rock-solid under the pressure of a live service.',
     philosophy:
-      'You will help shape desktop software that pastors and tech volunteers rely on every Sunday. More details for this role will be published soon.',
+      'We are looking for someone who cares deeply about the Apple platform — not just as a deployment target, but as a craft. You understand the macOS Human Interface Guidelines, you know when to reach for AppKit versus SwiftUI, and you take pride in building software that feels like it belongs on a Mac. You are comfortable working close to the metal when performance demands it.',
+    skillsHeading: 'We are looking for individuals who possess the following skills:',
+    skills: [
+      'Proficiency in Swift and/or Objective-C for native macOS application development',
+      'Experience with AppKit, SwiftUI, and the macOS application lifecycle',
+      'Strong understanding of macOS-specific APIs including AVFoundation, CoreAudio, CoreGraphics, and ScreenCaptureKit',
+      'Ability to diagnose and resolve performance bottlenecks in a real-time, UI-intensive application',
+      'Experience with code signing, notarization, and macOS app distribution workflows',
+      'Consistent willingness to learn and grow both personally and professionally',
+    ],
+    valuesHeading: 'Additionally, we highly value individuals who:',
+    values: [
+      'Have experience integrating Rust or C++ libraries into a Swift/Objective-C codebase via FFI or bridging headers',
+      'Possess exceptional written and verbal communication skills',
+      'Take responsibility for projects, thrive with loosely defined specifications, and drive towards achieving results',
+      'Have shipped a macOS application to the Mac App Store or via direct distribution',
+      'Understand the unique demands of live presentation software — where crashes are not an option',
+    ],
+    idealHeading: 'Our top engineers will ideally have:',
+    ideal: [
+      'Experience with NDI, Syphon, or other video output frameworks on macOS',
+      "Familiarity with OBS Studio's WebSocket API or similar broadcast software integrations",
+      'Experience with multi-window application architectures and cross-window communication on macOS',
+      'Hands-on experience with audio device enumeration, routing, and real-time audio processing on macOS',
+      'A background in or genuine appreciation for church technology, AV production, or live event software',
+    ],
   },
   {
     id: 'sales-marketing',
@@ -3218,9 +3272,34 @@ export const aboutJobOpenings: JobOpening[] = [
     location: 'South Africa',
     status: 'Active',
     intro:
-      'Help Q-worship reach churches across South Africa through relationship-driven sales and marketing.',
+      'As a Q-worship Sales & Marketing Representative based in South Africa, you will be the face of Q-worship and Devine Digital Technologies in one of our most important and fastest-growing markets. You will build relationships with churches, denominations, and ministry networks across South Africa — introducing them to a platform that can transform how they present the Word every Sunday.',
     philosophy:
-      'We are looking for passionate communicators who understand ministry needs and can represent Q-worship with integrity. Full role details coming soon.',
+      "We are looking for someone who is passionate about both technology and ministry. You don't need to be a software engineer — but you do need to understand the church environment deeply, communicate with genuine warmth and conviction, and have the drive to grow a market from the ground up. This is a role for someone who sees selling Q-worship not as a job, but as a calling.",
+    skillsHeading: 'We are looking for individuals who possess the following skills:',
+    skills: [
+      'Proven experience in B2B or B2C sales, ideally in the technology, media, or non-profit/ministry sector',
+      'Strong understanding of the South African church landscape — denominations, networks, and decision-making structures',
+      'Excellent verbal and written communication skills in English; proficiency in Afrikaans or Zulu is a significant advantage',
+      'Ability to conduct product demonstrations confidently, both in person and via video call',
+      'Self-motivated with the ability to manage a pipeline, set targets, and report on progress independently',
+      'Consistent willingness to learn and grow both personally and professionally',
+    ],
+    valuesHeading: 'Additionally, we highly value individuals who:',
+    values: [
+      'Have an existing network within South African churches, denominations, or Christian media organisations',
+      'Possess experience with CRM tools (HubSpot, Salesforce, or similar) for pipeline management',
+      'Take responsibility for their territory, thrive with loosely defined targets, and drive towards achieving results',
+      'Have a genuine personal faith and understand the culture, language, and priorities of the church community',
+      'Are comfortable representing a UK-based technology company to a local audience with cultural sensitivity and authenticity',
+    ],
+    idealHeading: 'Our top candidates will ideally have:',
+    ideal: [
+      'Experience selling SaaS or subscription-based software products',
+      'A track record of building and growing a regional sales territory from early-stage',
+      'Experience in church AV, media ministry, or worship technology — either professionally or as a volunteer',
+      "Familiarity with Q-worship's core use cases: Bible projection, song management, live presentation, and OBS integration",
+      'The ability to run community events, church tech workshops, or product demonstrations at conferences and denominational gatherings',
+    ],
   },
   {
     id: 'core-windows',
@@ -3229,9 +3308,34 @@ export const aboutJobOpenings: JobOpening[] = [
     location: 'Remote',
     status: 'Active',
     intro:
-      'Build reliable Windows-native features for Q-worship’s church presentation platform.',
+      'As a Q-worship Windows Software Engineer, you will own the native Windows experience of the Q-worship Live Console — the desktop application used by churches across the world every Sunday. You will build and maintain a high-performance, reliable Windows application that handles everything from real-time Bible projection and voice command processing to multi-display output and OBS Studio integration.',
     philosophy:
-      'You will work on performance-critical desktop software used in live services. Additional requirements for this role will be added soon.',
+      'We are looking for someone who knows Windows development deeply — not just as a platform, but as an ecosystem. You understand Win32, WinUI, and the Windows driver model. You know how to squeeze performance out of the platform, how to handle multi-monitor setups gracefully, and how to ship software that works reliably across the wide diversity of Windows hardware found in church environments.',
+    skillsHeading: 'We are looking for individuals who possess the following skills:',
+    skills: [
+      'Proficiency in C++ and/or C# for native Windows application development',
+      'Experience with Win32 API, WinUI 3, or WPF for building desktop applications',
+      'Strong understanding of Windows-specific APIs including DirectX, WASAPI, and Windows Media Foundation',
+      'Ability to diagnose and resolve performance bottlenecks in a real-time, UI-intensive application',
+      'Experience with Windows code signing, packaging (MSIX/APPX), and distribution via direct download or the Microsoft Store',
+      'Consistent willingness to learn and grow both personally and professionally',
+    ],
+    valuesHeading: 'Additionally, we highly value individuals who:',
+    values: [
+      'Have experience integrating Rust or C++ libraries into a C# codebase via P/Invoke or COM interop',
+      'Possess exceptional written and verbal communication skills',
+      'Take responsibility for projects, thrive with loosely defined specifications, and drive towards achieving results',
+      'Have shipped a Windows desktop application and managed its update lifecycle',
+      'Understand the unique demands of live presentation software — where crashes are not an option',
+    ],
+    idealHeading: 'Our top engineers will ideally have:',
+    ideal: [
+      'Experience with NDI, Spout, or other video output frameworks on Windows',
+      "Familiarity with OBS Studio's WebSocket API or similar broadcast software integrations",
+      'Experience with multi-window and multi-monitor application architectures on Windows',
+      'Hands-on experience with audio device enumeration, ASIO/WASAPI routing, and real-time audio processing on Windows',
+      'A background in or genuine appreciation for church technology, AV production, or live event software',
+    ],
   },
 ]
 
