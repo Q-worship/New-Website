@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'wouter'
 import type { GuideCard } from '@/types/content'
 import { guideProductInfo } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
@@ -29,7 +30,9 @@ export function GuideStepsSection({ guide, activeProduct }: GuideStepsSectionPro
 
   const activeSection = sections.find((section) => section.id === activeSectionId) ?? sections[0]
   const activeSectionIndex = sections.findIndex((section) => section.id === activeSection.id)
+  const prevSection = sections[activeSectionIndex - 1]
   const nextSection = sections[activeSectionIndex + 1]
+  const isLastSection = activeSectionIndex === sections.length - 1
 
   const goToSection = (sectionId: string) => {
     const section = sections.find((item) => item.id === sectionId)
@@ -167,15 +170,37 @@ export function GuideStepsSection({ guide, activeProduct }: GuideStepsSectionPro
               })}
             </div>
 
-            {nextSection && (
-              <button
-                type="button"
-                className="guide-steps-next-btn"
-                onClick={() => goToSection(nextSection.id)}
-              >
-                Next: {nextSection.label}
-                <MaterialIcon name="arrow_forward" aria-hidden />
-              </button>
+            {(prevSection || nextSection || isLastSection) && (
+              <div className="guide-steps-nav-buttons">
+                {prevSection ? (
+                  <button
+                    type="button"
+                    className="guide-steps-prev-btn"
+                    onClick={() => goToSection(prevSection.id)}
+                  >
+                    <MaterialIcon name="arrow_back" aria-hidden />
+                    Previous
+                  </button>
+                ) : (
+                  <span />
+                )}
+
+                {nextSection ? (
+                  <button
+                    type="button"
+                    className="guide-steps-next-btn"
+                    onClick={() => goToSection(nextSection.id)}
+                  >
+                    Next: {nextSection.label}
+                    <MaterialIcon name="arrow_forward" aria-hidden />
+                  </button>
+                ) : (
+                  <Link href="/pricing" className="guide-steps-next-btn">
+                    Try It Free
+                    <MaterialIcon name="arrow_forward" aria-hidden />
+                  </Link>
+                )}
+              </div>
             )}
           </div>
         </div>

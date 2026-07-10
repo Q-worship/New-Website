@@ -184,8 +184,8 @@ export interface GuideCard {
   id: string
   categoryId: string
   title: string
-  titleLines: { line1: string; line2: string }
   description: string
+  heroBody?: string
   image: string
   imageAlt: string
   imageFit?: 'cover' | 'contain'

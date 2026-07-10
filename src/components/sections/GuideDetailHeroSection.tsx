@@ -21,7 +21,7 @@ export function GuideDetailHeroSection({ guide, compact = false }: GuideDetailHe
 
             <h1 className="guide-detail-hero-heading font-headline font-bold">{guide.title}</h1>
 
-            <p className="features-hero-body">{featuresHeroCopy.body}</p>
+            <p className="features-hero-body">{guide.heroBody ?? featuresHeroCopy.body}</p>
 
             <div className="features-hero-actions cta-pair-mobile-inline">
               <button type="button" className="features-hero-download-btn">

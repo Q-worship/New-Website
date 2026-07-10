@@ -31,10 +31,7 @@ export function GuideCardGrid({ cards }: GuideCardGridProps) {
 
           <div className="guide-card-body">
             <h3 className="guide-card-title font-headline">
-              <Link href={`/guides/${card.id}`} aria-label={card.title}>
-                <span className="guide-card-title-line">{card.titleLines.line1}</span>
-                <span className="guide-card-title-line">{card.titleLines.line2}</span>
-              </Link>
+              <Link href={`/guides/${card.id}`}>{card.title}</Link>
             </h3>
             <p className="guide-card-description">{card.description}</p>
 
