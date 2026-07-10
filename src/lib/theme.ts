@@ -1790,45 +1790,86 @@ export const guideCards: GuideCard[] = [
       ],
     },
     cloudSteps: {
-      summary: 'A lightweight walkthrough for running your first service entirely from the browser.',
+      summary: 'A step-by-step walkthrough for building and running your first service entirely from the browser.',
       sections: [
         {
-          id: 'cloud-overview',
-          label: 'Get Started in the Browser',
+          id: 'before-the-service',
+          label: 'Before the Service',
           description:
-            "No install, no downloads — sign in and you're ready to go live from any computer.",
+            "Q-worship Cloud runs entirely in your browser — no installation required. You'll need a stable internet connection and a machine connected to your projection screen.",
           steps: [
             {
-              id: 'sign-in-browser',
-              title: 'Sign In at cloud.q-worship.com',
-              body: 'Open any modern browser, go to cloud.q-worship.com, and sign in with your church account. Your Bible translations, songbook, and saved service orders are already synced from the Live Console.',
+              id: 'log-in-cloud',
+              title: 'Log In to Q-worship Cloud',
+              body: 'Open your browser and go to app.qworship.com. Sign in with your church account. Q-worship Cloud works in Chrome, Edge, and Firefox — we recommend Chrome for the best performance. No plugins or extensions required.',
               blocks: [
                 {
                   type: 'tip',
-                  body: "There's nothing to install or update — the Cloud Presentation System always runs the latest version, so a borrowed laptop or a Chromebook in the lobby works just as well as your usual operator machine.",
+                  body: "Bookmark app.qworship.com on your operator's machine so it's one click away on Sunday morning.",
                 },
               ],
             },
             {
-              id: 'open-output-window',
-              title: 'Open the Output Window',
-              body: 'Click "Open Output" to launch a second browser window, drag it onto your projector or secondary display, and make it full screen.',
+              id: 'create-presentation',
+              title: 'Create Your Service Presentation',
+              body: "From the Dashboard, click 'New Presentation' and give it a name (e.g. 'Sunday 6 July 2025'). You'll be taken to the Service Builder — a full-screen editor where you add, arrange, and design every element of your service.",
+              blocks: [
+                {
+                  type: 'checklist',
+                  items: [
+                    'Pre-Service loop slides',
+                    'Opening / Welcome',
+                    'Worship songs with lyrics',
+                    'Sermon scripture slides',
+                    'Announcements',
+                    'Offering / Giving slide',
+                    'Closing',
+                  ],
+                },
+              ],
             },
             {
-              id: 'run-service-cloud',
-              title: 'Run the Service',
-              body: 'Use the same Bible, Songs, and Slides controls as the desktop app, right in your browser tab, to advance through your service order.',
+              id: 'add-songs-songbook',
+              title: 'Add Songs from the Songbook',
+              body: "Click 'Add Item' and select 'Song'. Search your church's song library or import a new song from a Word, PDF, or text file. Q-worship parses the file and structures it into sections automatically. Arrange sections (Verse 1, Chorus, Bridge, Tag) in the order your worship leader will use them.",
+            },
+            {
+              id: 'add-scripture-slides',
+              title: 'Add Scripture Slides',
+              body: "Click 'Add Item' and select 'Bible Verse'. Search by reference (e.g. 'Romans 8:28') or keyword. Select your translation (KJV, NKJV, NIV, ESV, AMP, or MSG) and choose whether to display a single verse or a range. The verse appears as a formatted slide with your chosen background.",
+              blocks: [
+                {
+                  type: 'tip',
+                  body: 'You can add multiple translations of the same verse as separate slides — useful for churches that like to show the congregation two versions side by side.',
+                },
+              ],
+            },
+            {
+              id: 'design-slides-canvas',
+              title: 'Design Your Slides with the Canvas Editor',
+              body: "For custom slides (announcements, welcome screens, sermon series titles), click 'Add Item' and select 'Custom Slide'. The built-in Slide Canvas editor lets you add text, images, QR codes, and position every element exactly where you want it. Choose a background from the Cloud Media Library or upload your own.",
+            },
+            {
+              id: 'choose-backgrounds',
+              title: 'Choose Backgrounds from the Media Library',
+              body: 'Click any slide and open the Background panel. Browse the Cloud Media Library — a curated collection of worship backgrounds, motion videos, and seasonal templates — or upload your own images and videos from My Media Library. Advanced tag filtering makes it easy to find the right background in seconds.',
+              blocks: [
+                {
+                  type: 'tip',
+                  body: 'Tag your own uploaded assets by mood, colour, season, or theme. The more organised your library, the faster your Sunday morning setup becomes.',
+                },
+              ],
+            },
+            {
+              id: 'connect-obs',
+              title: 'Connect OBS Studio (Optional)',
+              body: "If you're streaming your service online, go to Settings > Integrations > OBS Studio. Enter your OBS WebSocket server address and password. Q-worship can start/stop your stream, switch OBS scenes, and sync your presentation content to OBS in real time — all from inside the platform.",
               blocks: [
                 {
                   type: 'warning',
-                  body: "The Cloud Presentation System has no offline mode — it needs a live internet connection for the full service. Confirm your venue's Wi-Fi or ethernet is stable before you go live, since a dropped connection will interrupt output.",
+                  body: 'OBS integration requires OBS Studio 28+ with the WebSocket plugin enabled. See the OBS Setup Guide for step-by-step connection instructions.',
                 },
               ],
-            },
-            {
-              id: 'share-service-link',
-              title: 'Share a View-Only Link',
-              body: "Need a volunteer to follow along remotely? Generate a share link so they can see the live output from their own device without needing an account.",
             },
           ],
         },
