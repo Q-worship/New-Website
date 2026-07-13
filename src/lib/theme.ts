@@ -110,7 +110,7 @@ export const buildTabItems: BuildTabItem[] = [
       'Pick up exactly where you left off, every time',
       'Navigate your whole service with simple keyboard shortcuts',
     ],
-    image: '/Photos/Service%20order.png',
+    image: '/Photos/Service%20order.webp',
   },
   {
     id: 'songs',
@@ -125,7 +125,7 @@ export const buildTabItems: BuildTabItem[] = [
       'Bring in songs from Word documents, PDFs or text files',
       'Keep your CCLI number, song key and tempo all in one place',
     ],
-    image: '/Photos/Songs.png',
+    image: '/Photos/Songs.webp',
   },
   {
     id: 'onscreen',
@@ -140,7 +140,7 @@ export const buildTabItems: BuildTabItem[] = [
       'See a preview of every slide before it goes live',
       'Move through chapters and verses without losing your flow',
     ],
-    image: '/Photos/On-screen%20bible.png',
+    image: '/Photos/On-screen%20bible.webp',
   },
   {
     id: 'handsfree',
@@ -155,7 +155,7 @@ export const buildTabItems: BuildTabItem[] = [
       'Remembers where you are so you can say “next verse” and keep going',
       'Say “thank you” or “amen” and the screen clears itself',
     ],
-    image: '/Photos/Hands%20free%20Bible.png',
+    image: '/Photos/Hands%20free%20Bible.webp',
   },
   {
     id: 'announcements',
@@ -170,7 +170,7 @@ export const buildTabItems: BuildTabItem[] = [
       'Move seamlessly from announcements into worship',
       'Everything on one screen, always under your control',
     ],
-    image: '/Photos/Announcements.png',
+    image: '/Photos/Announcements.webp',
   },
 ]
 
@@ -260,23 +260,23 @@ export const handsFreeShowcaseTabs: TabItem[] = [
   },
 ]
 
-const rectanglePortrait = '/Photos/Rectangle%209.png'
-const pastorForPastor = '/Photos/pASTORS%20(2).png'
-const downloadBannerImage = '/Photos/Download%201.png'
-const downloadOnlineCtaImage = '/Photos/Download%202.png'
+const rectanglePortrait = '/Photos/Rectangle%209.webp'
+const pastorForPastor = '/Photos/pASTORS%20(2).webp'
+const downloadBannerImage = '/Photos/Download%201.webp'
+const downloadOnlineCtaImage = '/Photos/Download%202.webp'
 
 export const featureGridCards: FeatureCard[] = [
   {
     title: 'Lightweight & Fast to Install',
     description:
       'Q-worship installs in minutes. No IT department, no server setup, no configuration headaches. Download, open, and you\'re ready for Sunday.',
-    image: '/Photos/eas%20to%20use.png',
+    image: '/Photos/eas%20to%20use.webp',
   },
   {
     title: 'Easy To Use by Everyone',
     description:
       'Qworship was designed so that anyone on your team, from the senior pastor to the newest volunteer can take the controls with confidence. Clean interface, voice commands, and a workflow that just makes sense.',
-    image: '/Photos/onlin%20and....png',
+    image: '/Photos/onlin%20and....webp',
   },
 ]
 
@@ -284,7 +284,7 @@ export const featureGridHighlight: FeatureCard = {
   title: 'Online & Offline Ready',
   description:
     'No Wi-Fi? No problem. Qworship works fully offline so your service never stops — whether you\'re in a rural church, a school hall, or a venue with no internet.',
-  image: '/Photos/lightweight.png',
+  image: '/Photos/lightweight.webp',
 }
 
 export const alternatingBlocks: FeatureCard[] = [
@@ -292,7 +292,7 @@ export const alternatingBlocks: FeatureCard[] = [
     title: 'In-built Lower Third Builder',
     description:
       'Create broadcast-quality name and title graphics directly inside Q-worship. Display speaker names, sermon titles, and announcements on your live stream — no extra software needed.',
-    image: '/Photos/third-builder.png',
+    image: '/Photos/third-builder.webp',
     linkText: 'Learn more',
     imageFirst: false,
   },
@@ -300,7 +300,7 @@ export const alternatingBlocks: FeatureCard[] = [
     title: 'NDI Support',
     description:
       "Send Qworship's output over your network as an NDI source. Route Bible verses, lyrics, and media directly into your video switcher or streaming rig — no capture cards, no extra cables.",
-    image: '/Photos/NDL.png',
+    image: '/Photos/NDL.webp',
     linkText: 'Learn more',
     imageFirst: true,
   },
@@ -308,20 +308,20 @@ export const alternatingBlocks: FeatureCard[] = [
     title: 'Easy to use',
     description:
       'Layer lyrics, 4K motion backgrounds, and alpha-channel videos with a non-destructive workflow that feels like a professional studio.',
-    image: '/Photos/Easy%20to%20use.png',
+    image: '/Photos/Easy%20to%20use.webp',
     linkText: 'Infinite Canvas Engine',
     imageFirst: false,
   },
 ]
 
-const praiseAndWorshipImage = '/Photos/Praise%20and%20Worship.png'
+const praiseAndWorshipImage = '/Photos/Praise%20and%20Worship.webp'
 
 export const teamCards: TeamCard[] = [
   {
     title: 'Pastors',
     description:
       'Built with Bible speech to text Intelligence, Q-worship helps Pastors to fetch bible scripture across all the popular Bible versions using voice command during live service.',
-    image: '/Photos/Pastors.png',
+    image: '/Photos/Pastors.webp',
     icon: 'layers',
     showButton: true,
     buttonText: 'Start for free today',
@@ -1220,7 +1220,7 @@ export const featuresHeroCopy = {
   body: "Q-worship brings together voice-powered Bible search, live projection, song management, multi integrations, and rich features — all built by pastors who've stood where you stand.",
   primaryCta: 'Download',
   secondaryCta: 'Get Started',
-  image: '/Photos/features/Rectangle%2042300.png',
+  image: '/Photos/features/Rectangle%2042300.webp',
 }
 
 export const featuresSubNavItems: FeaturesSubNavItem[] = [
@@ -1265,7 +1265,7 @@ export const handsFreeFeatureSpotlight: ChecklistSpotlightContent = {
         'Switch between all the major Bible translations- KJV, NKJV, MSG, AMP, GN, and NIV with a single voice command mid service. Your congregation hears the version that speaks to them',
     },
   ],
-  image: '/Photos/feature%201.png',
+  image: '/Photos/feature%201.webp',
   imageAlt: 'Church auditorium with Bible verse on screen',
   showListeningOverlay: false,
 }
@@ -1301,7 +1301,7 @@ export const onScreenBibleSpotlight: AccordionSpotlightContent = {
         'Switch between KJV, NKJV, NIV, MSG, ESV, NASB, NLT and more without leaving the editor. Your selected passage updates instantly across every translation you need.',
     },
   ],
-  image: '/Photos/features/3.png',
+  image: '/Photos/features/3.webp',
   imageAlt: 'On-screen Bible editor interface',
 }
 
@@ -1336,7 +1336,7 @@ export const postPastorsAccordionSpotlight: AccordionSpotlightContent = {
         'Switch between KJV, NKJV, NIV, MSG, ESV, NASB, NLT and more without leaving the editor. Your selected passage updates instantly across every translation you need.',
     },
   ],
-  image: '/Photos/features/ghgh.png',
+  image: '/Photos/features/ghgh.webp',
   imageAlt: 'Church auditorium with Philippians 4:13 on screen',
 }
 
@@ -1371,7 +1371,7 @@ export const moreFeaturesAccordionSpotlight: AccordionSpotlightContent = {
         'Switch between KJV, NKJV, NIV, MSG, ESV, NASB, NLT and more without leaving the editor. Your selected passage updates instantly across every translation you need.',
     },
   ],
-  image: '/Photos/features/ghgh.png',
+  image: '/Photos/features/ghgh.webp',
   imageAlt: 'Church auditorium with Philippians 4:13 on screen',
 }
 
@@ -1407,7 +1407,7 @@ export const songbookFeatureSpotlight: ChecklistSpotlightContent = {
         "Keep your congregation singing in sync with the Sing-Along Pace Setter — a real-time lyric progress indicator that highlights the current line as it's being sung. No more congregation falling behind or jumping ahead.",
     },
   ],
-  image: '/Photos/features/song.png',
+  image: '/Photos/features/song.webp',
   imageAlt: 'Amazing Grace lyrics projected over a mountain landscape',
   showListeningOverlay: false,
 }
@@ -1443,7 +1443,7 @@ export const prePastorsHandsFreeSpotlight: ChecklistSpotlightContent = {
         'Switch between all the major Bible translations- KJV, NKJV, MSG, AMP, GNT, and NIV with a single voice command mid service. Your congregation hears the version that speaks to them',
     },
   ],
-  image: '/Photos/features/song.png',
+  image: '/Photos/features/song.webp',
   imageAlt: 'Amazing Grace lyrics projected over a mountain landscape',
   showListeningOverlay: true,
 }
@@ -1480,7 +1480,7 @@ export const serviceSlidesAccordionSpotlight: AccordionSpotlightContent = {
         'Every slide in your service generates a real-time preview before it hits the big screen. See exactly what your congregation will see — background, text, layout, and all — before you click GO LIVE. No wrong slides. No awkward corrections. No surprises mid-service.',
     },
   ],
-  image: '/Photos/feature%203.png',
+  image: '/Photos/feature%203.webp',
   imageAlt: 'Service Slides canvas editor with Easter slide preview',
 }
 
@@ -1510,7 +1510,7 @@ export const serviceSlidesSpotlight: ChecklistSpotlightContent = {
         'Your service saves automatically, every step of the way. Pick up exactly where you left off, every time.',
     },
   ],
-  image: '/Photos/Service%20order.png',
+  image: '/Photos/Service%20order.webp',
   imageAlt: 'Service order management interface',
 }
 
@@ -1576,7 +1576,7 @@ export const mediaFeatureSpotlight: ChecklistSpotlightContent = {
         'Move seamlessly from announcements into worship. Everything on one screen, always under your control.',
     },
   ],
-  image: '/Photos/Announcements.png',
+  image: '/Photos/Announcements.webp',
   imageAlt: 'Announcements and media projection interface',
 }
 
@@ -1611,7 +1611,7 @@ export const lowerThirdBuilderSpotlight: ChecklistSpotlightContent = {
         'Save your most-used lower thirds — speaker names, sermon series titles, recurring announcements — and recall them instantly during a live service. No rebuilding from scratch each week. Your graphics are ready before your worship team arrives.',
     },
   ],
-  image: '/Photos/features/song.png',
+  image: '/Photos/features/song.webp',
   imageAlt: 'Amazing Grace lyrics projected over a mountain landscape',
   showListeningOverlay: false,
 }
@@ -1623,7 +1623,7 @@ export const guideCards: GuideCard[] = [
     title: 'Setting up Q-worship Live Console for your first Sunday',
     description:
       'Connect your displays, walk through the Live Console layout, and run a quick test so your team is ready before the congregation arrives.',
-    image: '/Photos/Guides/SUQL.png',
+    image: '/Photos/Guides/SUQL.webp',
     imageAlt: 'Q-worship Live Console welcome and Hands-Free Bible walkthrough',
     article: {
       title: {
@@ -1880,7 +1880,7 @@ export const guideCards: GuideCard[] = [
       'Connect your soundboard, lapel mic, USB microphone, or media board for the best Hands-Free Bible accuracy. Includes mic switching during service.',
     heroBody:
       'The Hands-Free Bible is only as good as the microphone feeding it. This guide covers every connection method — from USB mics to full soundboard setups — so your voice detection works perfectly every Sunday.',
-    image: '/Photos/Guides/SUYD.png',
+    image: '/Photos/Guides/SUYD.webp',
     imageAlt: 'Q-worship audio and content settings interface',
     article: {
       title: {
@@ -2101,7 +2101,7 @@ export const guideCards: GuideCard[] = [
       'How the Hands-Free Bible works, how to set it up, and how to get the best results during a live sermon. Includes voice command reference.',
     heroBody:
       'Stay in the moment. Just say the reference out loud — Q-worship hears you, finds the verse, and puts it on screen. No pausing, no searching, no breaking your stride at the pulpit.',
-    image: '/Photos/Guides/NTJS.png',
+    image: '/Photos/Guides/NTJS.webp',
     imageAlt: 'Pastor speaking with live Hands-Free Bible verse detection on screen',
     article: {
       title: {
@@ -2319,7 +2319,7 @@ export const guideCards: GuideCard[] = [
       'Connect to a projector via HDMI or broadcast wirelessly to OBS, vMix, ProPresenter, and Wirecast using NDI. Includes the Qworship Bridge download.',
     heroBody:
       'Connect Q-worship to your projector via HDMI, or broadcast wirelessly to OBS, ProPresenter, vMix, and more using NDI. This guide covers every output method for both the desktop app and Q-worship Cloud.',
-    image: '/Photos/Guides/SYVO.png',
+    image: '/Photos/Guides/SYVO.webp',
     imageAlt: 'Q-worship stage view and display output settings',
     article: {
       title: {
@@ -2537,7 +2537,7 @@ export const guideCards: GuideCard[] = [
       'Import songs from Word, PDF, or plain text. Organise sections, add CCLI metadata, and project lyrics live with the Sing-Along Pace feature to keep timing in sync with your worship leader.',
     heroBody:
       'Import songs from any format, organise them into sections, and project lyrics live with the Sing-Along Pace Setter. Your worship team will never lose their place in a song again.',
-    image: '/Photos/Guides/BYS.png',
+    image: '/Photos/Guides/BYS.webp',
     imageAlt: 'Q-worship songbook lyrics and song search interface',
     article: {
       title: {
@@ -2746,7 +2746,7 @@ export const guideCards: GuideCard[] = [
       "Design broadcast-quality lower thirds for scripture references, speaker names, song credits, and social handles — fully customizable to match your church's brand.",
     heroBody:
       'Design broadcast-quality lower thirds for scripture references, speaker names, song titles, and announcements — directly inside Q-worship. No After Effects, no external software, no extra operator.',
-    image: '/Photos/Guides/ULTB.png',
+    image: '/Photos/Guides/ULTB.webp',
     imageAlt: 'Pastor preaching with a lower third scripture overlay',
     article: {
       title: {
@@ -2996,7 +2996,7 @@ export const guidesHeroCopy = {
   body: featuresHeroCopy.body,
   primaryCta: 'Download',
   secondaryCta: 'Get Started online',
-  image: '/Photos/Heros/Hero-guides.png',
+  image: '/Photos/Heros/Hero-guides.webp',
 }
 
 export const guidesCategoryItems: GuideCategoryItem[] = [
@@ -3048,7 +3048,7 @@ export const faqsHeroCopy = {
   body: featuresHeroCopy.body,
   primaryCta: 'Download',
   secondaryCta: 'Get Started online',
-  image: '/Photos/Heros/Hero-FAQ.png',
+  image: '/Photos/Heros/Hero-FAQ.webp',
 }
 
 export const faqCategoryItems: FaqCategoryItem[] = [
@@ -3077,7 +3077,7 @@ export const downloadsPageCopy: DownloadsPageCopy = {
     version: 'Version 1.1.2 (35258370)',
     highlights: 'Accuracy Improvements, Offline',
     date: 'June 25, 2026',
-    image: '/Photos/Heros/Download%20-%20image.png',
+    image: '/Photos/Heros/Download%20-%20image.webp',
     imageAlt: 'Operator running Q-worship during a live service',
   },
   platforms: [
@@ -3103,7 +3103,7 @@ export const aboutHeroCopy = {
   badge: 'WHO WE ARE',
   heading: { before: 'About', accent: 'Q-worship' },
   body: 'Q-worship is a product of Devine Digital Technologies (DDT) — a company dedicated to building purposeful technology for the Christian industry. Q-worship brings together voice-powered Bible search, live projection, song management, multi-integrations, and other rich features.',
-  image: '/Photos/Heros/Hero-About.png',
+  image: '/Photos/Heros/Hero-About.webp',
   imageAlt: 'Worship band leading a congregation on stage',
 }
 
@@ -3135,14 +3135,14 @@ export const aboutInsights: { heading: string; items: InsightCard[] } = {
   heading: 'Built from the pulpit.\nRefined by every Sunday.',
   items: [
     {
-      image: '/Photos/Heros/About-ministry.png',
+      image: '/Photos/Heros/About-ministry.webp',
       imageAlt: 'Operator working on a laptop during a live event',
       title: 'Ministry first. Technology second.',
       description:
         "At Devine Digital Technologies, we don't build features for feature lists. Q-worship exists because real pastors in real churches needed real solutions — on a real Sunday morning. Every decision we make is filtered through one question: does this make Sunday easier for the person standing at the pulpit?",
     },
     {
-      image: '/Photos/Heros/About%20-%20built.png',
+      image: '/Photos/Heros/About%20-%20built.webp',
       imageAlt: 'Hand raised in worship before a glowing cross',
       title: 'Built for the moment that matters',
       description:
@@ -3360,7 +3360,7 @@ export const aboutFaqTeaserItems: FaqItem[] = [
 export const authShowcaseSlides = [
   {
     id: 'hands-free-bible',
-    image: '/Photos/login/Group%201171276018.png',
+    image: '/Photos/login/Group%201171276018.webp',
     alt: 'Hands-free Bible voice search with scripture on screen',
     title: 'Q-worship Hands free Bible',
     body: 'Your church service, Powered by voice.',
@@ -3368,21 +3368,21 @@ export const authShowcaseSlides = [
   },
   {
     id: 'on-screen-bible',
-    image: '/Photos/login/Group%201171276012.png',
+    image: '/Photos/login/Group%201171276012.webp',
     alt: 'On-screen Bible search and verse selection',
     title: 'On-screen Bible',
     body: 'Search any scripture across all 66 books in seconds.',
   },
   {
     id: 'announcements',
-    image: '/Photos/login/image%20149.png',
+    image: '/Photos/login/image%20149.webp',
     alt: 'Sunday announcements slide preview',
     title: 'Announcements',
     body: 'Keep your church in the loop — right inside your service.',
   },
   {
     id: 'entire-team',
-    image: '/Photos/login/Group%201171276012.png',
+    image: '/Photos/login/Group%201171276012.webp',
     alt: 'Team collaboration with live production tools',
     title: 'Built For the Entire Team',
     body: 'Built with tools to support the entire team',
@@ -3394,9 +3394,9 @@ export const loginShowcaseSlides = authShowcaseSlides
 
 export const images = {
   logo: '/Photos/logo.png',
-  heroFrame: '/Photos/Frame%201171275872.png',
-  handsFreeFrame: '/Photos/Group%201171275977.png',
-  handsFreeStage: '/Photos/hands-free-stage.png',
+  heroFrame: '/Photos/Frame%201171275872.webp',
+  handsFreeFrame: '/Photos/Group%201171275977.webp',
+  handsFreeStage: '/Photos/hands-free-stage.webp',
   rectanglePortrait,
   hero:
     'https://lh3.googleusercontent.com/aida-public/AB6AXuDYGRFuNG4vm0daVzCMIGtTpA6iHCAbNtv6ej8DEBg6PyDtB8seToBnjMS1VeB_k7LSZqFV-pBiavQRDS-QNCdmpng92C8uq9tJr0GyQMkgsl1tQIN4FijvSMeJbRKAkTymr094S4WLTV0LNJ8xLKcbVCX3sgMm9GVt0VvH1J3eeQy_PFOZhiAw0i-xFfu-D-TJbAccpxtjBdOoHFJx-cwSwGEBQstDkqWyQ0fD5NEw87sEJxD4tUDSCrdNIir0RTMS5BseK8oQbjQo',
@@ -3405,7 +3405,7 @@ export const images = {
   pastor: pastorForPastor,
   partners:
     'https://lh3.googleusercontent.com/aida-public/AB6AXuBEulfurEaig4HkDRWZHLhOHiW3eycUCF3M42BaGblBzntXMdMFWZZIEXqVqqIrey50IkNrT0h-EaWS_3gaQzosqVdYnyOarGCsB7yy0KKmOcudI0Kj8dCTT7h-XvilnTmE5j9bCMvtyVYEjnWfmuQf-NpRiS0qhXtF47hym7Y1fABSA9dqj8325BsvAKmjJjIIl-gdUhFGcZC0PJe2wpQXOAzHlxqFa1EvYrrNpg4dQK1slcfLmSBup_agmDtTv-4LD8SiCbEld0TO',
-  cta: '/Photos/lastlast.png',
-  ctaMobile: '/Photos/Pastors.png',
-  featuresHero: '/Photos/features/Rectangle%2042300.png',
+  cta: '/Photos/lastlast.webp',
+  ctaMobile: '/Photos/Pastors.webp',
+  featuresHero: '/Photos/features/Rectangle%2042300.webp',
 }
