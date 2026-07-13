@@ -30,7 +30,7 @@ export function FAQsHeroSection() {
           <div className="features-hero-media">
             <img
               src={faqsHeroCopy.image}
-              alt="Team collaborating on church presentation software"
+              alt="Worship team operating Q-worship laptops during a live service"
               className="features-hero-image"
               loading="eager"
             />

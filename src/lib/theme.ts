@@ -1623,8 +1623,8 @@ export const guideCards: GuideCard[] = [
     title: 'Setting up Q-worship Live Console for your first Sunday',
     description:
       'Connect your displays, walk through the Live Console layout, and run a quick test so your team is ready before the congregation arrives.',
-    image: '/Photos/On-screen%20bible.png',
-    imageAlt: 'Q-worship Live Console Bible interface',
+    image: '/Photos/Guides/SUQL.png',
+    imageAlt: 'Q-worship Live Console welcome and Hands-Free Bible walkthrough',
     article: {
       title: {
         line1: 'Your first Sunday.',
@@ -1880,8 +1880,8 @@ export const guideCards: GuideCard[] = [
       'Connect your soundboard, lapel mic, USB microphone, or media board for the best Hands-Free Bible accuracy. Includes mic switching during service.',
     heroBody:
       'The Hands-Free Bible is only as good as the microphone feeding it. This guide covers every connection method — from USB mics to full soundboard setups — so your voice detection works perfectly every Sunday.',
-    image: '/Photos/Announcements.png',
-    imageAlt: 'Sunday announcements slide preview',
+    image: '/Photos/Guides/SUYD.png',
+    imageAlt: 'Q-worship audio and content settings interface',
     article: {
       title: {
         line1: 'Clear audio.',
@@ -2101,9 +2101,8 @@ export const guideCards: GuideCard[] = [
       'How the Hands-Free Bible works, how to set it up, and how to get the best results during a live sermon. Includes voice command reference.',
     heroBody:
       'Stay in the moment. Just say the reference out loud — Q-worship hears you, finds the verse, and puts it on screen. No pausing, no searching, no breaking your stride at the pulpit.',
-    image: '/Photos/hands-free-stage.png',
-    imageAlt: 'Pastor using hands-free Bible search on stage',
-    imageFit: 'cover',
+    image: '/Photos/Guides/NTJS.png',
+    imageAlt: 'Pastor speaking with live Hands-Free Bible verse detection on screen',
     article: {
       title: {
         line1: 'Your Bible. Hands-free.',
@@ -2320,8 +2319,8 @@ export const guideCards: GuideCard[] = [
       'Connect to a projector via HDMI or broadcast wirelessly to OBS, vMix, ProPresenter, and Wirecast using NDI. Includes the Qworship Bridge download.',
     heroBody:
       'Connect Q-worship to your projector via HDMI, or broadcast wirelessly to OBS, ProPresenter, vMix, and more using NDI. This guide covers every output method for both the desktop app and Q-worship Cloud.',
-    image: '/Photos/Easy%20to%20use.png',
-    imageAlt: 'Q-worship Live Console multi-panel setup view',
+    image: '/Photos/Guides/SYVO.png',
+    imageAlt: 'Q-worship stage view and display output settings',
     article: {
       title: {
         line1: 'Every screen.',
@@ -2538,9 +2537,8 @@ export const guideCards: GuideCard[] = [
       'Import songs from Word, PDF, or plain text. Organise sections, add CCLI metadata, and project lyrics live with the Sing-Along Pace feature to keep timing in sync with your worship leader.',
     heroBody:
       'Import songs from any format, organise them into sections, and project lyrics live with the Sing-Along Pace Setter. Your worship team will never lose their place in a song again.',
-    image: '/Photos/Praise%20and%20Worship.png',
-    imageAlt: 'Worship lyrics on screen',
-    imageFit: 'cover',
+    image: '/Photos/Guides/BYS.png',
+    imageAlt: 'Q-worship songbook lyrics and song search interface',
     article: {
       title: {
         line1: 'Every lyric. Every section.',
@@ -2748,8 +2746,8 @@ export const guideCards: GuideCard[] = [
       "Design broadcast-quality lower thirds for scripture references, speaker names, song credits, and social handles — fully customizable to match your church's brand.",
     heroBody:
       'Design broadcast-quality lower thirds for scripture references, speaker names, song titles, and announcements — directly inside Q-worship. No After Effects, no external software, no extra operator.',
-    image: '/Photos/Service%20order.png',
-    imageAlt: 'Service slide order',
+    image: '/Photos/Guides/ULTB.png',
+    imageAlt: 'Pastor preaching with a lower third scripture overlay',
     article: {
       title: {
         line1: 'Every reference.',
@@ -2998,7 +2996,7 @@ export const guidesHeroCopy = {
   body: featuresHeroCopy.body,
   primaryCta: 'Download',
   secondaryCta: 'Get Started online',
-  image: featuresHeroCopy.image,
+  image: '/Photos/Heros/Hero-guides.png',
 }
 
 export const guidesCategoryItems: GuideCategoryItem[] = [
@@ -3050,7 +3048,7 @@ export const faqsHeroCopy = {
   body: featuresHeroCopy.body,
   primaryCta: 'Download',
   secondaryCta: 'Get Started online',
-  image: featuresHeroCopy.image,
+  image: '/Photos/Heros/Hero-FAQ.png',
 }
 
 export const faqCategoryItems: FaqCategoryItem[] = [
@@ -3079,8 +3077,8 @@ export const downloadsPageCopy: DownloadsPageCopy = {
     version: 'Version 1.1.2 (35258370)',
     highlights: 'Accuracy Improvements, Offline',
     date: 'June 25, 2026',
-    image: featuresHeroCopy.image,
-    imageAlt: 'Team collaborating on church presentation software',
+    image: '/Photos/Heros/Download%20-%20image.png',
+    imageAlt: 'Operator running Q-worship during a live service',
   },
   platforms: [
     { id: 'windows', label: 'Windows', icon: 'windows' },
@@ -3104,9 +3102,9 @@ export const downloadsPageCopy: DownloadsPageCopy = {
 export const aboutHeroCopy = {
   badge: 'WHO WE ARE',
   heading: { before: 'About', accent: 'Q-worship' },
-  body: "Q-worship brings together voice-powered Bible search, live projection, song management, multi integrations, and rich features — all built by pastors who've stood where you stand.",
-  image: featuresHeroCopy.image,
-  imageAlt: 'Team collaborating on church presentation software',
+  body: 'Q-worship is a product of Devine Digital Technologies (DDT) — a company dedicated to building purposeful technology for the Christian industry. Q-worship brings together voice-powered Bible search, live projection, song management, multi-integrations, and other rich features.',
+  image: '/Photos/Heros/Hero-About.png',
+  imageAlt: 'Worship band leading a congregation on stage',
 }
 
 export const aboutCoreBeliefs: CoreBelief[] = [
@@ -3137,15 +3135,15 @@ export const aboutInsights: { heading: string; items: InsightCard[] } = {
   heading: 'Built from the pulpit.\nRefined by every Sunday.',
   items: [
     {
-      image: '/Photos/features/ghgh.png',
-      imageAlt: 'Laptop running Q-worship on a church stage',
+      image: '/Photos/Heros/About-ministry.png',
+      imageAlt: 'Operator working on a laptop during a live event',
       title: 'Ministry first. Technology second.',
       description:
         "At Devine Digital Technologies, we don't build features for feature lists. Q-worship exists because real pastors in real churches needed real solutions — on a real Sunday morning. Every decision we make is filtered through one question: does this make Sunday easier for the person standing at the pulpit?",
     },
     {
-      image: '/Photos/Praise%20and%20Worship.png',
-      imageAlt: 'Cross and congregation with hands raised in worship',
+      image: '/Photos/Heros/About%20-%20built.png',
+      imageAlt: 'Hand raised in worship before a glowing cross',
       title: 'Built for the moment that matters',
       description:
         "The moment a pastor opens their mouth to preach, the moment a worship leader lifts their hands, the moment a verse appears on screen — those are the moments DDT builds for. Q-worship exists so that technology never gets in the way of those moments again. That's not a mission statement. That's a Sunday-morning promise.",

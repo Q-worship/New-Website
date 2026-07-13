@@ -29,7 +29,7 @@ export function GuidesHeroSection() {
           <div className="features-hero-media">
             <img
               src={guidesHeroCopy.image}
-              alt="Team collaborating on church presentation software"
+              alt="Operator running Q-worship on multiple screens during a live service"
               className="features-hero-image"
               loading="eager"
             />
