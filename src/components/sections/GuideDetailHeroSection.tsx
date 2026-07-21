@@ -1,3 +1,4 @@
+import { Link } from 'wouter'
 import type { GuideCard } from '@/types/content'
 import { featuresHeroCopy, guidesHeroCopy } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
@@ -24,12 +25,12 @@ export function GuideDetailHeroSection({ guide, compact = false }: GuideDetailHe
             <p className="features-hero-body">{guide.heroBody ?? featuresHeroCopy.body}</p>
 
             <div className="features-hero-actions cta-pair-mobile-inline">
-              <button type="button" className="features-hero-download-btn">
+              <Link href="/downloads" className="features-hero-download-btn">
                 {guidesHeroCopy.primaryCta}
-              </button>
-              <button type="button" className="features-hero-secondary-btn">
+              </Link>
+              <Link href="/signup" className="features-hero-secondary-btn">
                 {guidesHeroCopy.secondaryCta}
-              </button>
+              </Link>
             </div>
           </div>
 

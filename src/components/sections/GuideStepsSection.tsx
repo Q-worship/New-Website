@@ -55,10 +55,10 @@ export function GuideStepsSection({ guide, activeProduct }: GuideStepsSectionPro
                 {guideProductInfo[activeProduct].title}
               </h2>
               <p className="guide-steps-sidebar-summary">{guideProductInfo[activeProduct].description}</p>
-              <button type="button" className="guide-steps-download-btn">
+              <Link href="/downloads" className="guide-steps-download-btn">
                 Download
                 <MaterialIcon name="download" className="guide-steps-download-icon" aria-hidden />
-              </button>
+              </Link>
             </div>
 
             <p className="guide-steps-nav-label">Sections</p>

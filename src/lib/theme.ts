@@ -1166,7 +1166,7 @@ const cloudProduct: PricingProductContent = {
       'The complete cloud-based church service platform. Build your full order of service with songs, Bible, announcements, videos, images, and a rich slide canvas — all in one place. Includes everything in the Live Console, and much more.',
     icon: 'cloud',
     primaryCta: 'Get Started for free',
-    primaryHref: '/login',
+    primaryHref: '/signup',
   },
   plansHeader: {
     badge: 'QWORSHIP CLOUD',
@@ -3364,7 +3364,6 @@ export const authShowcaseSlides = [
     alt: 'Hands-free Bible voice search with scripture on screen',
     title: 'Q-worship Hands free Bible',
     body: 'Your church service, Powered by voice.',
-    badge: 'AI Features',
   },
   {
     id: 'on-screen-bible',

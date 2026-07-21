@@ -1,3 +1,4 @@
+import { Link } from 'wouter'
 import { faqsHeroCopy } from '@/lib/theme'
 import { SiteContainer } from '@/components/layout/SiteContainer'
 
@@ -18,12 +19,12 @@ export function FAQsHeroSection() {
             <p className="features-hero-body">{faqsHeroCopy.body}</p>
 
             <div className="features-hero-actions cta-pair-mobile-inline">
-              <button type="button" className="features-hero-download-btn">
+              <Link href="/downloads" className="features-hero-download-btn">
                 {faqsHeroCopy.primaryCta}
-              </button>
-              <button type="button" className="features-hero-secondary-btn">
+              </Link>
+              <Link href="/signup" className="features-hero-secondary-btn">
                 {faqsHeroCopy.secondaryCta}
-              </button>
+              </Link>
             </div>
           </div>
 
